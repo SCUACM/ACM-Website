@@ -1,8 +1,45 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
+import vuetify from "./plugins/vuetify";
+import VueRouter from "vue-router";
 
-Vue.config.productionTip = false
+// pages
+
+import Index from "@/pages/Index.vue";
+import Board from "@/pages/Board.vue";
+import Events from "@/pages/Events.vue";
+
+Vue.config.productionTip = false;
+
+const routes = [
+  {
+    path: "/",
+    component: Index,
+  },
+  {
+    path: "/board",
+    component: Board,
+  },
+  {
+    path: "/events",
+    component: Events,
+  },
+  {
+    path: "*",
+    redirect: "/",
+  },
+];
+
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+  base: "",
+  routes,
+  mode: "history",
+});
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  vuetify,
+  router,
+  render: (h) => h(App),
+}).$mount("#app");
