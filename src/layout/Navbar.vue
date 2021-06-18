@@ -5,14 +5,14 @@
     flat
     width="100vw"
     height="75px"
-    hide-on-scroll
+    elevation="4"
+    absolute
   >
     <div class="app-bar mx-auto">
       <div class="mr-auto my-auto logo">
-        <v-img width="120px" height="60px" contain :src="logoBlackSmall">
-        </v-img>
+        <v-img width="120px" height="60px" contain :src="logoBlackSmall" />
       </div>
-      <div class="ml-auto hidden-xs-only routes">
+      <div class="ml-auto routes hidden-sm-and-down">
         <span class="link mx-6">
           <router-link to="/" :class="[aboutStyle ? 'link-active' : 'link']">
             about
@@ -42,7 +42,7 @@
             H4H
           </a>
         </span>
-        <span class="link mx-6">
+        <span class="link ml-6">
           <v-btn
             outlined
             class="join-btn"
@@ -53,6 +53,48 @@
             join us!
           </v-btn>
         </span>
+      </div>
+      <div class="ml-auto hidden-md-and-up">
+        <v-menu>
+          <template v-slot:activator="{ on, attrs }">
+            <v-flex justify-end>
+              <v-btn
+                icon
+                color="white"
+                depressed
+                v-on="on"
+                v-bind="attrs"
+                style="margin-top: 12px"
+              >
+                <v-icon large color="black">
+                  mdi-menu
+                </v-icon>
+              </v-btn>
+            </v-flex>
+          </template>
+          <v-list>
+            <v-list-item>
+              <router-link to="/" class="link">
+                about
+              </router-link>
+            </v-list-item>
+            <v-list-item>
+              <router-link to="/board" class="link">
+                board
+              </router-link>
+            </v-list-item>
+            <v-list-item>
+              <router-link to="/events" class="link">
+                events
+              </router-link>
+            </v-list-item>
+            <v-list-item>
+              <span :href="'https://hackforhumanity.io/'" class="link">
+                H4H
+              </span>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </div>
     </div>
   </v-app-bar>
