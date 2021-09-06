@@ -1,10 +1,19 @@
 <template>
   <div>
+    <transition name="fade">
+      <BoardPopup
+        @close-popup="closePopup()"
+        :member="activeMember"
+        :show="showPopup"
+      />
+    </transition>
     <div class="board-title">
       {{ title }}
     </div>
     <v-row>
       <v-col
+        class="board-member"
+        @click="updateCurrentMember(member)"
         cols="12"
         sm="6"
         md="6"
@@ -33,18 +42,69 @@
 
 <script>
 import "../assets/scss/board-media.scss";
+import BoardPopup from "./BoardPopup.vue";
 export default {
   name: "BoardListSection",
 
-  components: {},
+  components: {
+    BoardPopup,
+  },
 
   props: {
     title: String,
     memberList: Array,
   },
 
-  data: () => ({}),
+  data: () => ({
+    // default value for type handling
+    currentMember: {
+      src: "",
+      name: "",
+      role: "",
+      bio: "",
+    },
+
+    show: false,
+  }),
+
+  methods: {
+    updateCurrentMember(member) {
+      this.currentMember = member;
+      this.show = true;
+    },
+
+    closePopup() {
+      this.show = false;
+    },
+  },
+
+  computed: {
+    activeMember() {
+      return this.currentMember;
+    },
+
+    showPopup() {
+      return this.show;
+    },
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.board-member {
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+.board-member:hover {
+  background-color: #d3d3d3;
+  cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>

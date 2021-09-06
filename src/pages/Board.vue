@@ -11,7 +11,7 @@
 <script>
 import Navbar from "@/layout/Navbar.vue";
 import BoardList from "@/components/BoardList.vue";
-import Footer from "../layout/Footer.vue";
+import Footer from "@/layout/Footer.vue";
 export default {
   name: "Board",
 

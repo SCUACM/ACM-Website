@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import Logo from "../assets/branding/logo_temp.svg";
+import Logo from "../assets/branding/logo_temp_new.svg";
 import "../assets/scss/footer-media.scss";
 export default {
   name: "Footer",

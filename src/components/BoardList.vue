@@ -15,7 +15,7 @@ import DevinBhatt from "../assets/board/Devin_Bhatt.jpg";
 import JamesOssam from "../assets/board/James_Ossam.jpg";
 import JodiChui from "../assets/board/Jodi_Chui.png";
 import JonathanHo from "../assets/board/Jonathan_Ho.png";
-import KevinRooney from "../assets/board/Kevin_Rooney.jpg";
+import KevinRooney from "../assets/board/Kevin_Rooney.png";
 import MichelleLim from "../assets/board/Michelle_Lim.png";
 import RaniaAnsari from "../assets/board/Rania_Ansari.jpg";
 import StephenMistele from "../assets/board/Stephen_Mistele.jpg";

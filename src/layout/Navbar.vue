@@ -35,10 +35,7 @@
           </router-link>
         </span>
         <span class="link mx-6">
-          <a
-            :href="'https://hackforhumanity.io/'"
-            :class="[eventsStyle ? 'link-active' : 'link']"
-          >
+          <a :href="'https://hackforhumanity.io/'" class="link">
             H4H
           </a>
         </span>
@@ -48,7 +45,7 @@
             class="join-btn"
             height="40px"
             width="130px"
-            style="border-radius:10px; border: solid #1e6cff"
+            style="border-radius:10px; border: solid #b30738"
           >
             join us!
           </v-btn>
@@ -102,7 +99,7 @@
 
 <script>
 import "../assets/scss/navbar-media.scss";
-import logoBlackSmall from "../assets/branding/logo_temp.svg";
+import logoBlackSmall from "../assets/branding/logo_temp_new.svg";
 
 export default {
   data() {
@@ -142,12 +139,12 @@ export default {
   font-size: 1rem !important;
   letter-spacing: normal !important;
   text-transform: none !important;
-  color: #1e6cff !important;
+  color: #b30738 !important;
   transition: color 0.1s, background-color 0.4s;
 }
 
 .join-btn:hover {
-  background-color: #1e6cff;
+  background-color: #b30738;
   color: white !important;
   transition: color 0.1s, background-color 0.4s;
 }
@@ -158,13 +155,13 @@ export default {
   color: black;
 }
 .link:active {
-  color: #1e6cff;
+  color: #b30738;
   transition: color 0.3s;
 }
 
 .link-active {
-  color: #1e6cff;
-  border-bottom: 2px solid #1e6cff;
+  color: #b30738;
+  border-bottom: 2px solid #b30738;
   transition: color 0.3s;
 }
 
@@ -176,12 +173,12 @@ a {
   color: #000;
 }
 a:hover {
-  color: #1e6cff;
+  color: #b30738;
   transition: color 0.3s;
 }
 a:focus,
 a:active {
-  color: #1e6cff;
+  color: #b30738;
   transition: color 0.3s;
 }
 
@@ -192,7 +189,7 @@ a::before {
   top: 100%;
   height: 2px;
   width: 100%;
-  background-color: #1e6cff;
+  background-color: #b30738;
   -webkit-transform-origin: center top;
   transform-origin: center top;
   -webkit-transform: scale(0, 1);
@@ -204,7 +201,7 @@ a::before {
 }
 
 a:active::before {
-  background-color: #1e6cff;
+  background-color: #b30738;
   transition: color 0.3s;
 }
 
