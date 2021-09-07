@@ -1,100 +1,103 @@
 <template>
-  <v-app-bar
-    app
-    color="#FFFFFF"
-    flat
-    width="100vw"
-    height="75px"
-    elevation="4"
-    absolute
-  >
-    <div class="app-bar mx-auto">
-      <div class="mr-auto my-auto logo">
-        <v-img width="120px" height="60px" contain :src="logoBlackSmall" />
+  <div>
+    <v-app-bar
+      app
+      color="#FFFFFF"
+      flat
+      width="100vw"
+      height="75px"
+      elevation="4"
+      absolute
+    >
+      <div class="app-bar mx-auto">
+        <div class="mr-auto my-auto logo" @click="$router.push('/')">
+          <v-img width="120px" height="60px" contain :src="logoBlackSmall" />
+        </div>
+        <div class="ml-auto routes hidden-sm-and-down">
+          <span class="link mx-6">
+            <router-link to="/" :class="[aboutStyle ? 'link-active' : 'link']">
+              about
+            </router-link>
+          </span>
+          <span class="link mx-6">
+            <router-link
+              to="/board"
+              :class="[boardStyle ? 'link-active' : 'link']"
+            >
+              board
+            </router-link>
+          </span>
+          <span class="link mx-6">
+            <router-link
+              to="/events"
+              :class="[eventsStyle ? 'link-active' : 'link']"
+            >
+              events
+            </router-link>
+          </span>
+          <span class="link mx-6">
+            <a :href="'https://hackforhumanity.io/'" class="link">
+              H4H
+            </a>
+          </span>
+          <span class="link ml-6">
+            <v-btn
+              @click="toJoinUs()"
+              outlined
+              class="join-btn"
+              height="40px"
+              width="130px"
+              style="border-radius:10px; border: solid #b30738"
+            >
+              join us!
+            </v-btn>
+          </span>
+        </div>
+        <div class="ml-auto hidden-md-and-up">
+          <v-menu>
+            <template v-slot:activator="{ on, attrs }">
+              <v-flex justify-end>
+                <v-btn
+                  icon
+                  color="white"
+                  depressed
+                  v-on="on"
+                  v-bind="attrs"
+                  style="margin-top: 12px"
+                >
+                  <v-icon large color="black">
+                    mdi-menu
+                  </v-icon>
+                </v-btn>
+              </v-flex>
+            </template>
+            <v-list>
+              <v-list-item>
+                <router-link to="/" class="link">
+                  about
+                </router-link>
+              </v-list-item>
+              <v-list-item>
+                <router-link to="/board" class="link">
+                  board
+                </router-link>
+              </v-list-item>
+              <v-list-item>
+                <router-link to="/events" class="link">
+                  events
+                </router-link>
+              </v-list-item>
+              <v-list-item>
+                <span :href="'https://hackforhumanity.io/'" class="link">
+                  H4H
+                </span>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
       </div>
-      <div class="ml-auto routes hidden-sm-and-down">
-        <span class="link mx-6">
-          <router-link to="/" :class="[aboutStyle ? 'link-active' : 'link']">
-            about
-          </router-link>
-        </span>
-        <span class="link mx-6">
-          <router-link
-            to="/board"
-            :class="[boardStyle ? 'link-active' : 'link']"
-          >
-            board
-          </router-link>
-        </span>
-        <span class="link mx-6">
-          <router-link
-            to="/events"
-            :class="[eventsStyle ? 'link-active' : 'link']"
-          >
-            events
-          </router-link>
-        </span>
-        <span class="link mx-6">
-          <a :href="'https://hackforhumanity.io/'" class="link">
-            H4H
-          </a>
-        </span>
-        <span class="link ml-6">
-          <v-btn
-            outlined
-            class="join-btn"
-            height="40px"
-            width="130px"
-            style="border-radius:10px; border: solid #b30738"
-          >
-            join us!
-          </v-btn>
-        </span>
-      </div>
-      <div class="ml-auto hidden-md-and-up">
-        <v-menu>
-          <template v-slot:activator="{ on, attrs }">
-            <v-flex justify-end>
-              <v-btn
-                icon
-                color="white"
-                depressed
-                v-on="on"
-                v-bind="attrs"
-                style="margin-top: 12px"
-              >
-                <v-icon large color="black">
-                  mdi-menu
-                </v-icon>
-              </v-btn>
-            </v-flex>
-          </template>
-          <v-list>
-            <v-list-item>
-              <router-link to="/" class="link">
-                about
-              </router-link>
-            </v-list-item>
-            <v-list-item>
-              <router-link to="/board" class="link">
-                board
-              </router-link>
-            </v-list-item>
-            <v-list-item>
-              <router-link to="/events" class="link">
-                events
-              </router-link>
-            </v-list-item>
-            <v-list-item>
-              <span :href="'https://hackforhumanity.io/'" class="link">
-                H4H
-              </span>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </div>
-    </div>
-  </v-app-bar>
+    </v-app-bar>
+  </div>
 </template>
 
 <script>
@@ -102,6 +105,8 @@ import "../assets/scss/navbar-media.scss";
 import logoBlackSmall from "../assets/branding/logo_temp_new.svg";
 
 export default {
+  props: {},
+
   data() {
     return {
       logoBlackSmall,
@@ -109,6 +114,12 @@ export default {
   },
 
   components: {},
+
+  methods: {
+    toJoinUs() {
+      this.$router.push("/joinus");
+    },
+  },
 
   computed: {
     aboutStyle() {

@@ -2,7 +2,15 @@
   <footer class="blue-grey lighten-5 pa-8 mt-16" style="min-height: 250px">
     <v-container style="max-width: 1000px">
       <v-row>
-        <v-col cols="12" sm="12" md="4" lg="4" xl="4">
+        <v-col
+          class="clickable"
+          @click="$router.push('/')"
+          cols="12"
+          sm="12"
+          md="4"
+          lg="4"
+          xl="4"
+        >
           <v-img
             width="200px"
             height="100px"
@@ -94,4 +102,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.clickable:hover {
+  cursor: pointer;
+}
+</style>

@@ -12,6 +12,10 @@
   }
   @include media-sm-only {
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .routes {

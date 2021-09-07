@@ -8,6 +8,7 @@ import VueRouter from "vue-router";
 import Index from "@/pages/Index.vue";
 import Board from "@/pages/Board.vue";
 import Events from "@/pages/Events.vue";
+import JoinUs from "@/pages/JoinUs.vue";
 
 Vue.config.productionTip = false;
 
@@ -23,6 +24,10 @@ const routes = [
   {
     path: "/events",
     component: Events,
+  },
+  {
+    path: "/joinus",
+    component: JoinUs,
   },
   {
     path: "*",
