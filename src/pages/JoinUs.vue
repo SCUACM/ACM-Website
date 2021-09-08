@@ -134,7 +134,7 @@ export default {
 
     rules: {
       required: (value) => !!value || "Required.",
-      // disgusting regex from google:
+      // disgusting regex from google to pattern match email string:
       email: (value) => {
         const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return pattern.test(value) || "Invalid e-mail.";
@@ -153,6 +153,7 @@ export default {
 </script>
 
 <style scoped>
+/* This is the border of the v-input-fields when selected */
 .v-application .primary--text {
   color: #b30738 !important;
   caret-color: #b30738 !important;

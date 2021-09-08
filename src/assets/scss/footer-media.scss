@@ -5,12 +5,24 @@
 
 .footer-title {
   font-family: "Poppins", sans-serif;
+  color: white;
   font-weight: 600 !important;
   font-size: 1rem;
 }
 
 .footer-subtitle {
   font-family: "Poppins", sans-serif;
+  color: white;
   font-weight: 400 !important;
   font-size: 0.9rem;
+}
+
+.footer-header {
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-weight: 600;
+  font-size: 2.3rem;
+  @include media-xs-only {
+    font-size: 1.4rem;
+  }
 }

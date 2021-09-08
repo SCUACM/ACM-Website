@@ -2,16 +2,21 @@
   <div>
     <v-app-bar
       app
-      color="#FFFFFF"
+      :color="navColor"
       flat
       width="100vw"
       height="75px"
-      elevation="4"
+      :elevation="noElevation ? 0 : 4"
       absolute
     >
       <div class="app-bar mx-auto">
         <div class="mr-auto my-auto logo" @click="$router.push('/')">
-          <v-img width="120px" height="60px" contain :src="logoBlackSmall" />
+          <v-img
+            width="120px"
+            height="60px"
+            contain
+            :src="transparent ? logoWhiteSmall : logoBlackSmall"
+          />
         </div>
         <div class="ml-auto routes hidden-sm-and-down">
           <span class="link mx-6">
@@ -92,6 +97,11 @@
                   H4H
                 </span>
               </v-list-item>
+              <v-list-item>
+                <router-link to="/joinus" class="link">
+                  join us
+                </router-link>
+              </v-list-item>
             </v-list>
           </v-menu>
         </div>
@@ -102,14 +112,25 @@
 
 <script>
 import "../assets/scss/navbar-media.scss";
-import logoBlackSmall from "../assets/branding/logo_temp_new.svg";
+import logoBlackSmall from "@/assets/branding/logo_temp_new.svg";
+import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 
 export default {
-  props: {},
+  props: {
+    noElevation: {
+      default: false,
+      type: Boolean,
+    },
+    transparent: {
+      default: false,
+      type: Boolean,
+    },
+  },
 
   data() {
     return {
       logoBlackSmall,
+      logoWhiteSmall,
     };
   },
 
@@ -122,6 +143,9 @@ export default {
   },
 
   computed: {
+    navColor() {
+      return this.transparent ? "transparent" : "#FFFFFF";
+    },
     aboutStyle() {
       const path = this.$route.path.split("/");
       return path[path.length - 1].toLowerCase() === "";

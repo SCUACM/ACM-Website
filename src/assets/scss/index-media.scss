@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+@import "./custom-media";
+
+.main-container {
+  margin-top: 200px;
+}
+
+.title {
+  &-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &-header {
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    @include media-xs-only {
+      font-size: 1.5rem;
+    }
+    @include media-sm-only {
+      font-size: 2rem;
+    }
+  }
+
+  &-sub-header {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    max-width: 600px;
+    @include media-xs-only {
+      font-size: 1.1rem;
+    }
+    @include media-sm-only {
+      font-size: 1.3rem;
+      max-width: 400px;
+    }
+  }
+}
+
+.item {
+  &-container {
+    display: block;
+    max-width: 400px;
+    margin: auto;
+    padding: 10px;
+  }
+
+  &-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+
+  &-sub-title {
+    margin-top: 15px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  &-img {
+    margin-top: -50px;
+    border-radius: 50px;
+  }
+}
+
+.event {
+  &-title {
+    display: block;
+    width: 200px;
+    margin: auto;
+    margin-bottom: 30px;
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  &-sub-title {
+    display: block;
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 75px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-align: center;
+    @include media-xs-only {
+      font-size: 1.5rem;
+    }
+    @include media-sm-only {
+      max-width: 600px;
+    }
+  }
+
+  &-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 3px solid #e0e0e0;
+    margin: auto;
+  }
+
+  &-header {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 20px 0;
+  }
+
+  &-sub-header {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 400px;
+    display: block;
+    margin: auto;
+  }
+}
