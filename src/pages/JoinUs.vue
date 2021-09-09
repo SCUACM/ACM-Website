@@ -10,97 +10,101 @@
           Sign up below to follow us for updates and stay on top of upcoming
           events!
         </div>
-        <v-container class="form-container">
-          <v-row no-gutters>
-            <v-col cols="12">
-              <div class="form-header">
-                Email
-              </div>
-              <v-text-field
-                label="example@domain.com"
-                :rules="[rules.required, rules.email]"
-                v-model="email"
-                outlined
-                solo
-              >
-              </v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <div class="form-header">
-                First Name
-              </div>
-              <v-text-field
-                label="Enter first Name"
-                :rules="[rules.required]"
-                v-model="firstName"
-                outlined
-                solo
-              >
-              </v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <div class="form-header">
-                Last Name
-              </div>
-              <v-text-field
-                label="Enter last Name"
-                v-model="lastName"
-                outlined
-                solo
-              >
-              </v-text-field>
-            </v-col>
-            <v-col style="display: flex; justify-content: center;">
-              <v-dialog v-model="dialog" width="500">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    outlined
-                    class="mt-2 submit-btn"
-                    height="60px"
-                    width="200px"
-                    style="border-radius: 40px; border: solid #b30738"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
-                    Submit
-                  </v-btn>
-                </template>
-                <v-card style="border-radius: 15px;" height="330px">
-                  <v-card-actions>
+        <v-form ref="emailForm">
+          <v-container class="form-container">
+            <v-row no-gutters>
+              <v-col cols="12">
+                <div class="form-header">
+                  Email
+                </div>
+                <v-text-field
+                  label="example@domain.com"
+                  :rules="[rules.required, rules.email]"
+                  v-model="email"
+                  outlined
+                  solo
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <div class="form-header">
+                  First Name
+                </div>
+                <v-text-field
+                  label="Enter first Name"
+                  :rules="[rules.required]"
+                  v-model="firstName"
+                  outlined
+                  solo
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <div class="form-header">
+                  Last Name
+                </div>
+                <v-text-field
+                  label="Enter last Name"
+                  :rules="[rules.required]"
+                  v-model="lastName"
+                  outlined
+                  solo
+                >
+                </v-text-field>
+              </v-col>
+              <v-col style="display: flex; justify-content: center;">
+                <v-dialog v-model="dialog" width="500">
+                  <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      style="margin-left:auto"
-                      color="light-grey3"
-                      icon
-                      @click="dialog = false"
+                      outlined
+                      class="mt-2 submit-btn"
+                      height="60px"
+                      width="200px"
+                      style="border-radius: 40px; border: solid #b30738"
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="submitJoin()"
                     >
-                      <v-icon color="light-grey3">
-                        mdi-close
-                      </v-icon>
+                      Submit
                     </v-btn>
-                  </v-card-actions>
+                  </template>
+                  <v-card style="border-radius: 15px;" height="330px">
+                    <v-card-actions>
+                      <v-btn
+                        style="margin-left:auto"
+                        color="light-grey3"
+                        icon
+                        @click="dialog = false"
+                      >
+                        <v-icon color="light-grey3">
+                          mdi-close
+                        </v-icon>
+                      </v-btn>
+                    </v-card-actions>
 
-                  <v-card-actions class="mt-4">
-                    <div class="success-checkmark">
-                      <div class="check-icon">
-                        <span class="icon-line line-tip"></span>
-                        <span class="icon-line line-long"></span>
-                        <div class="icon-circle"></div>
-                        <div class="icon-fix"></div>
+                    <v-card-actions class="mt-4">
+                      <div class="success-checkmark">
+                        <div class="check-icon">
+                          <span class="icon-line line-tip"></span>
+                          <span class="icon-line line-long"></span>
+                          <div class="icon-circle"></div>
+                          <div class="icon-fix"></div>
+                        </div>
                       </div>
-                    </div>
-                  </v-card-actions>
+                    </v-card-actions>
 
-                  <v-card-actions
-                    class="sub-header"
-                    style="display: block; text-align: center; width: 100%; margin-top: -10px"
-                  >
-                    Successfully signed up!
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-col>
-          </v-row>
-        </v-container>
+                    <v-card-actions
+                      class="sub-header"
+                      style="display: block; text-align: center; width: 100%; margin-top: -10px"
+                    >
+                      Successfully signed up!
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
       </v-col>
 
       <v-col class="hidden-sm-and-down right-panel-colored" cols="6">

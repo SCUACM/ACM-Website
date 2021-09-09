@@ -3,10 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
 @import "./custom-media";
 
-.main-container {
-  margin-top: 200px;
-}
-
 .title {
   &-container {
     display: flex;
@@ -18,11 +14,17 @@
     font-family: "Poppins", sans-serif;
     font-size: 3rem;
     font-weight: 600;
+    max-width: 1000px;
+    color: white;
     @include media-xs-only {
       font-size: 1.5rem;
     }
     @include media-sm-only {
       font-size: 2rem;
+    }
+    @include media-xxl-only {
+      max-width: 1200px;
+      font-size: 3.7rem;
     }
   }
 
@@ -31,12 +33,17 @@
     font-size: 1.5rem;
     font-weight: 400;
     max-width: 600px;
+    color: white;
     @include media-xs-only {
       font-size: 1.1rem;
     }
     @include media-sm-only {
       font-size: 1.3rem;
       max-width: 400px;
+    }
+    @include media-xxl-only {
+      font-size: 2rem;
+      max-width: 900px;
     }
   }
 }
@@ -119,5 +126,71 @@
     max-width: 400px;
     display: block;
     margin: auto;
+  }
+}
+
+.navigation {
+  width: 100%;
+  min-height: 200px;
+  padding-bottom: 30px;
+  background-color: #b30738;
+
+  &-header {
+    font-family: "Poppins", sans-serif;
+    color: white;
+    font-weight: 600;
+    font-size: 3rem;
+    @include media-xs-only {
+      font-size: 2rem;
+    }
+  }
+}
+
+.resource {
+  &-title {
+    display: block;
+    width: 300px;
+    margin: auto;
+    margin-bottom: 30px;
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  &-card-container {
+    margin: auto;
+    padding: 20px;
+    width: 300px;
+    height: 400px;
+    box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%) !important;
+    border-radius: 50px;
+    text-align: center;
+    transition: background-color 0.5s ease;
+  }
+
+  &-card-container:hover {
+    cursor: pointer;
+    background-color: #e8e8e8;
+  }
+
+  &-img {
+    max-width: 300px;
+    height: 100px;
+    margin: auto;
+  }
+
+  &-header {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+
+  &-sub-header {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
   }
 }

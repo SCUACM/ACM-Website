@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+@import "./custom-media";
+
+.events {
+  &-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &-container {
+    text-align: center;
+    padding: 50px;
+  }
+
+  &-calendar-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin: auto;
+    @include media-xs-only {
+      font-size: 1rem;
+    }
+  }
+
+  &-img-container {
+    max-width: 400px;
+    height: 300px;
+    margin: auto;
+    @include media-sm-and-down {
+      height: 200px;
+    }
+  }
+
+  &-img {
+    border-radius: 30px;
+  }
+
+  &-date {
+    font-family: "Poppins", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    @include media-xs-only {
+      font-size: 1.7rem;
+    }
+  }
+
+  &-content {
+    margin-top: 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    @include media-xs-only {
+      margin-top: 10px;
+      font-size: 0.8rem;
+    }
+  }
+}

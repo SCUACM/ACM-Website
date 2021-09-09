@@ -38,6 +38,7 @@
               height="100px"
               style="margin: auto;"
               contain
+              :lazy-src="Logo"
               :src="Logo"
             />
           </v-col>

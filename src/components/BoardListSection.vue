@@ -24,7 +24,11 @@
       >
         <v-row no-gutters>
           <v-col cols="4">
-            <v-img :src="member.src" class="board-image" />
+            <v-img
+              :lazy-src="member.src"
+              :src="member.src"
+              class="board-image"
+            />
           </v-col>
           <v-col cols="8">
             <div class="board-name">

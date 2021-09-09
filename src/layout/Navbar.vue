@@ -3,11 +3,9 @@
     <v-app-bar
       app
       :color="navColor"
-      flat
       width="100vw"
       height="75px"
-      :elevation="noElevation ? 0 : 4"
-      absolute
+      elevate-on-scroll
     >
       <div class="app-bar mx-auto">
         <div class="mr-auto my-auto logo" @click="$router.push('/')">
@@ -15,19 +13,39 @@
             width="120px"
             height="60px"
             contain
-            :src="transparent ? logoWhiteSmall : logoBlackSmall"
+            :laz-src="!isTransparent ? logoBlackSmall : logoWhiteSmall"
+            :src="!isTransparent ? logoBlackSmall : logoWhiteSmall"
           />
         </div>
         <div class="ml-auto routes hidden-sm-and-down">
           <span class="link mx-6">
-            <router-link to="/" :class="[aboutStyle ? 'link-active' : 'link']">
+            <router-link
+              to="/"
+              :class="[
+                isTransparent
+                  ? aboutStyle
+                    ? 'link-active'
+                    : 'link-transparent'
+                  : aboutStyle
+                  ? 'link-active'
+                  : 'link',
+              ]"
+            >
               about
             </router-link>
           </span>
           <span class="link mx-6">
             <router-link
               to="/board"
-              :class="[boardStyle ? 'link-active' : 'link']"
+              :class="[
+                isTransparent
+                  ? boardStyle
+                    ? 'link-active'
+                    : 'link-transparent'
+                  : boardStyle
+                  ? 'link-active'
+                  : 'link',
+              ]"
             >
               board
             </router-link>
@@ -35,13 +53,24 @@
           <span class="link mx-6">
             <router-link
               to="/events"
-              :class="[eventsStyle ? 'link-active' : 'link']"
+              :class="[
+                isTransparent
+                  ? eventsStyle
+                    ? 'link-active'
+                    : 'link-transparent'
+                  : eventsStyle
+                  ? 'link-active'
+                  : 'link',
+              ]"
             >
               events
             </router-link>
           </span>
           <span class="link mx-6">
-            <a :href="'https://hackforhumanity.io/'" class="link">
+            <a
+              :href="'https://hackforhumanity.io/'"
+              :class="[!isTransparent ? 'link' : 'link-transparent']"
+            >
               H4H
             </a>
           </span>
@@ -49,7 +78,7 @@
             <v-btn
               @click="toJoinUs()"
               outlined
-              class="join-btn"
+              :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
               height="40px"
               width="130px"
               style="border-radius:10px; border: solid #b30738"
@@ -70,7 +99,7 @@
                   v-bind="attrs"
                   style="margin-top: 12px"
                 >
-                  <v-icon large color="black">
+                  <v-icon large :color="fontColor">
                     mdi-menu
                   </v-icon>
                 </v-btn>
@@ -129,6 +158,7 @@ export default {
 
   data() {
     return {
+      scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
     };
@@ -136,14 +166,30 @@ export default {
 
   components: {},
 
+  mounted() {
+    window.addEventListener("scroll", this.updateScroll);
+  },
+
   methods: {
     toJoinUs() {
       this.$router.push("/joinus");
     },
+
+    updateScroll() {
+      this.scrollPosition = window.scrollY;
+    },
   },
 
   computed: {
+    isTransparent() {
+      return this.transparent && this.scrollPosition < 100;
+    },
+    fontColor() {
+      if (this.scrollPosition > 100) return "#000000";
+      return "#FFFFFF";
+    },
     navColor() {
+      if (this.scrollPosition > 100) return "#FFFFFF";
       return this.transparent ? "transparent" : "#FFFFFF";
     },
     aboutStyle() {
@@ -178,7 +224,17 @@ export default {
   transition: color 0.1s, background-color 0.4s;
 }
 
-.join-btn:hover {
+.join-btn-transparent {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  color: #fff !important;
+  transition: color 0.1s, background-color 0.4s;
+}
+
+.join-btn:hover,
+.join-btn-transparent:hover {
   background-color: #b30738;
   color: white !important;
   transition: color 0.1s, background-color 0.4s;
@@ -189,6 +245,12 @@ export default {
   font-size: 1rem;
   color: black;
 }
+.link-transparent {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  color: white;
+}
+
 .link:active {
   color: #b30738;
   transition: color 0.3s;
