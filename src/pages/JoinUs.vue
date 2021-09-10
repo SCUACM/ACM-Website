@@ -10,7 +10,15 @@
           Sign up below to follow us for updates and stay on top of upcoming
           events!
         </div>
-        <v-form ref="emailForm">
+        <v-form
+          action="https://scu.us12.list-manage.com/subscribe/post?u=6c12b19c2669eb3e7b5abb862&amp;id=4bb2a9a097"
+          method="post"
+          id="mc-embedded-subscribe-form"
+          name="mc-embedded-subscribe-form"
+          novalidateref="emailForm"
+          @submit="submitJoin()"
+          onsbumit="return false"
+        >
           <v-container class="form-container">
             <v-row no-gutters>
               <v-col cols="12">
@@ -23,6 +31,9 @@
                   v-model="email"
                   outlined
                   solo
+                  type="email"
+                  :value="email"
+                  name="EMAIL"
                 >
                 </v-text-field>
               </v-col>
@@ -36,6 +47,9 @@
                   v-model="firstName"
                   outlined
                   solo
+                  type="text"
+                  :value="firstName"
+                  name="FNAME"
                 >
                 </v-text-field>
               </v-col>
@@ -49,58 +63,45 @@
                   v-model="lastName"
                   outlined
                   solo
+                  type="text"
+                  :value="lastName"
+                  name="LNAME"
                 >
                 </v-text-field>
               </v-col>
-              <v-col style="display: flex; justify-content: center;">
-                <v-dialog v-model="dialog" width="500">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      outlined
-                      class="mt-2 submit-btn"
-                      height="60px"
-                      width="200px"
-                      style="border-radius: 40px; border: solid #b30738"
-                      v-bind="attrs"
-                      v-on="on"
-                      @click="submitJoin()"
-                    >
-                      Submit
-                    </v-btn>
-                  </template>
-                  <v-card style="border-radius: 15px;" height="330px">
-                    <v-card-actions>
-                      <v-btn
-                        style="margin-left:auto"
-                        color="light-grey3"
-                        icon
-                        @click="dialog = false"
-                      >
-                        <v-icon color="light-grey3">
-                          mdi-close
-                        </v-icon>
-                      </v-btn>
-                    </v-card-actions>
-
-                    <v-card-actions class="mt-4">
-                      <div class="success-checkmark">
-                        <div class="check-icon">
-                          <span class="icon-line line-tip"></span>
-                          <span class="icon-line line-long"></span>
-                          <div class="icon-circle"></div>
-                          <div class="icon-fix"></div>
-                        </div>
-                      </div>
-                    </v-card-actions>
-
-                    <v-card-actions
-                      class="sub-header"
-                      style="display: block; text-align: center; width: 100%; margin-top: -10px"
-                    >
-                      Successfully signed up!
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
+              <v-col cols="12" style="display: flex; justify-content: center;">
+                <div
+                  style="position: absolute; left: -5000px;"
+                  aria-hidden="true"
+                >
+                  <input
+                    type="text"
+                    name="b_6c12b19c2669eb3e7b5abb862_4bb2a9a097"
+                    tabindex="-1"
+                    value=""
+                  />
+                </div>
+                <div class="clear">
+                  <input
+                    type="submit"
+                    value="Subscribe"
+                    name="subscribe"
+                    class="mt-2 submit-btn"
+                    style="height: 60px; width: 250px; border-radius: 40px; border: solid #b30738"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" style="margin-top: 40px">
+                <div
+                  class="form-header"
+                  id="mce-error-response"
+                  style="display: none;"
+                ></div>
+                <div
+                  class="form-header"
+                  id="mce-success-response"
+                  style="display: none; color: #4BB543"
+                ></div>
               </v-col>
             </v-row>
           </v-container>
@@ -146,6 +147,16 @@ export default {
     },
   }),
 
+  mounted() {
+    // script 1 for mailchimp
+    let mc_script1 = document.createElement("script");
+    mc_script1.setAttribute(
+      "src",
+      "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"
+    );
+    document.head.appendChild(mc_script1);
+  },
+
   methods: {
     submitJoin() {
       console.log("email: ", this.email);
@@ -157,13 +168,19 @@ export default {
 </script>
 
 <style scoped>
+#mc_embed_signup {
+  background: #fff;
+  clear: left;
+  font: 14px Helvetica, Arial, sans-serif;
+}
+
 /* This is the border of the v-input-fields when selected */
 .v-application .primary--text {
   color: #b30738 !important;
   caret-color: #b30738 !important;
 }
 .submit-btn {
-  font-family: "Nunito", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.3rem;
   letter-spacing: normal;
   font-weight: 500;
