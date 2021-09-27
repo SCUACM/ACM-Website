@@ -28,7 +28,7 @@
               :lazy-src="member.src"
               :src="member.src"
               class="board-image"
-            />
+          />
           </v-col>
           <v-col cols="8">
             <div class="board-name">

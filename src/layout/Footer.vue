@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="pa-8 mt-16" style="background-color: #b30738;">
+    <footer class="pa-8 mt-16" style="background-color: #1c548d;">
       <v-row
         style="display: flex; justify-content: center; text-align: center;"
       >

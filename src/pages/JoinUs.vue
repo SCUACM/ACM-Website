@@ -87,7 +87,7 @@
                     value="Subscribe"
                     name="subscribe"
                     class="mt-2 submit-btn"
-                    style="height: 60px; width: 250px; border-radius: 40px; border: solid #b30738"
+                    style="height: 60px; width: 250px; border-radius: 40px; border: solid #1c548d"
                   />
                 </div>
               </v-col>
@@ -110,7 +110,7 @@
 
       <v-col class="hidden-sm-and-down right-panel-colored" cols="6">
         <div class="img-container">
-          <v-img class="img" src="@/assets/branding/remote_work.svg" />
+          <v-img class="img" src="@/assets/branding/remote_work1.svg" />
           <div class="welcome-text">
             Welcome to SCU ACM!
           </div>
@@ -176,8 +176,8 @@ export default {
 
 /* This is the border of the v-input-fields when selected */
 .v-application .primary--text {
-  color: #b30738 !important;
-  caret-color: #b30738 !important;
+  color: #1c548d !important;
+  caret-color: #1c548d !important;
 }
 .submit-btn {
   font-family: "Poppins", sans-serif;
@@ -185,12 +185,12 @@ export default {
   letter-spacing: normal;
   font-weight: 500;
   text-transform: none !important;
-  color: #b30738;
+  color: #1c548d;
   transition: color 0.1s, background-color 0.4s;
 }
 
 .submit-btn:hover {
-  background-color: #b30738;
+  background-color: #1c548d;
   color: white;
   transition: color 0.1s, background-color 0.4s;
 }

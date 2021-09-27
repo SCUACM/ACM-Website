@@ -68,7 +68,7 @@
           </span>
           <span class="link mx-6">
             <a
-              :href="'https://hackforhumanity.io/'"
+              @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
             >
               H4H
@@ -81,7 +81,7 @@
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
               height="40px"
               width="130px"
-              style="border-radius:10px; border: solid #b30738"
+              style="border-radius:10px; border: solid #1c548d"
             >
               join us!
             </v-btn>
@@ -122,7 +122,10 @@
                 </router-link>
               </v-list-item>
               <v-list-item>
-                <span :href="'https://hackforhumanity.io/'" class="link">
+                <span
+                  @click="routeTo('https://hackforhumanity.io/')"
+                  class="link"
+                >
                   H4H
                 </span>
               </v-list-item>
@@ -178,6 +181,10 @@ export default {
     updateScroll() {
       this.scrollPosition = window.scrollY;
     },
+
+    routeTo(path) {
+      window.open(path);
+    },
   },
 
   computed: {
@@ -185,6 +192,7 @@ export default {
       return this.transparent && this.scrollPosition < 100;
     },
     fontColor() {
+      if (!this.isTransparent) return "#000000";
       if (this.scrollPosition > 100) return "#000000";
       return "#FFFFFF";
     },
@@ -220,7 +228,7 @@ export default {
   font-size: 1rem !important;
   letter-spacing: normal !important;
   text-transform: none !important;
-  color: #b30738 !important;
+  color: #1c548d !important;
   transition: color 0.1s, background-color 0.4s;
 }
 
@@ -235,7 +243,7 @@ export default {
 
 .join-btn:hover,
 .join-btn-transparent:hover {
-  background-color: #b30738;
+  background-color: #1c548d;
   color: white !important;
   transition: color 0.1s, background-color 0.4s;
 }
@@ -252,13 +260,13 @@ export default {
 }
 
 .link:active {
-  color: #b30738;
+  color: #1c548d;
   transition: color 0.3s;
 }
 
 .link-active {
-  color: #b30738;
-  border-bottom: 2px solid #b30738;
+  color: #1c548d;
+  border-bottom: 2px solid #1c548d;
   transition: color 0.3s;
 }
 
@@ -270,12 +278,12 @@ a {
   color: #000;
 }
 a:hover {
-  color: #b30738;
+  color: #1c548d;
   transition: color 0.3s;
 }
 a:focus,
 a:active {
-  color: #b30738;
+  color: #1c548d;
   transition: color 0.3s;
 }
 
@@ -286,7 +294,7 @@ a::before {
   top: 100%;
   height: 2px;
   width: 100%;
-  background-color: #b30738;
+  background-color: #1c548d;
   -webkit-transform-origin: center top;
   transform-origin: center top;
   -webkit-transform: scale(0, 1);
@@ -298,7 +306,7 @@ a::before {
 }
 
 a:active::before {
-  background-color: #b30738;
+  background-color: #1c548d;
   transition: color 0.3s;
 }
 

@@ -6,18 +6,22 @@
 .right-panel-colored {
   display: flex;
   height: 100%;
-  background-color: #b30738;
+  background-color: #1c548d;
   padding: 15px;
 }
 
 .left-panel {
   height: 100%;
-  padding-top: 150px;
+  padding-top: 8%;
   padding-left: 5%;
   padding-right: 5%;
   @include media-xs-only {
+    padding-top: 150px;
     padding-left: 30px;
     padding-right: 30px;
+  }
+  @include media-sm-only {
+    padding-top: 150px;
   }
 }
 

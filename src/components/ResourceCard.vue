@@ -31,7 +31,8 @@ export default {
 
   methods: {
     routeTo(path) {
-      window.location = path;
+      // window.location = path; // routes without opening new tab
+      window.open(path);
     },
   },
 };
