@@ -2,6 +2,8 @@
   <div>
     <BoardListSection title="ACM Board" :memberList="mainBoard" />
 
+    <BoardListSection title="ACM-W" :memberList="acmWBoard" />
+
     <BoardListSection title="Bronco Sec" :memberList="broncoSecBoard" />
 
     <BoardListSection title="Chapter Advisors" :memberList="chapterAdvisors" />
@@ -104,6 +106,30 @@ export default {
           role: "BroncoSec Coordinator",
           bio:
             "Hi All! I’m Casey, and I am super excited to be the BroncoSec president this year! I am a Senior Computer Science major from San Jose, CA. Cybersecurity is my main passion, and I especially enjoy solving tough challenges during capture the flag competitions. I also love learning more about other topics like computer networks, IoT, and AI. When away from my computer, you can often find me working on 3D printing projects, playing beach volleyball outside of Malley, or at Schott Stadium, where I am a student manager for the baseball team. Please feel free to reach out if you have questions, suggestions, or even just want to chat. I hope to see you all at BroncoSec events this year!",
+        },
+      ],
+
+      acmWBoard: [
+        {
+          src: StephenMistele,
+          name: "Stephen Mistele",
+          role: "Workshop Coordinator",
+          bio:
+            "Hi everyone! I'm Stephen Mistele and I am a stupid idiot loser haha.",
+        },
+        {
+          src: StephenMistele,
+          name: "Stephen Mistele",
+          role: "Workshop Coordinator",
+          bio:
+            "Hi everyone! I'm Stephen Mistele. I love meeting new people, so feel free to reach out and connect anytime! I'm currently working on a small startup called Panterix that ranks roads based on how dangerous they are, as well as a game in Unity and my personal portfolio site. The only thing I love more than programming is helping others learn the craft, so if you have any technical questions regarding website development, cloud computing, or APIs, hit me up!",
+        },
+        {
+          src: StephenMistele,
+          name: "Stephen Mistele",
+          role: "Workshop Coordinator",
+          bio:
+            "Hi everyone! I'm Stephen Mistele. I love meeting new people, so feel free to reach out and connect anytime! I'm currently working on a small startup called Panterix that ranks roads based on how dangerous they are, as well as a game in Unity and my personal portfolio site. The only thing I love more than programming is helping others learn the craft, so if you have any technical questions regarding website development, cloud computing, or APIs, hit me up!",
         },
       ],
 

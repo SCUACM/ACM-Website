@@ -366,7 +366,7 @@ export default {
 .parallax {
   display: flex;
   /* The image used */
-  background-image: url("../assets/images/parallax-temp.jpg");
+  background-image: url("../assets/images/parallax-temp1.jpg");
 
   /* Set a specific height */
   min-height: 500px;
