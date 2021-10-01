@@ -64,6 +64,7 @@
           </v-menu>
         </div>
       </div>
+      <!-- List of events -->
       <EventList />
     </v-container>
     <Footer />

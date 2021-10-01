@@ -70,6 +70,7 @@
             <a
               @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
+              style="cursor: alias;"
             >
               H4H
             </a>
