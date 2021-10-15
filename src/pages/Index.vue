@@ -59,7 +59,8 @@
         Events
       </div>
       <div class="event-sub-title">
-        We host a plethora of fun events for anyone of any background or major!
+        We host a plethora of fun events for anyone of any background or major
+        interested in computer science!
       </div>
       <v-row>
         <v-col
@@ -248,7 +249,7 @@ export default {
         src: image1,
         title: "What do we do?",
         content:
-          "ACM is the largest Computer Science organization at SCU. We strongly encourage and welcome students of all backgrounds, majors, and skill levels to join us and share our love for technology!",
+          "ACM is one of the largest student organizations at SCU. We strongly encourage and welcome students of all backgrounds, majors, and skill levels to join us and share our love for technology!",
         content2:
           "At SCU's ACM, we present informative workshops, bring guest speakers, and host fun weekly meetings, as well as hackathons.",
       },
@@ -275,18 +276,19 @@ export default {
         src: hackathon,
         title: "Hackathons",
         content:
-          "Every year we host Hack for Humanity, SCU's social good hackathon.",
+          "Every year we host linkHack for Humanity, SCU's social good hackathon.",
       },
       {
         src: workshop,
         title: "Workshops",
         content:
-          "Our bi-monthly workshops are a great way to learn cutting edge technologies right on SCU's campus.",
+          "Our monthly workshops are a great way to learn real world technologies right on SCU's campus.",
       },
       {
         src: speaker,
         title: "Speakers",
-        content: "Learn about exciting new topics from guest speakers!",
+        content:
+          "Learn about exciting new topics from guest speakers. We have speakers from Google, Microsoft, and more!",
       },
     ],
 

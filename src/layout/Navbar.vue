@@ -82,7 +82,7 @@
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
               height="40px"
               width="130px"
-              style="border-radius:10px; border: solid #1c548d"
+              style="border-radius:10px; border: solid #0099ff"
             >
               join us!
             </v-btn>
@@ -229,7 +229,7 @@ export default {
   font-size: 1rem !important;
   letter-spacing: normal !important;
   text-transform: none !important;
-  color: #1c548d !important;
+  color: #0099ff !important;
   transition: color 0.1s, background-color 0.4s;
 }
 
@@ -244,7 +244,7 @@ export default {
 
 .join-btn:hover,
 .join-btn-transparent:hover {
-  background-color: #1c548d;
+  background-color: #0099ff;
   color: white !important;
   transition: color 0.1s, background-color 0.4s;
 }
@@ -261,13 +261,13 @@ export default {
 }
 
 .link:active {
-  color: #1c548d;
+  color: #0099ff;
   transition: color 0.3s;
 }
 
 .link-active {
-  color: #1c548d;
-  border-bottom: 2px solid #1c548d;
+  color: #0099ff;
+  border-bottom: 2px solid #0099ff;
   transition: color 0.3s;
 }
 
@@ -279,12 +279,12 @@ a {
   color: #000;
 }
 a:hover {
-  color: #1c548d;
+  color: #0099ff;
   transition: color 0.3s;
 }
 a:focus,
 a:active {
-  color: #1c548d;
+  color: #0099ff;
   transition: color 0.3s;
 }
 
@@ -295,7 +295,7 @@ a::before {
   top: 100%;
   height: 2px;
   width: 100%;
-  background-color: #1c548d;
+  background-color: #0099ff;
   -webkit-transform-origin: center top;
   transform-origin: center top;
   -webkit-transform: scale(0, 1);
@@ -307,7 +307,7 @@ a::before {
 }
 
 a:active::before {
-  background-color: #1c548d;
+  background-color: #0099ff;
   transition: color 0.3s;
 }
 
