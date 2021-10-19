@@ -2,7 +2,7 @@
   <div>
     <BoardListSection title="ACM Board" :memberList="mainBoard" />
 
-    <BoardListSection title="ACM-W" :memberList="acmWBoard" />
+    <!-- <BoardListSection title="ACM-W" :memberList="acmWBoard" /> -->
 
     <BoardListSection title="Bronco Sec" :memberList="broncoSecBoard" />
 

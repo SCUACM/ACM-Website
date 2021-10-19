@@ -174,13 +174,13 @@ import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
 import ResourceCard from "@/components/ResourceCard.vue";
 
-import image1 from "@/assets/images/1.jpg";
-import image2 from "@/assets/images/2.jpg";
-import image3 from "@/assets/images/3.jpg";
+import image1 from "@/assets/images/Veritas.jpg";
+import image2 from "@/assets/images/Bonfire.jpg";
+import image3 from "@/assets/images/FirstGeneral.jpg";
 
 import hackathon from "@/assets/images/events/hackathon.jpg";
 import workshop from "@/assets/images/events/workshop.jpg";
-import speaker from "@/assets/images/events/speaker.jpg";
+import speaker from "@/assets/images/events/Speaker1.png";
 
 import ACM from "@/assets/images/resources/ACM.svg";
 import TeamTreeHouse from "@/assets/images/resources/teamtreehouse.svg";
@@ -255,17 +255,17 @@ export default {
       },
       {
         src: image2,
-        title: "How do we do it?",
+        title: "Why do we do it?",
         content:
-          "ACM has the help of an amazing board, as well as a network of computer science enthusiasts at SCU.",
+          "ACM is comprised of individuals passionate about computer science determined to make a difference on campus.",
         content2:
-          "Our board works hard to make sure our workshops and meetings are interesting, intuitive, and interactive!",
+          "We strive to make a community where people can find friends with similar interests and grow their real world technical knowledge to be more effective in industry.",
       },
       {
         src: image3,
         title: "How do I get involved?",
         content:
-          "Meetings are every Tuesday at 5:45. Join our mailing list or slack channel to get involved!",
+          "Meetings are every Tuesday at 5:45 in SCDI 1302. Join our mailing list or slack channel to get involved!",
         content2:
           "We are open to, and accepting of all majors and backgrounds. Don't be afraid to stop by even if you don't have any computer science experience.",
       },
@@ -276,7 +276,7 @@ export default {
         src: hackathon,
         title: "Hackathons",
         content:
-          "Every year we host linkHack for Humanity, SCU's social good hackathon.",
+          "Every year we host Hack for Humanity, SCU's social good hackathon.",
       },
       {
         src: workshop,
@@ -320,7 +320,7 @@ export default {
         link: "https://teamtreehouse.com/",
         title: "Team Treehouse",
         content:
-          "Team Treehouse offers a variety of tutorials and video tutorials that help you walk through the fundamentals of whichever computer science topic you may be exploring.",
+          "Team Treehouse offers a variety of tutorials and video tutorials that help you walk through the fundamentals of whichever computer science topic you may be exploring. Please contact the ACM president for login credentials.",
       },
       {
         src: SmartScholar,

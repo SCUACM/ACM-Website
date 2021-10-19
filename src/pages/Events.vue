@@ -162,7 +162,7 @@ export default {
         data.items.map((event) => ({
           name: event.summary,
           start: event.start.date,
-          color: this.colors[Math.floor(Math.random() * this.colors.length)],
+          color: "grey darken-1",
         }))
       );
 
@@ -176,7 +176,7 @@ export default {
           name: event.summary,
           start: this.parseTime(event.start.dateTime),
           end: this.parseTime(event.end.dateTime),
-          color: this.colors[Math.floor(Math.random() * this.colors.length)],
+          color: this.getColor(event.summary),
           details: event.description,
         }))
       );
@@ -197,6 +197,15 @@ export default {
         " " +
         dateTime.substring(dateTime.indexOf("T") + 1, dateTime.length - 9)
       );
+    },
+
+    getColor(eventName) {
+      eventName = eventName.toLowerCase();
+      if (eventName.includes("broncosec")) return "indigo";
+      else if (eventName.includes("general")) return "orange";
+      else if (eventName.includes("interview prep")) return "blue";
+      else if (eventName.includes("workshop")) return "cyan";
+      return "green";
     },
   },
 };
