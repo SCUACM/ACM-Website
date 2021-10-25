@@ -174,9 +174,9 @@ import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
 import ResourceCard from "@/components/ResourceCard.vue";
 
-import image1 from "@/assets/images/Veritas.jpg";
+import image1 from "@/assets/images/FirstGeneral.jpg";
 import image2 from "@/assets/images/Bonfire.jpg";
-import image3 from "@/assets/images/FirstGeneral.jpg";
+import image3 from "@/assets/images/Veritas.jpg";
 
 import hackathon from "@/assets/images/events/hackathon.jpg";
 import workshop from "@/assets/images/events/workshop.jpg";
