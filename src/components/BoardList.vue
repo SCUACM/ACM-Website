@@ -25,6 +25,7 @@ import SudhishSewpaul from "../assets/board/Sudhish_Sewpaul.png";
 import TimHradil from "../assets/board/Tim_Hradil.png";
 import VrindaShorewala from "../assets/board/Vrinda_Shorewala.jpg";
 import WilliamCockrum from "../assets/board/William_Cockrum.jpg";
+import KavithaVinod from "../assets/board/Kavitha_Vinod.jpg";
 
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 import SilviaFiguera from "../assets/board/chapterAdvisors/Silvia_Figueira.jpg";
@@ -107,23 +108,16 @@ export default {
           bio:
             "Hi All! I’m Casey, and I am super excited to be the BroncoSec president this year! I am a Senior Computer Science major from San Jose, CA. Cybersecurity is my main passion, and I especially enjoy solving tough challenges during capture the flag competitions. I also love learning more about other topics like computer networks, IoT, and AI. When away from my computer, you can often find me working on 3D printing projects, playing beach volleyball outside of Malley, or at Schott Stadium, where I am a student manager for the baseball team. Please feel free to reach out if you have questions, suggestions, or even just want to chat. I hope to see you all at BroncoSec events this year!",
         },
+        {
+          src: KavithaVinod,
+          name: "Kavitha Vinod",
+          role: "Underclassmen Representative",
+          bio:
+            "Hi! I’m Kavitha, and I’m a sophomore studying Computer Science from the Bay Area. I became passionate about computer science after taking an online course the summer before my freshman year of college. I’m interested in AI, machine learning, and the use of computing to solve scientific problems. In my free time I enjoy reading, spending time with friend and family, and learning fun facts about food. I’m really excited to be underclassman rep this year, and help people new to college, coding, or both feel like they’re part of the ACM community!",
+        },
       ],
 
       acmWBoard: [
-        {
-          src: StephenMistele,
-          name: "Stephen Mistele",
-          role: "Workshop Coordinator",
-          bio:
-            "Hi everyone! I'm Stephen Mistele and I am a stupid idiot loser haha.",
-        },
-        {
-          src: StephenMistele,
-          name: "Stephen Mistele",
-          role: "Workshop Coordinator",
-          bio:
-            "Hi everyone! I'm Stephen Mistele. I love meeting new people, so feel free to reach out and connect anytime! I'm currently working on a small startup called Panterix that ranks roads based on how dangerous they are, as well as a game in Unity and my personal portfolio site. The only thing I love more than programming is helping others learn the craft, so if you have any technical questions regarding website development, cloud computing, or APIs, hit me up!",
-        },
         {
           src: StephenMistele,
           name: "Stephen Mistele",
