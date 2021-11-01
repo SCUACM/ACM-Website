@@ -189,7 +189,7 @@ import image3 from "@/assets/images/Veritas.jpg";
 
 import hackathon from "@/assets/images/events/hackathon.jpg";
 import workshop from "@/assets/images/events/workshop.jpg";
-import speaker from "@/assets/images/events/Speaker1.png";
+import speaker from "@/assets/images/events/Speaker1.jpg";
 
 import ACM from "@/assets/images/resources/ACM.svg";
 import TeamTreeHouse from "@/assets/images/resources/teamtreehouse.svg";
