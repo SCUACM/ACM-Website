@@ -26,6 +26,7 @@ import TimHradil from "../assets/board/Tim_Hradil.png";
 import VrindaShorewala from "../assets/board/Vrinda_Shorewala.jpg";
 import WilliamCockrum from "../assets/board/William_Cockrum.jpg";
 import KavithaVinod from "../assets/board/Kavitha_Vinod.jpg";
+import JordanMosakowski from "../assets/board/Jordan_Mosakowski.jpg";
 
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 import SilviaFiguera from "../assets/board/chapterAdvisors/Silvia_Figueira.jpg";
@@ -50,7 +51,7 @@ export default {
           name: "Michelle Lim",
           role: "President",
           bio:
-            "Hi everyone! I’m Michelle and I’m a sophomore computer science and engineering major from Fremont, CA. I got interested in computer science after watching some YouTube tutorials in my sophomore year of high school and I’ve loved it ever since. Some other things about me are that I enjoy reading, playing volleyball, and I’m trying to learn how to bake. Some fields that I’m interested in are cybersecurity and computer vision. I love meeting new people and I can’t wait to meet all of you, so don’t hesitate to reach out and say hi!",
+            "Hi everyone! I’m Michelle and I’m a Junior computer science and engineering major from Fremont, CA. I got interested in computer science after watching some YouTube tutorials in my sophomore year of high school and I’ve loved it ever since. Some other things about me are that I enjoy reading, playing volleyball, and I’m trying to learn how to bake. Some fields that I’m interested in are cybersecurity and computer vision. I love meeting new people and I can’t wait to meet all of you, so don’t hesitate to reach out and say hi!",
         },
         {
           src: WilliamCockrum,
@@ -78,7 +79,7 @@ export default {
           name: "Kevin Rooney",
           role: "Webmaster",
           bio:
-            "I'm Kevin Rooney, a Sophomore Computer Science major born and raised in Silicon Valley. My passion for Computer Science stems from my love for gaming, and so I learned coding at a young age in an attempt to build a video game. I enjoy doing full-stack and application development, and I am currently running a startup company with a team of other developers! I'm always looking for something interesting to learn, and hope to one day put my knowledge to good use in industry. I love meeting new, interesting people, so don't be afraid to reach out and say hi!",
+            "I'm Kevin Rooney, a Junior Computer Science major born and raised in Silicon Valley. My passion for Computer Science stems from my love for gaming, and so I learned coding at a young age in an attempt to build a video game. I enjoy doing full-stack and application development, and I am currently running a startup company with a team of other developers! I'm always looking for something interesting to learn, and hope to one day put my knowledge to good use in industry. I love meeting new, interesting people, so don't be afraid to reach out and say hi!",
         },
         {
           src: StephenMistele,
@@ -114,6 +115,13 @@ export default {
           role: "Underclassmen Representative",
           bio:
             "Hi! I’m Kavitha, and I’m a sophomore studying Computer Science from the Bay Area. I became passionate about computer science after taking an online course the summer before my freshman year of college. I’m interested in AI, machine learning, and the use of computing to solve scientific problems. In my free time I enjoy reading, spending time with friend and family, and learning fun facts about food. I’m really excited to be underclassman rep this year, and help people new to college, coding, or both feel like they’re part of the ACM community!",
+        },
+        {
+          src: JordanMosakowski,
+          name: "Jordan Mosakowski",
+          role: "Underclassmen Representative",
+          bio:
+            "Hi! My name is Jordan Mosakowski, and I am a freshman Computer Science and Engineering student from Boulder, Colorado. I have been interested in computer science since I attended a video game programming camp in elementary school. In high school, I published several mobile apps on the App Store and Play Store and was an active member in my school’s robotics club. I have also developed several web and virtual reality applications, so feel free to reach out if you have questions about any of those topics. Outside of school, you can find me playing piano, watching Formula 1 racing, or throwing a frisbee with friends. I’m looking forward to an amazing year and I can’t wait to meet all of you!",
         },
       ],
 
