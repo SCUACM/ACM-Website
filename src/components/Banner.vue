@@ -40,8 +40,8 @@ export default {
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
-    rgba(15, 47, 131, 1) 0%,
-    rgba(0, 157, 255, 1) 100%
+    rgba(15, 72, 158, 1) 0%,
+    rgba(0, 127, 255, 1) 100%
   );
   align-items: center;
   justify-content: center;
