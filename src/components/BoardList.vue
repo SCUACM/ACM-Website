@@ -15,18 +15,19 @@ import AndrewChiang from "../assets/board/Andrew_Chiang.jpg";
 import CaseyBates from "../assets/board/Casey_Bates.jpg";
 import DevinBhatt from "../assets/board/Devin_Bhatt.jpg";
 import JamesOssam from "../assets/board/James_Ossam.jpg";
-import JodiChui from "../assets/board/Jodi_Chui.png";
-import JonathanHo from "../assets/board/Jonathan_Ho.png";
-import KevinRooney from "../assets/board/Kevin_Rooney.png";
-import MichelleLim from "../assets/board/Michelle_Lim.png";
+import JodiChui from "../assets/board/Jodi_Chui.jpg";
+import JonathanHo from "../assets/board/Jonathan_Ho.jpg";
+import KevinRooney from "../assets/board/Kevin_Rooney.jpg";
+import MichelleLim from "../assets/board/Michelle_Lim.jpg";
 import RaniaAnsari from "../assets/board/Rania_Ansari.jpg";
 import StephenMistele from "../assets/board/Stephen_Mistele.jpg";
-import SudhishSewpaul from "../assets/board/Sudhish_Sewpaul.png";
-import TimHradil from "../assets/board/Tim_Hradil.png";
+import SudhishSewpaul from "../assets/board/Sudhish_Sewpaul.jpg";
+import TimHradil from "../assets/board/Tim_Hradil.jpg";
 import VrindaShorewala from "../assets/board/Vrinda_Shorewala.jpg";
 import WilliamCockrum from "../assets/board/William_Cockrum.jpg";
 import KavithaVinod from "../assets/board/Kavitha_Vinod.jpg";
 import JordanMosakowski from "../assets/board/Jordan_Mosakowski.jpg";
+import DannyWalsh from "../assets/board/Danny_Walsh.jpg";
 
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 import SilviaFiguera from "../assets/board/chapterAdvisors/Silvia_Figueira.jpg";
@@ -177,6 +178,13 @@ export default {
           role: "Public Relations",
           bio:
             "Hey hey! My name is Vrinda and I am a senior Computer Science major. When I'm not busy trying to debug my code, you can catch me dancing away with my friends, baking in the kitchen, or binge-watching a new series! I am super interested in security and have tried to stay involved in many initiatives on campus and outside SCU (I’d be happy to share all the resources I’ve collected so far!) I am excited to be on the board of BroncoSec and I hope to introduce more students to the amazingly vast and dynamic field of security. So feel free to reach out to me if you have any questions, ideas, or just want to talk. I can't wait to meet you all!",
+        },
+        {
+          src: DannyWalsh,
+          name: "Danny Walsh",
+          role: "Underclassmen Representative",
+          bio:
+            "Hello, my name is Danny Walsh, and I’m excited to be one of two BroncoSec Underclassmen Reps. I am a sophomore Web Design & Engineering major from North Shore, Massachusetts. When I’m not at my computer, I’m probably playing hockey for the SCU club ice hockey team, cooking for my friends, or playing guitar. I’m especially interested in front-end development, learning good UI techniques, and solving difficult coding challenges. I’m looking forward to getting other underclassmen excited about cybersecurity and growing BroncoSec. I look forward to seeing everyone at our workshops, speaker events, and Capture the Flag events. If you have any questions, feel free to reach out!",
         },
       ],
 
