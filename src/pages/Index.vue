@@ -26,14 +26,12 @@
     </div>
 
     <div ref="navigation" class="navigation">
-      <Banner
+      <!-- <Banner
         :show="true"
-        content="Sign up for our upcoming hackathon, INRIX hack! 
-Winners get final-round internship interviews with INRIX.
-Read more and sign up "
-        link="http://acm.engr.scu.edu/inrix/"
-        linkTitle="HERE"
-      />
+        content="Be a part of ACM! Come to our general meetings every Tuesday at 5:45 PM in SCDI 1308."
+        link=""
+        linkTitle=""
+      /> -->
       <v-container style="max-width: 800px;">
         <v-row
           style="display: flex; justify-content: center; text-align: center;"
@@ -181,7 +179,7 @@ import "../assets/scss/index-media.scss";
 import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
 import ResourceCard from "@/components/ResourceCard.vue";
-import Banner from "@/components/Banner.vue";
+// import Banner from "@/components/Banner.vue";
 
 import image1 from "@/assets/images/FirstGeneral.jpg";
 import image2 from "@/assets/images/Bonfire.jpg";
@@ -203,7 +201,7 @@ export default {
     Navbar,
     Footer,
     ResourceCard,
-    Banner,
+    //Banner,
   },
 
   watch: {
