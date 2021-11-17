@@ -28,7 +28,7 @@
     <div ref="navigation" class="navigation">
       <!-- <Banner
         :show="true"
-        content="Be a part of ACM! Come to our general meetings every Tuesday at 5:45 PM in SCDI 1308."
+        content="Be a part of ACM! Come to our general meetings every Tuesday at 5:45 PM in SCDI 1302."
         link=""
         linkTitle=""
       /> -->
@@ -185,7 +185,7 @@ import image1 from "@/assets/images/FirstGeneral.jpg";
 import image2 from "@/assets/images/Bonfire.jpg";
 import image3 from "@/assets/images/Veritas.jpg";
 
-import hackathon from "@/assets/images/events/hackathon.jpg";
+import hackathon from "@/assets/images/events/hackathon2.jpg";
 import workshop from "@/assets/images/events/workshop.jpg";
 import speaker from "@/assets/images/events/Speaker1.jpg";
 
