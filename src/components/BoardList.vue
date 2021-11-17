@@ -11,24 +11,24 @@
 </template>
 
 <script>
-import AndrewChiang from "../assets/board/Andrew_Chiang.jpg";
-import CaseyBates from "../assets/board/Casey_Bates.jpg";
-import DevinBhatt from "../assets/board/Devin_Bhatt.jpg";
-import JamesOssam from "../assets/board/James_Ossam.jpg";
-import JodiChui from "../assets/board/Jodi_Chui.jpg";
-import JonathanHo from "../assets/board/Jonathan_Ho.jpg";
-import KevinRooney from "../assets/board/Kevin_Rooney.jpg";
-import MichelleLim from "../assets/board/Michelle_Lim.jpg";
-import RaniaAnsari from "../assets/board/Rania_Ansari.jpg";
-import StephenMistele from "../assets/board/Stephen_Mistele.jpg";
-import SudhishSewpaul from "../assets/board/Sudhish_Sewpaul.jpg";
-import TimHradil from "../assets/board/Tim_Hradil.jpg";
-import VrindaShorewala from "../assets/board/Vrinda_Shorewala.jpg";
-import WilliamCockrum from "../assets/board/William_Cockrum.jpg";
-import KavithaVinod from "../assets/board/Kavitha_Vinod.jpg";
-import JordanMosakowski from "../assets/board/Jordan_Mosakowski.jpg";
-import DannyWalsh from "../assets/board/Danny_Walsh.jpg";
-import Nechal from "../assets/board/Nechal.jpg";
+import AndrewChiang from "../assets/board/main/Andrew_Chiang.jpg";
+import CaseyBates from "../assets/board/broncosec/Casey_Bates.jpg";
+import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
+import JamesOssam from "../assets/board/broncosec/James_Ossam.jpg";
+import JodiChui from "../assets/board/main/Jodi_Chui.jpg";
+import JonathanHo from "../assets/board/broncosec/Jonathan_Ho.jpg";
+import KevinRooney from "../assets/board/main/Kevin_Rooney.jpg";
+import MichelleLim from "../assets/board/main/Michelle_Lim.jpg";
+import RaniaAnsari from "../assets/board/broncosec/Rania_Ansari.jpg";
+import StephenMistele from "../assets/board/main/Stephen_Mistele.jpg";
+import SudhishSewpaul from "../assets/board/main/Sudhish_Sewpaul.jpg";
+import TimHradil from "../assets/board/main/Tim_Hradil.jpg";
+import VrindaShorewala from "../assets/board/broncosec/Vrinda_Shorewala.jpg";
+import WilliamCockrum from "../assets/board/main/William_Cockrum.jpg";
+import KavithaVinod from "../assets/board/main/Kavitha_Vinod.jpg";
+import JordanMosakowski from "../assets/board/main/Jordan_Mosakowski.jpg";
+import DannyWalsh from "../assets/board/broncosec/Danny_Walsh.jpg";
+import Nechal from "../assets/board/broncosec/Nechal.jpg";
 
 import AmandaNguyen from "../assets/board/ACM-W/Amanda_Nguyen.jpeg";
 import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
