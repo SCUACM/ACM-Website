@@ -40,7 +40,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   base: "",
   routes,
-  mode: "history",
+  mode: "hash",
   scrollBehavior() {
     return { x: 0, y: 0 };
   },

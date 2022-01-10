@@ -29,6 +29,7 @@ import KavithaVinod from "../assets/board/main/Kavitha_Vinod.jpg";
 import JordanMosakowski from "../assets/board/main/Jordan_Mosakowski.jpg";
 import DannyWalsh from "../assets/board/broncosec/Danny_Walsh.jpg";
 import Nechal from "../assets/board/broncosec/Nechal.jpg";
+import QuinnSamms from "../assets/board/main/Quinn_Samms.jpeg";
 
 import AmandaNguyen from "../assets/board/ACM-W/Amanda_Nguyen.jpeg";
 import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
@@ -134,6 +135,13 @@ export default {
           role: "Underclassmen Representative",
           bio:
             "Hi! My name is Jordan Mosakowski, and I am a freshman Computer Science and Engineering student from Boulder, Colorado. I have been interested in computer science since I attended a video game programming camp in elementary school. In high school, I published several mobile apps on the App Store and Play Store and was an active member in my school’s robotics club. I have also developed several web and virtual reality applications, so feel free to reach out if you have questions about any of those topics. Outside of school, you can find me playing piano, watching Formula 1 racing, or throwing a frisbee with friends. I’m looking forward to an amazing year and I can’t wait to meet all of you!",
+        },
+        {
+          src: QuinnSamms,
+          name: "Quinn Samms",
+          role: "Underclassmen Representative",
+          bio:
+            "Hello! My name is Quinn Samms and I’m a Computer Science and Engineering major from Phoenix, Arizona. I became interested in computer science ever since I took my first intro to programming course during my senior year of highschool. I’m currently researching and learning about distinct computer science fields in order to figure out what’s the most interesting/fun to me! Outside of school I love to watch and play sports(especially baseball), play video games, hang with friends, eat good food, and meet new people! So feel free to reach out or say hello if you ever see me around campus. I’m super excited to be a part of ACM and work with all of you this year! :)",
         },
       ],
 
