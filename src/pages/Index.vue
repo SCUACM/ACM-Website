@@ -28,9 +28,9 @@
     <div ref="navigation" class="navigation">
       <Banner
         :show="true"
-        content="Join us for Hack for Humanity, Santa Clara University's annual humanitarian hackathon. Sign up "
+        content="Get involved! ACM's general meetings are every Tuesday at 5:45. Stay up to date by signing up for the mailing list."
         link="https://hackforhumanity.io/"
-        linkTitle="here!"
+        linkTitle=""
       />
       <v-container style="max-width: 800px;">
         <v-row
@@ -273,7 +273,7 @@ export default {
         src: image3,
         title: "How do I get involved?",
         content:
-          "Meetings are every Tuesday at 5:45 in SCDI 1302. Join our mailing list or slack channel to get involved!",
+          "Meetings are every Tuesday at 5:45 in various rooms around campus. Join our mailing list or slack channel to get updated information!",
         content2:
           "We are open to, and accepting of all majors and backgrounds. Don't be afraid to stop by even if you don't have any computer science experience.",
       },
