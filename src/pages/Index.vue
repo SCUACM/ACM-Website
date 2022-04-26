@@ -204,11 +204,7 @@ export default {
     Banner,
   },
 
-  watch: {
-    windowHeight(newHeight, oldHeight) {
-      console.log(`it changed to ${newHeight} from ${oldHeight}`);
-    },
-  },
+  watch: {},
 
   mounted() {
     window.addEventListener("resize", this.handleResize);
@@ -355,7 +351,7 @@ export default {
 
     containerMargin() {
       // function for getting the position of the content
-      // needed because the red navigation bar is dyhnamic based on window size
+      // needed because the red navigation bar is dynamic based on window size
       if (this.isMounted) {
         return this.navigationHeight;
       }
@@ -375,13 +371,10 @@ export default {
 <style scoped>
 .parallax {
   display: flex;
-  /* The image used */
   background-image: url("../assets/images/parallax-temp1.jpg");
 
-  /* Set a specific height */
   min-height: 500px;
 
-  /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
