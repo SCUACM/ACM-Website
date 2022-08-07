@@ -3,6 +3,8 @@ import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
 import VueRouter from "vue-router";
 
+import { firestorePlugin } from 'vuefire';
+
 // pages
 
 import Index from "@/pages/Index.vue";
@@ -36,6 +38,8 @@ const routes = [
 ];
 
 Vue.use(VueRouter);
+
+Vue.use(firestorePlugin);
 
 const router = new VueRouter({
   base: "",
