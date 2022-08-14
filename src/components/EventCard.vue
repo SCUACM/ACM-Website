@@ -1,16 +1,29 @@
 <template>
-  <div>
-    <h1>{{ event.title }}</h1>
-    <h3>{{ event.date.toDate() | formatDate }}</h3>
-    <h3>Location: {{ event.location }}</h3>
-    <p>{{ event.description }}</p>
-    <p v-for="link of event.links || {}" :key="link.title" class="link">
-      <v-icon color="#1976d2" class="link-icon">
-        {{ link.icon || 'mdi-link' }}
-      </v-icon>
-      <a :href="link.url" target="_blank">{{link.title}}</a>
-    </p>
-    <youtube v-if="event.youtube" :video-id="event.youtube"></youtube>
+  <div class="event-card">
+    <div>
+      <button @click="dialog = true">
+        <img v-if="image" :src="image">
+      </button>
+      <v-dialog
+        v-model="dialog"
+        width="700"
+      >
+        <img v-if="image" :src="image" />
+      </v-dialog>
+    </div>
+    <div>
+      <h1>{{ event.title }}</h1>
+      <h3>{{ event.date.toDate() | formatDate }}</h3>
+      <h3>Location: {{ event.location }}</h3>
+      <p>{{ event.description }}</p>
+      <p v-for="link of event.links || {}" :key="link.title" class="link">
+        <v-icon color="#1976d2" class="link-icon">
+          {{ link.icon || 'mdi-link' }}
+        </v-icon>
+        <a :href="link.url" target="_blank">{{link.title}}</a>
+      </p>
+      <youtube v-if="event.youtube" :video-id="event.youtube"></youtube>
+    </div>
     <!-- <div class="events-title">
       {{ title }}
     </div>
@@ -41,6 +54,8 @@
 
 <script>
 import "../assets/scss/board-media.scss";
+import {storage} from '../firebase';
+import { ref, getDownloadURL } from "firebase/storage";
 
 export default {
   name: "EventCard",
@@ -51,11 +66,35 @@ export default {
     event: Object
   },
 
-  data: () => ({}),
+  async mounted(){
+    try{
+      this.image = await getDownloadURL(ref(storage, `event-images/${this.event.id}/flyer.jpg`));
+    }
+    catch(e){
+      console.log("No image available")
+    }
+  },
+
+  data: () => ({
+    image: null,
+    dialog: false,
+  }),
 };
 </script>
 
 <style scoped>
+
+.event-card{
+  display: grid;
+  grid-template-columns: min(30vw, 15rem) auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.event-card img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
 .link {
   font-size: 1.2rem;
 }
