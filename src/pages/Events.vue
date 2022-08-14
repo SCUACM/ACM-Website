@@ -1,212 +1,137 @@
 <template>
   <v-app>
     <Navbar />
-    <v-container style="margin-top: 100px; max-width: 1000px">
-      <div style="margin-bottom: 200px;">
+    <v-container style="margin-top: 75px; max-width: 1000px">
         <div class="events-title">
           Upcoming Events
         </div>
-        <div style="height: 600px;">
-          <!-- Calendar Navigation -->
-          <v-sheet tile height="54" class="d-flex">
-            <v-btn icon class="ma-2" @click="$refs.calendar.prev()">
-              <v-icon>mdi-chevron-left</v-icon>
-            </v-btn>
-            <v-spacer />
-            <div class="events-calendar-title" v-if="$refs.calendar">
-              {{ $refs.calendar.title }}
-            </div>
-            <v-spacer />
-            <v-select
-              v-model="calendarType"
-              :items="calendarTypes"
-              dense
-              outlined
-              hide-details
-              class="ma-2"
-              label="type"
-            ></v-select>
-            <v-btn icon class="ma-2" @click="$refs.calendar.next()">
-              <v-icon>mdi-chevron-right</v-icon>
-            </v-btn>
-          </v-sheet>
-          <!-- Calendar -->
-          <v-calendar
-            ref="calendar"
-            v-model="value"
-            :type="calendarType"
-            :events="events"
-            :event-overlap-mode="mode"
-            :event-overlap-threshold="30"
-            :event-color="getEventColor"
-            @change="getEvents"
-            @click:event="showEvent"
-          />
-          <!-- Below is code for popup on click -->
-          <v-menu
-            v-model="selectedOpen"
-            :close-on-content-click="false"
-            :activator="selectedElement"
-            offset-x
-          >
-            <v-card color="grey lighten-4" min-width="350px" flat>
-              <v-toolbar :color="selectedEvent.color" dark>
-                <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-btn icon @click="selectedOpen = false">
-                  <v-icon>mdi-close</v-icon>
-                </v-btn>
-              </v-toolbar>
-              <v-card-text v-if="selectedEvent.details">
-                <span v-html="selectedEvent.details"></span>
-              </v-card-text>
-            </v-card>
-          </v-menu>
+      <EventCard v-for="event of this.upcoming" :event="event" :key="event.id" />
+        <div class="events-title">
+          Past Events
         </div>
-      </div>
-      <!-- List of events -->
-      <EventList />
+      <EventCard v-for="event of this.past" :event="event" :key="event.id" />
     </v-container>
     <Footer />
   </v-app>
 </template>
 
 <script>
-import "../assets/scss/events-media.scss";
+import "../assets/scss/board-media.scss";
+
+import EventCard from "@/components/EventCard.vue";
+
+import Lockpicking from "@/assets/eventlist/Lockpicking.jpg";
+import Rollerskating from "@/assets/eventlist/RollerSkating.jpg";
+import Forensic from "@/assets/eventlist/Forensic.jpg";
+import H4H from "@/assets/eventlist/h4h.jpg";
+import EWeekFormal from "@/assets/eventlist/eWeekFormal.jpg";
+import EWeekLateNightBreakfast from "@/assets/eventlist/eWeekLateNightBreakfast.jpg";
+import EWeekLunch from "@/assets/eventlist/eWeekLunch.jpg";
+import Capgemini from "@/assets/eventlist/Capgemini.jpg";
+import EWeekCarnival from "@/assets/eventlist/eWeekCarnival.jpg";
+import EWeekPhotoComp from "@/assets/eventlist/eWeekPhotoComp.jpg";
+import Go from "@/assets/eventlist/Go.jpg";
+import AI from "@/assets/eventlist/AI.jpg";
 import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
-import EventList from "@/components/EventList";
+
+// import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore'
+import {db, Timestamp} from '../firebase';
+
 export default {
-  name: "Events",
+  name: "EventList",
 
   components: {
     Navbar,
+    EventCard,
     Footer,
-    EventList,
   },
 
-  data: () => ({
-    isMounted: false,
-    selectedOpen: false,
-    selectedEvent: "",
-    selectedElement: "",
-    calendarType: "month",
-    mode: "stack",
-    value: "",
-    calendarTypes: ["month", "week", "day"],
-    events: [],
-    colors: [
-      "blue",
-      "indigo",
-      "deep-purple",
-      "cyan",
-      "green",
-      "orange",
-      "grey darken-1",
-    ],
-  }),
-
-  async mounted() {
-    await this.getHolidays();
-    this.isMounted = true;
+  firestore: {
+    upcoming: db.collection('events').where("date",">=",Timestamp.now()).orderBy('date', 'desc'),
+    past: db.collection('events').where("date","<",Timestamp.now()).orderBy('date', 'desc'),
   },
 
-  methods: {
-    getEventColor(event) {
-      return event.color;
-    },
-
-    getEvents() {
-      this.events;
-    },
-
-    showEvent({ nativeEvent, event }) {
-      const open = () => {
-        this.selectedEvent = event;
-        this.selectedElement = nativeEvent.target;
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() => (this.selectedOpen = true))
-        );
-      };
-
-      if (this.selectedOpen) {
-        this.selectedOpen = false;
-        requestAnimationFrame(() => requestAnimationFrame(() => open()));
-      } else {
-        open();
-      }
-
-      nativeEvent.stopPropagation();
-    },
-
-    async getHolidays() {
-      // typically we want to hide our auth... but since this is private it is fine
-      const auth = "AIzaSyCnRyFyPuJ9WSeu602Q7CE13TsxWVNbw10";
-
-      // only get holidays for 6 months prior and forward
-      let currentDate = new Date();
-      let futureDate = new Date(currentDate);
-      futureDate.setMonth(currentDate.getMonth() + 6);
-      let pastDate = new Date(currentDate);
-      pastDate.setMonth(currentDate.getMonth() - 6);
-
-      const timeMin = pastDate.toJSON();
-      const timeMax = futureDate.toJSON();
-
-      const res = await fetch(
-        `https://www.googleapis.com/calendar/v3/calendars/en.usa%23holiday%40group.v.calendar.google.com/events?key=${auth}&timeMin=${timeMin}&timeMax=${timeMax}`
-      );
-      const data = await res.json();
-      console.log(data);
-      this.events = this.events.concat(
-        data.items.map((event) => ({
-          name: event.summary,
-          start: event.start.date,
-          color: "grey darken-1",
-        }))
-      );
-
-      const acmEventsResponse = await fetch(
-        `https://clients6.google.com/calendar/v3/calendars/santaclara.acm@gmail.com/events?calendarId=santaclara.acm%40gmail.com&singleEvents=true&timeZone=America%2FLos_Angeles&maxAttendees=1&maxResults=250&sanitizeHtml=true&timeMin=${timeMin}&timeMax=${timeMax}&key=${auth}`
-      );
-      const acmEventsData = await acmEventsResponse.json();
-      console.log(acmEventsData);
-      this.events = this.events.concat(
-        acmEventsData.items.map((event) => ({
-          name: event.summary,
-          start: this.parseTime(event.start.dateTime),
-          end: this.parseTime(event.end.dateTime),
-          color: this.getColor(event.summary),
-          details: event.description,
-        }))
-      );
-    },
-
-    // fetching acm events gives time string in incorrect format
-    parseTime(dateTime) {
-      if (!dateTime) return "2000-00-00";
-      console.log(dateTime);
-      console.log(typeof dateTime);
-      console.log(
-        dateTime.substring(0, dateTime.indexOf("T")) +
-          " " +
-          dateTime.substring(dateTime.indexOf("T") + 1, dateTime.length - 9)
-      );
-      return (
-        dateTime.substring(0, dateTime.indexOf("T")) +
-        " " +
-        dateTime.substring(dateTime.indexOf("T") + 1, dateTime.length - 9)
-      );
-    },
-
-    getColor(eventName) {
-      eventName = eventName.toLowerCase();
-      if (eventName.includes("broncosec")) return "indigo";
-      else if (eventName.includes("general")) return "orange";
-      else if (eventName.includes("interview prep")) return "blue";
-      else if (eventName.includes("workshop")) return "cyan";
-      return "green";
-    },
+  data() {
+    return {
+      upcoming: [],
+      past: [],
+      events2020: [
+        {
+          src: Lockpicking,
+          date: "March 10th, 2020",
+          info:
+            "BroncoSec hosted a Lockpicking Workshop! (Physical security still counts as security). This workshop was open to all students interested in learning how to pick a lock.",
+        },
+        {
+          src: Rollerskating,
+          date: "March 6th, 2020",
+          info:
+            "ACM and IEEE hosted a fun evening of roller skating at Aloha Roller Rink!",
+        },
+        {
+          src: Forensic,
+          date: "February 29th, 2020",
+          info:
+            "Digital Forensics is about the collection and examination of digital evidence and the subsequent response to threats and attacks. As seen weekly on your average episode of CSI or NCIS, except it's nothing like CSI or NCIS in real life. This introductory workshop taught students about Digital Forensics and Incident Response, some of the tools professionals use to uncover evidence, and worked on a simulated case. ",
+        },
+        {
+          src: H4H,
+          date: "February 22nd – February 23rd, 2020",
+          info:
+            "This year was SCU ACM's seventh Hack for Humanity, an annual 24-hour hackathon that includes solving pressing social issues using creativity and code. Teams comprised of 2-6 students. ",
+        },
+        {
+          src: EWeekFormal,
+          date: "February 20th, 2020",
+          info:
+            "To celebrate the 2020 National Engineers Week, many organizations worked together to host the first annual eWeek Formal. This free event included pizza, churros, a photo booth, and lots of dancing! It was hosted by Society of Women Engineers (SWE), the Society of Hispanic Professional Engineers (SHPE), the National Society of Black Engineers (NSBE), Women in STEM (WinSTEM), the Association for Computing Machinery--Women's Chapter (ACM-W), Peer Advisors, and STAR. The Formal was hosted in partnership with: Tau Beta Pi, ACM, Biomedical Engineering Society (BMES), American Society of Civil Engineers (ASCE), and the Institute of Electrical & Electronics Engineers (IEEE).",
+        },
+        {
+          src: EWeekLateNightBreakfast,
+          date: "February 19th, 2020",
+          info:
+            "To celebrate National Engineers Week, students took a Late Night Breakfast and Game break co-hosted by ACM, Society of Women Engineers (SWE), Women in STEM, Theta Tau, Engineers Without Borders, and the School of Engineering. Breakfast foods were provided by the School of Engineering staff. Board games were provided and there was even some surprise karaoke! ",
+        },
+        {
+          src: EWeekLunch,
+          date: "February 19th, 2020",
+          info:
+            "The School of Engineering undergraduates, graduates, faculty, and staff were all invited to the annual eWeek Lunch. There were various wellness inspired activities including a puppy petting area, an art show provided by AGES, and stress-releasing games provided by our student organizations including ACM, Society of Women Engineers (SWE), Women in STEM, Theta Tau, and Engineers Without Borders.",
+        },
+        {
+          src: Capgemini,
+          date: "February 18th, 2020",
+          info:
+            "ACM co-hosted the Capgemini Info Session with SWE and ACM-W for students to learn more about exciting internship and full-time opportunities. There was a special focus for students interested in the following roles: business analyst, programmer/developer, project management, and quality engineer. Chick-fil-a and Capgemini swag were provided!",
+        },
+        {
+          src: EWeekCarnival,
+          date: "February 18th, 2020",
+          info:
+            "To celebrate the 2020 National Engineers week, ACM joined co-hosted an engineering carnival with the Society of Women Engineers (SWE), Women in STEM, Theta Tau, Engineers Without Borders and the School of Engineering! Students received e-week t-shirts, played games, won prizes, enjoyed some sweet treats, and flew their creations in a paper airplane contest!",
+        },
+        {
+          src: EWeekPhotoComp,
+          date: "February 11th – February 18th, 2020",
+          info:
+            "This year for eWeek's Wellness Day, there was a Photo Competition in which students took creative photos with professors for the chance to win $50 Amazon Gift Cards! A slideshow of submitted photos was shown during the eWeek Lunch. Those who attended the lunch were able to vote for their favorites!",
+        },
+        {
+          src: Go,
+          date: "February 8th, 2020",
+          info:
+            "Go is an open source programming language developed by Google that makes it easy to build simple, reliable, and efficient software. Hundreds of companies use Golang, including Uber, Twitch, Dropbox and Soundclound. Taught by the famous Paul Ahrens.",
+        },
+        {
+          src: AI,
+          date: "January 25th, 2020",
+          info:
+            "In medical imaging, artificial intelligence (AI) models are applied to tasks such as image segmentation and disease diagnosis. After training a model to segment an image or diagnose a disease, it is necessary to consider factors other than accuracy, such as model interpretability, how the model classifies data, and so on. In this workshop, we passed medical images through a simple neural network, analyzed the receiver operating characteristic curve, and looked at what features contribute to a class prediction.",
+        },
+      ],
+    };
   },
 };
 </script>

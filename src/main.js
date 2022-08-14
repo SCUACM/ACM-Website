@@ -9,8 +9,12 @@ import { firestorePlugin } from 'vuefire';
 
 import Index from "@/pages/Index.vue";
 import Board from "@/pages/Board.vue";
+import Calendar from "@/pages/Calendar.vue";
 import Events from "@/pages/Events.vue";
 import JoinUs from "@/pages/JoinUs.vue";
+
+import moment from 'moment'
+import VueYoutube from 'vue-youtube'
 
 Vue.config.productionTip = false;
 
@@ -22,6 +26,10 @@ const routes = [
   {
     path: "/board",
     component: Board,
+  },
+  {
+    path: "/calendar",
+    component: Calendar,
   },
   {
     path: "/events",
@@ -40,6 +48,14 @@ const routes = [
 Vue.use(VueRouter);
 
 Vue.use(firestorePlugin);
+
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('MMM Do, YYYY h:mm a')
+  }
+});
+ 
+Vue.use(VueYoutube)
 
 const router = new VueRouter({
   base: "",

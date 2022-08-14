@@ -1,6 +1,17 @@
 <template>
   <div>
-    <div class="events-title">
+    <h1>{{ event.title }}</h1>
+    <h3>{{ event.date.toDate() | formatDate }}</h3>
+    <h3>Location: {{ event.location }}</h3>
+    <p>{{ event.description }}</p>
+    <p v-for="link of event.links || {}" :key="link.title" class="link">
+      <v-icon color="#1976d2" class="link-icon">
+        {{ link.icon || 'mdi-link' }}
+      </v-icon>
+      <a :href="link.url" target="_blank">{{link.title}}</a>
+    </p>
+    <youtube v-if="event.youtube" :video-id="event.youtube"></youtube>
+    <!-- <div class="events-title">
       {{ title }}
     </div>
     <v-row>
@@ -24,7 +35,7 @@
           {{ event.info }}
         </div>
       </v-col>
-    </v-row>
+    </v-row> -->
   </div>
 </template>
 
@@ -32,17 +43,23 @@
 import "../assets/scss/board-media.scss";
 
 export default {
-  name: "EventListSection",
+  name: "EventCard",
 
   components: {},
 
   props: {
-    title: String,
-    eventList: Array,
+    event: Object
   },
 
   data: () => ({}),
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.link {
+  font-size: 1.2rem;
+}
+.link-icon {
+  margin-right: 5px;
+}
+</style>
