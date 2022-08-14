@@ -2,25 +2,29 @@
   <div class="event-card">
     <div>
       <button @click="dialog = true">
-        <img v-if="image" :src="image">
+        <img v-if="image" :src="image" class="flyer">
       </button>
       <v-dialog
         v-model="dialog"
-        width="700"
+        width="unset"
       >
-        <img v-if="image" :src="image" />
+        <div class="dialog">
+          <img v-if="image" :src="image" class="dialog-img" />
+        </div>
       </v-dialog>
     </div>
     <div>
       <h1>{{ event.title }}</h1>
-      <h3>{{ event.date.toDate() | formatDate }}</h3>
-      <h3>Location: {{ event.location }}</h3>
+      <h3 v-if="event.startDate != undefined">{{ event.startDate.toDate() | formatDate }}</h3>
+      <h3 v-if="event.location">Location: {{ event.location }}</h3>
       <p>{{ event.description }}</p>
       <p v-for="link of event.links || {}" :key="link.title" class="link">
-        <v-icon color="#1976d2" class="link-icon">
-          {{ link.icon || 'mdi-link' }}
-        </v-icon>
-        <a :href="link.url" target="_blank">{{link.title}}</a>
+        <a :href="link.url" target="_blank">
+          <v-icon color="#1976d2" class="link-icon">
+            {{ link.icon || 'mdi-link' }}
+          </v-icon>
+          <span>{{ link.title }}</span>
+        </a>
       </p>
       <youtube v-if="event.youtube" :video-id="event.youtube"></youtube>
     </div>
@@ -68,7 +72,7 @@ export default {
 
   async mounted(){
     try{
-      this.image = await getDownloadURL(ref(storage, `event-images/${this.event.id}/flyer.jpg`));
+      this.image = await getDownloadURL(ref(storage, `flyers/${this.event.id}.jpg`));
     }
     catch(e){
       console.log("No image available")
@@ -84,21 +88,54 @@ export default {
 
 <style scoped>
 
+.flyer:hover{
+  transform: scale(1.05);
+  background-color: #f5f5f5;
+}
+
+.flyer{
+  transition: all .2s ease-in-out;
+  border-radius: .5rem;
+  padding: 1rem;
+}
+
 .event-card{
   display: grid;
   grid-template-columns: min(30vw, 15rem) auto;
   gap: 1rem;
   margin-bottom: 2rem;
+  padding: 1rem;
 }
 
 .event-card img {
   width: 100%;
   border-radius: 0.5rem;
 }
-.link {
+.link a {
   font-size: 1.2rem;
+  text-decoration: none;
 }
+
+.link a span{
+  font-size: 1.2rem;
+  text-decoration: underline;
+}
+
 .link-icon {
   margin-right: 5px;
+  text-decoration: none;
+}
+
+.dialog-img{
+  height: 100%;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.dialog{
+  height: 90vh;
+  text-align: center;
+  overflow: hidden;
 }
 </style>

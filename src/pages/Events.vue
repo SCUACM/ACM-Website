@@ -49,8 +49,8 @@ export default {
   },
 
   firestore: {
-    upcoming: db.collection('events').where("date",">=",Timestamp.now()).orderBy('date', 'desc'),
-    past: db.collection('events').where("date","<",Timestamp.now()).orderBy('date', 'desc'),
+    upcoming: db.collection('events').where("startDate",">=",Timestamp.now()).orderBy('startDate', 'desc'),
+    past: db.collection('events').where("startDate","<",Timestamp.now()).orderBy('startDate', 'desc'),
   },
 
   data() {
