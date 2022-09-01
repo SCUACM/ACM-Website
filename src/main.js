@@ -50,9 +50,19 @@ Vue.use(VueRouter);
 Vue.use(firestorePlugin);
 
 Vue.filter('formatDate', function(value) {
-  if (value) {
-    return moment(String(value)).format('MMM Do, YYYY h:mm a')
+  if(!value) return '';
+  if(value.startDate && !value.endDate) {
+    return moment(value.startDate.toDate()).format('MMM Do YYYY, h:mm a');
   }
+  const date1 = moment(String(value.startDate.toDate())).format('MMM Do');
+  const date2 = moment(String(value.endDate.toDate())).format('MMM Do');
+  const time1 = moment(String(value.startDate.toDate())).format('h:mm a');
+  const time2 = moment(String(value.endDate.toDate())).format('h:mm a');
+  if(date1 === date2) {
+    return `${date1} ${time1} - ${time2}`;
+  }
+  return `${date1} ${time1} - ${date2} ${time2}`;
+
 });
  
 Vue.use(VueYoutube)
