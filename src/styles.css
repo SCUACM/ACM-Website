@@ -15,8 +15,8 @@
     margin: 100px auto;
     padding: 20px;
   }
-  #drop-area.highlight {
-    border-color: purple;
+  #dropArea.highlight {
+    border-color: #104ca4 ;
   }
   p {
     margin-top: 0;

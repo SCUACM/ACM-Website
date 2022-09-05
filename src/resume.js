@@ -26,16 +26,20 @@ const storage = getStorage(firebase);
 const storageRef = ref(storage);
 
 let dropArea = document.getElementById("dropArea");
-let fileInput = document.getElementById("fileElement");
 
+dropArea.addEventListener("drop", dropHandler, false);
+
+
+let fileInput = document.getElementById("fileElement");
 fileInput.addEventListener("change", fileHandler, false);
+
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach((event) => {
   dropArea.addEventListener(event, preventDefaults, false);
 });
 
 function preventDefaults(e) {
-  e.preventDefaults();
+  e.preventDefault();
   e.stopPropagation();
 }
 
@@ -47,33 +51,41 @@ function preventDefaults(e) {
 );
 
 function highlight(e) {
-  dropEvent.classList.add("highlight");
+  dropArea.classList.add("highlight");
 }
 
 function removeHighlight(e) {
-  dropEvent.classList.remove("highlight");
+  dropArea.classList.remove("highlight");
 }
 
-dropArea.addEventListener("drop", dropHandler, false);
 
 function dropHandler(e) {
-  let data = e.dataTransfer;
-  let files = data.files;
-
-  fileHandler(files);
+  if (e.dataTransfer.items){
+    [...e.dataTransfer.items].forEach((item, i) =>{
+      if (item.kind === 'file'){
+        const file = item.getAsFile();
+        fileUpload(file);
+      }
+    })
+  }
 }
 
 function fileHandler(e) {
   // iterating through the files individually...
+
   [...e.target.files].forEach(fileUpload);
 }
 
+let fakeID = ['adf', 'gfd', 'fds'];
+
 function fileUpload(file) {
-  const resumeStorageRef = ref(storage, "resumes/resume_name.pdf");
+  // Replace fakeID with firebase user ID. It should automatically replace
+  // any existing resume file with the name.
+  const resumeStorageRef = ref(storage, `resumes/${fakeID[0]}.pdf`);
 
   uploadBytes(resumeStorageRef, file).then((snapshot) =>{
-    console.log('uploaded resume!');
+    alert('uploaded resume!');
+    
   });
 
-  console.log("test");
 }
