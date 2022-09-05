@@ -6,22 +6,20 @@
   <title>Resume Upload Page</title>
   <link href="styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  
+
 </head>
 
 <body>
-
-  <div id="dropArea">
+  <script src="./resume.js" type="module"> 
+  </script>
+<div id="dropArea">
     <form class="my-form">
       <p>Upload your resume here!</p>
     </form>
-    <input type="file" id="fileElement" multiple accept ="application/pdf,application/msword,
-    application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange="fileHandler(this.files)">
-    <label class ="button" for="fileElem">Select files (.pdf, .doc, .docx) </label>
+    <input type="file" id="fileElement"  multiple accept ="application/pdf,application/msword,
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document">
   </div>
-  <script src="resume.js" type="module">
-
-
-  </script>
 
 </body>
 
