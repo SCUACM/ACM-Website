@@ -10,7 +10,7 @@ import { firestorePlugin } from 'vuefire';
 import Index from "@/pages/Index.vue";
 import Board from "@/pages/Board.vue";
 import Calendar from "@/pages/Calendar.vue";
-import Events from "@/pages/Events.vue";
+import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
 
 import moment from 'moment'

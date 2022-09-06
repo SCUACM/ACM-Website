@@ -65,44 +65,29 @@ export default {
   computed: {
     mapLink(){
       const buildingCodes = {
-        "Admission & Enrollment Services": 202,
-        "Adobe Lodge": 2,
         "Alameda": 24,
-        "Alumni Science": 4,
-        "Alviso Mall": 233,
-        "Aquatic Center": 137,
-        "Athletic Excellence Center": 250,
-        "Bannan Alumni House": 18,
         "Bellarmine": 133,
-        "Benson Center": 7,
-        "Bronco Corner Bookstore": 9,
+        "Benson": 7,
+        "Bookstore": 9,
         "Campisi": 12,
-        "Campus Safety Services": 74,
         "Casa Italiana": 13,
         "Charney": 232,
-        "Cowell Center": 15,
-        "De Saisset Museum": 17,
+        "Cowell": 15,
+        "Museum": 17,
         "Dunne": 19,
-        "Edward M. Dowd Art and Art History": 227,
-        "Facilities Building": 22,
+        "Dowd": 227,
+        "Facilities": 22,
         "Finn": 240,
-        "Forge Garden": 212,
-        "Frugal Innovation Lab": 214,
+        "Forge": 212,
         "Graham": 205,
         "Guadalupe": 230,
-        "Jesuit Community Residence": 25,
         "Kenna": 33,
-        "Kerr Alumni Park": 61,
-        "Kids on Campus": 34,
-        "Learning Commons and Library": 144,
-        "Leavey Center": 37,
+        "Learning Commons": 144,
+        "Leavey": 37,
         "Locatelli": 156,
         "Loyola": 117,
         "Lucas": 148,
-        "Main Entrance": 126,
-        "Main Gate Visitor Kiosk": 110,
-        "Malley Center": 39,
-        "Manresa Learning Center": 235,
+        "Malley": 39,
         "Mayer Theatre": 40,
         "McLaughlin": 41,
         "Mission Church": 42,
@@ -129,16 +114,22 @@ export default {
         "Swig": 54,
         "Tennis Center": 76,
         "The Garage": 241,
-        "University Villas": 201,
+        "Villas": 201,
         "Vari": 14,
         "Varsi": 58,
-        "Walsh Administration Building": 55,
+        "Walsh Admin": 55,
         "Walsh": 56
       }
       const buildingList = Object.keys(buildingCodes);
-      const building = (this.event.location ?? "").split(" ")[0];
+      const location = this.event.location ?? "";
+      const splitIndex = location.lastIndexOf(" ");
+      if(splitIndex === -1) {
+        return null;
+      }
+      const building = location.substring(0, splitIndex);
+      console.log(location,splitIndex,building);
       if(buildingList.includes(building)){
-        const floor = (this.event.location ?? "").split(" ")[1];
+        const floor = location.substring(splitIndex + 1);
         if(floor){
           return `https://www.scu.edu/map/location/${buildingCodes[building]}/floors/${floor}`;
         }
