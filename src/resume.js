@@ -26,13 +26,13 @@ const storage = getStorage(firebase);
 const storageRef = ref(storage);
 
 let dropArea = document.getElementById("dropArea");
-
 dropArea.addEventListener("drop", dropHandler, false);
-
 
 let fileInput = document.getElementById("fileElement");
 fileInput.addEventListener("change", fileHandler, false);
 
+let submitBtn = document.getElementById("submitBtn");
+submitBtn.disabled = true;
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach((event) => {
   dropArea.addEventListener(event, preventDefaults, false);
@@ -58,34 +58,64 @@ function removeHighlight(e) {
   dropArea.classList.remove("highlight");
 }
 
-
 function dropHandler(e) {
-  if (e.dataTransfer.items){
-    [...e.dataTransfer.items].forEach((item, i) =>{
-      if (item.kind === 'file'){
-        const file = item.getAsFile();
-        fileUpload(file);
-      }
-    })
-  }
+  uploadHandler(e.dataTransfer.files[0]);
 }
 
 function fileHandler(e) {
-  // iterating through the files individually...
-
-  [...e.target.files].forEach(fileUpload);
+  uploadHandler(e.target.files[0]);
 }
 
-let fakeID = ['adf', 'gfd', 'fds'];
+function uploadHandler(file) {
+  if (file.type != "application/pdf") {
+    alert("Please upload a PDF file!");
+    submitBtn.disabled = true;
+  } else {
+    submitBtn.disabled = false;
+  }
+  // Apparently you can only store primitive types in local
+  // storage. This means 'file' types must be converted to base64.
+  var reader = new FileReader();
+  var base64;
+  reader.onload = function (fileLoadedEvent) {
+    base64 = fileLoadedEvent.target.result;
+    localStorage.setItem("file", base64);
+    // console.log(base64);
+  };
+  reader.readAsDataURL(file);
+  submitBtn.addEventListener("click", buttonHandler, false);
+}
+
+// Returns converted base64 string to PDF
+function getFile() {
+  var base64 = localStorage.getItem("file");
+  var base64Parts = base64.split(",");
+
+  // Decoding the base64
+  var fileContent = Uint8Array.from(window.atob(base64Parts[1]), (c) =>
+    c.charCodeAt(0)
+  );
+
+  // Creating file based on newly decoded string
+  var file = new File([fileContent], `${fakeID[0]}.pdf`, {
+    type: "application/pdf",
+  });
+  return file;
+}
+
+function buttonHandler(e) {
+  fileUpload(getFile());
+}
+
+let fakeID = ["adf", "gfd", "fds"];
 
 function fileUpload(file) {
   // Replace fakeID with firebase user ID. It should automatically replace
   // any existing resume file with the name.
+
   const resumeStorageRef = ref(storage, `resumes/${fakeID[0]}.pdf`);
 
-  uploadBytes(resumeStorageRef, file).then((snapshot) =>{
-    alert('uploaded resume!');
-    
+  uploadBytes(resumeStorageRef, file).then((snapshot) => {
+    alert("Your resume has been uploaded!");
   });
-
 }

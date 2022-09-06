@@ -13,12 +13,13 @@
 <body>
   <script src="./resume.js" type="module"> 
   </script>
+  <script src="/node_modules/localforage/dist/localforage.js"></script>
 <div id="dropArea">
     <form class="my-form">
       <p>Drop your resume here!</p>
     </form>
-    <input type="file" id="fileElement"  multiple accept ="application/pdf,application/msword,
-    application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    <input type="file" id="fileElement"  multiple accept ="application/pdf">
+    <button id="submitBtn">submit</button>
   </div>
 
 </body>
