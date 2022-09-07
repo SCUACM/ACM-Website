@@ -37,8 +37,8 @@ export default {
 
   // Create Observables (objects that will auto update as data gets updated/added) of all upcoming and past event objects.
   firestore: {
-    upcoming: db.collection('events').where("startDate",">=",Timestamp.now()).orderBy('startDate', 'desc'),
-    past: db.collection('events').where("startDate","<",Timestamp.now()).orderBy('startDate', 'desc'),
+    upcoming: db.collection('events').where("startDate",">=",Timestamp.now()).orderBy('startDate', 'asc').limit(5),
+    past: db.collection('events').where("startDate","<",Timestamp.now()).orderBy('startDate', 'desc').limit(15),
   },
 
   data() {
