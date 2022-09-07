@@ -63,27 +63,35 @@ function dropHandler(e) {
 }
 
 function fileHandler(e) {
+
   uploadHandler(e.target.files[0]);
 }
 
 function uploadHandler(file) {
+  let fileDesc = document.getElementById('fileName');  
   if (file.type != "application/pdf") {
     alert("Please upload a PDF file!");
+    fileDesc.textContent = " ";
     submitBtn.disabled = true;
-  } else {
-    submitBtn.disabled = false;
   }
-  // Apparently you can only store primitive types in local
-  // storage. This means 'file' types must be converted to base64.
-  var reader = new FileReader();
-  var base64;
-  reader.onload = function (fileLoadedEvent) {
-    base64 = fileLoadedEvent.target.result;
-    localStorage.setItem("file", base64);
-    // console.log(base64);
-  };
-  reader.readAsDataURL(file);
-  submitBtn.addEventListener("click", buttonHandler, false);
+  else  {
+    submitBtn.disabled = false;
+    dropArea.appendChild(submitBtn);
+    fileDesc.textContent = `Selected file: ${file.name}`;
+
+
+    // Apparently you can only store primitive types in local
+    // storage. This means 'file' types must be converted to base64.
+    var reader = new FileReader();
+    var base64;
+    reader.onload = function (fileLoadedEvent) {
+      base64 = fileLoadedEvent.target.result;
+      localStorage.setItem("file", base64);
+      // console.log(base64);
+    };
+    reader.readAsDataURL(file);
+    submitBtn.addEventListener("click", buttonHandler, false);
+  }
 }
 
 // Returns converted base64 string to PDF
@@ -118,4 +126,23 @@ function fileUpload(file) {
   uploadBytes(resumeStorageRef, file).then((snapshot) => {
     alert("Your resume has been uploaded!");
   });
+}
+
+// ================ HELPER FUNCTION ===================
+
+// post: takes in a parent element, item content to append, and type
+// pre: returns element type. Appends the item to the last child
+function appendItemChild(
+  parent,
+  textContent = "",
+  elementType = "div",
+  className = "",
+  style ="",
+) {
+let item = document.createElement(elementType);
+  item.textContent = textContent;
+  parent.appendChild(item);
+  if (className.length != 0) item.className = className;
+  if (style != "") item.style.cssText += style;
+  return item;
 }

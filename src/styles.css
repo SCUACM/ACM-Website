@@ -41,10 +41,18 @@
     border-radius: 5px;
     border: 1px solid #ccc;
   }
+  button{
+    padding: 1em;
+    margin: 0.5em auto;
+    display: block;
+  }
   .button:hover {
     background: #ddd;
   }
   #fileElem {
     display: none;
+    
   }
+
+  
   
