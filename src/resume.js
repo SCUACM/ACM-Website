@@ -5,6 +5,9 @@ import {
   getStorage,
   ref,
   uploadBytes,
+  getMetadata,
+  getBytes,
+  getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -25,6 +28,31 @@ const storage = getStorage(firebase);
 // Create a storage ref from storage service
 const storageRef = ref(storage);
 
+//! Temporary placeholder
+let fakeID = ["adf", "gfd", "fds"];
+
+// Reference to user's stored resume, if any.
+let resume = ref(storage, `resumes/${fakeID[0]}.pdf`);
+
+// Getting metadata for the logged in user.
+//! Replace fakeID with user token
+getMetadata(ref(storage, `resumes/${fakeID[0]}.pdf`))
+  .then((metadata) => {
+    // console.log(metadata);
+  })
+  .catch((error) => {
+    console.log("Error retrieving metadata!");
+  });
+
+const gsReference = ref(
+  storage,
+  `gs://scu-acm.appspot.com/resumes/${fakeID[0]}.pdf`
+);
+
+
+//! Immediate loading functions and variables
+updateResume();
+
 let dropArea = document.getElementById("dropArea");
 dropArea.addEventListener("drop", dropHandler, false);
 
@@ -33,6 +61,17 @@ fileInput.addEventListener("change", fileHandler, false);
 
 let submitBtn = document.getElementById("submitBtn");
 submitBtn.disabled = true;
+
+let pdfView = document.getElementById("pdf");
+
+
+// Downloads and sets pdf src property, given that it exists in the database.
+function updateResume(){
+  getDownloadURL(resume).then((function(downloadURL){
+    console.log(downloadURL);
+    pdfView.setAttribute('src', downloadURL);
+  }));
+}
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach((event) => {
   dropArea.addEventListener(event, preventDefaults, false);
@@ -63,22 +102,19 @@ function dropHandler(e) {
 }
 
 function fileHandler(e) {
-
   uploadHandler(e.target.files[0]);
 }
 
 function uploadHandler(file) {
-  let fileDesc = document.getElementById('fileName');  
-  if (file.type != "application/pdf") {
+  let fileDesc = document.getElementById("fileName");
+  if (file === undefined || file.type != "application/pdf") {
     alert("Please upload a PDF file!");
     fileDesc.textContent = " ";
     submitBtn.disabled = true;
-  }
-  else  {
+  } else {
     submitBtn.disabled = false;
     dropArea.appendChild(submitBtn);
     fileDesc.textContent = `Selected file: ${file.name}`;
-
 
     // Apparently you can only store primitive types in local
     // storage. This means 'file' types must be converted to base64.
@@ -87,7 +123,6 @@ function uploadHandler(file) {
     reader.onload = function (fileLoadedEvent) {
       base64 = fileLoadedEvent.target.result;
       localStorage.setItem("file", base64);
-      // console.log(base64);
     };
     reader.readAsDataURL(file);
     submitBtn.addEventListener("click", buttonHandler, false);
@@ -104,7 +139,7 @@ function getFile() {
     c.charCodeAt(0)
   );
 
-  // Creating file based on newly decoded string
+  // Creating file based on newly decoded string (decoding is mandatory)
   var file = new File([fileContent], `${fakeID[0]}.pdf`, {
     type: "application/pdf",
   });
@@ -115,8 +150,6 @@ function buttonHandler(e) {
   fileUpload(getFile());
 }
 
-let fakeID = ["adf", "gfd", "fds"];
-
 function fileUpload(file) {
   // Replace fakeID with firebase user ID. It should automatically replace
   // any existing resume file with the name.
@@ -125,6 +158,7 @@ function fileUpload(file) {
 
   uploadBytes(resumeStorageRef, file).then((snapshot) => {
     alert("Your resume has been uploaded!");
+    updateResume();
   });
 }
 
@@ -137,12 +171,28 @@ function appendItemChild(
   textContent = "",
   elementType = "div",
   className = "",
-  style ="",
+  style = ""
 ) {
-let item = document.createElement(elementType);
+  let item = document.createElement(elementType);
   item.textContent = textContent;
   parent.appendChild(item);
   if (className.length != 0) item.className = className;
   if (style != "") item.style.cssText += style;
   return item;
 }
+
+// ================== FIREBASE HELPER FUNCTIONS ===============
+getDownloadURL(resume)
+  .then((url) => {
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = "blob";
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open("GET", url);
+    xhr.send();
+  })
+  .catch((error) => {
+    console.log("could not download file.");
+  });
+

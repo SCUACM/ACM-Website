@@ -50,9 +50,14 @@
     background: #ddd;
   }
   #fileElem {
-    display: none;
-    
+    display: none; 
   }
-
-  
+  #pdfViewingArea{
+    display: grid;
+    justify-content: center;
+  }
+  #pdf{
+    width: 50em;
+    height: 40em;
+  }
   
