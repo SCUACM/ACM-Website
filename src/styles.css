@@ -60,4 +60,10 @@
     width: 50em;
     height: 40em;
   }
+  #metaData{
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+
+  }
   

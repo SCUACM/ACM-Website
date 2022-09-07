@@ -8,6 +8,7 @@ import {
   getMetadata,
   getBytes,
   getDownloadURL,
+  updateMetadata
 } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -19,6 +20,8 @@ const firebaseConfig = {
   appId: "1:561382074280:web:e3e8ca43e1a5270b519f9d",
   measurementId: "G-9ELQ4BE3XH",
 };
+//! Temporary placeholder
+let fakeID = ["adf", "gfd", "fds"];
 
 const firebase = initializeApp(firebaseConfig);
 
@@ -28,27 +31,8 @@ const storage = getStorage(firebase);
 // Create a storage ref from storage service
 const storageRef = ref(storage);
 
-//! Temporary placeholder
-let fakeID = ["adf", "gfd", "fds"];
-
 // Reference to user's stored resume, if any.
 let resume = ref(storage, `resumes/${fakeID[0]}.pdf`);
-
-// Getting metadata for the logged in user.
-//! Replace fakeID with user token
-getMetadata(ref(storage, `resumes/${fakeID[0]}.pdf`))
-  .then((metadata) => {
-    // console.log(metadata);
-  })
-  .catch((error) => {
-    console.log("Error retrieving metadata!");
-  });
-
-const gsReference = ref(
-  storage,
-  `gs://scu-acm.appspot.com/resumes/${fakeID[0]}.pdf`
-);
-
 
 //! Immediate loading functions and variables
 updateResume();
@@ -64,13 +48,44 @@ submitBtn.disabled = true;
 
 let pdfView = document.getElementById("pdf");
 
+let metaDataResume = document.getElementById("metaData");
+
+// Getting metadata for the logged in user.
+//! Replace fakeID with user token
+getMetadata(resume)
+  .then((mData) => {
+    console.log(mData);
+    metaDataResume.textContent = `Submission date: ${mData.updated}`;
+    appendItemChild(metaDataResume, `file name: ${mData.name}`);
+    console.log(mData.updated);
+    console.log(mData.name);
+    
+
+  })
+  .catch((error) => {
+    console.log("Error retrieving metadata!");
+  });
+
+
 
 // Downloads and sets pdf src property, given that it exists in the database.
 function updateResume(){
   getDownloadURL(resume).then((function(downloadURL){
-    console.log(downloadURL);
+    // console.log(downloadURL);
     pdfView.setAttribute('src', downloadURL);
   }));
+}
+
+function updateResumeMetadata(){
+  const newMetadata = { 
+    updated : new Date(),
+  }
+  updateMetadata(resume, newMetadata)
+    .then((mData) =>{
+
+    }).catch((error) => {
+      console.log('error updating metadata!');
+    }) 
 }
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach((event) => {
@@ -159,6 +174,7 @@ function fileUpload(file) {
   uploadBytes(resumeStorageRef, file).then((snapshot) => {
     alert("Your resume has been uploaded!");
     updateResume();
+    // updateResumeMetadata();
   });
 }
 
