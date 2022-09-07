@@ -36,6 +36,7 @@ let resume = ref(storage, `resumes/${fakeID[0]}.pdf`);
 
 //! Immediate loading functions and variables
 updateResume();
+displayMetadata();
 
 let dropArea = document.getElementById("dropArea");
 dropArea.addEventListener("drop", dropHandler, false);
@@ -52,19 +53,19 @@ let metaDataResume = document.getElementById("metaData");
 
 // Getting metadata for the logged in user.
 //! Replace fakeID with user token
-getMetadata(resume)
-  .then((mData) => {
-    console.log(mData);
-    metaDataResume.textContent = `Submission date: ${mData.updated}`;
-    appendItemChild(metaDataResume, `file name: ${mData.name}`);
-    console.log(mData.updated);
-    console.log(mData.name);
-    
+function displayMetadata(){
+  getMetadata(resume)
+    .then((mData) => {
+      console.log(mData);
+      metaDataResume.textContent = `Submission date: ${mData.updated}`;
+      appendItemChild(metaDataResume, `file name: ${mData.name}`);
+  
+    })
+    .catch((error) => {
+      console.log("Error retrieving metadata!");
+    });
 
-  })
-  .catch((error) => {
-    console.log("Error retrieving metadata!");
-  });
+}
 
 
 
@@ -74,18 +75,10 @@ function updateResume(){
     // console.log(downloadURL);
     pdfView.setAttribute('src', downloadURL);
   }));
+
 }
 
 function updateResumeMetadata(){
-  const newMetadata = { 
-    updated : new Date(),
-  }
-  updateMetadata(resume, newMetadata)
-    .then((mData) =>{
-
-    }).catch((error) => {
-      console.log('error updating metadata!');
-    }) 
 }
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach((event) => {
@@ -174,7 +167,7 @@ function fileUpload(file) {
   uploadBytes(resumeStorageRef, file).then((snapshot) => {
     alert("Your resume has been uploaded!");
     updateResume();
-    // updateResumeMetadata();
+    displayMetadata();
   });
 }
 
