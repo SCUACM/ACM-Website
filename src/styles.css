@@ -35,23 +35,28 @@
     margin-right: 10px;
     vertical-align: middle;
   }
-  .button {
-    display: inline-block;
-    padding: 10px;
-    background: #ccc;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
   button{
+    border-width: 3px;
+    border-color: rgb(0, 0, 0);
     padding: 1em;
     margin: 0.5em auto;
     display: block;
     border-radius: 20px;
+    background: rgb(255, 255, 255);
+
   }
   button:hover {
-    background: #ddd;
+    background: rgb(186, 186, 186);
+    transition-duration: 20ms;
   }
+  button, button::before{
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -ms-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    }
+  
   #fileElement {
     
     width: 129px;

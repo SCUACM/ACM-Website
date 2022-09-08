@@ -78,14 +78,19 @@ function updateResume(){
     // console.log(downloadURL);
     pdfView.setAttribute('src', downloadURL);
     downloadBtn.disabled = false;
-    downloadBtn.addEventListener('click', download => {
-        console.log('he');
-        const a = document.createElement('a')
-        a.href = downloadURL
-        a.download = downloadURL.split('/').pop()
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
+    downloadBtn.addEventListener('click', () => {
+      getDownloadURL(resume)
+        .then((url) => fetch(url)).then((response) => response.blob()).then((blob) => {
+          const a = document.createElement('a')
+          a.href = window.URL.createObjectURL(blob);
+          a.download = 'resume.pdf'
+          document.body.appendChild(a)
+          a.click()
+          document.body.removeChild(a)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       
     });
   }))
