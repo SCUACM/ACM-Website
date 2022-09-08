@@ -1,3 +1,8 @@
+/**
+ * Creates a link to the SCU map for a location
+ * @param {string} location - A string for the location. Examples: SCDI 1302, Locatelli, Zoom
+ * @returns {string | null} a URL to the SCU map, or null if the location is not a valid SCU location.
+ */
 export function getMapLink(location) {
     const buildingCodes = {
         "Alameda": 24,
@@ -58,7 +63,7 @@ export function getMapLink(location) {
     const buildingList = Object.keys(buildingCodes);
     const splitIndex = location.lastIndexOf(" ");
     if(splitIndex === -1) {
-    return null;
+        return null;
     }
     const building = location.substring(0, splitIndex);
     console.log(location,splitIndex,building);
