@@ -4,7 +4,7 @@
     <v-container style="margin-top: 100px; max-width: 1000px">
       <div style="margin-bottom: 200px;">
         <div class="events-title">
-          Upcoming Events
+          Calendar
         </div>
         <div style="height: 600px;">
           <!-- Calendar Navigation -->
@@ -65,7 +65,7 @@
         </div>
       </div>
       <!-- List of events -->
-      <EventList />
+      <!-- <EventList /> -->
     </v-container>
     <Footer />
   </v-app>
@@ -75,14 +75,14 @@
 import "../assets/scss/events-media.scss";
 import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
-import EventList from "@/components/EventList";
+// import EventList from "@/components/EventList";
 export default {
-  name: "Events",
+  name: "Calendar",
 
   components: {
     Navbar,
     Footer,
-    EventList,
+    // EventList,
   },
 
   data: () => ({
