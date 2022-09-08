@@ -32,9 +32,11 @@ const storage = getStorage(firebase);
 const storageRef = ref(storage);
 
 // Reference to user's stored resume, if any.
-let resume = ref(storage, `resumes/${fakeID[0]}.pdf`);
 
 //! Immediate loading functions and variables
+let resumeBase64;
+let resume;
+resume = ref(storage, `resumes/${fakeID[0]}.pdf`);
 updateResume();
 displayMetadata();
 
@@ -47,39 +49,53 @@ fileInput.addEventListener("change", fileHandler, false);
 let submitBtn = document.getElementById("submitBtn");
 submitBtn.disabled = true;
 
+let downloadBtn = document.getElementById("downloadBtn");
+downloadBtn.disabled = true;
+
 let pdfView = document.getElementById("pdf");
 
 let metaDataResume = document.getElementById("metaData");
+
 
 // Getting metadata for the logged in user.
 //! Replace fakeID with user token
 function displayMetadata(){
   getMetadata(resume)
     .then((mData) => {
-      console.log(mData);
+      // console.log(mData);
       metaDataResume.textContent = `Submission date: ${mData.updated}`;
-      appendItemChild(metaDataResume, `file name: ${mData.name}`);
-  
     })
     .catch((error) => {
-      console.log("Error retrieving metadata!");
+      console.log(error);
+    });
+
+}
+
+// Downloads and sets pdf src property, given that it exists in the database.
+// Also enables downloadButton
+function updateResume(){
+  getDownloadURL(resume).then((function(downloadURL){
+    // console.log(downloadURL);
+    pdfView.setAttribute('src', downloadURL);
+    downloadBtn.disabled = false;
+    downloadBtn.addEventListener('click', download => {
+        console.log('he');
+        const a = document.createElement('a')
+        a.href = downloadURL
+        a.download = downloadURL.split('/').pop()
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+      
+    });
+  }))
+    .catch((error) =>{
+      console.log(error);
     });
 
 }
 
 
-
-// Downloads and sets pdf src property, given that it exists in the database.
-function updateResume(){
-  getDownloadURL(resume).then((function(downloadURL){
-    // console.log(downloadURL);
-    pdfView.setAttribute('src', downloadURL);
-  }));
-
-}
-
-function updateResumeMetadata(){
-}
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach((event) => {
   dropArea.addEventListener(event, preventDefaults, false);
@@ -130,7 +146,7 @@ function uploadHandler(file) {
     var base64;
     reader.onload = function (fileLoadedEvent) {
       base64 = fileLoadedEvent.target.result;
-      localStorage.setItem("file", base64);
+      resumeBase64 = base64;
     };
     reader.readAsDataURL(file);
     submitBtn.addEventListener("click", buttonHandler, false);
@@ -139,7 +155,7 @@ function uploadHandler(file) {
 
 // Returns converted base64 string to PDF
 function getFile() {
-  var base64 = localStorage.getItem("file");
+  var base64 = resumeBase64;
   var base64Parts = base64.split(",");
 
   // Decoding the base64
@@ -202,6 +218,6 @@ getDownloadURL(resume)
     xhr.send();
   })
   .catch((error) => {
-    console.log("could not download file.");
+    console.log(error);
   });
 
