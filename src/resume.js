@@ -8,7 +8,7 @@ import {
   getMetadata,
   getBytes,
   getDownloadURL,
-  updateMetadata
+  updateMetadata,
 } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -36,6 +36,7 @@ const storageRef = ref(storage);
 //! Immediate loading functions and variables
 let resumeBase64;
 let resume;
+let fileSizeLimit = 5000000; // 5mb, in bytes
 resume = ref(storage, `resumes/${fakeID[0]}.pdf`);
 updateResume();
 displayMetadata();
@@ -55,52 +56,48 @@ downloadBtn.disabled = true;
 let pdfView = document.getElementById("pdf");
 
 let metaDataResume = document.getElementById("metaData");
-
+let fileDesc = document.getElementById("fileName");
 
 // Getting metadata for the logged in user.
 //! Replace fakeID with user token
-function displayMetadata(){
+function displayMetadata() {
   getMetadata(resume)
     .then((mData) => {
-      // console.log(mData);
       metaDataResume.textContent = `Submission date: ${mData.updated}`;
     })
     .catch((error) => {
       console.log(error);
     });
-
 }
 
 // Downloads and sets pdf src property, given that it exists in the database.
 // Also enables downloadButton
-function updateResume(){
-  getDownloadURL(resume).then((function(downloadURL){
-    // console.log(downloadURL);
-    pdfView.setAttribute('src', downloadURL);
-    downloadBtn.disabled = false;
-    downloadBtn.addEventListener('click', () => {
-      getDownloadURL(resume)
-        .then((url) => fetch(url)).then((response) => response.blob()).then((blob) => {
-          const a = document.createElement('a')
-          a.href = window.URL.createObjectURL(blob);
-          a.download = 'resume.pdf'
-          document.body.appendChild(a)
-          a.click()
-          document.body.removeChild(a)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      
-    });
-  }))
-    .catch((error) =>{
+function updateResume() {
+  getDownloadURL(resume)
+    .then(function (downloadURL) {
+      pdfView.setAttribute("src", downloadURL);
+      downloadBtn.disabled = false;
+      downloadBtn.addEventListener("click", () => {
+        getDownloadURL(resume)
+          .then((url) => fetch(url))
+          .then((response) => response.blob())
+          .then((blob) => {
+            const a = document.createElement("a");
+            a.href = window.URL.createObjectURL(blob);
+            a.download = "resume.pdf";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    })
+    .catch((error) => {
       console.log(error);
     });
-
 }
-
-
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach((event) => {
   dropArea.addEventListener(event, preventDefaults, false);
@@ -135,11 +132,10 @@ function fileHandler(e) {
 }
 
 function uploadHandler(file) {
-  let fileDesc = document.getElementById("fileName");
   if (file === undefined || file.type != "application/pdf") {
-    alert("Please upload a PDF file!");
-    fileDesc.textContent = " ";
-    submitBtn.disabled = true;
+    errorHandler(0);
+  } else if (file.size > fileSizeLimit) {
+    errorHandler(1);
   } else {
     submitBtn.disabled = false;
     dropArea.appendChild(submitBtn);
@@ -155,6 +151,26 @@ function uploadHandler(file) {
     };
     reader.readAsDataURL(file);
     submitBtn.addEventListener("click", buttonHandler, false);
+  }
+}
+
+function errorHandler(code) {
+  switch (code) {
+    case 0: {
+      alert("Please upload a PDF file!");
+      fileDesc.textContent = " ";
+      submitBtn.disabled = true;
+      break;
+    }
+    case 1: {
+      alert("Please submit a file size less than 5 mb!");
+      fileDesc.textContent = " ";
+      submitBtn.disabled = true;
+      break;
+    }
+    default: {
+      alert("Unknown error!");
+    }
   }
 }
 
@@ -225,4 +241,3 @@ getDownloadURL(resume)
   .catch((error) => {
     console.log(error);
   });
-
