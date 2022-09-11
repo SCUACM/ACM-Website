@@ -12,6 +12,7 @@ import Board from "@/pages/Board.vue";
 import Calendar from "@/pages/Calendar.vue";
 import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
+import EditEvent from "@/pages/EditEvent.vue";
 
 import moment from 'moment'
 import VueYoutube from 'vue-youtube'
@@ -34,6 +35,14 @@ const routes = [
   {
     path: "/events",
     component: Events,
+  },
+  {
+    path: "/register/:id",
+    component: Events,
+  },
+  {
+    path: "/admin/events/:id",
+    component: EditEvent,
   },
   {
     path: "/joinus",
