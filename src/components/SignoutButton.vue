@@ -3,7 +3,7 @@
     <v-btn class=blue white--text> Sign In </v-btn>
   </div>
 </template>
-
+<script>
 
 methods: {
   SignOut() {
@@ -17,3 +17,4 @@ methods: {
   });
 }
 }
+</script>
