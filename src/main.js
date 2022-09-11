@@ -58,12 +58,12 @@ Vue.filter('formatDateTime', function(event) {
     return moment(event.startDate.toDate()).format('MMM Do YYYY, h:mm a');
   }
   // Format the start and end as dates. Ex: Oct 1st
-  const startDate = moment(String(event.startDate.toDate())).format('MMM Do, YYYY,');
-  const endDate = moment(String(event.endDate.toDate())).format('MMM Do, YYYY,');
+  const startDate = moment(event.startDate.toDate()).format('MMM Do, YYYY,');
+  const endDate = moment(event.endDate.toDate()).format('MMM Do, YYYY,');
 
   // Format the start and end as times. Ex: 5:45 pm
-  const startTime = moment(String(event.startDate.toDate())).format('h:mm a');
-  const endTime = moment(String(event.endDate.toDate())).format('h:mm a');
+  const startTime = moment(event.startDate.toDate()).format('h:mm a');
+  const endTime = moment(event.endDate.toDate()).format('h:mm a');
 
   if(startDate === endDate) {
     if(startTime === endTime) {

@@ -66,7 +66,6 @@ export function getMapLink(location) {
         return null;
     }
     const building = location.substring(0, splitIndex);
-    console.log(location,splitIndex,building);
     if(buildingList.includes(building)){
     const floor = location.substring(splitIndex + 1);
     if(floor){
