@@ -15,10 +15,10 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-if (location.hostname === "localhost") {
-  firebase.firestore().useEmulator("localhost", 8080);
-  firebase.storage().useEmulator("localhost", 9199);
-}
+// if (location.hostname === "localhost") {
+//   firebase.firestore().useEmulator("localhost", 8080);
+//   firebase.storage().useEmulator("localhost", 9199);
+// }
 
 const { Timestamp, GeoPoint } = firebase.firestore
 export { Timestamp, GeoPoint }

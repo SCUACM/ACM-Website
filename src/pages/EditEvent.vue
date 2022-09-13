@@ -43,17 +43,9 @@
         <v-text-field
           label=""
           outlined
-          type="date"
+          type="datetime-local"
           v-model="eventDetails.startDate"
           :value="eventDetails.startDate"
-        >
-        </v-text-field>
-        <v-text-field
-          label=""
-          outlined
-          type="time"
-          v-model="eventDetails.startTime"
-          :value="eventDetails.startTime"
         >
         </v-text-field>
         <div class="form-header">
@@ -62,27 +54,32 @@
         <v-text-field
           label=""
           outlined
-          type="date"
+          type="datetime-local"
           v-model="eventDetails.endDate"
           :value="eventDetails.endDate"
         >
         </v-text-field>
-        <v-text-field
-          label=""
-          outlined
-          type="time"
-          v-model="eventDetails.endTime"
-          :value="eventDetails.endTime"
-        >
-        </v-text-field>
+        <div class="form-header">
+          Event Flyer
+        </div>
+        <input type="file" style="display: none" name="fileUpload" id='fileUpload' accept="image/*" @change='handleFile'/>
+        <label
+          type="button"
+          for="fileUpload"
+        >{{(eventDetails.flyer && !removeFlyer) ? "Replace" : "Upload"}} Flyer</label>
+        <span v-if="flyerFile"> Selected {{flyerFile.name}}</span>
+        <template v-if="eventDetails.flyer && !removeFlyer"> 
+          <br>
+          <button @click="viewFlyer">View Current Flyer</button>
+          <button class="remove" @click="markFlyerRemoval">Remove Flyer</button>
+        </template>
+        <br><br>
         <input
           type="button"
           @click="submit"
           :value="this.isNew ? 'Create Event' : 'Update Event'"
           class="mt-2 submit-btn"
-          style="height: 60px; width: 250px; border-radius: 40px; border: solid #1c548d"
         />
-        
       </v-form>
     </v-container>
     <Footer />
@@ -96,9 +93,8 @@ import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
 
 import moment from 'moment'
-// import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
-import {db, Timestamp} from '../firebase';
+import {db, Timestamp, storage} from '../firebase';
 
 export default {
   name: "EditEvent",
@@ -116,32 +112,32 @@ export default {
 
   async mounted() {
     if(this.isNew) {
-      const today = moment(new Date()).format('YYYY-MM-DD');
-      this.eventDetails.startDate = today;
-      this.eventDetails.endDate = today;
-      this.eventDetails.startTime = '17:45';
-      this.eventDetails.endTime = '18:45';
-    } 
+      //Set the date pickers to use today, 5:45-6:45PM by default
+      const today = moment(new Date()).format('YYYY-MM-DDT');
+      this.eventDetails.startDate = today+"17:45";
+      this.eventDetails.endDate = today+"18:45";
+    }
     else {
       const doc = await db.collection("events").doc(this.$route.params.id).get();
       const data = doc.data();
       this.eventDetails = data;
-      // Format the start and end as dates. Ex: 2022-09-19
-      const startDate = moment(data.startDate.toDate()).format('YYYY-MM-DD');
-      const endDate = moment(data.endDate.toDate()).format('YYYY-MM-DD');
-
-      // Format the start and end as times. Ex: 18:45
-      const startTime = moment(data.startDate.toDate()).format('HH:mm');
-      const endTime = moment(data.endDate.toDate()).format('HH:mm');
+      // Format the start and end as date and times. Ex: 2022-09-19T17:45
+      const startDate = moment(data.startDate.toDate()).format('YYYY-MM-DDTHH:mm');
+      const endDate = moment(data.endDate.toDate()).format('YYYY-MM-DDTHH:mm');
 
       this.eventDetails.startDate = startDate;
       this.eventDetails.endDate = endDate;
-      this.eventDetails.startTime = startTime;
-      this.eventDetails.endTime = endTime;
     }
   },
 
   methods: {
+    handleFile(e) {
+      const file = e.target.files[0];
+      if(!file) {
+        return;
+      }
+      this.flyerFile = file;
+    },
     async submit(e) {
       e.preventDefault();
       const details = {...this.eventDetails};
@@ -149,25 +145,38 @@ export default {
         alert("Please provide an event name");
         return;
       }
-      const startDateTime = new Date(details.startDate+" "+details.startTime);
-      const endDateTime = new Date(details.endDate+" "+details.endTime);
+      const startDateTime = new Date(details.startDate);
+      const endDateTime = new Date(details.endDate);
       if(startDateTime.getTime() > endDateTime.getTime()) {
         alert("End date should be after start date");
         return;
       }
+      // Convert the firebase into the standard
       details.startDate = Timestamp.fromDate(startDateTime);
       details.endDate = Timestamp.fromDate(endDateTime);
-      delete details.startTime;
-      delete details.endTime;
-      if(this.isNew){
-        const newEvent = await db.collection("events").add(details);
-        console.log("New Event created", newEvent.id);
+      const docId = this.isNew ? db.collection("events").doc().id : this.$route.params.id;
+      if(details.flyer && this.removeFlyer) {
+        await storage.ref(details.flyer).delete();
+        delete details.flyer;
       }
-      else {
-        await db.collection("events").doc(this.$route.params.id).update(details);
-        console.log("Updated event");
+      if(this.flyerFile) {
+        const fileName = 'flyers/'+docId + this.flyerFile.name.substring(this.flyerFile.name.lastIndexOf("."));
+        console.log(fileName);
+        await storage.ref(fileName).put(this.flyerFile);
+        details.flyer = fileName;
       }
+      await db.collection("events").doc(docId).set(details);
+      console.log("Event updated");
       this.$router.push("/events");
+    },
+    async viewFlyer(e){
+      e.preventDefault();
+      const url = await storage.ref(this.eventDetails.flyer).getDownloadURL();
+      window.open(url, '_blank');
+    },
+    markFlyerRemoval(e) {
+      e.preventDefault();
+      this.removeFlyer = true;
     }
   },
 
@@ -178,10 +187,11 @@ export default {
         description: '',
         startDate: '',
         endDate: '',
-        startTime: '',
-        endTime: '',
         location: '',
+        flyer: null
       },
+      removeFlyer: false,
+      flyerFile: null,
       rules: {
         required: (value) => !!value || "Required.",
       },
@@ -190,4 +200,31 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  /* label{
+    border-radius: 40px;
+    padding: 10px 30px;
+    margin-bottom: 15px;
+    border: 2px solid #1c548d;
+    margin-right: 20px;
+  } */
+  button {
+    border-radius: 40px;
+    padding: 10px 30px;
+    margin-bottom: 15px;
+    border: 2px solid #1c548d;
+    margin-right: 20px;
+  }
+  button.remove {
+    border: 2px solid #eb4034;
+
+  }
+  input[type=button], label {
+    padding: 10px 30px;
+    border-radius: 40px;
+    background-color: #1c548d;
+    color: white;
+    margin-bottom: 15px;
+
+  }
+</style>
