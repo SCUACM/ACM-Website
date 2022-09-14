@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Resume Upload Page</title>
+  <link href="styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  
+
+</head>
+
+<body>
+  <script src="./resume.js" type="module"> 
+  </script>
+<div id="dropArea">
+    <form class="my-form">
+      <p>Drop your resume here!</p>
+    </form>
+    <input type="file" id="fileElement"  multiple accept ="application/pdf"/>
+    <p id="fileName"></p>
+    <button id="submitBtn" style="align-content: center">Submit</button>
+  </div>
+<div id="pdfViewingArea">
+    <p id = "metaData"></p>
+    <button id="downloadBtn" >Download</button>
+    <embed id="pdf">
+</div>
+
+</body>
+
+</html>
