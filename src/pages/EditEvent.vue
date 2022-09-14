@@ -139,8 +139,11 @@ export default {
       this.flyerFile = file;
     },
     async submit(e) {
+      // Prevent the page from navigating to a form submission page (the default behavoior)
       e.preventDefault();
       const details = {...this.eventDetails};
+      
+      // Checks for if the event is valid
       if(details.title.length == 0) {
         alert("Please provide an event name");
         return;
@@ -151,20 +154,28 @@ export default {
         alert("End date should be after start date");
         return;
       }
-      // Convert the firebase into the standard
+
+      // Convert the date into a Firestore Timestamp object
       details.startDate = Timestamp.fromDate(startDateTime);
       details.endDate = Timestamp.fromDate(endDateTime);
+      // Get the current event ID or generate a new one
       const docId = this.isNew ? db.collection("events").doc().id : this.$route.params.id;
+
+      // Delete the event flyer
       if(details.flyer && this.removeFlyer) {
         await storage.ref(details.flyer).delete();
         delete details.flyer;
       }
+
+      // Add an event flyer
       if(this.flyerFile) {
         const fileName = 'flyers/'+docId + this.flyerFile.name.substring(this.flyerFile.name.lastIndexOf("."));
         console.log(fileName);
         await storage.ref(fileName).put(this.flyerFile);
         details.flyer = fileName;
       }
+
+      // Update the event and navigate back to the main events list page
       await db.collection("events").doc(docId).set(details);
       console.log("Event updated");
       this.$router.push("/events");
