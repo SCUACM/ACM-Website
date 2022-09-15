@@ -202,6 +202,7 @@ import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 // New imports
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth} from '../firebase';
+import { getAuth, signOut } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"
 import { doc, updateDoc } from "firebase/firestore";
 
@@ -251,14 +252,35 @@ export default {
       string email = user.getEmail();
 
        auth.signInWithPopup(provider)
-        if email.includes("@scu.edu"){
           .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
+            if email.includes("@scu.edu"){
             // ...
+              FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+              if (user != null){
+                String userName = user.getDisplayName();
+                String uid = user.getUid();
+
+                doc = await db.collection("users").doc(someUserId).get()
+                if (!(doc.exists)){
+                import { doc, setDoc } from "firebase/firestore";
+
+                await setDoc(doc(db, "users", uid, {
+                  name: userName
+                  major: ""
+                  year: ""
+                  });
+                }
+              }
+            }
+            else {
+              SignOut();
+            }
           }).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
@@ -269,34 +291,10 @@ export default {
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
           });
-          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-          if (user != null){
-            String userName = user.getDisplayName();
-
-            String uid = user.getUid();
-
-            doc = await db.collection("users").doc(someUserId).get()
-            if (!(doc.exists)){
-              import { doc, setDoc } from "firebase/firestore";
-
-              await setDoc(doc(db, "users", uid, {
-                  name: userName
-                  major: ""
-                  year: ""
-              });
-            }
-          }
-      }
-      else {
-        SignOut()
-      }
     },
     SignOut() {
-      import { getAuth, signOut } from "firebase/auth";
 
-      const auth = getAuth();
-      signOut(auth).then(() => {
+      auth.signOut().then(() => {
       // Sign-out successful.
       }).catch((error) => {
       // An error happened.
