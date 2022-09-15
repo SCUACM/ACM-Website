@@ -199,6 +199,11 @@
 import "../assets/scss/navbar-media.scss";
 import logoBlackSmall from "@/assets/branding/logo_temp_new.svg";
 import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
+// New imports
+import { GoogleAuthProvider } from "firebase/auth";
+import {auth} from '../firebase';
+import { doc, setDoc } from "firebase/firestore"
+import { doc, updateDoc } from "firebase/firestore";
 
 export default {
   props: {
