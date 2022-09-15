@@ -245,17 +245,13 @@ export default {
       window.open(path);
     },
     SignIn() {
-      import { GoogleAuthProvider } from "firebase/auth";
 
       const provider = new GoogleAuthProvider();
       provider.addScope('email')
       string email = user.getEmail();
-      if email.includes("@scu.edu"){
 
-        import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
-        const auth = getAuth();
-        signInWithPopup(auth, provider)
+       auth.signInWithPopup(provider)
+        if email.includes("@scu.edu"){
           .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -291,7 +287,9 @@ export default {
               });
             }
           }
-
+      }
+      else {
+        SignOut()
       }
     },
     SignOut() {
