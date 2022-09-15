@@ -130,11 +130,11 @@
                   </v-card-title>
                   <div>
                   <h3> Preferred Name: </h3>
-                  <input type="text" :value="value" @input="updateName($event.target.value)"
+                  <input type="text" :value="value" @input="updateName($event.target.value)">
                   <h3> Major: </h3>
-                  <input type="text" :value="value" @input="updateMajor($event.target.value)"
+                  <input type="text" :value="value" @input="updateMajor($event.target.value)">
                   <h3> Year: </h3>
-                  <input type="text" :value="value" @input="updateYear($event.target.value)"
+                  <input type="text" :value="value" @input="updateYear($event.target.value)">
                   </div>
                 </v-card>
             </v-dialog>
