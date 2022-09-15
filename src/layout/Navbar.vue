@@ -201,10 +201,7 @@ import logoBlackSmall from "@/assets/branding/logo_temp_new.svg";
 import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 // New imports
 import { GoogleAuthProvider } from "firebase/auth";
-import {auth} from '../firebase';
-import { getAuth, signOut } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore"
-import { doc, updateDoc } from "firebase/firestore";
+import {auth, db} from '../firebase';
 
 export default {
   props: {
@@ -216,7 +213,6 @@ export default {
       default: false,
       type: Boolean,
     },
-    value,
   },
 
   data() {
@@ -248,99 +244,92 @@ export default {
     SignIn() {
 
       const provider = new GoogleAuthProvider();
-      provider.addScope('email')
-      string email = user.getEmail();
+      provider.addScope('email');
 
        auth.signInWithPopup(provider)
-          .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+          .then(async (result) => {
+            console.log("Signed in");
             // The signed-in user info.
             const user = result.user;
-            if email.includes("@scu.edu"){
+            const email = user.providerData[0].email;
+            if (email.includes("@scu.edu")){
             // ...
-              FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+              const user = auth.currentUser;
 
               if (user != null){
-                String userName = user.getDisplayName();
-                String uid = user.getUid();
+                const userName = user.displayName;
+                const uid = user.uid;
 
-                doc = await db.collection("users").doc(someUserId).get()
+                const doc = await db.collection("users").doc(uid).get()
                 if (!(doc.exists)){
-                import { doc, setDoc } from "firebase/firestore";
-
-                await setDoc(doc(db, "users", uid, {
-                  name: userName
-                  major: ""
-                  year: ""
-                  });
+                  await db.collection("users").doc(uid).set({
+                    name: userName,
+                    major: "",
+                    year: "",
+                    });
                 }
               }
             }
             else {
-              SignOut();
+              this.SignOut();
             }
           }).catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(error);
+            // // Handle Errors here.
+            // const errorCode = error.code;
+            // const errorMessage = error.message;
+            // // The email of the user's account used.
+            // const email = error.customData.email;
+            // // The AuthCredential type that was used.
+            // const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
           });
     },
     SignOut() {
 
       auth.signOut().then(() => {
+            console.log("Signed out");
       // Sign-out successful.
       }).catch((error) => {
+        console.log(error);
       // An error happened.
       });
     },
-    updateName(value){
+    async updateName(value){
       this.$emit("input",value)
-      import { doc, updateDoc } from "firebase/firestore";
-      FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+      const user = auth.currentUser;
 
       if (user != null){
-        String uid = user.getUid();
-        const userRef = doc(db, "users", uid);
+        const uid = user.uid;
+        const userRef = db.collection("users").doc(uid);
 
-        // Set the "capital" field of the city 'DC'
-        await updateDoc(userRef, {
+        await userRef.update({
           name: value
         });
       }
     },
-    updateMajor(value){
+    async updateMajor(value){
       this.$emit("input",value)
-      import { doc, updateDoc } from "firebase/firestore";
-      FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+      const user = auth.currentUser;
 
       if (user != null){
-        String uid = user.getUid();
-        const userRef = doc(db, "users", uid);
+        const uid = user.uid;
+        const userRef = db.collection("users").doc(uid);
 
-        // Set the "capital" field of the city 'DC'
-        await updateDoc(userRef, {
+        await userRef.update( {
           major: value
         });
       }
     },
-    updateYear(value){
+    async updateYear(value){
       this.$emit("input",value)
-      import { doc, updateDoc } from "firebase/firestore";
-      FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+      const user = auth.currentUser;
 
       if (user != null){
-        String uid = user.getUid();
-        const userRef = doc(db, "users", uid);
+        const uid = user.uid;
+        const userRef = db.collection("users").doc(uid);
 
-        // Set the "capital" field of the city 'DC'
-        await updateDoc(userRef, {
+        await userRef.update({
           year: value
         });
       }
