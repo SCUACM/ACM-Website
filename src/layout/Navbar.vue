@@ -87,6 +87,58 @@
               join us!
             </v-btn>
           </span>
+          <span class="link ml-6">
+            <v-btn
+              @click="SignIn()"
+              outlined
+              :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+              height="40px"
+              width="130px"
+              style="border-radius:10px; border: solid #0099ff"
+            >
+              sign in
+            </v-btn>
+          </span>
+          <span class="link ml-6">
+            <v-btn
+              @click="SignOut()"
+              outlined
+              :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+              height="40px"
+              width="130px"
+              style="border-radius:10px; border: solid #0099ff"
+            >
+              sign out
+            </v-btn>
+          </span>
+          <span class="link ml-6">
+            <v-dialog max-width="600px">
+              <v-btn
+                flat slot = "activator"
+                class = "success"
+                outlined
+                :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+                height="40px"
+                width="130px"
+                style="border-radius:10px; border: solid #0099ff"
+              >
+                update profile
+              </v-btn>
+                <v-card>
+                  <v-card-title>
+                    <h2> Update Profile </h2>
+                  </v-card-title>
+                  <div>
+                  <h3> Preferred Name: </h3>
+                  <input type="text" :value="value" @input="updateName($event.target.value)"
+                  <h3> Major: </h3>
+                  <input type="text" :value="value" @input="updateMajor($event.target.value)"
+                  <h3> Year: </h3>
+                  <input type="text" :value="value" @input="updateYear($event.target.value)"
+                  </div>
+                </v-card>
+            </v-dialog>
+          </span>
         </div>
         <div class="ml-auto hidden-md-and-up">
           <v-menu>
@@ -158,6 +210,7 @@ export default {
       default: false,
       type: Boolean,
     },
+    value,
   },
 
   data() {
@@ -186,6 +239,56 @@ export default {
     routeTo(path) {
       window.open(path);
     },
+    SignIn() {
+      import { GoogleAuthProvider } from "firebase/auth";
+
+      const provider = new GoogleAuthProvider();
+      provider.addScope('email')
+      string email = user.getEmail();
+      if email.includes(""@scu.edu"){
+
+      import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+      const auth = getAuth();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          // ...
+        }).catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          // ...
+        });
+      }
+    },
+    SignOut() {
+      import { getAuth, signOut } from "firebase/auth";
+
+      const auth = getAuth();
+      signOut(auth).then(() => {
+      // Sign-out successful.
+      }).catch((error) => {
+      // An error happened.
+      });
+    },
+    updateName(value){
+      this.$emit("input",value)
+    }
+    updateMajor(value){
+      this.$emit("input",value)
+    }
+    updateYear(value){
+      this.$emit("input",value)
+    }
   },
 
   computed: {
