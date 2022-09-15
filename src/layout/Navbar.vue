@@ -90,7 +90,7 @@
           <span class="link ml-6">
             const user = auth.currentUser;
             <v-btn 
-              v-if=(user != null)
+              v-if=(user == null)
               @click="SignIn()"
               outlined
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
