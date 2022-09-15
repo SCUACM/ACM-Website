@@ -2,12 +2,19 @@
   <v-app>
     <v-container style="margin-top: 75px; max-width: 750px">
       <div>
-        <div id="dropArea">
+        <div 
+          id="dropArea" 
+          @dragenter.prevent="isHovering = true"
+          @dragover.prevent="isHovering = true"
+          @dragleave.prevent="isHovering = false"
+          @drop.prevent="handleDrop"
+          :class="{highlight: isHovering}">
           <form ref="form">
-            <input type="file" style="display: none" name="fileUpload" id='fileUpload' accept="application/pdf" @change='handleFile'/>
+            <input type="file" style="display: none" name="fileUpload" id='fileUpload' accept="application/pdf" @change='handleInput'/>
           </form>
           <label type="button" for="fileUpload">Upload New Resume</label>
-          <span v-if="file"> Selected {{file.name}}</span>
+          <span> or drag your resume here </span><br>
+          <span :style="{visibility: file ? 'visible' : 'hidden'}"> Selected {{file && file.name}}</span>
           <button id="submitBtn" :disabled="!file" style="align-content: center" @click="submit">Submit</button>
         </div>
         <div id="pdfViewingArea" v-if="metadata">
@@ -32,8 +39,15 @@ import {storage, auth} from '../firebase';
     },
 
     methods: {
-      handleFile(e) {
-        const file = e.target.files[0];
+      handleInput(e) {
+        this.handleFile(e.target.files[0]);
+      },
+      handleDrop(e) {
+        e.preventDefault();
+        this.isHovering = false;
+        this.handleFile(e.dataTransfer.files[0]);
+      },
+      handleFile(file) {
         if (file === undefined || file.type != "application/pdf") {
           alert("Please upload a PDF file!");
           this.$refs.form.reset();
@@ -43,7 +57,9 @@ import {storage, auth} from '../firebase';
           this.$refs.form.reset();
           this.file = null;
         }
-        this.file = file;
+        else{
+          this.file = file;
+        }
       },
       async submit() {
         if(!this.file || !this.storageRef) {
@@ -110,7 +126,8 @@ import {storage, auth} from '../firebase';
     data: () => ({
       metadata: null,
       pdfUrl: null,
-      file: null
+      file: null,
+      isHovering: false
     }),
   };
 </script>
@@ -119,10 +136,16 @@ import {storage, auth} from '../firebase';
   #dropArea {
     font-family: sans-serif;
     margin: 0.5em auto;
+    padding: 2em 1em;
+    border: 2px dashed #ccc;
     justify-items: center;
+    border-radius: 1em;
+  }
+  #dropArea.highlight {
+    border-color: #104ca4 ;
   }
   button[disabled] {
-    display: none;
+    visibility: hidden;
   }
   button {
     border-radius: 40px;
