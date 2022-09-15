@@ -88,7 +88,9 @@
             </v-btn>
           </span>
           <span class="link ml-6">
-            <v-btn
+            const user = auth.currentUser;
+            <v-btn 
+              v-if=(user != null)
               @click="SignIn()"
               outlined
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
@@ -98,9 +100,8 @@
             >
               sign in
             </v-btn>
-          </span>
-          <span class="link ml-6">
-            <v-btn
+            <v-btn 
+              v-else
               @click="SignOut()"
               outlined
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
@@ -109,7 +110,6 @@
               style="border-radius:10px; border: solid #0099ff"
             >
               sign out
-            </v-btn>
           </span>
           <span class="link ml-6">
             <v-dialog max-width="600px">
