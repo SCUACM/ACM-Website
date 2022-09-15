@@ -245,29 +245,48 @@ export default {
       const provider = new GoogleAuthProvider();
       provider.addScope('email')
       string email = user.getEmail();
-      if email.includes(""@scu.edu"){
+      if email.includes("@scu.edu"){
 
-      import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-      const auth = getAuth();
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          const token = credential.accessToken;
-          // The signed-in user info.
-          const user = result.user;
-          // ...
-        }).catch((error) => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // The email of the user's account used.
-          const email = error.customData.email;
-          // The AuthCredential type that was used.
-          const credential = GoogleAuthProvider.credentialFromError(error);
-          // ...
-        });
+        const auth = getAuth();
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // ...
+          }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+          });
+          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+          if (user != null){
+            String userName = user.getDisplayName();
+
+            String uid = user.getUid();
+
+            doc = await db.collection("users").doc(someUserId).get()
+            if (!(doc.exists)){
+              import { doc, setDoc } from "firebase/firestore";
+
+              await setDoc(doc(db, "users", uid, {
+                  name: userName
+                  major: ""
+                  year: ""
+              });
+            }
+          }
+
       }
     },
     SignOut() {
@@ -282,13 +301,49 @@ export default {
     },
     updateName(value){
       this.$emit("input",value)
-    }
+      import { doc, updateDoc } from "firebase/firestore";
+      FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+      if (user != null){
+        String uid = user.getUid();
+        const userRef = doc(db, "users", uid);
+
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(userRef, {
+          name: value
+        });
+      }
+    },
     updateMajor(value){
       this.$emit("input",value)
-    }
+      import { doc, updateDoc } from "firebase/firestore";
+      FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+      if (user != null){
+        String uid = user.getUid();
+        const userRef = doc(db, "users", uid);
+
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(userRef, {
+          major: value
+        });
+      }
+    },
     updateYear(value){
       this.$emit("input",value)
-    }
+      import { doc, updateDoc } from "firebase/firestore";
+      FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+      if (user != null){
+        String uid = user.getUid();
+        const userRef = doc(db, "users", uid);
+
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(userRef, {
+          year: value
+        });
+      }
+    },
   },
 
   computed: {
