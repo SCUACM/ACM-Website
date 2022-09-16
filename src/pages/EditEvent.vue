@@ -177,7 +177,7 @@ export default {
 
       // Update the event and navigate back to the main events list page
       await db.collection("events").doc(docId).set(details);
-      console.log("Event updated");
+      alert(this.isNew ? "Event created" : "Event updated");
       this.$router.push("/events");
     },
     async viewFlyer(e){
