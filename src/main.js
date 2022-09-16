@@ -13,9 +13,12 @@ import Calendar from "@/pages/Calendar.vue";
 import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
 import EditEvent from "@/pages/EditEvent.vue";
+import Profile from "@/pages/Profile.vue";
 
 import moment from 'moment'
 import VueYoutube from 'vue-youtube'
+
+import {auth} from './firebase';
 
 Vue.config.productionTip = false;
 
@@ -35,14 +38,31 @@ const routes = [
   {
     path: "/events",
     component: Events,
+    meta: {
+      authRequired: true,
+    },
+  },
+  {
+    path: "/profile",
+    component: Profile,
+    meta: {
+      authRequired: true,
+    },
   },
   {
     path: "/register/:id",
     component: Events,
+    meta: {
+      authRequired: true,
+    },
   },
   {
     path: "/admin/events/:id",
     component: EditEvent,
+    meta: {
+      authRequired: true,
+      adminRequired: true
+    },
   },
   {
     path: "/joinus",
@@ -96,6 +116,21 @@ const router = new VueRouter({
   scrollBehavior() {
     return { x: 0, y: 0 };
   },
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.authRequired)) {
+    if (auth.currentUser) {
+      next();
+    } else {
+      alert('You must be logged in to see this page');
+      next({
+        path: '/',
+      });
+    }
+  } else {
+    next();
+  }
 });
 
 new Vue({

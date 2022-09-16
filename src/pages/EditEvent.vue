@@ -170,7 +170,6 @@ export default {
       // Add an event flyer
       if(this.flyerFile) {
         const fileName = 'flyers/'+docId + this.flyerFile.name.substring(this.flyerFile.name.lastIndexOf("."));
-        console.log(fileName);
         await storage.ref(fileName).put(this.flyerFile);
         details.flyer = fileName;
       }
