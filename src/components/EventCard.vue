@@ -50,11 +50,13 @@ export default {
   },
 
   async mounted(){
-    try{
-      this.image = await getDownloadURL(ref(storage, `flyers/${this.event.id}.jpg`));
-    }
-    catch(e){
-      console.log("No image available")
+    if(this.event.flyer) {
+      try{
+        this.image = await getDownloadURL(ref(storage, this.event.flyer));
+      }
+      catch(e){
+        console.log("No image available")
+      }
     }
   },
 
