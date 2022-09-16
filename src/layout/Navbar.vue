@@ -126,11 +126,14 @@
                 </v-btn>
               </template>
               <v-list>
-                <router-link
-                  to="/profile"
-                  >
+                <router-link to="/profile">
                   <v-list-item>
                     <v-list-item-title>Manage Profile</v-list-item-title>
+                  </v-list-item>
+                </router-link><br>
+                <router-link to="/admin" v-if="isAdmin">
+                  <v-list-item>
+                    <v-list-item-title>Admin Dashboard</v-list-item-title>
                   </v-list-item>
                 </router-link><br>
                 <a style="width: 100%" @click="signOut">
@@ -205,6 +208,11 @@
                     manage profile
                   </router-link>
                 </v-list-item>
+                <v-list-item v-if="isAdmin">
+                  <router-link to="/admin" class="link">
+                    admin dashboard
+                  </router-link>
+                </v-list-item>
                 <v-list-item>
                   <a @click="signOut" class="link">
                     sign out
@@ -244,7 +252,8 @@ export default {
       scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
-      user: auth.currentUser
+      user: auth.currentUser,
+      isAdmin: false
     };
   },
 
@@ -267,6 +276,10 @@ export default {
                 name: userName,
               });
               this.$router.push("/profile");
+            }
+            const idToken = await user.getIdTokenResult();
+            if(idToken.claims.admin) {
+              this.isAdmin = true;
             }
           }
         }

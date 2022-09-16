@@ -14,6 +14,7 @@ import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
 import EditEvent from "@/pages/EditEvent.vue";
 import Profile from "@/pages/Profile.vue";
+import Admin from "@/pages/Admin.vue";
 
 import moment from 'moment'
 import VueYoutube from 'vue-youtube'
@@ -54,6 +55,14 @@ const routes = [
     component: Events,
     meta: {
       authRequired: true,
+    },
+  },
+  {
+    path: "/admin",
+    component: Admin,
+    meta: {
+      authRequired: true,
+      adminRequired: true
     },
   },
   {
@@ -118,9 +127,19 @@ const router = new VueRouter({
   },
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach( async (to, from, next) => {
   if (to.matched.some(record => record.meta.authRequired)) {
-    if (auth.currentUser) {
+    const user = auth.currentUser;
+    if (user) {
+      if(to.matched.some(record => record.meta.adminRequired)){
+        const idToken = await user.getIdTokenResult();
+        if(!idToken.claims.admin) {
+          alert('You must be an admin to see this page');
+          next({
+            path: '/',
+          });
+        }
+      }
       next();
     } else {
       alert('You must be logged in to see this page');

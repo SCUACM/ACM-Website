@@ -211,13 +211,6 @@ export default {
 </script>
 
 <style scoped>
-  /* label{
-    border-radius: 40px;
-    padding: 10px 30px;
-    margin-bottom: 15px;
-    border: 2px solid #1c548d;
-    margin-right: 20px;
-  } */
   button {
     border-radius: 40px;
     padding: 10px 30px;
