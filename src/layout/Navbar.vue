@@ -103,6 +103,58 @@
               join us!
             </v-btn>
           </span>
+          <span class="link ml-6">
+            <v-btn 
+              v-if="user == null"
+              @click="SignIn()"
+              outlined
+              :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+              height="40px"
+              width="130px"
+              style="border-radius:10px; border: solid #0099ff"
+            >
+              sign in
+            </v-btn>
+            <v-btn 
+              v-else
+              @click="SignOut()"
+              outlined
+              :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+              height="40px"
+              width="130px"
+              style="border-radius:10px; border: solid #0099ff"
+            >
+              sign out
+            </v-btn>
+          </span>
+          <span class="link ml-6">
+            <v-dialog max-width="600px">
+              <v-btn
+                flat slot = "activator"
+                class = "success"
+                outlined
+                :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+                height="40px"
+                width="130px"
+                style="border-radius:10px; border: solid #0099ff"
+              >
+                update profile
+              </v-btn>
+                <v-card>
+                  <v-card-title>
+                    <h2> Update Profile </h2>
+                  </v-card-title>
+                  <div>
+                  <h3> Preferred Name: </h3>
+                  <input type="text" :value="value" @input="updateName($event.target.value)">
+                  <h3> Major: </h3>
+                  <input type="text" :value="value" @input="updateMajor($event.target.value)">
+                  <h3> Year: </h3>
+                  <input type="text" :value="value" @input="updateYear($event.target.value)">
+                  </div>
+                </v-card>
+            </v-dialog>
+          </span>
         </div>
         <div class="ml-auto hidden-md-and-up">
           <v-menu>
@@ -168,6 +220,9 @@
 import "../assets/scss/navbar-media.scss";
 import logoBlackSmall from "@/assets/branding/logo_temp_new.svg";
 import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
+// New imports
+import { GoogleAuthProvider } from "firebase/auth";
+import {auth, db} from '../firebase';
 
 export default {
   props: {
@@ -186,6 +241,7 @@ export default {
       scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
+      user: null
     };
   },
 
@@ -193,6 +249,32 @@ export default {
 
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log("Signed in", user);
+        const email = user.providerData[0].email;
+        if (email.includes("@scu.edu")){
+          if (user != null){
+            const userName = user.displayName;
+            const uid = user.uid;
+
+            const doc = await db.collection("users").doc(uid).get()
+            if (!(doc.exists)){
+              await db.collection("users").doc(uid).set({
+                name: userName,
+                });
+            }
+          }
+        }
+        else {
+          this.SignOut();
+        }
+        this.user = user;
+      } else {
+        console.log("Signed out");
+        this.user = null;
+      }
+    });
   },
 
   methods: {
@@ -206,6 +288,50 @@ export default {
 
     routeTo(path) {
       window.open(path);
+    },
+    SignIn() {
+
+      const provider = new GoogleAuthProvider();
+      provider.addScope('email');
+
+      auth.signInWithPopup(provider);
+    },
+    SignOut() {
+      auth.signOut();
+    },
+    async updateName(value){
+      this.$emit("input",value);
+
+      if (this.user != null){
+        const uid = this.user.uid;
+        const userRef = db.collection("users").doc(uid);
+
+        await userRef.update({
+          name: value
+        });
+      }
+    },
+    async updateMajor(value){
+      this.$emit("input",value);
+      if (this.user != null){
+        const uid = this.user.uid;
+        const userRef = db.collection("users").doc(uid);
+
+        await userRef.update( {
+          major: value
+        });
+      }
+    },
+    async updateYear(value){
+
+      if (this.user != null){
+        const uid = this.user.uid;
+        const userRef = db.collection("users").doc(uid);
+
+        await userRef.update({
+          year: value
+        });
+      }
     },
   },
 
