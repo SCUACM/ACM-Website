@@ -10,8 +10,10 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "firebase": "^9.9.2",
+    "moment": "^2.29.4",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
+    "vue-youtube": "^1.4.0",
     "vuefire": "^2.2.5",
     "vuetify": "^2.4.0"
   },

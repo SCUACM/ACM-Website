@@ -52,6 +52,22 @@
           </span>
           <span class="link mx-6">
             <router-link
+              to="/calendar"
+              :class="[
+                isTransparent
+                  ? calendarStyle
+                    ? 'link-active'
+                    : 'link-transparent'
+                  : calendarStyle
+                  ? 'link-active'
+                  : 'link',
+              ]"
+            >
+              calendar
+            </router-link>
+          </span>
+          <span class="link mx-6">
+            <router-link
               to="/events"
               :class="[
                 isTransparent
@@ -167,6 +183,11 @@
               <v-list-item>
                 <router-link to="/board" class="link">
                   board
+                </router-link>
+              </v-list-item>
+              <v-list-item>
+                <router-link to="/calendar" class="link">
+                  calendar
                 </router-link>
               </v-list-item>
               <v-list-item>
@@ -342,6 +363,10 @@ export default {
     eventsStyle() {
       const path = this.$route.path.split("/");
       return path[path.length - 1].toLowerCase() === "events";
+    },
+    calendarStyle() {
+      const path = this.$route.path.split("/");
+      return path[path.length - 1].toLowerCase() === "calendar";
     },
   },
 };
