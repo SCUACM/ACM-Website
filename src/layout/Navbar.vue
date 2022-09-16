@@ -88,9 +88,8 @@
             </v-btn>
           </span>
           <span class="link ml-6">
-            const user = auth.currentUser;
             <v-btn 
-              v-if=(user == null)
+              v-if="user == null"
               @click="SignIn()"
               outlined
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
@@ -110,6 +109,7 @@
               style="border-radius:10px; border: solid #0099ff"
             >
               sign out
+            </v-btn>
           </span>
           <span class="link ml-6">
             <v-dialog max-width="600px">
@@ -220,6 +220,7 @@ export default {
       scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
+      user: null
     };
   },
 
@@ -227,6 +228,32 @@ export default {
 
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log("Signed in", user);
+        const email = user.providerData[0].email;
+        if (email.includes("@scu.edu")){
+          if (user != null){
+            const userName = user.displayName;
+            const uid = user.uid;
+
+            const doc = await db.collection("users").doc(uid).get()
+            if (!(doc.exists)){
+              await db.collection("users").doc(uid).set({
+                name: userName,
+                });
+            }
+          }
+        }
+        else {
+          this.SignOut();
+        }
+        this.user = user;
+      } else {
+        console.log("Signed out");
+        this.user = null;
+      }
+    });
   },
 
   methods: {
@@ -246,61 +273,16 @@ export default {
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
 
-       auth.signInWithPopup(provider)
-          .then(async (result) => {
-            console.log("Signed in");
-            // The signed-in user info.
-            const user = result.user;
-            const email = user.providerData[0].email;
-            if (email.includes("@scu.edu")){
-            // ...
-              const user = auth.currentUser;
-
-              if (user != null){
-                const userName = user.displayName;
-                const uid = user.uid;
-
-                const doc = await db.collection("users").doc(uid).get()
-                if (!(doc.exists)){
-                  await db.collection("users").doc(uid).set({
-                    name: userName,
-                    major: "",
-                    year: "",
-                    });
-                }
-              }
-            }
-            else {
-              this.SignOut();
-            }
-          }).catch((error) => {
-            console.log(error);
-            // // Handle Errors here.
-            // const errorCode = error.code;
-            // const errorMessage = error.message;
-            // // The email of the user's account used.
-            // const email = error.customData.email;
-            // // The AuthCredential type that was used.
-            // const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
-          });
+      auth.signInWithPopup(provider);
     },
     SignOut() {
-
-      auth.signOut().then(() => {
-            console.log("Signed out");
-      // Sign-out successful.
-      }).catch((error) => {
-        console.log(error);
-      // An error happened.
-      });
+      auth.signOut();
     },
     async updateName(value){
-      this.$emit("input",value)
-      const user = auth.currentUser;
+      this.$emit("input",value);
 
-      if (user != null){
-        const uid = user.uid;
+      if (this.user != null){
+        const uid = this.user.uid;
         const userRef = db.collection("users").doc(uid);
 
         await userRef.update({
@@ -309,11 +291,9 @@ export default {
       }
     },
     async updateMajor(value){
-      this.$emit("input",value)
-      const user = auth.currentUser;
-
-      if (user != null){
-        const uid = user.uid;
+      this.$emit("input",value);
+      if (this.user != null){
+        const uid = this.user.uid;
         const userRef = db.collection("users").doc(uid);
 
         await userRef.update( {
@@ -322,11 +302,9 @@ export default {
       }
     },
     async updateYear(value){
-      this.$emit("input",value)
-      const user = auth.currentUser;
 
-      if (user != null){
-        const uid = user.uid;
+      if (this.user != null){
+        const uid = this.user.uid;
         const userRef = db.collection("users").doc(uid);
 
         await userRef.update({
