@@ -2,13 +2,13 @@
   <v-app>
     <Navbar />
     <v-container style="margin-top: 75px; max-width: 1000px">
-        <div class="events-title">
-          Upcoming Events
-        </div>
+      <div class="events-title" v-if="upcoming.length">
+        Upcoming Events
+      </div>
       <EventCard v-for="event of this.upcoming" :event="event" :key="event.id" />
-        <div class="events-title">
-          Past Events
-        </div>
+      <div class="events-title" v-if="past.length">
+        Past Events
+      </div>
       <EventCard v-for="event of this.past" :event="event" :key="event.id" />
     </v-container>
     <Footer />

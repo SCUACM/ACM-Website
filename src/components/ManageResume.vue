@@ -1,30 +1,28 @@
 <template>
-  <v-app>
-    <v-container style="margin-top: 75px; max-width: 750px">
-      <div>
-        <div 
-          id="dropArea" 
-          @dragenter.prevent="isHovering = true"
-          @dragover.prevent="isHovering = true"
-          @dragleave.prevent="isHovering = false"
-          @drop.prevent="handleDrop"
-          :class="{highlight: isHovering}">
-          <form ref="form">
-            <input type="file" style="display: none" name="fileUpload" id='fileUpload' accept="application/pdf" @change='handleInput'/>
-          </form>
-          <label type="button" for="fileUpload">Upload New Resume</label>
-          <span> or drag your resume here </span><br>
-          <span :style="{visibility: file ? 'visible' : 'hidden'}"> Selected {{file && file.name}}</span>
-          <button id="submitBtn" :disabled="!file" style="align-content: center" @click="submit">Submit</button>
-        </div>
-        <div id="pdfViewingArea" v-if="metadata">
-            <p>Last updated: {{lastUpdated}}</p>
-            <button id="downloadBtn" @click="downloadCurrentResume">Download Current Resume</button>
-            <embed v-if="pdfUrl" id="pdf" :src="pdfUrl">
-        </div>
+  <v-container>
+    <div>
+      <div 
+        id="dropArea" 
+        @dragenter.prevent="isHovering = true"
+        @dragover.prevent="isHovering = true"
+        @dragleave.prevent="isHovering = false"
+        @drop.prevent="handleDrop"
+        :class="{highlight: isHovering}">
+        <form ref="form">
+          <input type="file" style="display: none" name="fileUpload" id='fileUpload' accept="application/pdf" @change='handleInput'/>
+        </form>
+        <label type="button" for="fileUpload">Upload New Resume</label>
+        <span> or drag your resume here </span><br>
+        <span :style="{visibility: file ? 'visible' : 'hidden'}"> Selected {{file && file.name}}</span>
+        <button id="submitBtn" :disabled="!file" style="align-content: center" @click="submit">Submit</button>
       </div>
-    </v-container>
-  </v-app>
+      <div id="pdfViewingArea" v-if="metadata">
+          <p>Last updated: {{lastUpdated}}</p>
+          <button id="downloadBtn" @click="downloadCurrentResume">Download Current Resume</button>
+          <embed v-if="pdfUrl" id="pdf" :src="pdfUrl">
+      </div>
+    </div>
+  </v-container>
 </template>
 
 <script>

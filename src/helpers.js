@@ -66,7 +66,6 @@ export function getMapLink(location) {
         return null;
     }
     const building = location.substring(0, splitIndex);
-    console.log(location,splitIndex,building);
     if(buildingList.includes(building)){
     const floor = location.substring(splitIndex + 1);
     if(floor){
@@ -78,3 +77,64 @@ export function getMapLink(location) {
     }
     return null;
 }
+
+export const majorsList = [
+    "Computer Science and Engineering",
+    "Computer Science",
+    "Electrical Engineering",
+    "Electrical and Computer Engineering",
+    "Web Design and Engineering",
+    "Management Information Systems",
+    "Mathematics",
+    "Bioengineering",
+    "Civil, Environmental, and Sustainable Engineering",
+    "General Engineering",
+    "Mechanical Engineering",
+    "Accounting",
+    "Accounting & Information Systems",
+    "Economics",
+    "Finance",
+    "Individual Studies",
+    "Management & Entrepreneurship",
+    "Marketing",
+    "Ancient Studies",
+    "Anthropology",
+    "Art History",
+    "Biochemistry",
+    "Biology",
+    "Chemistry",
+    "Child Studies",
+    "Classical Studies",
+    "Communication",
+    "Economics",
+    "Engineering Physics",
+    "English",
+    "Environmental Science",
+    "Environmental Studies",
+    "Ethnic Studies",
+    "Greek Language and Literature",
+    "History",
+    "Individual Studies",
+    "Latin and Greek",
+    "Latin Language and Literature",
+    "Military Science",
+    "Arabic",
+    "Chinese",
+    "French",
+    "German",
+    "Italian",
+    "Japanese",
+    "Spanish",
+    "Music",
+    "Neuroscience",
+    "Philosophy",
+    "Physics",
+    "Political Science",
+    "Psychology",
+    "Public Health Science",
+    "Religious Studies",
+    "Sociology",
+    "Studio Art",
+    "Theatre and Dance",
+    "Women's and Gender Studies",
+];

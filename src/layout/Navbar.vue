@@ -66,7 +66,7 @@
               calendar
             </router-link>
           </span>
-          <span class="link mx-6">
+          <span class="link mx-6" v-if="user">
             <router-link
               to="/events"
               :class="[
@@ -92,21 +92,17 @@
             </a>
           </span>
           <span class="link ml-6">
-            <v-btn
-              @click="toJoinUs()"
-              outlined
-              :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
-              height="40px"
-              width="130px"
-              style="border-radius:10px; border: solid #0099ff"
+            <router-link
+              to="/joinus"
+              :class="[!isTransparent ? 'link' : 'link-transparent']"
             >
-              join us!
-            </v-btn>
+              newsletter
+            </router-link>
           </span>
           <span class="link ml-6">
             <v-btn 
               v-if="user == null"
-              @click="SignIn()"
+              @click="signIn()"
               outlined
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
               height="40px"
@@ -115,45 +111,38 @@
             >
               sign in
             </v-btn>
-            <v-btn 
-              v-else
-              @click="SignOut()"
-              outlined
-              :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
-              height="40px"
-              width="130px"
-              style="border-radius:10px; border: solid #0099ff"
-            >
-              sign out
-            </v-btn>
-          </span>
-          <span class="link ml-6">
-            <v-dialog max-width="600px">
-              <v-btn
-                flat slot = "activator"
-                class = "success"
-                outlined
-                :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
-                height="40px"
-                width="130px"
-                style="border-radius:10px; border: solid #0099ff"
-              >
-                update profile
-              </v-btn>
-                <v-card>
-                  <v-card-title>
-                    <h2> Update Profile </h2>
-                  </v-card-title>
-                  <div>
-                  <h3> Preferred Name: </h3>
-                  <input type="text" :value="value" @input="updateName($event.target.value)">
-                  <h3> Major: </h3>
-                  <input type="text" :value="value" @input="updateMajor($event.target.value)">
-                  <h3> Year: </h3>
-                  <input type="text" :value="value" @input="updateYear($event.target.value)">
-                  </div>
-                </v-card>
-            </v-dialog>
+            <v-menu offset-y v-else>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  outlined
+                  :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+                  height="40px"
+                  width="130px"
+                  style="border-radius:10px; border: solid #0099ff"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  account
+                </v-btn>
+              </template>
+              <v-list>
+                <router-link to="/profile">
+                  <v-list-item>
+                    <v-list-item-title>Manage Profile</v-list-item-title>
+                  </v-list-item>
+                </router-link><br>
+                <router-link to="/admin" v-if="isAdmin">
+                  <v-list-item>
+                    <v-list-item-title>Admin Dashboard</v-list-item-title>
+                  </v-list-item>
+                </router-link><br>
+                <a style="width: 100%" @click="signOut">
+                  <v-list-item>
+                    <v-list-item-title>Sign Out</v-list-item-title>
+                  </v-list-item>
+                </a>
+              </v-list>
+            </v-menu>
           </span>
         </div>
         <div class="ml-auto hidden-md-and-up">
@@ -190,7 +179,7 @@
                   calendar
                 </router-link>
               </v-list-item>
-              <v-list-item>
+              <v-list-item v-if="user">
                 <router-link to="/events" class="link">
                   events
                 </router-link>
@@ -205,9 +194,31 @@
               </v-list-item>
               <v-list-item>
                 <router-link to="/joinus" class="link">
-                  join us
+                  newsletter
                 </router-link>
               </v-list-item>
+              <v-list-item v-if="!user">
+                <a @click="signIn" class="link">
+                  sign in
+                </a>
+              </v-list-item>
+              <template v-else>
+                <v-list-item>
+                  <router-link to="/profile" class="link">
+                    manage profile
+                  </router-link>
+                </v-list-item>
+                <v-list-item v-if="isAdmin">
+                  <router-link to="/admin" class="link">
+                    admin dashboard
+                  </router-link>
+                </v-list-item>
+                <v-list-item>
+                  <a @click="signOut" class="link">
+                    sign out
+                  </a>
+                </v-list-item>
+              </template>
             </v-list>
           </v-menu>
         </div>
@@ -241,7 +252,8 @@ export default {
       scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
-      user: null
+      user: auth.currentUser,
+      isAdmin: false
     };
   },
 
@@ -262,12 +274,18 @@ export default {
             if (!(doc.exists)){
               await db.collection("users").doc(uid).set({
                 name: userName,
-                });
+              });
+              this.$router.push("/profile");
+            }
+            const idToken = await user.getIdTokenResult();
+            if(idToken.claims.admin) {
+              this.isAdmin = true;
             }
           }
         }
         else {
-          this.SignOut();
+          alert("Please sign in with your scu.edu email address");
+          this.signOut();
         }
         this.user = user;
       } else {
@@ -289,15 +307,18 @@ export default {
     routeTo(path) {
       window.open(path);
     },
-    SignIn() {
+    signIn() {
 
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
 
       auth.signInWithPopup(provider);
     },
-    SignOut() {
-      auth.signOut();
+    async signOut() {
+      await auth.signOut();
+      if(this.$route.meta.authRequired){
+        this.$router.push("/");
+      }
     },
     async updateName(value){
       this.$emit("input",value);

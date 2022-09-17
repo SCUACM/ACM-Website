@@ -12,9 +12,14 @@ import Board from "@/pages/Board.vue";
 import Calendar from "@/pages/Calendar.vue";
 import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
+import EditEvent from "@/pages/EditEvent.vue";
+import Profile from "@/pages/Profile.vue";
+import Admin from "@/pages/Admin.vue";
 
 import moment from 'moment'
 import VueYoutube from 'vue-youtube'
+
+import {auth} from './firebase';
 
 Vue.config.productionTip = false;
 
@@ -34,6 +39,39 @@ const routes = [
   {
     path: "/events",
     component: Events,
+    meta: {
+      authRequired: true,
+    },
+  },
+  {
+    path: "/profile",
+    component: Profile,
+    meta: {
+      authRequired: true,
+    },
+  },
+  {
+    path: "/register/:id",
+    component: Events,
+    meta: {
+      authRequired: true,
+    },
+  },
+  {
+    path: "/admin",
+    component: Admin,
+    meta: {
+      authRequired: true,
+      adminRequired: true
+    },
+  },
+  {
+    path: "/admin/events/:id",
+    component: EditEvent,
+    meta: {
+      authRequired: true,
+      adminRequired: true
+    },
   },
   {
     path: "/joinus",
@@ -58,12 +96,12 @@ Vue.filter('formatDateTime', function(event) {
     return moment(event.startDate.toDate()).format('MMM Do YYYY, h:mm a');
   }
   // Format the start and end as dates. Ex: Oct 1st
-  const startDate = moment(String(event.startDate.toDate())).format('MMM Do, YYYY,');
-  const endDate = moment(String(event.endDate.toDate())).format('MMM Do, YYYY,');
+  const startDate = moment(event.startDate.toDate()).format('MMM Do, YYYY,');
+  const endDate = moment(event.endDate.toDate()).format('MMM Do, YYYY,');
 
   // Format the start and end as times. Ex: 5:45 pm
-  const startTime = moment(String(event.startDate.toDate())).format('h:mm a');
-  const endTime = moment(String(event.endDate.toDate())).format('h:mm a');
+  const startTime = moment(event.startDate.toDate()).format('h:mm a');
+  const endTime = moment(event.endDate.toDate()).format('h:mm a');
 
   if(startDate === endDate) {
     if(startTime === endTime) {
@@ -87,6 +125,31 @@ const router = new VueRouter({
   scrollBehavior() {
     return { x: 0, y: 0 };
   },
+});
+
+router.beforeEach( async (to, from, next) => {
+  if (to.matched.some(record => record.meta.authRequired)) {
+    const user = auth.currentUser;
+    if (user) {
+      if(to.matched.some(record => record.meta.adminRequired)){
+        const idToken = await user.getIdTokenResult();
+        if(!idToken.claims.admin) {
+          alert('You must be an admin to see this page');
+          next({
+            path: '/',
+          });
+        }
+      }
+      next();
+    } else {
+      alert('You must be logged in to see this page');
+      next({
+        path: '/',
+      });
+    }
+  } else {
+    next();
+  }
 });
 
 new Vue({

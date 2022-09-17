@@ -2,6 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
+import 'firebase/compat/functions';
 
 const firebaseConfig = {
     apiKey: "AIzaSyDTCNXN1akZ6DEWKLGyOp2JZvAworux9jI",
@@ -21,3 +22,6 @@ export { Timestamp, GeoPoint }
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
+export const functions = firebase.functions();
+
+db.enablePersistence();

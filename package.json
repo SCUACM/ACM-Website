@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "debounce": "^1.2.1",
     "firebase": "^9.9.2",
     "moment": "^2.29.4",
+    "qrcode.vue": "^1.7.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
     "vue-youtube": "^1.4.0",
