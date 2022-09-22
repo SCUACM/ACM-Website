@@ -15,6 +15,7 @@ import JoinUs from "@/pages/JoinUs.vue";
 import EditEvent from "@/pages/EditEvent.vue";
 import Profile from "@/pages/Profile.vue";
 import Admin from "@/pages/Admin.vue";
+import Register from "@/pages/Register.vue";
 
 import moment from 'moment'
 import VueYoutube from 'vue-youtube'
@@ -52,10 +53,7 @@ const routes = [
   },
   {
     path: "/register/:id",
-    component: Events,
-    meta: {
-      authRequired: true,
-    },
+    component: Register,
   },
   {
     path: "/admin",
