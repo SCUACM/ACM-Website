@@ -1,5 +1,8 @@
 <template>
   <div>
+    <v-dialog v-model="showWelcome" max-width="800px">
+      <Welcome :user="user" @close="closePopup"></Welcome>
+    </v-dialog>
     <v-app-bar
       app
       :color="navColor"
@@ -234,6 +237,7 @@ import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 // New imports
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../firebase';
+import Welcome from '../components/Welcome.vue';
 
 export default {
   props: {
@@ -249,6 +253,7 @@ export default {
 
   data() {
     return {
+      showWelcome: false,
       scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
@@ -257,7 +262,7 @@ export default {
     };
   },
 
-  components: {},
+  components: { Welcome },
 
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
@@ -275,7 +280,7 @@ export default {
               await db.collection("users").doc(uid).set({
                 name: userName,
               });
-              this.$router.push("/profile");
+              this.showWelcome = true;
             }
             const idToken = await user.getIdTokenResult();
             if(idToken.claims.admin) {
@@ -320,40 +325,10 @@ export default {
         this.$router.push("/");
       }
     },
-    async updateName(value){
-      this.$emit("input",value);
-
-      if (this.user != null){
-        const uid = this.user.uid;
-        const userRef = db.collection("users").doc(uid);
-
-        await userRef.update({
-          name: value
-        });
-      }
-    },
-    async updateMajor(value){
-      this.$emit("input",value);
-      if (this.user != null){
-        const uid = this.user.uid;
-        const userRef = db.collection("users").doc(uid);
-
-        await userRef.update( {
-          major: value
-        });
-      }
-    },
-    async updateYear(value){
-
-      if (this.user != null){
-        const uid = this.user.uid;
-        const userRef = db.collection("users").doc(uid);
-
-        await userRef.update({
-          year: value
-        });
-      }
-    },
+    closePopup() {
+      this.showWelcome = false;
+      this.$router.push("/profile");
+    }
   },
 
   computed: {
