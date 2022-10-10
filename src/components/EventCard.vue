@@ -20,7 +20,7 @@
       <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
       <span v-else> {{ event.location }}</span>
       </h3>
-      <p>{{ event.description }}</p>
+      <div v-html="getMarkdownDescription"></div>
       <p v-for="link of event.links || {}" :key="link.title" class="link">
         <a :href="link.url" target="_blank">
           <v-icon color="#1976d2" class="link-icon">
@@ -39,6 +39,7 @@ import "../assets/scss/board-media.scss";
 import {storage} from '../firebase';
 import { ref, getDownloadURL } from "firebase/storage";
 import {getMapLink} from '../helpers';
+import { marked } from 'marked';
 
 export default {
   name: "EventCard",
@@ -68,6 +69,9 @@ export default {
   computed: {
     mapLink(){
       return getMapLink(this.event.location ?? "")
+    },
+    getMarkdownDescription() {
+      return marked.parse(this.event.description ?? "")
     }
   }
 };
