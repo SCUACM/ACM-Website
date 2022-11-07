@@ -28,9 +28,9 @@
     <div ref="navigation" class="navigation">
       <Banner
         :show="true"
-        content="Get involved! ACM's general meetings are every Tuesday at 5:45. Stay up to date by signing up for the mailing list."
-        link="https://hackforhumanity.io/"
-        linkTitle=""
+        content="INRIX Hack is this weekend, 10/12-10/13! Learn more -> "
+        link="http://acm.engr.scu.edu/inrix/"
+        linkTitle="here"
       />
       <v-container style="max-width: 800px;">
         <v-row
