@@ -18,14 +18,14 @@
         <div class="form-header">
           Description
         </div>
-        <v-text-field
+        <v-textarea
           label="2-3 sentences about the event"
           v-model="eventDetails.description"
           :value="eventDetails.description"
           outlined
           solo
         >
-        </v-text-field>
+        </v-textarea>
         <div class="form-header">
           Location
         </div>

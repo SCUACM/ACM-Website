@@ -4,6 +4,7 @@ module.exports = {
     es6: true,
     node: true,
   },
+  parser: "babel-eslint",
   extends: [
     "eslint:recommended",
     "google",
@@ -11,5 +12,6 @@ module.exports = {
   rules: {
     indent: "off",
     quotes: ["error", "double"],
+    undefined: "off",
   },
 };
