@@ -28,7 +28,7 @@
     <div ref="navigation" class="navigation">
       <Banner
         :show="true"
-        content="INRIX Hack is this weekend, 10/12-10/13! Learn more -> "
+        content="INRIX Hack is this weekend, 11/12-11/13! Learn more -> "
         link="http://acm.engr.scu.edu/inrix/"
         linkTitle="here"
       />
