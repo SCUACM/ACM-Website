@@ -1,41 +1,28 @@
 <template>
-    <v-app>
-        <Navbar />
-            <v-container style="margin-top: 75px; max-width: 1000px">
-                <h2>Manage Admin Users</h2>
-                <v-text-field class="uid-input" label="Enter User UID" v-model="uid">
-                </v-text-field>
-                <button @click="addAdmin">Add Admin Privileges</button>
-                <button @click="removeAdmin" class="remove">Remove Admin Privileges</button>
-                <h2>Manage Events</h2>
-                <router-link to="/admin/events/new">
-                    <button class="create">Create New Event</button>
-                </router-link>
-                <span>or select an existing event below:</span><br>
-                <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event">
-                </AdminEventCard>
-            </v-container>
-        <Footer />
-    </v-app>
-  </template>
-  
-  <script>
-  import Navbar from "@/layout/Navbar.vue";
-  import Footer from "@/layout/Footer.vue";
-  import QRCode from 'qrcode';
+    <div>
+        <h3>{{event.title}} ({{event | formatDateTime}}) Attendance: {{this.Attendance}} </h3>
+        <router-link :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
+        <button @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
+        <button @click="() => openQrCode(event.id)">View Event QR Code</button>
+    </div>
+</template>
+<script>
 
-  import 'firebase/compat/firestore'
-  import {db, functions} from '../firebase';
-import AdminEventCard from "../components/AdminEventCard.vue";
-  
-  export default {
-    name: "Admin",
-  
-    components: {
-    Navbar,
-    Footer,
-    AdminEventCard
-},
+import {db, functions} from '../firebase';
+import QRCode from 'qrcode';
+
+export default {
+    name: "AdminEventCard",
+
+    components: {},
+
+    props: {
+        event: Object
+    },
+
+    async mounted(){
+        this.getEventAttendance(this.event.id);
+    },
 
     methods: {
         async addAdmin() {
@@ -57,14 +44,9 @@ import AdminEventCard from "../components/AdminEventCard.vue";
                 console.log("deleted");
             }
         },
-        getEventAttendance(e){
-            functions.httpsCallable("getEventAttendance")({id: e}).then((value) => {
-                //return JSON.stringify(value.data);
-                this.eventAttendance[e] = JSON.stringify(value.data);
-                this.$set(this.eventAttendance, e, JSON.stringify(value.data));
-                alert(this.eventAttendance[e]);
-            });
-            this.eventAttendance[e] = -1;
+        async getEventAttendance(e){
+            this.Attendance = JSON.stringify((await functions.httpsCallable("getEventAttendance")({id: e})).data);
+        
         },
         async openQrCode(id) {
             const url = window.location.origin+"/#/register/"+id;
@@ -90,20 +72,13 @@ import AdminEventCard from "../components/AdminEventCard.vue";
             window.open(blobUrl, '_blank');
         }
     },
-  
-    firestore: {
-      acmEvents: db.collection('events').orderBy('startDate', 'desc')
-    },
 
-    data() {
-      return {
-        uid: "",
-        acmEvents: [],
-      };
-    },
-  };
-  </script>
-  
+    data: () => ({
+        Attendance: null
+    })
+}
+</script>
+
 <style scoped>
     .uid-input {
         display: inline-block;
