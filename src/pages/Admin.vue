@@ -22,7 +22,6 @@
   <script>
   import Navbar from "@/layout/Navbar.vue";
   import Footer from "@/layout/Footer.vue";
-  import QRCode from 'qrcode';
 
   import 'firebase/compat/firestore'
   import {db, functions} from '../firebase';
@@ -51,44 +50,6 @@ import AdminEventCard from "../components/AdminEventCard.vue";
                 alert(result.data.message);
             }
         },
-        async deleteEvent(id) {
-            if (confirm("Are you sure you want to delete this event?") == true) {
-                await db.collection("events").doc(id).delete();
-                console.log("deleted");
-            }
-        },
-        getEventAttendance(e){
-            functions.httpsCallable("getEventAttendance")({id: e}).then((value) => {
-                //return JSON.stringify(value.data);
-                this.eventAttendance[e] = JSON.stringify(value.data);
-                this.$set(this.eventAttendance, e, JSON.stringify(value.data));
-                alert(this.eventAttendance[e]);
-            });
-            this.eventAttendance[e] = -1;
-        },
-        async openQrCode(id) {
-            const url = window.location.origin+"/#/register/"+id;
-            const imageSrc = await QRCode.toDataURL(url, {width: 512});
-            const contentType = 'image/png';
-            const byteCharacters = atob(imageSrc.substr(`data:${contentType};base64,`.length));
-            const byteArrays = [];
-            for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
-                const slice = byteCharacters.slice(offset, offset + 1024);
-
-                const byteNumbers = new Array(slice.length);
-                for (let i = 0; i < slice.length; i++) {
-                    byteNumbers[i] = slice.charCodeAt(i);
-                }
-
-                const byteArray = new Uint8Array(byteNumbers);
-
-                byteArrays.push(byteArray);
-            }
-            const blob = new Blob(byteArrays, {type: contentType});
-            const blobUrl = URL.createObjectURL(blob);
-
-            window.open(blobUrl, '_blank');
-        }
     },
   
     firestore: {

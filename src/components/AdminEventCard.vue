@@ -25,19 +25,6 @@ export default {
     },
 
     methods: {
-        async addAdmin() {
-            console.log(this.uid);
-            if(this.uid.length > 0) {
-                const result = await functions.httpsCallable("addAdmin")({uid: this.uid});
-                alert(result.data.message);
-            }
-        },
-        async removeAdmin() {
-            if(this.uid.length > 0) {
-                const result = await functions.httpsCallable("removeAdmin")({uid: this.uid});
-                alert(result.data.message);
-            }
-        },
         async deleteEvent(id) {
             if (confirm("Are you sure you want to delete this event?") == true) {
                 await db.collection("events").doc(id).delete();
