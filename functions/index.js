@@ -38,10 +38,10 @@ exports.removeAdmin = functions.https.onCall( (data, context) => {
 });
 exports.getEventAttendance = functions.https.onCall( async (data, context) => {
     const eventId = data.id;
-    // const isAdmin = context.auth.token.admin || false;
-    // if (!isAdmin) {
-    //     return {message: "You must be an admin to see event statistics"};
-    // }
+    const isAdmin = context.auth.token.admin || false;
+    if (!isAdmin) {
+        return {message: "You must be an admin to see event statistics"};
+    }
     if (!eventId) {
         return {message: "Please pass an event id to the function"};
     }
