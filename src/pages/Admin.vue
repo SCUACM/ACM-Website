@@ -12,12 +12,8 @@
                     <button class="create">Create New Event</button>
                 </router-link>
                 <span>or select an existing event below:</span><br>
-                <div v-for="e in acmEvents" :key="e.id" :to="'/admin/events/'+e.id" class="event">
-                    <h3>{{e.title}} ({{e | formatDateTime}})</h3>
-                    <router-link :to="'/admin/events/'+e.id"><button>Edit Event</button></router-link>
-                    <button @click="() => deleteEvent(e.id)" class="remove">Delete Event</button>
-                    <button @click="() => openQrCode(e.id)">View Event QR Code</button>
-                </div>
+                <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event">
+                </AdminEventCard>
             </v-container>
         <Footer />
     </v-app>
@@ -26,19 +22,20 @@
   <script>
   import Navbar from "@/layout/Navbar.vue";
   import Footer from "@/layout/Footer.vue";
-  import QRCode from 'qrcode';
-  
+
   import 'firebase/compat/firestore'
   import {db, functions} from '../firebase';
+import AdminEventCard from "../components/AdminEventCard.vue";
   
   export default {
     name: "Admin",
   
     components: {
-        Navbar,
-        Footer,
-    },
-  
+    Navbar,
+    Footer,
+    AdminEventCard
+},
+
     methods: {
         async addAdmin() {
             console.log(this.uid);
@@ -53,41 +50,12 @@
                 alert(result.data.message);
             }
         },
-        async deleteEvent(id) {
-            if (confirm("Are you sure you want to delete this event?") == true) {
-                await db.collection("events").doc(id).delete();
-                console.log("deleted");
-            }
-        },
-        async openQrCode(id) {
-            const url = window.location.origin+"/#/register/"+id;
-            const imageSrc = await QRCode.toDataURL(url, {width: 512});
-            const contentType = 'image/png';
-            const byteCharacters = atob(imageSrc.substr(`data:${contentType};base64,`.length));
-            const byteArrays = [];
-            for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
-                const slice = byteCharacters.slice(offset, offset + 1024);
-
-                const byteNumbers = new Array(slice.length);
-                for (let i = 0; i < slice.length; i++) {
-                    byteNumbers[i] = slice.charCodeAt(i);
-                }
-
-                const byteArray = new Uint8Array(byteNumbers);
-
-                byteArrays.push(byteArray);
-            }
-            const blob = new Blob(byteArrays, {type: contentType});
-            const blobUrl = URL.createObjectURL(blob);
-
-            window.open(blobUrl, '_blank');
-        }
     },
   
     firestore: {
       acmEvents: db.collection('events').orderBy('startDate', 'desc')
     },
-  
+
     data() {
       return {
         uid: "",

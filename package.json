@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "chart.js": "^3.9.1",
     "core-js": "^3.6.5",
     "debounce": "^1.2.1",
     "firebase": "^9.9.2",
@@ -15,6 +16,8 @@
     "moment": "^2.29.4",
     "qrcode": "^1.5.1",
     "vue": "^2.6.11",
+    "vue-async-computed": "^3.9.0",
+    "vue-chartjs": "^4.1.2",
     "vue-router": "^3.5.1",
     "vue-youtube": "^1.4.0",
     "vuefire": "^2.2.5",
