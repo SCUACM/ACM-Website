@@ -21,6 +21,9 @@ import JodiChiu from "../assets/board/main/Jodi_Chiu.jpg";
 import MubashirHussain from "../assets/board/main/Mubashir_Hussain.jpg";
 import SamYang from "../assets/board/main/Sam_Yang.png";
 import ShivJhalani from "../assets/board/main/Shiv_Jhalani.jpg";
+import AndrewCollins from "../assets/board/main/Andrew_Collins.jpg";
+import JakeEsperson from "../assets/board/main/Jake_Esperson.jpg";
+import SamhitaRachapudi from "../assets/board/main/Samhita_Rachapudi.jpg";
 import CaseyBates from "../assets/board/broncosec/Casey_Bates.jpg";
 import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
 import JamesOssam from "../assets/board/broncosec/James_Ossam.jpg";
@@ -115,13 +118,6 @@ export default {
             "Hi everyone! I’m Mubashir Hussain and I am a Junior Computer Science and Engineering student with a minor in math from Santa Clara, CA. I have always had an interest in computer science, but my passion sparked through classes I took and projects I worked on in middle school and high school. I developed a love for programming through my involvement in high school robotics with Team 254. Outside of school, I love playing basketball, finding new places to eat, and listening to music. I love meeting new people so don’t hesitate to reach out and say hi!",
         },
         {
-          src: CaseyBates,
-          name: "Casey Bates",
-          role: "BroncoSec Coordinator",
-          bio:
-            "Hi All! I’m Casey, and I am super excited to be the BroncoSec president this year! I am a Senior Computer Science major from San Jose, CA. Cybersecurity is my main passion, and I especially enjoy solving tough challenges during capture the flag competitions. I also love learning more about other topics like computer networks, IoT, and AI. When away from my computer, you can often find me working on 3D printing projects, playing beach volleyball outside of Malley, or at Schott Stadium, where I am a student manager for the baseball team. Please feel free to reach out if you have questions, suggestions, or even just want to chat. I hope to see you all at BroncoSec events this year!",
-        },
-        {
           src: KavithaVinod,
           name: "Kavitha Vinod",
           role: "Industry Liason",
@@ -135,6 +131,27 @@ export default {
           bio:
             "Hi everyone! I’m Shiv, a sophomore computer science major from New Delhi, India. My passion for CS began through a Java course in 2017, and I haven’t looked back since! I’m interested in big data, prediction-based machine learning, and I’m currently exploring more in the field, eager to learn more about AI and ML. In my free time, you’d probably catch me watching Formula One racing, soccer, YouTube, or hanging out with friends. I love meeting and talking with people, so feel free to reach out!",
         },
+        {
+          src: AndrewCollins,
+          name: "Andrew Collins",
+          role: "Underclassmen Representative",
+          bio:
+            "Hello, I’m Andrew, a Freshman Computer Science and Engineering student from San Diego, CA. My passion for computer science started in middle and high school through classes and clubs where I learned how to develop simple websites and fetch data from APIs. I am interested in mobile development, ML and AI, entrepreneurship, and game development. In my free time, I enjoy spending time with friends, reading, watching shows and movies, cooking, finding new music, and working on personal projects. I love meeting new people so feel free to reach out anytime!",
+        },
+        {
+          src: JakeEsperson,
+          name: "Jake Esperson",
+          role: "Underclassmen Representative",
+          bio:
+            "Hello everyone! My name is Jake, and I’m a Freshman Computer Science Engineering student from Rocklin, CA. My passion for computer science started with learning about the dot-com bubble from my parents and learning about the type of environment that comes with learning CS. I enjoy learning about virtual and augmented reality and I want to learn more about databases. Outside of school, you can find me playing baseball, working on my Mercedes, or learning all the cool spots in Silicon Valley. I am always excited to make new friends, so don’t be afraid to come up and say hi!",
+        },
+        {
+          src: SamhitaRachapudi,
+          name: "Samhita Rachapudi",
+          role: "Underclassmen Representative",
+          bio:
+            "Hi! I’m Samhita, and I’m a sophomore majoring in computer science originally from Redmond, WA. I first became interested in computer science after getting more involved with the CS club at my high school. I decided to major in it because I loved how applicable CS is to anything and I love problem solving! In my free time I like to bake, go swimming, and spend time with my friends and family. I’m excited to serve the CS community at SCU as a part of ACM!",
+        }
       ],
 
       acmWBoard: [
