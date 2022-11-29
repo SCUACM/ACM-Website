@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const {firestore} = require("firebase-admin");
@@ -35,6 +36,24 @@ exports.removeAdmin = functions.https.onCall( (data, context) => {
         return {message: "User removed as admin"};
     });
 });
+exports.getEventAttendance = functions.https.onCall( async (data, context) => {
+    const eventId = data.id;
+    const isAdmin = context.auth.token.admin || false;
+    if (!isAdmin) {
+        return {message: "You must be an admin to see event statistics"};
+    }
+    if (!eventId) {
+        return {message: "Please pass an event id to the function"};
+    }
+
+    const regRef = firestore().collection("registrations");
+
+    // const eventID = eventRef.where("id","==",data.eventID);
+    const registrations = await regRef.where("event", "==", eventId).count().get();
+
+    return registrations.data().count;
+});
+
 /* eslint-disable */
 
 // pubsub.schedule("21 21 * * *").onRun((async (context) => {
