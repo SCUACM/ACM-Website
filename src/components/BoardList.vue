@@ -127,7 +127,7 @@ export default {
         {
           src: ShivJhalani,
           name: "Shiv Jhalani",
-          role: "Industy Liason",
+          role: "Industry Liason",
           bio:
             "Hi everyone! I’m Shiv, a sophomore computer science major from New Delhi, India. My passion for CS began through a Java course in 2017, and I haven’t looked back since! I’m interested in big data, prediction-based machine learning, and I’m currently exploring more in the field, eager to learn more about AI and ML. In my free time, you’d probably catch me watching Formula One racing, soccer, YouTube, or hanging out with friends. I love meeting and talking with people, so feel free to reach out!",
         },
