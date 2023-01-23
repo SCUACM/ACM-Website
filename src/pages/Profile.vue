@@ -5,9 +5,12 @@
         <div class="events-title">
           Manage Profile
         </div>
+        <h2 style="text-align:center;" class="">
+          Events Attended: {{ attendance }}
+        </h2>
         <v-form v-if="formData" @submit.prevent="updateFirebase" @input="callDebounce">
           <div class="form-header">
-            Preferred Name
+            Preferred Name 
           </div>
           <v-text-field
             label="Preferred Name"
@@ -100,6 +103,8 @@ export default {
           await ref.set(data);
         }
         this.formData = data;
+        const attRef = await db.collection("registrations").where("uid", "==", user.uid).get();
+        this.attendance = attRef.size;
       }
     });
   },
@@ -109,7 +114,8 @@ export default {
       graduationYears: [2023, 2024, 2025, 2026],
       formData: null,
       user: auth.currentUser,
-      majorsList: majorsList
+      majorsList: majorsList,
+      attendance: "loading"
     };
   },
 };
