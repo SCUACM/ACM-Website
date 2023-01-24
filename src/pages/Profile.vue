@@ -89,9 +89,6 @@ export default {
         this.state = 'error';
       }
     },
-    async getAttendance() {
-        
-    },
   },
 
   mounted() {
