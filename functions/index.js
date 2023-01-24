@@ -54,6 +54,19 @@ exports.getEventAttendance = functions.https.onCall( async (data, context) => {
     return registrations.data().count;
 });
 
+exports.getUserAttendance = functions.https.onCall( async (data, context) => {
+    const userId = data.id;
+    const auth = context.auth;
+    if (!auth) {
+        return {message: "You must be logged in to call this function", code: 401};
+    }
+
+    const regRef = firestore().collection("registrations");
+
+    const attRef = await regRef.where("uid", "==", userId).count().get();
+    return attRef.data().count;
+});
+
 /* eslint-disable */
 
 // pubsub.schedule("21 21 * * *").onRun((async (context) => {
