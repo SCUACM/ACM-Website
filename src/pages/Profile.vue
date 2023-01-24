@@ -58,7 +58,7 @@ import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
 
 import 'firebase/compat/firestore'
-import {db, auth} from '../firebase';
+import {db, auth, functions} from '../firebase';
 import { debounce } from 'debounce';
 import { majorsList } from '../helpers';
 import ManageResume from '../components/ManageResume.vue';
@@ -103,8 +103,12 @@ export default {
           await ref.set(data);
         }
         this.formData = data;
-        const attRef = await db.collection("registrations").where("uid", "==", user.uid).get();
-        this.attendance = attRef.size;
+        var result;
+        if(this.user.uid.length > 0) {
+            result = await functions.httpsCallable("getUserAttendance")({id: user.uid});
+            this.attendance = result.data;
+        }
+        
       }
     });
   },
