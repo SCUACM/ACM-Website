@@ -16,6 +16,7 @@ import EditEvent from "@/pages/EditEvent.vue";
 import Profile from "@/pages/Profile.vue";
 import Admin from "@/pages/Admin.vue";
 import Register from "@/pages/Register.vue";
+import Redirect from "@/pages/Redirect.vue";
 
 import moment from 'moment'
 import VueYoutube from 'vue-youtube'
@@ -76,6 +77,10 @@ const routes = [
     component: JoinUs,
   },
   {
+    path: "/redirect",
+    component: Redirect,
+  },
+  {
     path: "*",
     redirect: "/",
   },
@@ -126,23 +131,28 @@ const router = new VueRouter({
 });
 
 router.beforeEach( async (to, from, next) => {
-  if (to.matched.some(record => record.meta.authRequired)) {
+  //Check if the page we are going to requires a user to be signed in or admin permissions
+  const needsAuth = to.matched.some(record => record.meta.authRequired);
+  const needsAdmin = to.matched.some(record => record.meta.adminRequired);
+  if (needsAuth) {
     const user = auth.currentUser;
     if (user) {
-      if(to.matched.some(record => record.meta.adminRequired)){
+      if(needsAdmin){
         const idToken = await user.getIdTokenResult();
         if(!idToken.claims.admin) {
-          alert('You must be an admin to see this page');
+          //Push the user to a redirect page to check if they have auth or not
+          const path = "/redirect?uri="+encodeURIComponent(to.path)+"&admin=true";
           next({
-            path: '/',
+            path: path,
           });
         }
       }
       next();
     } else {
-      alert('You must be logged in to see this page');
+      //Push the user to a redirect page to check if they have auth or not
+      const path = "/redirect?uri="+encodeURIComponent(to.path)+"&admin="+(needsAdmin ? "true" : "false");
       next({
-        path: '/',
+        path: path,
       });
     }
   } else {
