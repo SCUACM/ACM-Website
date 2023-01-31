@@ -31,7 +31,7 @@ export default {
                 // Redirect to home page, insufficient permissions
                 else {
                     this.$router.push("/");
-                    alert('You must be logged in to view this page');
+                    alert('You do not have permission to view this page');
                 }
             } 
             // Redirect to home page, insufficient permissions
