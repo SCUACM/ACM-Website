@@ -22,6 +22,7 @@ export function getMapLink(location) {
         "Graham": 205,
         "Guadalupe": 230,
         "Kenna": 33,
+        "Daly": 16,
         "Learning Commons": 144,
         "Leavey": 37,
         "Locatelli": 156,
