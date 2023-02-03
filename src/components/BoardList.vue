@@ -4,7 +4,7 @@
 
     <BoardListSection title="ACM-W" :memberList="acmWBoard" />
 
-    <BoardListSection title="Bronco Sec" :memberList="broncoSecBoard" />
+    <BoardListSection title="BroncoSec" :memberList="broncoSecBoard" />
 
     <BoardListSection title="Chapter Advisors" :memberList="chapterAdvisors" />
   </div>
