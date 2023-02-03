@@ -11,7 +11,7 @@
           <v-row>
             <v-col cols="12" class="title-container">
               <div class="title-header">
-                Association for Computing Machinery
+                Association for Silly Hats
               </div>
             </v-col>
             <v-col cols="12" class="title-container">
