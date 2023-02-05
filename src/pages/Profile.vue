@@ -5,9 +5,12 @@
         <div class="events-title">
           Manage Profile
         </div>
+        <h2 style="text-align:center;" class="">
+          Events Attended: {{ attendance }}
+        </h2>
         <v-form v-if="formData" @submit.prevent="updateFirebase" @input="callDebounce">
           <div class="form-header">
-            Preferred Name
+            Preferred Name 
           </div>
           <v-text-field
             label="Preferred Name"
@@ -55,7 +58,7 @@ import Navbar from "@/layout/Navbar.vue";
 import Footer from "@/layout/Footer.vue";
 
 import 'firebase/compat/firestore'
-import {db, auth} from '../firebase';
+import {db, auth, functions} from '../firebase';
 import { debounce } from 'debounce';
 import { majorsList } from '../helpers';
 import ManageResume from '../components/ManageResume.vue';
@@ -100,6 +103,12 @@ export default {
           await ref.set(data);
         }
         this.formData = data;
+        var result;
+        if(this.user.uid.length > 0) {
+            result = await functions.httpsCallable("getUserAttendance")({id: user.uid});
+            this.attendance = result.data;
+        }
+        
       }
     });
   },
@@ -109,7 +118,8 @@ export default {
       graduationYears: [2023, 2024, 2025, 2026],
       formData: null,
       user: auth.currentUser,
-      majorsList: majorsList
+      majorsList: majorsList,
+      attendance: "loading"
     };
   },
 };
