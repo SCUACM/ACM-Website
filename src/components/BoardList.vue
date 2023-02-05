@@ -44,7 +44,6 @@ import MadeleineDoi from "../assets/board/ACM-W/Madeleine_Doi.jpeg";
 import PriyaJain from "../assets/board/ACM-W/Priya_Jain.jpeg";
 
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
-import SilviaFiguera from "../assets/board/chapterAdvisors/Silvia_Figueira.jpg";
 
 import "../assets/scss/board-media.scss";
 
@@ -286,14 +285,7 @@ export default {
           role: "ACM Advisor",
           bio:
             "Prof. Yi Fang is an assistant professor in the Department of Computer Engineering who specializes in Machine Learning and Artificial Intelligence. You can read more about his research here. He received his Ph.D. in computer science at Purdue University. He was awarded both Teacher of the Year and Researcher of the Year in 2017.",
-        },
-        {
-          src: SilviaFiguera,
-          name: "Dr. Silvia Figueira",
-          role: "ACM-W Advisor",
-          bio:
-            "Dr. Silvia Figueira received her B.S. and M.S. degrees in Computer Science from the Federal University of Rio de Janeiro (UFRJ), Brazil, and her Ph.D. degree also in Computer Science from the University of California, San Diego. Currently, she is an Associate Professor of Computer Engineering at Santa Clara University. Her research is in the area of performance evaluation and prediction, recently with a focus on energy efficiency. She is also the director of the SCU Frugal Innovation Hub, in which she leads the Mobile Lab and advises students working on mobile applications for under-served communities and emerging markets. She has published over 70 papers and has established several collaborations with both companies in Silicon Valley and social entrepreneurs in the United States and abroad.",
-        },
+        }
       ],
     };
   },
