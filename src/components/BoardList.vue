@@ -36,12 +36,11 @@ import Nechal from "../assets/board/broncosec/Nechal.jpg";
 import AmandaNguyen from "../assets/board/ACM-W/Amanda_Nguyen.jpeg";
 import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
 import AnayaGordia from "../assets/board/ACM-W/Anaya_Gordia.jpeg";
-import DivyaSyal from "../assets/board/ACM-W/Divya_Syal.png";
-import EerinaHaque from "../assets/board/ACM-W/Eerina_Haque.jpeg";
-import KamyaKrishnan from "../assets/board/ACM-W/Kamya_Krishnan.jpeg";
-import MaddieWaldie from "../assets/board/ACM-W/Maddie_Waldie.jpeg";
-import MadeleineDoi from "../assets/board/ACM-W/Madeleine_Doi.jpeg";
+import MadisonNguyen from "../assets/board/ACM-W/Madison_Nguyen.jpg";
 import PriyaJain from "../assets/board/ACM-W/Priya_Jain.jpeg";
+import BeatriceHackman from "../assets/board/ACM-W/Beatrice_Hackman.jpg";
+import GwendolynPatwardhan from "../assets/board/ACM-W/Gwendolyn_Patwardhan.png";
+import LeilaErhili from "../assets/board/ACM-W/Leila_Erhili.jpeg";
 
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 
@@ -155,67 +154,59 @@ export default {
 
       acmWBoard: [
         {
-          src: KamyaKrishnan,
-          name: "Kamya Krishnan",
-          role: "President",
-          bio:
-            "Hey! My name is Kamya Krishnan and I am a sophomore computer science and engineering major. When I was a junior in high school, my mom encouraged me to try out a computer science course. After taking it, I realized that I really enjoyed coming up with solutions to problems through coding. I decided to pursue a degree in computer science and engineering because I believe that there are so many problems that can be solved in our world with a background in technology. Besides technology, I am passionate about singing Indian classical music and I also love lifting weights and playing basketball. Sunsets are like my favorite thing ever so I am always ready to go watch one :) Also, going to Safeway  just to get a slice of chocolate cake is a ritual for me. I am excited to be your  ACM-W president this year and so excited to get to know everyone!",
-        },
-        {
           src: AnanyaPagadala,
           name: "Ananya Pagadala",
-          role: "Vice President ",
-          bio:
-            "Howdy! My name is Ananya, and I'm a sophomore studying Computer Science from Dallas, Texas. My passion for computer science stems from my obsession with brain teasers and puzzles. I'm addicted to the feeling you get when you finally figure out a solution, similar to the one where your code successfully runs! This past year, I've been working with algorithm efficiency and AI, and although I love it, I can't wait to explore other areas of CS.  In my free time, I enjoy gardening, running, and watching horror movies with friends. I'm so excited to be the Vice- President of ACM-W this year and explore our potential in tech as a community. Feel free to reach out if you want to be friends, work together, or simply have any qu",
+          role: "President",
+          bio: "Howdy! My name is Ananya, and I'm a Junior studying Computer Science from Dallas, Texas. My passion for computer science stems from my obsession with brain teasers and puzzles. I'm addicted to the feeling you get when you finally figure out a solution, similar to the one where your code successfully runs! This past year, I've been working with algorithm efficiency and AI, and although I love it, I can't wait to explore other areas of CS.  In my free time, I enjoy gardening, running, and watching horror movies with friends. I'm so excited to be the President of ACM-W this year and explore our potential in tech as a community. Feel free to reach out if you want to be friends, work together, or simply have any questions. I look forward to meeting all of you!"
         },
         {
-          src: MadeleineDoi,
-          name: "Madeleine Doi",
+          src: MadisonNguyen,
+          name: "Madison Nguyen",
           role: "Secretary ",
           bio:
-            "Hello!! I am a sophomore majoring in Computer Science from Seattle, Washington. I was first introduced to computer science in 8th grade when I participated in a computer science camp. This was the first time I discovered how to print my name to the terminal window and I have been hooked on computer science since. My main passions include being an advocate for mental health awareness, inspiring women to join the STEM field, skiing, stand-up paddle boarding, and swimming! Feel free to reach out to me if you have any questions, want to be friends, or simply just want to talk! I look forward to meeting you all!",
+            "Hi, my name is Madison Nguyen! I’m a sophomore from San Jose, California studying Web Design and Engineering. I learned about computer science in middle school from Girls Who Code and to be honest I initially hated it. However, I always admired my mom in her field, and in high school, I tried again. I was pleasantly surprised by my new love for design, helping classmates debug their code, and assisting my AP Computer Science teachers! This year I am working at the SCU Alumni Association as their Web Specialist so you are always welcome to come in and say hello! In my free time, I enjoy making eccentric Spotify playlists, trying out good food and boba spots, and making new memories with my friends. I’m excited to be ACM-W’s new secretary and I cannot wait to meet you all! :)"
         },
         {
-          src: PriyaJain,
-          name: "Priya Jain",
+          src: GwendolynPatwardhan,
+          name: "Gwendolyn Patwardhan",
           role: "Treasurer ",
           bio:
-            "Hi! My name is Priya Jain and I am from Los Altos, California but I am originally from Santa Clara! I am really grateful to have been selected to be the Treasurer for ACM-W this year. I am a sophomore majoring in Web Design and Engineering, which I discovered my passion for through AP Computer Science and Girls Who Code. I love being able to add my personal touch to assigned projects through colors, music, or any other visuals. In my free time, I love to go on social media (I can spend hours on Pinterest!), eat junk food, spend time with friends and family, and do creative writing. Feel free to reach out if you ever need anything!",
+            "Hello! I’m Gwendolyn Patwardhan, a sophomore Computer Science and Engineering major and looking into art and math minors. I have always loved problem solving and creation and I found computer science to be the perfect fusion of the two. Currently, I am most interested in UX/UI design & research and game development–I currently work with SCU’s game development team in the Imaginarium. In my free time I love drawing, reading, and playing games with friends. I look forward to having a great year with you all!"
         },
         {
           src: AmandaNguyen,
           name: "Amanda Nguyen",
+          role: "Director of Events",
+          bio:
+            "Hi! My name is Amanda and I’m a junior studying Computer Science from San Jose, California. My interest in computer science began with trying out a programming course in middle school and getting excited over figuring out solutions through code. I’m especially interested in artificial intelligence, machine learning, and game design. In my free time, I like knitting while binge watching TV shows as well as playing video games with my friends. I look forward to getting to know everyone. Feel free to reach out if you need anything!"
+        },
+        {
+          src: AnayaGoradia,
+          name: "Anaya Goradia",
           role: "Co-Event Coordinator",
           bio:
-            "Hi! My name is Amanda and I’m a sophomore studying Computer Science from San Jose, California. My interest in computer science began with trying out a programming course in middle school and getting excited over figuring out solutions through code. I’m especially interested in artificial intelligence, machine learning, and game design. In my free time, I like knitting while binge watching TV shows as well as playing video games with my friends. I look forward to getting to know everyone!",
+            "Hi! My name is Anaya and I am a sophomore majoring in Computer Science from San Ramon, California. I first realized that I liked computer science because of the thrill that you get when you finally solve a coding or math problem. I decided to major in Computer Science because it has so many applications in today's world and the possibilities are endless. Other than coding and math I love to paint or do anything art related. For fun I love to bake with my family and I'm always ready for a boba run. I look forward to being a part of ACM-W and getting to know everyone!"
         },
         {
-          src: DivyaSyal,
-          name: "Divya Syal",
-          role: "Co-Event Coordinator",
+          src: PriyaJain,
+          name: "Priya Jain",
+          role: "Outreach Coordinator",
           bio:
-            "Hey! I’m Divya and I’m a sophomore computer science and engineering major from Seattle, WA. I enjoy playing tennis, drawing, baking, and dancing in various styles, including Bollywood and lyrical; I love traveling and exploring new places! My passion for computer science was sparked in my freshman year of high school when I initially joined Girls Who Code and started coding with Scratch. I am interested in many different fields of computer science, but I am especially interested in applying computer science to solutions centered around healthcare, education, and sustainability. I am super excited to be an event coordinator this year and organize fun events. I like meeting new people, so feel free to reach out to me at any time!",
+            "Hi! My name is Priya Jain, and I am a third-year student from Los Altos, California majoring in Web Design and Engineering. My first exposure to computer science was in 6th grade where we dabbled in Scratch and Khan Academy, and it was ironically not very user-friendly. However, my opinion changed after being involved in Girls Who Code and taking AP Computer Science in my sophomore year of high school. I like either working on personal projects or getting to customize assigned projects through colors, music, or any other visual features. In my free time, I like to scroll on social media, keep up with pop culture news, listen to music, and eat unhealthy food. Feel free to reach out if you ever need anything!"
         },
         {
-          src: MaddieWaldie,
-          name: "Maddie Waldie",
-          role: "Hackathon Coordinator",
+          src: BeatriceHackman,
+          name: "Beatrice Hackman",
+          role: "Webmaster",
           bio:
-            "Hi everyone, I'm Maddie! Growing up in Philadelphia, I was always fascinated by technology. I was often glued to my family’s iMac, trying to learn new things and figure out how things worked. In high school, I was on my school’s robotics team and fell in love with the world of programming and the art of engineering. Now, I’m a sophomore Computer Science & Engineering major and Math minor! I’m particularly interested in delivering a high-quality product to people, and this summer I worked at Apple as a Software Engineering QA Intern. Outside of school and work, I love to read, bake, crochet, and go hiking. I’m also a Black Belt in Tang Soo Do, and am a member of SCU Harry Potter Club, SWE, ACM, and ACM-W. I’m so excited to meet all of you; feel free to reach out because I love making new friends!",
+            "Hello! I am Beatrice Hackman and I am currently a second-year Web Design major from the Bay Area. In my free time I love to spend time with family and friends, take photos, hike, and binge true crime shows. Whether it was graphics or birthday cards, I always loved designing things, and so when I first learned to code, I knew that I would love web development. I am so excited to be a part of ACM-W and meet everyone!"
         },
         {
-          src: AnayaGordia,
-          name: "Anaya Gordia",
-          role: "Underclassmen Representative",
+          src: LeilaErhili,
+          name: "Leila Erhili",
+          role: "Public Relations Director",
           bio:
-            "Hi! My name is Anaya and I am a freshman majoring in Computer Science from San Ramon, California. I first realized that I liked computer science because of the thrill that you get when you finally solve a coding or math problem. I decided to major in Computer Science because it has so many applications in today's world and the possibilities are endless. Other than coding and math I love to paint or do anything art related. For fun I love to bake with my family and I'm always ready for a boba run. I look forward to being a part of ACM-W and getting to know everyone!",
-        },
-        {
-          src: EerinaHaque,
-          name: "Eerina Haque",
-          role: "Underclassmen Representative",
-          bio:
-            "Hi, I’m Eerina Haque and I’m a first-year computer science and engineering major from Dallas, Texas! I’m looking forward to helping enrich the ACM-W community and getting to know all of the brilliant technologists within ACM-W. I love learning about blockchain technology. In my free-time, I enjoy balancing my love for computing with my love for humanities by oil painting landscapes, learning about philosophy, and playing the guitar. ",
+            "Hello! My name is Leila and I am a sophomore studying Computer Science and Engineering here at SCU. I absolutely love computer science, so I am a huge advocate for getting more women the opportunity to discover how fun and satisfying programming can be. I actually did not begin my college journey studying Computer Science and Engineering. My freshman year, I took a C++ class out of curiosity, and immediately knew that I had found what I wanted to study. I then switched majors and have never looked back. Other pastimes that I enjoy include moving my body (ie. gym, hiking, etc,) , thrifting, writing, and of course, spending time with the people closest to me. I am so excited to be part of such an amazing community of amazing women and can’t wait to get to know everyone! "
         },
       ],
 
