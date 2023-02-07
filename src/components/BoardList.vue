@@ -33,11 +33,11 @@ import VrindaShorewala from "../assets/board/broncosec/Vrinda_Shorewala.jpg";
 import DannyWalsh from "../assets/board/broncosec/Danny_Walsh.jpg";
 import Nechal from "../assets/board/broncosec/Nechal.jpg";
 
-import AmandaNguyen from "../assets/board/ACM-W/Amanda_Nguyen.jpeg";
+import AmandaNguyen from "../assets/board/ACM-W/Amanda_Nguyen.JPG";
 import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
-import AnayaGordia from "../assets/board/ACM-W/Anaya_Gordia.jpeg";
+import AnayaGordia from "../assets/board/ACM-W/Anaya_Gordia.JPG";
 import MadisonNguyen from "../assets/board/ACM-W/Madison_Nguyen.jpg";
-import PriyaJain from "../assets/board/ACM-W/Priya_Jain.jpeg";
+import PriyaJain from "../assets/board/ACM-W/Priya_Jain.jpg";
 import BeatriceHackman from "../assets/board/ACM-W/Beatrice_Hackman.jpg";
 import GwendolynPatwardhan from "../assets/board/ACM-W/Gwendolyn_Patwardhan.png";
 import LeilaErhili from "../assets/board/ACM-W/Leila_Erhili.jpeg";
