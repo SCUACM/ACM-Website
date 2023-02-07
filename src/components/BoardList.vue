@@ -35,7 +35,7 @@ import Nechal from "../assets/board/broncosec/Nechal.jpg";
 
 import AmandaNguyen from "../assets/board/ACM-W/Amanda_Nguyen.JPG";
 import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
-import AnayaGordia from "../assets/board/ACM-W/Anaya_Gordia.JPG";
+import AnayaGoradia from "../assets/board/ACM-W/Anaya_Goradia.JPG";
 import MadisonNguyen from "../assets/board/ACM-W/Madison_Nguyen.jpg";
 import PriyaJain from "../assets/board/ACM-W/Priya_Jain.jpg";
 import BeatriceHackman from "../assets/board/ACM-W/Beatrice_Hackman.jpg";
