@@ -25,13 +25,12 @@ import AndrewCollins from "../assets/board/main/Andrew_Collins.jpg";
 import JakeEsperson from "../assets/board/main/Jake_Esperson.jpg";
 import SamhitaRachapudi from "../assets/board/main/Samhita_Rachapudi.jpg";
 import CaseyBates from "../assets/board/broncosec/Casey_Bates.jpg";
-import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
-import JamesOssam from "../assets/board/broncosec/James_Ossam.jpg";
-import JonathanHo from "../assets/board/broncosec/Jonathan_Ho.jpg";
-import RaniaAnsari from "../assets/board/broncosec/Rania_Ansari.jpg";
-import VrindaShorewala from "../assets/board/broncosec/Vrinda_Shorewala.jpg";
+import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.heic";
 import DannyWalsh from "../assets/board/broncosec/Danny_Walsh.jpg";
-import Nechal from "../assets/board/broncosec/Nechal.jpg";
+import DavisRobertson from "../assets/board/broncosec/Davis_Robertson.JPG";
+import EthanSychangco from "../assets/board/broncosec/Ethan_Sychangco.png";
+import TiffanyNguyen from "../assets/board/broncosec/Tiffany_Nguyen.png";
+import VarunMangla from "../assets/board/broncosec/Varun_Mangla.jpg";
 
 import AmandaNguyen from "../assets/board/ACM-W/Amanda_Nguyen.jpeg";
 import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
@@ -221,61 +220,54 @@ export default {
 
       broncoSecBoard: [
         {
-          src: CaseyBates,
-          name: "Casey Bates",
+          src: DannyWalsh,
+          name: "Danny Walsh",
           role: "BroncoSec President",
           bio:
-            "Hi All! I’m Casey, and I am super excited to be the BroncoSec president this year! I am a Senior Computer Science major from San Jose, CA. Cybersecurity is my main passion, and I especially enjoy solving tough challenges during capture the flag competitions. I also love learning more about other topics like computer networks, IoT, and AI. When away from my computer, you can often find me working on 3D printing projects, playing beach volleyball outside of Malley, or at Schott Stadium, where I am a student manager for the baseball team. Please feel free to reach out if you have questions, suggestions, or even just want to chat. I hope to see you all at BroncoSec events this year!",
+            "Hello, my name is Danny Walsh, and I’m excited to be BroncoSec President this year! I am a junior Web Design & Engineering major from Georgetown, Massachusetts. When I’m not at my computer, I’m probably playing hockey for the SCU club ice hockey team, cooking for my friends, or playing guitar. I’m especially interested in front-end development, learning good UI techniques, and solving difficult coding challenges. I’m looking forward to seeing so many of you at our BroncoSec events and sharing our interest in cyber security. If you have any questions, feel free to reach out!",
         },
         {
-          src: RaniaAnsari,
-          name: "Rania Ansari",
-          role: "BroncoSec Vice President",
+          src: VarunMangla,
+          name: "Varun Mangla",
+          role: "Public Relations",
           bio:
-            "Hello! My name is Rania Ansari, and I will be a Junior studying Computer Science from San Jose. I love playing soccer, trying new food, and meeting new people! I’m super excited to serve as the Vice President of BroncoSec; we’ve got many fun things planned! My goal is to motivate other students to join and discover the endless possibilities with BroncoSec, from fun challenges to informative workshops! If you ever have any questions about anything or just want to talk, please don’t hesitate to reach out to me!",
+            "Hello everyone! I'm Varun, a sophomore Computer Science and Engineering student from Los Altos, CA. While I only started coding during the winter quarter of my first year at SCU, I've always been fascinated with technology. I'm eager to join BroncoSec as its Public Relations manager this year, as participating in the club helped me develop a budding interest in cybersecurity. Through this role, I intend to introduce other students to BroncoSec and the ever-growing field of cybersecurity. Outside of computer science, some of my interests are music, games, and hanging out with my friends. Please let me know if you have any questions or suggestions, and I'm looking forward to seeing everyone at our weekly club meetings!",
         },
         {
-          src: JamesOssam,
-          name: "James Ossam",
-          role: "Internal CTF Coordinator",
+          src: EthanSychangco,
+          name: "Ethan Sychangco",
+          role: "Underclassmen Representative",
           bio:
-            "Hi there! I’m James and I’m a senior computer science major from just outside Boston MA. I’ve been interested in cybersecurity since I was in high school, which is why I’m so excited to be your BroncoSec Internal CTF Coordinator! When I’m not on the computer, you can find me tossing a frisbee around, or hanging out with friends. I’m really looking forward to meeting everyone this year, so if you see me around, feel free to say hi!",
+            "Hello, my name is Ethan Sychangco! I am one of your BroncoSec underclassman representatives for the 2022-2023 school year! I am a first-year majoring in Computer Science and Engineering, and I am local to the Bay Area. I find interest in all things technology, gaming, and cybersecurity, and I want to bring that excitement to the BroncoSec club. When I am not laser-focused on developing a project, I am probably spending time with family, enjoying game nights with friends, or watching random YouTube videos to take a break from my busy days. I want to make sure all BroncoSec members have their voices heard, and that we can support each other's passions for cybersecurity. You can reach out to me at any time!",
         },
         {
-          src: JonathanHo,
-          name: "Jonathan Ho",
+          src: TiffanyNguyen,
+          name: "Tiffany Nguyen",
+          role: "Representative",
+          bio:
+            "My name is Tiffany Nguyen, and I am a freshman majoring in Computer Science and Engineering from San Jose, California. I am passionate about learning about all the fun and interesting ways computer science can be applied across various fields like cybersecurity, and I hope to be able to help plan fun activities that get others excited about security.",
+        },
+        {
+          src: DavisRobertson,
+          name: "Davis Robertson",
           role: "External CTF Coordinator",
           bio:
-            "Hi, I’m Jonathan, aka CSN3RD, from Cupertino, CA. I am a junior, majoring in Computer Science. Outside of school, I compete in a lot of programming, security, and puzzle competitions. Some notable achievements include winning 1st in SCU’s Hack for Humanity CTF, 1st in Harvard’s Puzzle Day (twice in a row), 3rd in Stanford’s Programming Contest, 5th in UC Berkeley’s bSUIT Coding Contest, and 6th in Akamai’s Affinity CTF. I look forward to organizing different CTF events throughout the year for us to test our skills, learn new ones, and compete with teams from other colleges. Feel free to message me if you have any questions or suggestions!",
+            "Hello! I’m Davis and I’m excited to be BroncoSec’s external CTF coordinator this year! I am a junior computer science (security emphasis) and philosophy major from New York. I’ve been interested in computer science since I was a kid and have really enjoyed being a part of BroncoSec at SCU. When I’m not writing papers or working on CS projects there’s a good chance you can find me playing or watching basketball. Please reach out if you have any questions or for any other reason, I’m looking forward to connecting with the BroncoSec community!",
         },
         {
           src: DevinBhatt,
           name: "Devin Bhatt",
-          role: "Workshop Coordinator",
+          role: "BroncoCTF Coordinator",
           bio:
-            "Hi, I'm Devin. I'm a sophomore Computer Science and Engineering major from Mill Valley, CA. I've been interested in computing for longer than I can remember (my dad had me playing with his computer when I was two years old!), and started attending BroncoSec events during my second week at SCU. What drew me to Computer Science (and Cybersecurity especially) was the thrill of finding interesting ways to make a computer do whatever you want it to, even if that means breaking things along the way. As the BroncoSec Workshop Coordinator this year, I hope to capture that magic in the form of fun and engaging challenges that provide a valuable learning experience.",
+            "Hi, I’m Devin. I’m a junior Computer Science from the Bay Area. For my second year on the BroncoCTF board, I’ve taken on the role of BroncoCTF coordinator. Most of my work at BroncoSec involves planning for BroncoCTF, writing challenges, and setting up the infrastructure for you to (hopefully not) break :wink:. I love to learn new things (especially when it comes to security and infrastructure), and I love to help others learn as well. I hope that BroncoCTF is not just a fun event, but a learning opportunity for all of its attendees!",
         },
         {
-          src: VrindaShorewala,
-          name: "Vrinda Shorewala",
-          role: "Public Relations",
+          src: CaseyBates,
+          name: "Casey Bates",
+          role: "Graduate Relations",
           bio:
-            "Hey hey! My name is Vrinda and I am a senior Computer Science major. When I'm not busy trying to debug my code, you can catch me dancing away with my friends, baking in the kitchen, or binge-watching a new series! I am super interested in security and have tried to stay involved in many initiatives on campus and outside SCU (I’d be happy to share all the resources I’ve collected so far!) I am excited to be on the board of BroncoSec and I hope to introduce more students to the amazingly vast and dynamic field of security. So feel free to reach out to me if you have any questions, ideas, or just want to talk. I can't wait to meet you all!",
-        },
-        {
-          src: DannyWalsh,
-          name: "Danny Walsh",
-          role: "Underclassmen Representative",
-          bio:
-            "Hello, my name is Danny Walsh, and I’m excited to be one of two BroncoSec Underclassmen Reps. I am a sophomore Web Design & Engineering major from North Shore, Massachusetts. When I’m not at my computer, I’m probably playing hockey for the SCU club ice hockey team, cooking for my friends, or playing guitar. I’m especially interested in front-end development, learning good UI techniques, and solving difficult coding challenges. I’m looking forward to getting other underclassmen excited about cybersecurity and growing BroncoSec. I look forward to seeing everyone at our workshops, speaker events, and Capture the Flag events. If you have any questions, feel free to reach out!",
-        },
-        {
-          src: Nechal,
-          name: "Nechal Thind",
-          role: "Underclassmen Representative",
-          bio:
-            "Hi!!! My name is Nehchal, and I’m a freshman from Danville, CA. I have been interested in computer science for as long as I can remember and am so excited to be this year’s Broncosec underclassmen representative! Some things I love are traveling, working out, cooking, meeting new people, finding new music, and many other things! My goal for this year is to get everyone as excited about cyber security as I am and to share my love of the field with you all! I can’t wait to meet everyone at our upcoming meetings this year, and please feel free to reach out to me if you have any questions or just want to say hey!",
-        },
+            "Hi All! I’m Casey, a Computer Science and Engineering Master's student from San Jose, CA. I'm passionate about Cybersecurity, and I especially enjoy solving tough challenges during capture the flag competitions. I also love learning more about other topics like computer networks, IoT, and cloud computing. Outside of school, I've been able to combine my interests in computers and baseball by working as a Software Engineer for the Philadelphia Phillies. Please feel free to reach out if you have questions, suggestions, or even just want to chat. I hope to see you all at BroncoSec events this year!",
+        }
       ],
 
       chapterAdvisors: [
