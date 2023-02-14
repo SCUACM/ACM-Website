@@ -102,7 +102,7 @@ exports.sendEventNotifications = functions
         console.log(doc.data() + "\n\n\n");
 
         const slackTitle = "*Event Happening Tomorrow! " + doc.data().title + "*";
-        const discordTitle = "**Event Happening Tomorrow! " + doc.data().title + "**";
+        const discordTitle = "<@&1074916982748614758> **Event Happening Tomorrow! " + doc.data().title + "**";
 
         const messageBody = "\n" + formatDateTime(doc.data()) +
         "\n" + doc.data().description;
