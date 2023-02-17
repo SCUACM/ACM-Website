@@ -44,6 +44,7 @@ import LeilaErhili from "../assets/board/ACM-W/Leila_Erhili.jpg";
 import MaddieFollosco from "../assets/board/ACM-W/Maddie_Follosco.jpg";
 import EmmaBoctor from "../assets/board/ACM-W/Emma_Boctor.jpg";
 import MeaganVu from "../assets/board/ACM-W/Meagan_Vu.jpg";
+import SharonHsaio from "../assets/board/ACM-W/Sharon_Hsaio.jpg";
 
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 
@@ -300,7 +301,14 @@ export default {
           role: "ACM Advisor",
           bio:
             "Prof. Yi Fang is an assistant professor in the Department of Computer Engineering who specializes in Machine Learning and Artificial Intelligence. You can read more about his research here. He received his Ph.D. in computer science at Purdue University. He was awarded both Teacher of the Year and Researcher of the Year in 2017.",
-        }
+        },
+        {
+          src: SharonHsaio,
+          name: "Sharon Hsaio",
+          role: "ACM-W Advisor",
+          bio:
+            "Dr. Hsiao is Assistant Professor & David Packard endowed junior fellow in the Department of Computer Science & Engineering at Santa Clara University. Prior to SCU, she was an assistant professor at Arizona State University and Columbia University, where she established several research projects and taught a number of graduate & undergraduate level courses. Her research focuses on educational technologies, computational modeling, visual analytics, and adaptive technology for personalized learning. Her research methodology involves AI and HCI approaches, applied data science, and machine learning techniques in researching effective technology to help people learn. Dr. Hsiao is actively involved in several international research communities, including Educational Data Mining (EDM), Learning Analytics & Knowledge (LAK), and Artificial Intelligence in Education (AIED). She serves as one of the board directors in the International Educational Data Mining Society (IMEDS), the Program Chair of the 14th International Conference on Educational Data Mining, the Organizing Chair of the 9th of International Conference on Learning Analytics & Knowledge, and several other leadership and editing positions.",
+        },
       ],
     };
   },
