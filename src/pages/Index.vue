@@ -28,8 +28,8 @@
     <div ref="navigation" class="navigation">
       <Banner
         :show="true"
-        content="Hack for Humanity is on February 18 - 19! Sign up -> "
-        link="http://bit.ly/h4h2023"
+        content="Hack for Humanity is on February 18 - 19! More information "
+        link="https://hackforhumanity.io/"
         linkTitle="here"
       />
       <v-container style="max-width: 800px;">
