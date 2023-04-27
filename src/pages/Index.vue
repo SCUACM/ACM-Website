@@ -27,7 +27,7 @@
 
     <div ref="navigation" class="navigation">
       <Banner
-        :show="true"
+        :show="false"
         content="Hack for Humanity is on February 18 - 19! More information "
         link="https://hackforhumanity.io/"
         linkTitle="here"
