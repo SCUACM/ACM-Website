@@ -94,7 +94,7 @@ export default {
       {
         icon: "mdi-slack",
         href: "https://scuacm.slack.com/",
-        color: "#4A154B",
+        color: "#36C5F0",
       },
       {
         icon: "mdi-instagram",
