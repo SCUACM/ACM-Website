@@ -149,6 +149,105 @@ exports.sendEventNotifications = functions
     return "done";
 }));
 
+/* eslint-disable */
+
+// pubsub.schedule("21 21 * * *").onRun((async (context) => {
+// .onRun(( async (context) => {
+// https.onCall( async (data, context) => {
+exports.sendEventNotificationsTest = functions.runWith({secrets: ["DISCORD_WEBHOOK", "SLACK_BOT_TOKEN", "SLACK_APP_TOKEN", "SLACK_SIGNING_SECRET"]})
+.https.onCall( async (data, context) => {
+
+});
+    
+exports.sendEventNotificationsTest = functions.runWith({secrets: ["notificationSecrets"]})
+.https.onCall( async (data, context) => {
+
+    console.log("notificationSecrets: " + JSON.stringify(process.env.notificationSecrets))
+    const secrets = JSON.parse(process.env.notificationSecrets);
+    const discordWebhook = secrets.DISCORD_WEBHOOK;
+    const slackBotToken = secrets.SLACK_BOT_TOKEN;
+    const slackAppToken = secrets.SLACK_APP_TOKEN;
+    const slackSigningSecret = secrets.SLACK_SIGNING_SECRET;
+
+    //discordWebhook = "https://discord.com/api/webhooks/1026626552466788392/b1sO4oSkcxLC0dFxlR2ZiK-OCsiW9GrICpeSSYwCRTCbeEiMk4N2x4MBUyJtospsj__G";
+    return await sendEventMessages(discordWebhook, slackBotToken, slackAppToken, slackSigningSecret);
+});
+    
+async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,slackSigningSecret){
+    const eventRef = firestore().collection("events");
+
+    // Initialize Slack App
+    const app = new App({
+        token: slackBotToken,
+        signingSecret: slackSigningSecret,
+        socketMode: true,
+        appToken: slackAppToken,
+    });
+    // Get upcoming events
+    var workshop = await eventRef.where("startDate", ">=", admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * 7 * 1000)).where("startDate", "<=", (admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * (24+7) * 1000))).orderBy("startDate", "asc").get();// eslint-disable-line
+
+    if (workshop.empty) {
+        return "No Data";
+    }
+
+    // Send Messages
+    for (let index = 0; index < workshop.docs.length; ++index) {
+        const doc = workshop.docs[index];
+        var hasFlyer = false;
+        if (doc.data().flyer) {
+            hasFlyer = true;
+            var flyer = await admin.storage().bucket().file(doc.data().flyer).download();
+        }
+        console.log(doc.data() + "\n\n\n");
+
+        const slackTitle = "*Event Happening Tomorrow! " + doc.data().title + "*";
+        const discordTitle = "<@&1074916982748614758> **Event Happening Tomorrow! " + doc.data().title + "**";
+
+        const messageBody = "\n" + formatDateTime(doc.data()) +
+        "\n" + doc.data().description;
+
+        // Send message to Slack
+        const channel = "C0LBTLUV8";
+        if (hasFlyer) {
+            var slackResult = await app.client.files.upload({
+                channels: channel,
+                initial_comment: slackTitle + messageBody,
+                file: flyer[0],
+            });
+        } else {
+            var slackResult = await app.client.chat.postMessage({
+                channels: channel,
+                text: slackTitle + messageBody,
+            });
+        }
+
+        // Send message to Discord
+        let formdata = {
+            "content": discordTitle + messageBody,
+        };
+        if (hasFlyer) {
+            formdata = {
+                ...formdata,
+                "flyer": {
+                    "value": flyer[0],
+                    "options": {
+                        "filename": "flyer.png",
+                        "contentType": null,
+        }}};
+}
+        await request({
+            "method": "POST",
+            "url": discordWebhook,
+            "formData": formdata,
+            }, function(error, response) {
+            if (error) throw new Error(error);
+                console.log(response.body);
+        });
+        await slackResult;
+    }
+    return "done";
+}
+
 // Function (created using Vue filters, https://v2.vuejs.org/v2/guide/filters.html) used to format an event's date and time
 function formatDateTime(event) {
     if (!event || !event.startDate) return "";
@@ -176,3 +275,4 @@ function formatDateTime(event) {
     // Otherwise, return the start date and time and end date and time. Ex: Feb 12th, 2022, 10:00 am - Feb 13th, 2022, 12:00 pm
     return `${startDate} ${startTime} - ${endDate} ${endTime}`;
 }
+
