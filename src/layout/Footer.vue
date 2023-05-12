@@ -92,14 +92,9 @@ export default {
 
     socials: [
       {
-        icon: "mdi-facebook",
-        href: "https://www.facebook.com/groups/165822943541098/?ref=br_rs",
-        color: "#4267B2",
-      },
-      {
         icon: "mdi-slack",
         href: "https://scuacm.slack.com/",
-        color: "#4A154B",
+        color: "#36C5F0",
       },
       {
         icon: "mdi-instagram",
