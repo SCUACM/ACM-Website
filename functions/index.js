@@ -73,16 +73,45 @@ exports.getUserAttendance = functions.https.onCall( async (data, context) => {
 // .onRun(( async (context) => {
 // https.onCall( async (data, context) => {
 exports.sendEventNotifications = functions
-.runWith({secrets: ["DISCORD_WEBHOOK", "SLACK_BOT_TOKEN", "SLACK_APP_TOKEN", "SLACK_SIGNING_SECRET"]})
+.runWith({secrets: ["notificationSecrets"]})
 .pubsub.schedule("0 17 * * *").onRun((async (context) => {
+    let secretsString = process.env.notificationSecrets;
+    secretStrings = secretsString.replace("\\\"","")
+    const secrets = JSON.parse(secretStrings);
+    const discordWebhook = secrets.DISCORD_WEBHOOK;
+    const slackBotToken = secrets.SLACK_BOT_TOKEN;
+    const slackAppToken = secrets.SLACK_APP_TOKEN;
+    const slackSigningSecret = secrets.SLACK_SIGNING_SECRET;
+    const slackGeneralChannel = "C0LBTLUV8";
+    return await sendEventMessages(discordWebhook, slackBotToken, slackAppToken, slackSigningSecret, slackGeneralChannel);
+}));
+
+/* eslint-disable */
+    
+exports.sendEventNotificationsTest = functions.runWith({secrets: ["notificationSecrets"]})
+.https.onCall( async (data, context) => {
+    //console.log("notificationSecrets: " + JSON.stringify(process.env.notificationSecrets))
+    let secretsString = process.env.notificationSecrets;
+    secretStrings = secretsString.replace("\\\"","")
+    const secrets = JSON.parse(secretStrings);
+    const discordWebhook = secrets.DISCORD_WEBHOOK_TEST;
+    const slackBotToken = secrets.SLACK_BOT_TOKEN;
+    const slackAppToken = secrets.SLACK_APP_TOKEN;
+    const slackSigningSecret = secrets.SLACK_SIGNING_SECRET;
+    const slackTestChannel = "C040EKTF2N6";
+    //discordWebhook = "https://discord.com/api/webhooks/1026626552466788392/b1sO4oSkcxLC0dFxlR2ZiK-OCsiW9GrICpeSSYwCRTCbeEiMk4N2x4MBUyJtospsj__G";
+    return await sendEventMessages(discordWebhook, slackBotToken, slackAppToken, slackSigningSecret, slackTestChannel);
+});
+    
+async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,slackSigningSecret, slackChannel){
     const eventRef = firestore().collection("events");
 
     // Initialize Slack App
     const app = new App({
-        token: process.env.SLACK_BOT_TOKEN,
-        signingSecret: process.env.SLACK_SIGNING_SECRET,
+        token: slackBotToken,
+        signingSecret: slackSigningSecret,
         socketMode: true,
-        appToken: process.env.SLACK_APP_TOKEN,
+        appToken: slackAppToken,
     });
     // Get upcoming events
     var workshop = await eventRef.where("startDate", ">=", admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * 7 * 1000)).where("startDate", "<=", (admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * (24+7) * 1000))).orderBy("startDate", "asc").get();// eslint-disable-line
@@ -108,7 +137,7 @@ exports.sendEventNotifications = functions
         "\n" + doc.data().description;
 
         // Send message to Slack
-        const channel = "C0LBTLUV8";
+        const channel = slackChannel;
         if (hasFlyer) {
             var slackResult = await app.client.files.upload({
                 channels: channel,
@@ -138,7 +167,7 @@ exports.sendEventNotifications = functions
 }
         await request({
             "method": "POST",
-            "url": process.env.DISCORD_WEBHOOK,
+            "url": discordWebhook,
             "formData": formdata,
             }, function(error, response) {
             if (error) throw new Error(error);
@@ -147,7 +176,7 @@ exports.sendEventNotifications = functions
         await slackResult;
     }
     return "done";
-}));
+}
 
 // Function (created using Vue filters, https://v2.vuejs.org/v2/guide/filters.html) used to format an event's date and time
 function formatDateTime(event) {
@@ -176,3 +205,4 @@ function formatDateTime(event) {
     // Otherwise, return the start date and time and end date and time. Ex: Feb 12th, 2022, 10:00 am - Feb 13th, 2022, 12:00 pm
     return `${startDate} ${startTime} - ${endDate} ${endTime}`;
 }
+
