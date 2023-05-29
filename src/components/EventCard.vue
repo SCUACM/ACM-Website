@@ -127,4 +127,26 @@ export default {
   text-align: center;
   overflow: hidden;
 }
+
+@media screen and (max-width: 700px) {
+  .event-card{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    margin-bottom: 0rem;
+  }
+
+  .event-card img {
+    width: min(12.5rem, 100%);
+    border-radius: 1rem;
+  }
+
+  h1 {
+    font-size: 1.125rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+}
 </style>
