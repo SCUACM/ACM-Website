@@ -107,7 +107,7 @@ export default {
         color: "white",
       },
       {
-        icon: "mdi-laptop",
+        icon: "bi-discord",
         href: "https://discord.gg/G242hXD",
         color: "#7289da",
       },
