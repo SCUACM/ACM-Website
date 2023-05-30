@@ -189,7 +189,8 @@ export default {
 }
 
 .dialog-img-grid{
-  height: 65%;
+  width: 75%;
+  max-width: 350px;
   border-radius: 0.5rem;
   display: block;
   margin: 0 auto 25px;
