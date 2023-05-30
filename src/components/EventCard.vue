@@ -127,4 +127,22 @@ export default {
   text-align: center;
   overflow: hidden;
 }
+
+@media screen and (max-width: 700px) {
+  .event-card{
+    display: inline;
+  }
+
+  .event-card img {
+    width: min(12.5rem, 100%);
+  }
+
+  h1 {
+    font-size: 1.125rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+}
 </style>
