@@ -288,7 +288,7 @@ export default {
         }
         else {
           alert("Please sign in with your scu.edu email address");
-          this.signOut();
+          await this.signOut();
         }
         this.user = user;
       } else {
