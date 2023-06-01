@@ -115,8 +115,7 @@ async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,sl
     }
 
     // Send Messages
-    for (const element of workshop.docs) {
-        const doc = element;
+    for (const doc of workshop.docs) {
         var hasFlyer = false;
         if (doc.data().flyer) {
             hasFlyer = true;
