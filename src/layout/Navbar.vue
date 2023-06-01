@@ -271,7 +271,6 @@ export default {
         console.log("Signed in", user);
         const email = user.providerData[0].email;
         if (email.includes("@scu.edu")){
-          if (user != null){
             const userName = user.displayName;
             const uid = user.uid;
 
@@ -286,7 +285,6 @@ export default {
             if(idToken.claims.admin) {
               this.isAdmin = true;
             }
-          }
         }
         else {
           alert("Please sign in with your scu.edu email address");
