@@ -359,8 +359,8 @@ export default {
     },
 
     scrollTo(refName) {
-      var element = this.$refs[refName];
-      var top = element.offsetTop - 120; // small offset for visuals
+      let element = this.$refs[refName];
+      let top = element.offsetTop - 120; // small offset for visuals
 
       window.scrollTo({ top, behavior: "smooth" });
     },
