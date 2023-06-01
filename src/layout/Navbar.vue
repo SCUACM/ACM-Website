@@ -236,7 +236,7 @@ import logoBlackSmall from "@/assets/branding/logo_temp_new.svg";
 import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 // New imports
 import { GoogleAuthProvider } from "firebase/auth";
-import {auth, db} from '@/firebase';
+import {auth, db} from '../firebase';
 import Welcome from '../components/Welcome.vue';
 
 export default {
