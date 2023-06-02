@@ -103,7 +103,7 @@ export default {
           await ref.set(data);
         }
         this.formData = data;
-        var result;
+        let result;
         if(this.user.uid.length > 0) {
             result = await functions.httpsCallable("getUserAttendance")({id: user.uid});
             this.attendance = result.data;

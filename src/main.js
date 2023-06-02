@@ -92,7 +92,7 @@ Vue.use(firestorePlugin);
 
 // Function (created using Vue filters, https://v2.vuejs.org/v2/guide/filters.html) used to format an event's date and time
 Vue.filter('formatDateTime', function(event) {
-  if(!event || !event.startDate) return '';
+  if(!event?.startDate) return '';
   // If a start date is provided but an end date isn't, return the start date:
   // Format: Oct 1st 5:45 pm
   if(event.startDate && !event.endDate) {

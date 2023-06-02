@@ -72,7 +72,7 @@ exports.sendEventNotifications = functions
 .runWith({secrets: ["notificationSecrets"]})
 .pubsub.schedule("0 17 * * *").onRun((async (context) => {
     let secretsString = process.env.notificationSecrets;
-    secretStrings = secretsString.replace("\\\"","")
+    let secretStrings = secretsString.replace("\\\"","")
     const secrets = JSON.parse(secretStrings);
     const discordWebhook = secrets.DISCORD_WEBHOOK;
     const slackBotToken = secrets.SLACK_BOT_TOKEN;
@@ -87,7 +87,7 @@ exports.sendEventNotifications = functions
 exports.sendEventNotificationsTest = functions.runWith({secrets: ["notificationSecrets"]})
 .https.onCall( async (data, context) => {
     let secretsString = process.env.notificationSecrets;
-    secretStrings = secretsString.replace("\\\"","")
+    let secretStrings = secretsString.replace("\\\"","")
     const secrets = JSON.parse(secretStrings);
     const discordWebhook = secrets.DISCORD_WEBHOOK_TEST;
     const slackBotToken = secrets.SLACK_BOT_TOKEN;
@@ -108,15 +108,14 @@ async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,sl
         appToken: slackAppToken,
     });
     // Get upcoming events
-    var workshop = await eventRef.where("startDate", ">=", admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * 7 * 1000)).where("startDate", "<=", (admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * (24+7) * 1000))).orderBy("startDate", "asc").get();// eslint-disable-line
+    let workshop = await eventRef.where("startDate", ">=", admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * 7 * 1000)).where("startDate", "<=", (admin.firestore.Timestamp.fromMillis(new Date().getTime() + 60 * 60 * (24+7) * 1000))).orderBy("startDate", "asc").get();// eslint-disable-line
 
     if (workshop.empty) {
         return "No Data";
     }
 
     // Send Messages
-    for (let index = 0; index < workshop.docs.length; ++index) {
-        const doc = workshop.docs[index];
+    for (const doc of workshop.docs) {
         var hasFlyer = false;
         if (doc.data().flyer) {
             hasFlyer = true;
@@ -173,7 +172,7 @@ async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,sl
 
 // Function (created using Vue filters, https://v2.vuejs.org/v2/guide/filters.html) used to format an event's date and time
 function formatDateTime(event) {
-    if (!event || !event.startDate) return "";
+    if (!event?.startDate) return "";
     // If a start date is provided but an end date isn't, return the start date:
     // Format: Oct 1st 5:45 pm
     if (event.startDate && !event.endDate) {
