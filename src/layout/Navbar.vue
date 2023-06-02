@@ -53,7 +53,7 @@
               board
             </router-link>
           </span>
-          <span class="link mx-6">
+          <span class="link mx-6" v-if="!user">
             <router-link
               to="/calendar"
               :class="[
