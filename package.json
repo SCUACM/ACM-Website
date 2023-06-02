@@ -21,7 +21,7 @@
     "vue-router": "^3.5.1",
     "vue-youtube": "^1.4.0",
     "vuefire": "^2.2.5",
-    "vuetify": "^2.4.0"
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
