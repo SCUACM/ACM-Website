@@ -52,6 +52,11 @@ import MadiNguyen from "../assets/board/ACM-W/Madi_Nguyen.jpg";
 import GwynethAnawalt from "../assets/board/ACM-W/Gwyneth_Anawalt.jpg";
 import ChristinaDai from "../assets/board/ACM-W/Christina_Dai.jpg";
 
+import MichaelIwashima from "../assets/board/aicolab/Michael_Iwashima.jpg"
+import SayanJain from "../assets/board/aicolab/Sayan_Jain.jpg"
+import Aiana from "../assets/board/aicolab/Aiana.jpg"
+import Kim from "../assets/board/aicolab/Kim.jpg"
+
 import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg";
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 
@@ -328,6 +333,44 @@ export default {
           bio:
             "Hi All! I’m Casey, a Computer Science and Engineering Master's student from San Jose, CA. I'm passionate about Cybersecurity, and I especially enjoy solving tough challenges during capture the flag competitions. I also love learning more about other topics like computer networks, IoT, and cloud computing. Outside of school, I've been able to combine my interests in computers and baseball by working as a Software Engineer for the Philadelphia Phillies. Please feel free to reach out if you have questions, suggestions, or even just want to chat. I hope to see you all at BroncoSec events this year!",
         }
+      ],
+
+      aiColabBoard: [
+        {
+          src: MichaelIwashima,
+          name: "Michael Iwashima",
+          role: "President",
+          bio:
+            ""
+        },
+        {
+          src: SayanJain,
+          name: "Sayan Jain",
+          role: "",
+          bio:
+            ""
+        },
+        {
+          src: Aiana,
+          name: "Aiana",
+          role: "",
+          bio:
+            ""
+        },
+        {
+          src: KayaChun,
+          name: "Kaya Chun",
+          role: "",
+          bio:
+            ""
+        },
+        {
+          src: Kim,
+          name: "Kim",
+          role: "",
+          bio:
+            ""
+        },
       ],
 
       chapterAdvisors: [
