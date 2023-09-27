@@ -227,7 +227,7 @@ export default {
         },
         {
           src: EmmaBoctor,
-          name: "Beatrice Hackman",
+          name: "Emma Boctor",
           role: "Hackathon Coordinator",
           bio:
             ""
