@@ -177,7 +177,7 @@
                   board
                 </router-link>
               </v-list-item>
-              <v-list-item>
+              <v-list-item v-if="!user">
                 <router-link to="/calendar" class="link">
                   calendar
                 </router-link>
