@@ -1,19 +1,39 @@
 <template>
-  <div class="event-card">
+  <div :class="{'event-card-list': view==pageViews.List, 'event-card-grid': view==pageViews.Grid, 'big': view==pageViews.Grid && big}">
     <div>
       <button @click="dialog = true">
         <img v-if="image" :src="image" class="flyer">
       </button>
-      <v-dialog
-        v-model="dialog"
-        width="unset"
-      >
-        <div class="dialog">
-          <img v-if="image" :src="image" class="dialog-img" />
+      <v-dialog v-model="dialog" width="unset">
+        <!-- List Version: Dialog  -->
+        <div v-if="view==pageViews.List" class="dialog-list">
+          <img v-if="image" :src="image" class="dialog-img-list" />
+        </div>
+        <!-- Grid Version: Dialog -->
+        <div v-if="view==pageViews.Grid" class="dialog-grid">
+          <img v-if="image" :src="image" class="dialog-img-grid" />
+          <!-- Grid Version: Event Info -->
+          <h1>{{ event.title }}</h1>
+          <h3 v-if="event.startDate != undefined">{{ event | formatDateTime }}</h3>
+          <h3 v-if="event.location">Location: 
+          <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
+          <span v-else> {{ event.location }}</span>
+          </h3>
+          <div v-html="getMarkdownDescription"></div>
+          <p v-for="link of event.links || {}" :key="link.title" class="link">
+            <a :href="link.url" target="_blank">
+              <v-icon color="#1976d2" class="link-icon">
+                {{ link.icon || 'mdi-link' }}
+              </v-icon>
+              <span>{{ link.title }}</span>
+            </a>
+          </p>
+          <youtube v-if="event.youtube" :video-id="event.youtube"></youtube>
         </div>
       </v-dialog>
     </div>
-    <div>
+    <!-- List Version: Event Info -->
+    <div v-if="view==pageViews.List">
       <h1>{{ event.title }}</h1>
       <h3 v-if="event.startDate != undefined">{{ event | formatDateTime }}</h3>
       <h3 v-if="event.location">Location: 
@@ -47,7 +67,9 @@ export default {
   components: {},
 
   props: {
-    event: Object
+    event: Object,
+    view: Number,
+    big: Boolean,
   },
 
   async mounted(){
@@ -64,6 +86,10 @@ export default {
   data: () => ({
     image: null,
     dialog: false,
+    pageViews: {
+        List: 0,
+        Grid: 1,
+      }
   }),
 
   computed: {
@@ -79,6 +105,13 @@ export default {
 
 <style scoped>
 
+/* Same for both: */
+
+.event-card-list img, .event-card-grid img, .event-card-grid-big img {
+  width: 100%;
+  border-radius: 1rem;
+}
+
 .flyer:hover{
   transform: scale(1.05);
 }
@@ -88,18 +121,6 @@ export default {
   padding: 0.5rem;
 }
 
-.event-card{
-  display: grid;
-  grid-template-columns: min(30vw, 15rem) auto;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-}
-
-.event-card img {
-  width: 100%;
-  border-radius: 1rem;
-}
 .link a {
   font-size: 1.2rem;
   text-decoration: none;
@@ -115,25 +136,36 @@ export default {
   text-decoration: none;
 }
 
-.dialog-img{
+/* List version */
+
+.event-card-list{
+  display: grid;
+  grid-template-columns: min(30vw, 15rem) auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.dialog-img-list{
   height: 100%;
   margin: 0 auto;
   object-fit: contain;
   border-radius: 0.5rem;
 }
 
-.dialog{
+.dialog-list{
   height: 90vh;
   text-align: center;
   overflow: hidden;
 }
 
+
 @media screen and (max-width: 700px) {
-  .event-card{
+  .event-card-list{
     display: inline;
   }
 
-  .event-card img {
+  .event-card-list img {
     width: min(12.5rem, 100%);
   }
 
@@ -144,5 +176,31 @@ export default {
   h3 {
     font-size: 1rem;
   }
+}
+
+/* Grid version */
+
+.event-card-grid{
+  width: max(8vw, 7rem);
+}
+
+.event-card-grid.big {
+    width: max(20vw, 8.75rem) !important;
+}
+
+.dialog-img-grid{
+  width: 75%;
+  max-width: 350px;
+  border-radius: 0.5rem;
+  display: block;
+  margin: 0 auto 25px;
+}
+
+.dialog-grid{
+  height: 75vh;
+  max-width: 1200px;
+  background: white;
+  overflow: auto;
+  padding: 25px 5% 25px;
 }
 </style>
