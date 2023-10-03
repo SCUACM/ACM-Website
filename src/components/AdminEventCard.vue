@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{event.title}} ({{ getFormatDateTime(event) }}) Attendance: {{this.Attendance}} </h3>
+        <h3>{{event.title}} ({{ formatDateTime(event) }}) Attendance: {{this.Attendance}} </h3>
         <router-link :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
         <button @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
         <button @click="() => openQrCode(event.id)">View Event QR Code</button>
