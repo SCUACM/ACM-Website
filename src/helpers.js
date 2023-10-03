@@ -139,3 +139,31 @@ export const majorsList = [
     "Theatre and Dance",
     "Women's and Gender Studies",
 ];
+
+import moment from 'moment'
+export function getFormatDateTime(event) {
+    if(!event?.startDate) return '';
+    // If a start date is provided but an end date isn't, return the start date:
+    // Format: Oct 1st 5:45 pm
+    if(event.startDate && !event.endDate) {
+      return moment(event.startDate.toDate()).format('MMM Do YYYY, h:mm a');
+    }
+    // Format the start and end as dates. Ex: Oct 1st
+    const startDate = moment(event.startDate.toDate()).format('MMM Do, YYYY,');
+    const endDate = moment(event.endDate.toDate()).format('MMM Do, YYYY,');
+  
+    // Format the start and end as times. Ex: 5:45 pm
+    const startTime = moment(event.startDate.toDate()).format('h:mm a');
+    const endTime = moment(event.endDate.toDate()).format('h:mm a');
+  
+    if(startDate === endDate) {
+      if(startTime === endTime) {
+        // If the start and end match exactly, return only the start date. Ex: Oct 1st, 2022, 5:45 pm
+        return `${startDate} ${startTime}`
+      }
+      // If the dates match but the times don't, return the start date and both times. Ex: May 10th, 2022, 5:45 pm - 6:45 pm
+      return `${startDate} ${startTime} - ${endTime}`;
+    }
+    // Otherwise, return the start date and time and end date and time. Ex: Feb 12th, 2022, 10:00 am - Feb 13th, 2022, 12:00 pm
+    return `${startDate} ${startTime} - ${endDate} ${endTime}`;
+}
