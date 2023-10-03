@@ -1,6 +1,6 @@
 <template>
   <v-app style="position: relative;">
-    <Navbar transparent no-elevation />
+    <MainNavbar transparent no-elevation />
     <div
       ref="initContainer"
       class="parallax"
@@ -26,7 +26,7 @@
     </div>
 
     <div ref="navigation" class="navigation">
-      <Banner
+      <AnnouncementBanner
         :show="false"
         content="Hack for Humanity is on February 18 - 19! More information "
         link="https://hackforhumanity.io/"
@@ -170,16 +170,16 @@
         </v-col>
       </v-row>
     </v-container>
-    <Footer />
+    <MainFooter />
   </v-app>
 </template>
 
 <script>
 import "../assets/scss/index-media.scss";
-import Navbar from "@/layout/Navbar.vue";
-import Footer from "@/layout/Footer.vue";
+import MainNavbar from "@/layout/MainNavbar.vue";
+import MainFooter from "@/layout/MainFooter.vue";
 import ResourceCard from "@/components/ResourceCard.vue";
-import Banner from "@/components/Banner.vue";
+import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
 
 import image1 from "@/assets/images/FirstGeneral.jpg";
 import image2 from "@/assets/images/Bonfire.jpg";
@@ -195,13 +195,13 @@ import SmartScholar from "@/assets/images/resources/smartscholar.svg";
 import DataScience from "@/assets/images/resources/datascience.svg";
 
 export default {
-  name: "Index",
+  name: "IndexHome",
 
   components: {
-    Navbar,
-    Footer,
+    MainNavbar,
+    MainFooter,
     ResourceCard,
-    Banner,
+    AnnouncementBanner,
   },
 
   watch: {},
@@ -212,7 +212,7 @@ export default {
     this.isMounted = true;
   },
 
-  destroyed() {
+  unmounted() {
     window.removeEventListener("resize", this.handleResize);
   },
 

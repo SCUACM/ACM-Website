@@ -7,16 +7,16 @@ import { firestorePlugin } from 'vuefire';
 
 // pages
 
-import Index from "@/pages/Index.vue";
-import Board from "@/pages/Board.vue";
-import Calendar from "@/pages/Calendar.vue";
+import IndexHome from "@/pages/IndexHome.vue";
+import BoardPage from "@/pages/BoardPage.vue";
+import CalendarPage from "@/pages/CalendarPage.vue";
 import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
 import EditEvent from "@/pages/EditEvent.vue";
-import Profile from "@/pages/Profile.vue";
-import Admin from "@/pages/Admin.vue";
-import Register from "@/pages/Register.vue";
-import Redirect from "@/pages/Redirect.vue";
+import ProfilePage from "@/pages/ProfilePage.vue";
+import AdminPage from "@/pages/AdminPage.vue";
+import RegisterPage from "@/pages/RegisterPage.vue";
+import RedirectRouter from "@/pages/RedirectRouter.vue";
 
 import moment from 'moment'
 import VueYoutube from 'vue-youtube'
@@ -28,15 +28,15 @@ Vue.config.productionTip = false;
 const routes = [
   {
     path: "/",
-    component: Index,
+    component: IndexHome,
   },
   {
     path: "/board",
-    component: Board,
+    component: BoardPage,
   },
   {
     path: "/calendar",
-    component: Calendar,
+    component: CalendarPage,
   },
   {
     path: "/events",
@@ -47,18 +47,18 @@ const routes = [
   },
   {
     path: "/profile",
-    component: Profile,
+    component: ProfilePage,
     meta: {
       authRequired: true,
     },
   },
   {
     path: "/register/:id",
-    component: Register,
+    component: RegisterPage,
   },
   {
     path: "/admin",
-    component: Admin,
+    component: AdminPage,
     meta: {
       authRequired: true,
       adminRequired: true
@@ -78,7 +78,7 @@ const routes = [
   },
   {
     path: "/redirect",
-    component: Redirect,
+    component: RedirectRouter,
   },
   {
     path: "*",

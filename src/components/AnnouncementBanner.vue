@@ -12,7 +12,7 @@
 <script>
 import "../assets/scss/banner-media.scss";
 export default {
-  name: "Banner",
+  name: "AnnouncementBanner",
 
   props: {
     link: String,

@@ -98,7 +98,7 @@
 
 <script>
 export default {
-  name: "Welcome",
+  name: "WelcomePopup",
 
   props: {
     user: Object,

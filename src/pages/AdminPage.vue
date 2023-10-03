@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <Navbar />
+        <MainNavbar />
             <v-container style="margin-top: 75px; max-width: 1000px">
                 <h2>Manage Admin Users</h2>
                 <v-text-field class="uid-input" label="Enter User UID" v-model="uid">
@@ -15,24 +15,24 @@
                 <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event">
                 </AdminEventCard>
             </v-container>
-        <Footer />
+        <MainFooter />
     </v-app>
   </template>
   
   <script>
-  import Navbar from "@/layout/Navbar.vue";
-  import Footer from "@/layout/Footer.vue";
+  import MainNavbar from "@/layout/MainNavbar.vue";
+  import MainFooter from "@/layout/MainFooter.vue";
 
   import 'firebase/compat/firestore'
   import {db, functions} from '../firebase';
 import AdminEventCard from "../components/AdminEventCard.vue";
   
   export default {
-    name: "Admin",
+    name: "AdminPage",
   
     components: {
-    Navbar,
-    Footer,
+    MainNavbar,
+    MainFooter,
     AdminEventCard
 },
 
