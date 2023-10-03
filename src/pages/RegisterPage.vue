@@ -24,7 +24,7 @@ import {db,auth, Timestamp} from '../firebase';
 import { GoogleAuthProvider } from "firebase/auth";
 
 export default {
-  name: "Register",
+  name: "RegisterPage",
 
   components: {
   },

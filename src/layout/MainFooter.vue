@@ -83,7 +83,7 @@
 import Logo from "../assets/branding/logo_temp_new_invert.svg";
 import "../assets/scss/footer-media.scss";
 export default {
-  name: "Footer",
+  name: "MainFooter",
 
   components: {},
 

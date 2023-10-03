@@ -71,7 +71,7 @@
 import "../assets/scss/events-media.scss";
 // import EventList from "@/components/EventList";
 export default {
-  name: "Calendar",
+  name: "CalendarComponent",
 
   components: {},
 

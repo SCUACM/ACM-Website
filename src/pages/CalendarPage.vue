@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar />
+    <MainNavbar />
     <v-container style="margin-top: 100px; max-width: 1000px">
       <div style="margin-bottom: 200px;">
         <div class="events-title">
@@ -67,21 +67,21 @@
       <!-- List of events -->
       <!-- <EventList /> -->
     </v-container>
-    <Footer />
+    <MainFooter />
   </v-app>
 </template>
 
 <script>
 import "../assets/scss/events-media.scss";
-import Navbar from "@/layout/Navbar.vue";
-import Footer from "@/layout/Footer.vue";
+import MainNavbar from "@/layout/MainNavbar.vue";
+import MainFooter from "@/layout/MainFooter.vue";
 // import EventList from "@/components/EventList";
 export default {
-  name: "Calendar",
+  name: "CalendarPage",
 
   components: {
-    Navbar,
-    Footer,
+    MainNavbar,
+    MainFooter,
     // EventList,
   },
 

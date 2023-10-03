@@ -1,6 +1,6 @@
 <template>
   <v-app style="overflow: hidden">
-    <Navbar :just-logo="true" />
+    <MainNavbar :just-logo="true" />
     <v-row style="">
       <v-col class="left-panel" cols="12" sm="12" md="6" lg="6" xl="6">
         <div class="header">
@@ -122,13 +122,13 @@
 
 <script>
 import "../assets/scss/join-us-media.scss";
-import Navbar from "@/layout/TransparentNavbar.vue";
+import MainNavbar from "@/layout/TransparentNavbar.vue";
 
 export default {
   name: "JoinUs",
 
   components: {
-    Navbar,
+    MainNavbar,
   },
 
   data: () => ({

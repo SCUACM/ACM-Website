@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="showWelcome" max-width="800px">
-      <Welcome :user="user" @close="closePopup"></Welcome>
+      <WelcomePopup :user="user" @close="closePopup"></WelcomePopup>
     </v-dialog>
     <v-app-bar
       app
@@ -237,9 +237,11 @@ import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 // New imports
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../firebase';
-import Welcome from '../components/Welcome.vue';
+import WelcomePopup from '../components/WelcomePopup.vue';
 
 export default {
+  name: "MainNavbar",
+
   props: {
     noElevation: {
       default: false,
@@ -262,7 +264,7 @@ export default {
     };
   },
 
-  components: { Welcome },
+  components: { WelcomePopup },
 
   mounted() {
     window.addEventListener("scroll", this.updateScroll);

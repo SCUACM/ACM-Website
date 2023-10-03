@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar />
+    <MainNavbar />
     <v-container style="margin-top: 75px; max-width: 750px">
         <div class="events-title">
           Manage Profile
@@ -49,13 +49,13 @@
 
         </ManageResume>
     </v-container>
-    <Footer />
+    <MainFooter />
   </v-app>
 </template>
 
 <script>
-import Navbar from "@/layout/Navbar.vue";
-import Footer from "@/layout/Footer.vue";
+import MainNavbar from "@/layout/MainNavbar.vue";
+import MainFooter from "@/layout/MainFooter.vue";
 
 import 'firebase/compat/firestore'
 import {db, auth, functions} from '../firebase';
@@ -64,11 +64,11 @@ import { majorsList } from '../helpers';
 import ManageResume from '../components/ManageResume.vue';
 
 export default {
-  name: "EventList",
+  name: "ProfilePage",
 
   components: {
-    Navbar,
-    Footer,
+    MainNavbar,
+    MainFooter,
     ManageResume
 },
 
