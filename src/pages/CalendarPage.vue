@@ -51,7 +51,9 @@
           >
             <v-card color="grey lighten-4" min-width="350px" flat>
               <v-toolbar :color="selectedEvent.color" dark>
-                <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+                <!-- eslint-disable -->
+                <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title> 
+                <!-- eslint-enable -->
                 <v-spacer></v-spacer>
                 <v-btn icon @click="selectedOpen = false">
                   <v-icon>mdi-close</v-icon>

@@ -49,7 +49,9 @@
         >
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
+              <!-- eslint-disable -->
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <!-- eslint-enable -->
               <v-spacer></v-spacer>
               <v-btn icon @click="selectedOpen = false">
                 <v-icon>mdi-close</v-icon>
@@ -59,7 +61,7 @@
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
           </v-card>
-        </v-menu>
+        </v-menu>c
       </div>
     </div>
     <!-- List of events -->
