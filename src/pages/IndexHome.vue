@@ -27,10 +27,10 @@
 
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
-        :show="false"
-        content="Hack for Humanity is on February 18 - 19! More information "
-        link="https://hackforhumanity.io/"
-        linkTitle="here"
+        :show="true"
+        content="INRIX Hack 2023 is on November 11 - 12! More information "
+        link="http://acm.engr.scu.edu/inrix/"
+        linkTitle="here!"
       />
       <v-container style="max-width: 800px;">
         <v-row
