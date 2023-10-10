@@ -37,7 +37,7 @@ export default {
         
         },
         async openQrCode(id) {
-            const url = window.location.origin+"/#/register/"+id;
+            const url = window.location.origin+"/register/"+id;
             const imageSrc = await QRCode.toDataURL(url, {width: 512});
             const contentType = 'image/png';
             const byteCharacters = atob(imageSrc.substr(`data:${contentType};base64,`.length));
