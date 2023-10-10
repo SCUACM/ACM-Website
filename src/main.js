@@ -7,18 +7,17 @@ import { firestorePlugin } from 'vuefire';
 
 // pages
 
-import Index from "@/pages/Index.vue";
-import Board from "@/pages/Board.vue";
-import Calendar from "@/pages/Calendar.vue";
+import IndexHome from "@/pages/IndexHome.vue";
+import BoardPage from "@/pages/BoardPage.vue";
+import CalendarPage from "@/pages/CalendarPage.vue";
 import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
 import EditEvent from "@/pages/EditEvent.vue";
-import Profile from "@/pages/Profile.vue";
-import Admin from "@/pages/Admin.vue";
-import Register from "@/pages/Register.vue";
-import Redirect from "@/pages/Redirect.vue";
+import ProfilePage from "@/pages/ProfilePage.vue";
+import AdminPage from "@/pages/AdminPage.vue";
+import RegisterPage from "@/pages/RegisterPage.vue";
+import RedirectRouter from "@/pages/RedirectRouter.vue";
 
-import moment from 'moment'
 import VueYoutube from 'vue-youtube'
 
 import {auth} from './firebase';
@@ -28,15 +27,15 @@ Vue.config.productionTip = false;
 const routes = [
   {
     path: "/",
-    component: Index,
+    component: IndexHome,
   },
   {
     path: "/board",
-    component: Board,
+    component: BoardPage,
   },
   {
     path: "/calendar",
-    component: Calendar,
+    component: CalendarPage,
   },
   {
     path: "/events",
@@ -47,18 +46,18 @@ const routes = [
   },
   {
     path: "/profile",
-    component: Profile,
+    component: ProfilePage,
     meta: {
       authRequired: true,
     },
   },
   {
     path: "/register/:id",
-    component: Register,
+    component: RegisterPage,
   },
   {
     path: "/admin",
-    component: Admin,
+    component: AdminPage,
     meta: {
       authRequired: true,
       adminRequired: true
@@ -78,7 +77,7 @@ const routes = [
   },
   {
     path: "/redirect",
-    component: Redirect,
+    component: RedirectRouter,
   },
   {
     path: "/inrix",
@@ -95,35 +94,6 @@ const routes = [
 Vue.use(VueRouter);
 
 Vue.use(firestorePlugin);
-
-// Function (created using Vue filters, https://v2.vuejs.org/v2/guide/filters.html) used to format an event's date and time
-Vue.filter('formatDateTime', function(event) {
-  if(!event?.startDate) return '';
-  // If a start date is provided but an end date isn't, return the start date:
-  // Format: Oct 1st 5:45 pm
-  if(event.startDate && !event.endDate) {
-    return moment(event.startDate.toDate()).format('MMM Do YYYY, h:mm a');
-  }
-  // Format the start and end as dates. Ex: Oct 1st
-  const startDate = moment(event.startDate.toDate()).format('MMM Do, YYYY,');
-  const endDate = moment(event.endDate.toDate()).format('MMM Do, YYYY,');
-
-  // Format the start and end as times. Ex: 5:45 pm
-  const startTime = moment(event.startDate.toDate()).format('h:mm a');
-  const endTime = moment(event.endDate.toDate()).format('h:mm a');
-
-  if(startDate === endDate) {
-    if(startTime === endTime) {
-      // If the start and end match exactly, return only the start date. Ex: Oct 1st, 2022, 5:45 pm
-      return `${startDate} ${startTime}`
-    }
-    // If the dates match but the times don't, return the start date and both times. Ex: May 10th, 2022, 5:45 pm - 6:45 pm
-    return `${startDate} ${startTime} - ${endTime}`;
-  }
-  // Otherwise, return the start date and time and end date and time. Ex: Feb 12th, 2022, 10:00 am - Feb 13th, 2022, 12:00 pm
-  return `${startDate} ${startTime} - ${endDate} ${endTime}`;
-
-});
  
 Vue.use(VueYoutube)
 

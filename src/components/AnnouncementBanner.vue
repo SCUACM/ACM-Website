@@ -3,7 +3,7 @@
     <div class="banner-container">
       <div class="banner-text">
         {{ content }}
-        <a class="banner-link" :href="link">{{ linkTitle }}</a>
+        <a class="banner-link" :href="link" target="_blank">{{ linkTitle }}</a> 
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 <script>
 import "../assets/scss/banner-media.scss";
 export default {
-  name: "Banner",
+  name: "AnnouncementBanner",
 
   props: {
     link: String,
@@ -32,9 +32,9 @@ a,
 a:visited,
 a:active {
   font-family: "Poppins", sans-serif;
-  font-weight: 400 !important;
+  font-weight: 600 !important;
   font-size: 1.1rem;
-  color: black !important;
+  color: lightblue !important;
   text-transform: none;
   transition: 0.4s;
 }

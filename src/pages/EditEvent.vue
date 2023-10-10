@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar />
+    <MainNavbar />
     <v-container style="margin-top: 75px; max-width: 1000px">
       <v-form>
         <div class="form-header">
@@ -82,15 +82,15 @@
         />
       </v-form>
     </v-container>
-    <Footer />
+    <MainFooter />
   </v-app>
 </template>
 
 <script>
 import "../assets/scss/board-media.scss";
 
-import Navbar from "@/layout/Navbar.vue";
-import Footer from "@/layout/Footer.vue";
+import MainNavbar from "@/layout/MainNavbar.vue";
+import MainFooter from "@/layout/MainFooter.vue";
 
 import moment from 'moment'
 import 'firebase/compat/firestore'
@@ -100,8 +100,8 @@ export default {
   name: "EditEvent",
 
   components: {
-    Navbar,
-    Footer,
+    MainNavbar,
+    MainFooter,
   },
 
   computed: {

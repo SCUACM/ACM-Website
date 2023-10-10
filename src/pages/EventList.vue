@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar />
+    <MainNavbar />
     <v-container style="margin-top: 100px; max-width: 1000px;">
       <ul style="list-style: none; display: flex; justify-content: right; gap: 0.5rem; font-size: 1.25rem">
         <li @click="view=pageViews.List" style="cursor: pointer" :style="[view == pageViews.List ? {'color': '#0099ff'} : {'color': 'black'}]">
@@ -31,7 +31,7 @@
       </div>
     </v-container>
     <CalendarComponent v-show="view==pageViews.Calendar"/>
-    <Footer />
+    <MainFooter />
   </v-app>
 </template>
 
@@ -40,8 +40,8 @@ import "../assets/scss/board-media.scss";
 
 import EventCard from "@/components/EventCard.vue";
 import CalendarComponent from "@/components/CalendarComponent.vue";
-import Navbar from "@/layout/Navbar.vue";
-import Footer from "@/layout/Footer.vue";
+import MainNavbar from "@/layout/MainNavbar.vue";
+import MainFooter from "@/layout/MainFooter.vue";
 
 // import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
@@ -51,10 +51,10 @@ export default {
   name: "EventList",
 
   components: {
-    Navbar,
+    MainNavbar,
     EventCard,
     CalendarComponent,
-    Footer,
+    MainFooter,
   },
 
   // Create Observables (objects that will auto update as data gets updated/added) of all upcoming and past event objects.

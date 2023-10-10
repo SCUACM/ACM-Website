@@ -7,7 +7,7 @@
 <script>
 import {auth} from '../firebase';
 export default {
-    name: "Redirect",
+    name: "RedirectRouter",
     async mounted() {
         console.log(this.$route.query.uri);
         // Wait for the user object to be loaded

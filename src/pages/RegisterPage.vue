@@ -5,7 +5,7 @@
         <button v-if="!isRegistered" @click='register'>Register for this event</button>
         <div class="confirm-text" v-else >You are registered for this event ✓</div>
         <h1>{{ event.title }}</h1>
-        <h3 v-if="event.startDate != undefined">{{ event | formatDateTime }}</h3>
+        <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
         <p>{{ event.description }}</p>
       </div>
       <div v-else-if="showSignIn">
@@ -22,9 +22,10 @@ import "../assets/scss/board-media.scss";
 import 'firebase/compat/firestore'
 import {db,auth, Timestamp} from '../firebase';
 import { GoogleAuthProvider } from "firebase/auth";
+import {getFormatDateTime} from '../helpers';
 
 export default {
-  name: "Register",
+  name: "RegisterPage",
 
   components: {
   },
@@ -65,6 +66,9 @@ export default {
 
       auth.signInWithPopup(provider);
     },
+    formatDateTime(event) {
+      return getFormatDateTime(event);
+    }
   },
 
   data() {

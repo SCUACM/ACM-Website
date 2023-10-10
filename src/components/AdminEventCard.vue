@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>{{event.title}} ({{event | formatDateTime}}) Attendance: {{this.Attendance}} </h3>
+        <h3>{{event.title}} ({{ formatDateTime(event) }}) Attendance: {{this.Attendance}} </h3>
         <router-link :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
         <button @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
         <button @click="() => openQrCode(event.id)">View Event QR Code</button>
@@ -10,6 +10,7 @@
 
 import {db, functions} from '../firebase';
 import QRCode from 'qrcode';
+import {getFormatDateTime} from '../helpers';
 
 export default {
     name: "AdminEventCard",
@@ -57,6 +58,9 @@ export default {
             const blobUrl = URL.createObjectURL(blob);
 
             window.open(blobUrl, '_blank');
+        },
+        formatDateTime(event) {
+            return getFormatDateTime(event);
         }
     },
 

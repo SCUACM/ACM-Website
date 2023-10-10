@@ -14,7 +14,7 @@
           <img v-if="image" :src="image" class="dialog-img-grid" />
           <!-- Grid Version: Event Info -->
           <h1>{{ event.title }}</h1>
-          <h3 v-if="event.startDate != undefined">{{ event | formatDateTime }}</h3>
+          <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
           <h3 v-if="event.location">Location: 
           <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
           <span v-else> {{ event.location }}</span>
@@ -35,7 +35,7 @@
     <!-- List Version: Event Info -->
     <div v-if="view==pageViews.List">
       <h1>{{ event.title }}</h1>
-      <h3 v-if="event.startDate != undefined">{{ event | formatDateTime }}</h3>
+      <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
       <h3 v-if="event.location">Location: 
       <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
       <span v-else> {{ event.location }}</span>
@@ -60,6 +60,7 @@ import {storage} from '../firebase';
 import { ref, getDownloadURL } from "firebase/storage";
 import {getMapLink} from '../helpers';
 import { marked } from 'marked';
+import {getFormatDateTime} from '../helpers';
 
 export default {
   name: "EventCard",
@@ -91,6 +92,12 @@ export default {
         Grid: 1,
       }
   }),
+
+  methods: {
+    formatDateTime(event) {
+      return getFormatDateTime(event);
+    }
+  },
 
   computed: {
     mapLink(){

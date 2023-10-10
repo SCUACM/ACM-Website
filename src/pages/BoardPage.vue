@@ -1,24 +1,24 @@
 <template>
   <v-app>
-    <Navbar />
+    <MainNavbar />
     <v-container style="margin-top: 75px; max-width: 1000px">
       <BoardList />
     </v-container>
-    <Footer />
+    <MainFooter />
   </v-app>
 </template>
 
 <script>
-import Navbar from "@/layout/Navbar.vue";
+import MainNavbar from "@/layout/MainNavbar.vue";
 import BoardList from "@/components/BoardList.vue";
-import Footer from "@/layout/Footer.vue";
+import MainFooter from "@/layout/MainFooter.vue";
 export default {
-  name: "Board",
+  name: "BoardPage",
 
   components: {
-    Navbar,
+    MainNavbar,
     BoardList,
-    Footer,
+    MainFooter,
   },
 
   data: () => ({}),

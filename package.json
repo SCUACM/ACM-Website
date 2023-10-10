@@ -19,21 +19,21 @@
     "vue-async-computed": "^3.9.0",
     "vue-chartjs": "^4.1.2",
     "vue-router": "^3.5.1",
+    "vue-template-compiler": "^2.7.14",
     "vue-youtube": "^1.4.0",
     "vuefire": "^2.2.5",
     "vuetify": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^9.17.0",
     "sass": "^1.32.0",
     "sass-loader": "^10.0.0",
     "vue-cli-plugin-vuetify": "~2.4.0",
-    "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
   },
   "eslintConfig": {
