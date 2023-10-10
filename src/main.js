@@ -81,6 +81,12 @@ const routes = [
     component: Redirect,
   },
   {
+    path: "/inrix",
+    beforeEnter() {
+        window.location.replace("https://inrix.scuacm.com")
+    }
+  },
+  {
     path: "*",
     redirect: "/",
   },
@@ -124,7 +130,7 @@ Vue.use(VueYoutube)
 const router = new VueRouter({
   base: "",
   routes,
-  mode: "hash",
+  mode: "history",
   scrollBehavior() {
     return { x: 0, y: 0 };
   },

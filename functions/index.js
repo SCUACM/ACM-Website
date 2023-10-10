@@ -70,7 +70,7 @@ exports.getUserAttendance = functions.https.onCall( async (data, context) => {
 
 exports.sendEventNotifications = functions
 .runWith({secrets: ["notificationSecrets"]})
-.pubsub.schedule("0 17 * * *").onRun((async (context) => {
+.pubsub.schedule("0 19 * * *").onRun((async (context) => {
     let secretsString = process.env.notificationSecrets;
     let secretStrings = secretsString.replace("\\\"","")
     const secrets = JSON.parse(secretStrings);
