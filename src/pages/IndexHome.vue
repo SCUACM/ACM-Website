@@ -29,7 +29,7 @@
       <AnnouncementBanner
         :show="true"
         content="INRIX Hack 2023 is on November 11 - 12! More information "
-        link="http://acm.engr.scu.edu/inrix/"
+        link="https://inrix.scuacm.com/"
         linkTitle="here!"
       />
       <v-container style="max-width: 800px;">
