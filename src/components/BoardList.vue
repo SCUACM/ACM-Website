@@ -46,6 +46,7 @@ import GwendolynPatwardhan from "../assets/board/ACM-W/Gwendolyn_Patwardhan.jpg"
 import MeaganVu from "../assets/board/ACM-W/Meagan_Vu.jpg";
 import AvaSimmons from "../assets/board/ACM-W/Ava_Simmons.jpg";
 import IreneChang from "../assets/board/ACM-W/Irene_Chang.jpg";
+import PragnyaVijayan from "../assets/board/ACM-W/Pragnya_Vijayan.png";
 import EmmaBoctor from "../assets/board/ACM-W/Emma_Boctor.jpg";
 import TruptiJoshiSatish from "../assets/board/ACM-W/Trupti_Joshi_Satish.jpg";
 import MandyLin from "../assets/board/ACM-W/Mandy_Lin.jpg";
@@ -54,6 +55,8 @@ import BeatriceHackman from "../assets/board/ACM-W/Beatrice_Hackman.jpg";
 import MadiNguyen from "../assets/board/ACM-W/Madi_Nguyen.jpg";
 import GwynethAnawalt from "../assets/board/ACM-W/Gwyneth_Anawalt.jpg";
 import ChristinaDai from "../assets/board/ACM-W/Christina_Dai.jpg";
+import SanjnaSood from "../assets/board/ACM-W/Sanjna_Sood.jpg";
+import PrakritiPatnaik from "../assets/board/ACM-W/Prakriti_Patnaik.jpg";
 
 import MichaelIwashima from "../assets/board/aicolab/Michael_Iwashima.jpg"
 import SayanJain from "../assets/board/aicolab/Sayan_Jain.jpg"
@@ -222,8 +225,15 @@ export default {
         {
           src: IreneChang,
           name: "Irene Chang",
-          role: "Event Coordinator",
+          role: "Co-Event Coordinator",
           bio:
+            ""
+        },
+        {
+          src: PragnyaVijayan,
+          name: "Pragnya Vijayan",
+          role: "Co-Event Coordinator",
+          bio: 
             ""
         },
         {
@@ -282,6 +292,20 @@ export default {
           bio: 
             ""
         },
+        {
+          src: SanjnaSood,
+          name: "Sanjna Sood",
+          role: "Underclassman Representative",
+          bio: 
+            ""
+        },
+        {
+          src: PrakritiPatnaik,
+          name: "Prakriti Patnaik",
+          role: "Underclassman Representative",
+          bio: 
+            ""
+        }
       ],
 
       broncoSecBoard: [
