@@ -8,6 +8,8 @@
 
     <BoardListSection title="AI Collaborate" :memberList="aiColabBoard" />
 
+    <BoardListSection title="ACM-G" :memberList="acmGBoard" />
+
     <BoardListSection title="Chapter Advisors" :memberList="chapterAdvisors" />
   </div>
 </template>
@@ -57,6 +59,11 @@ import MichaelIwashima from "../assets/board/aicolab/Michael_Iwashima.jpg"
 import SayanJain from "../assets/board/aicolab/Sayan_Jain.jpg"
 import Aiana from "../assets/board/aicolab/Aiana.jpg"
 import Kim from "../assets/board/aicolab/Kim.jpg"
+
+import JordanRandleman from "../assets/board/ACM-G/Jordan_Randleman.jpg"
+import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
+import NolanAnderson from "../assets/board/ACM-G/Nolan_Anderson.jpg"
+import RahulYalavarthi from "../assets/board/ACM-G/Rahul_Yalavarthi.jpg"
 
 import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg";
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
@@ -370,6 +377,37 @@ export default {
           role: "",
           bio:
             ""
+        },
+      ],
+
+      acmGBoard: [
+        {
+          src: JordanRandleman,
+          name: "Jordan Randleman",
+          role: "President",
+          bio: 
+            "Hey there! I’m Jordan Randleman, a COEN Masters student graduating in 2024! Reach out if you have ACM-G questions, or if you want to chat about compilers/deep learning technology! :)"
+        },
+        {
+          src: LandisFusato,
+          name: "Landis Fusato",
+          role: "Officer",
+          bio:
+            "My name is Nolan Anderson, and I am currently a graduate COEN student! If you want to talk about technology (old or new), I am your guy!"
+        },
+        {
+          src: NolanAnderson,
+          name: "Nolan Anderson",
+          role: "Officer",
+          bio: 
+            "Hi, I'm Rahul, a COEN Master’s student. I love building cool projects, watching movies, and trying good food. I'm always up for a chat about tech."
+        },
+        {
+          src: RahulYalavarthi,
+          name: "Rahul Yalavarthi",
+          role: "Officer",
+          bio:
+            "Hi! My name is Landis and I am a first-year COEN Masters student. Some of my interests include Ethics, AI/ML, and Information Security."
         },
       ],
 
