@@ -28,7 +28,9 @@ import AnishKatragadda from "../assets/board/main/Anish_Katragadda.jpg";
 import JalenPaige from "../assets/board/main/Jalen_Paige.jpg";
 import KatieCarter from "../assets/board/main/Katie_Carter.jpg";
 import RileyWong from "../assets/board/main/Riley_Wong.jpg";
-import KayaChun from "../assets/board/main/Kaya_Chun.jpg";
+import GriffinJones from "../assets/board/main/Griffin_Jones.jpg";
+import ChrisShobe from "../assets/board/main/Chris_Shobe.jpg";
+import IanKennar from "../assets/board/main/Ian_Kennar.jpg";
 
 import WalkerSelby from "../assets/board/broncosec/Walker_Selby.jpg";
 import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
@@ -62,6 +64,7 @@ import MichaelIwashima from "../assets/board/aicolab/Michael_Iwashima.jpg"
 import SayanJain from "../assets/board/aicolab/Sayan_Jain.jpg"
 import Aiana from "../assets/board/aicolab/Aiana.jpg"
 import Kim from "../assets/board/aicolab/Kim.jpg"
+import KayaChun from "../assets/board/main/Kaya_Chun.jpg";
 
 import JordanRandleman from "../assets/board/ACM-G/Jordan_Randleman.jpg"
 import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
@@ -176,7 +179,28 @@ export default {
           role: "Webmaster",
           bio:
             "Hi everyone! I’m Riley, a Sophomore Computer Science student from El Cerrito here in the Bay Area. My passion for computer science began with MIT Scratch back in middle school. At the time, I didn’t even know what a function was, but I made my unnecessary 1000 blocks of code work… Currently, I am devoting most of my study to honing full-stack software development, web development, and open-source contributing. In my free time I’ll be found playing tennis, video games, rendering a new 3D project in Blender, or practicing a new song on the guitar. I’m excited to meet new people, so don’t hesitate to reach out!"
-        }
+        },
+        {
+        src: GriffinJones,
+          name: "Griffin Jones",
+          role: "Underclassman Representative",
+          bio:
+            "Hi everyone! My name is Griffin, I’m a Sophomore Computer Science student in the College of Arts and Sciences from Wellesley, MA. I started off learning how to code in elementary school with big dreams of making a video game. I learned some basic Javascript and immediately fell in love with coding! Since then I've done a decent amount of video game design and creation in Unity, some work with reinforcement learning in Python and the pygame library, and more recently I’ve been getting into web development. Aside from my school work I’m a passionate tennis player and I love to work out. If you’re ever  interested in ACM, Computer Science in general, or just making a friend come say hi!"
+        },
+        {
+        src: ChrisShobe,
+          name: "Chris Shobe",
+          role: "Underclassman Representative",
+          bio:
+            "Hello everyone! My name is Chris. I am a Freshman Computer Science and Engineering student from Redondo Beach, CA (it’s in LA county). I have wanted to code since I was around 8 years old. I love doing anything creative such as digital art and playing clarinet. Code to me is an outlet for my creativity as I see code as notes to a symphony. Over the years I’ve learned Java, C++, C, and have currently started to dabble with Python, HTML, and CSS. I’m really interested in any technology that integrates humanity into it. I hope to eventually make software that improves people's lives somehow. I love learning about anything and everything so if you ever feel the need to rant about something you find interesting, I’d love to hear from you!"
+        },
+        {
+          src: IanKennar,
+          name: "Ian Kennar",
+          role: "Underclassman Representative",
+          bio:
+            ""
+        },
       ],
 
       acmWBoard: [
@@ -305,7 +329,7 @@ export default {
           role: "Underclassman Representative",
           bio: 
             ""
-        }
+        },
       ],
 
       broncoSecBoard: [
