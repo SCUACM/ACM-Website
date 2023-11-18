@@ -334,60 +334,60 @@ export default {
 
       broncoSecBoard: [
         {
+          src: DevinBhatt,
+          name: "Devin Bhatt",
+          role: "President",
+          bio:
+            "Hi, I’m Devin. I’m a junior Computer Science from the Bay Area. For my second year on the BroncoCTF board, I’ve taken on the role of BroncoCTF coordinator. Most of my work at BroncoSec involves planning for BroncoCTF, writing challenges, and setting up the infrastructure for you to (hopefully not) break :wink:. I love to learn new things (especially when it comes to security and infrastructure), and I love to help others learn as well. I hope that BroncoCTF is not just a fun event, but a learning opportunity for all of its attendees!",
+        },  
+        {
+          src: DavisRobertson,
+          name: "Davis Robertson",
+          role: "Vice President",
+          bio:
+            "Hello! I’m Davis and I’m excited to be BroncoSec’s external CTF coordinator this year! I am a junior computer science (security emphasis) and philosophy major from New York. I’ve been interested in computer science since I was a kid and have really enjoyed being a part of BroncoSec at SCU. When I’m not writing papers or working on CS projects there’s a good chance you can find me playing or watching basketball. Please reach out if you have any questions or for any other reason, I’m looking forward to connecting with the BroncoSec community!",
+        },
+        {
           src: DannyWalsh,
           name: "Danny Walsh",
-          role: "",
+          role: "Industry Liaison",
           bio:
             ""
           },
         {
-          src: VarunMangla,
-          name: "Varun Mangla",
-          role: "",
-          bio:
-            "Hello everyone! I'm Varun, a sophomore Computer Science and Engineering student from Los Altos, CA. While I only started coding during the winter quarter of my first year at SCU, I've always been fascinated with technology. I'm eager to join BroncoSec as its Public Relations manager this year, as participating in the club helped me develop a budding interest in cybersecurity. Through this role, I intend to introduce other students to BroncoSec and the ever-growing field of cybersecurity. Outside of computer science, some of my interests are music, games, and hanging out with my friends. Please let me know if you have any questions or suggestions, and I'm looking forward to seeing everyone at our weekly club meetings!",
+          src: WalkerSelby,
+          name: "Walker Selby",
+          role: "BroncoCTF coordinator",
+          bio: ""
         },
+        {
+          src: KaraBaresse,
+          name: "Kara Baresse",
+          role: "External CTF coordinator",
+          bio:
+            ""
+          },
         {
           src: EthanSychangco,
           name: "Ethan Sychangco",
-          role: "",
+          role: "Workshop Coordinator",
           bio:
             "Hello, my name is Ethan Sychangco! I am one of your BroncoSec underclassman representatives for the 2022-2023 school year! I am a first-year majoring in Computer Science and Engineering, and I am local to the Bay Area. I find interest in all things technology, gaming, and cybersecurity, and I want to bring that excitement to the BroncoSec club. When I am not laser-focused on developing a project, I am probably spending time with family, enjoying game nights with friends, or watching random YouTube videos to take a break from my busy days. I want to make sure all BroncoSec members have their voices heard, and that we can support each other's passions for cybersecurity. You can reach out to me at any time!",
         },
         {
           src: TiffanyNguyen,
           name: "Tiffany Nguyen",
-          role: "",
+          role: "Workshop Coordinator",
           bio:
             "My name is Tiffany Nguyen, and I am a freshman majoring in Computer Science and Engineering from San Jose, California. I am passionate about learning about all the fun and interesting ways computer science can be applied across various fields like cybersecurity, and I hope to be able to help plan fun activities that get others excited about security.",
         },
         {
-          src: DavisRobertson,
-          name: "Davis Robertson",
-          role: "",
+          src: VarunMangla,
+          name: "Varun Mangla",
+          role: "Workshop Coordinator",
           bio:
-            "Hello! I’m Davis and I’m excited to be BroncoSec’s external CTF coordinator this year! I am a junior computer science (security emphasis) and philosophy major from New York. I’ve been interested in computer science since I was a kid and have really enjoyed being a part of BroncoSec at SCU. When I’m not writing papers or working on CS projects there’s a good chance you can find me playing or watching basketball. Please reach out if you have any questions or for any other reason, I’m looking forward to connecting with the BroncoSec community!",
+            "Hello everyone! I'm Varun, a sophomore Computer Science and Engineering student from Los Altos, CA. While I only started coding during the winter quarter of my first year at SCU, I've always been fascinated with technology. I'm eager to join BroncoSec as its Public Relations manager this year, as participating in the club helped me develop a budding interest in cybersecurity. Through this role, I intend to introduce other students to BroncoSec and the ever-growing field of cybersecurity. Outside of computer science, some of my interests are music, games, and hanging out with my friends. Please let me know if you have any questions or suggestions, and I'm looking forward to seeing everyone at our weekly club meetings!",
         },
-        {
-          src: DevinBhatt,
-          name: "Devin Bhatt",
-          role: "",
-          bio:
-            "Hi, I’m Devin. I’m a junior Computer Science from the Bay Area. For my second year on the BroncoCTF board, I’ve taken on the role of BroncoCTF coordinator. Most of my work at BroncoSec involves planning for BroncoCTF, writing challenges, and setting up the infrastructure for you to (hopefully not) break :wink:. I love to learn new things (especially when it comes to security and infrastructure), and I love to help others learn as well. I hope that BroncoCTF is not just a fun event, but a learning opportunity for all of its attendees!",
-        },
-        {
-          src: WalkerSelby,
-          name: "Walker Selby",
-          role: "",
-          bio: ""
-        },
-        {
-          src: KaraBaresse,
-          name: "Kara Baresse",
-          role: "",
-          bio:
-            ""
-          },
       ],
 
       aiColabBoard: [
