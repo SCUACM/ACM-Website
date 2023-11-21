@@ -28,8 +28,8 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="INRIX Hack 2023 is on November 11 - 12! More information "
-        link="https://inrix.scuacm.com/"
+        content="INRIX Hack 2023 has ended! See the projects "
+        link="https://inrix-hack-2023.devpost.com/project-gallery"
         linkTitle="here!"
       />
       <v-container style="max-width: 800px;">
