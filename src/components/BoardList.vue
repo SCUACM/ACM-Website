@@ -148,7 +148,7 @@ export default {
         {
           src: SamhitaRachapudi,
           name: "Samhita Rachapudi",
-          role: "IDEAS Liaison",
+          role: "DEI Chair",
           bio:
             "Hi! I’m Samhita Rachapudi, and I’m a junior majoring in Computer Science in the CAS from Redmond, Washington. I first became interested in computer science after getting more involved with the CS club at my high school. I decided to major in it because I loved how applicable CS is to anything and I love problem solving! In my free time I like to bake, go swimming, and spend time with my friends and family. I’m excited to serve the CS community at SCU as the IDEAS Liaison for ACM!"
         },
