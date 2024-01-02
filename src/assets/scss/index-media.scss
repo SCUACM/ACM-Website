@@ -75,6 +75,88 @@
   }
 }
 
+.related-club {
+  &-title {
+    display: block;
+    max-width: 400px;
+    margin: auto;
+    margin-bottom: 30px;
+    font-family: "Poppins", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 25px;
+    @include media-sm-and-up {
+      justify-content: center;
+      gap: 40px;
+    }
+  }
+
+  &-card-container {
+    width: fit-content;
+    @include media-sm-and-up {
+      padding: 10px 20px 10px;
+    }
+    @include media-xs-only {
+      padding: 5px;
+    }
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  &-card-container:hover {
+    cursor: pointer;
+    background-color: #e8e8e8;
+  }
+
+  &-card-img {
+    @include media-sm-and-up {
+      width: 60px;
+      height: 60px;
+      max-width: 60px;
+    }
+    @include media-xs-only {
+      width: 40px;
+      height: 40px;
+      max-width: 40px;
+    }
+    margin: auto;
+  }
+
+  &-card-header {
+    margin: auto;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    @include media-sm-and-up {
+      font-size: 1.8rem;
+    }
+    @include media-xs-only {
+      font-size: 1.25rem;;
+    }
+  }
+}
+
+.about-title {
+  display: block;
+  width: 300px;
+  margin: auto;
+  margin-bottom: 75px;
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+}
+
 .event {
   &-title {
     display: block;
