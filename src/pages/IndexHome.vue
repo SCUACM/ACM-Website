@@ -60,7 +60,7 @@
     <v-container style="max-width: 1000px; margin-top: 150px;">
       <!-- had to use style bind with js breakpoint because class didn't work for some reason... -->
       <div class="related-club-title">
-        Related Clubs
+        Club Affiliates
       </div>
       <div class="related-club-container">
         <span v-for="(club, i) in relatedClubContent" :key="i">
@@ -312,12 +312,12 @@ export default {
       {
         src: AiCollab,
         link: "https://www.instagram.com/scu_aicollab/",
-        title: "AiCollab",
+        title: "AI Collaborate",
       },
       {
         src: CPC,
         link: "https://scuacm.slack.com/archives/C05VB4JB2MN/",
-        title: "ACM CPC",
+        title: "Competitive Programming",
       },
       {
         src: ACMG,
