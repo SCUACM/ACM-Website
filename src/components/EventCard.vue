@@ -11,7 +11,7 @@
         <!-- List Version: Dialog  -->
         <div v-if="view==pageViews.List" class="dialog-list">
           <img v-if="image" :src="image" class="dialog-img-list" />
-          <div v-else class="dialog-img-list" style="background-color: #1c548d; color: white; font-size: 60px; padding: 30% 100px">{{ event.title }}</div>>
+          <div v-else class="dialog-img-list" style="background-color: #1c548d; color: white; font-size: 60px; padding: 30% 100px">{{ event.title }}</div>
         </div>
         <!-- Grid Version: Dialog -->
         <div v-if="view==pageViews.Grid" class="dialog-grid">
