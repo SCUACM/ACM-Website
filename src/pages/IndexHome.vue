@@ -27,9 +27,9 @@
 
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
-        :show="false"
-        content="INRIX Hack 2023 has ended! See the projects "
-        link="https://inrix-hack-2023.devpost.com/project-gallery"
+        :show="true"
+        content="Hack for Humanity will begin Feb. 17th! Sign-up "
+        link="https://bit.ly/H4H-sign-up"
         linkTitle="here!"
       />
       <v-container style="max-width: 800px;">
