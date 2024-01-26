@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h3>{{event.title}} ({{ formatDateTime(event) }}) Attendance: {{this.Attendance}} </h3>
-        <router-link :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
-        <button @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
+        <h3>{{event.title}} ({{formatDateTime(event)}}) Attendance: {{this.Attendance}} </h3>
+        <router-link v-if="canEdit" :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
+        <button v-if="canDelete" @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
         <button @click="() => openQrCode(event.id)">View Event QR Code</button>
     </div>
 </template>
@@ -18,7 +18,9 @@ export default {
     components: {},
 
     props: {
-        event: Object
+        event: Object,
+        canEdit: Boolean,
+        canDelete: Boolean
     },
 
     async mounted(){

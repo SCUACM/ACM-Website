@@ -24,4 +24,11 @@ export const auth = firebase.auth();
 export const storage = firebase.storage();
 export const functions = firebase.functions();
 
+if (location.hostname === "localhost") {
+  db.useEmulator("localhost", 8080);
+  auth.useEmulator("http://localhost:9099");
+  functions.useEmulator("localhost",5001);
+  storage.useEmulator("localhost",9199)
+}
+
 db.enablePersistence();

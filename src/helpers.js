@@ -1,3 +1,5 @@
+import {db, auth} from './firebase';
+
 /**
  * Creates a link to the SCU map for a location
  * @param {string} location - A string for the location. Examples: SCDI 1302, Locatelli, Zoom
@@ -166,4 +168,92 @@ export function getFormatDateTime(event) {
     }
     // Otherwise, return the start date and time and end date and time. Ex: Feb 12th, 2022, 10:00 am - Feb 13th, 2022, 12:00 pm
     return `${startDate} ${startTime} - ${endDate} ${endTime}`;
+}
+export const permsList = [
+    "changeRolePerms",
+    "changeUserRole",
+
+    "editMyProfile",
+    "viewAllProfiles",
+
+    "acmAddEvent",
+    "acmEditEvent",
+    "acmDeleteEvent",
+
+    "acmwAddEvent",
+    "acmwEditEvent",
+    "acmwDeleteEvent",
+
+    "broncosecAddEvent",
+    "broncosecEditEvent",
+    "broncosecDeleteEvent",
+
+    "aicAddEvent",
+    "aicEditEvent",
+    "aicDeleteEvent",
+
+    "otherAddEvent",
+    "otherEditEvent",
+    "otherDeleteEvent",
+    
+    "viewEvents",
+    "canRegister",
+
+    "uploadResume",
+    "viewMyResume",
+    "viewAllResume",
+
+    "viewProject",
+    "addProject",
+    "editProject",
+    "deleteProject"
+];
+
+auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+        cachedUserPerms = null;
+    }
+  });
+
+let cachedUserPerms = null;
+export async function getUserPerms(user) {
+    if(!user) {
+        cachedUserPerms = null;
+        return null;
+    }
+    if(cachedUserPerms != null) {
+        return cachedUserPerms;
+    }
+
+    const defaultRole = "dwhKivN6lb9iFdPVhpf6";
+    const scuRole = "Ty3gvdUlg0pedWFFgFYZ";
+
+    const idToken = await user.getIdTokenResult();
+    const myRoles = (idToken.claims ?? []).roles ?? [];
+
+    myRoles.push(defaultRole);
+    const email = user.providerData[0].email;
+    if (email.includes("@scu.edu")){
+        myRoles.push(scuRole)
+    }
+
+    const userPerms = {};
+    for(let perm of permsList) {
+        userPerms[perm] = false;
+    }
+    for(let role of myRoles) {
+        let values = await db.collection("roles").doc(role).get();
+        for(let perm of permsList) {
+            userPerms[perm] = userPerms[perm] || values.data()[perm];
+        }
+    }
+    cachedUserPerms = userPerms;
+    return userPerms;
+}
+
+export const eventTags = {
+    "acm": "ACM",
+    "acmw": "ACM-W",
+    "aic": "AI Collaborate",
+    "broncosec": "BroncoSec",
 }

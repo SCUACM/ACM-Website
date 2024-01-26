@@ -15,6 +15,7 @@
           <v-text-field
             label="Preferred Name"
             @input="callDebounce"
+            :disabled="!canEdit"
             v-model="formData.name"
             outlined
             solo
@@ -27,6 +28,7 @@
             label="Graduation Year"
             v-model="formData.year"
             @input="callDebounce"
+            :disabled="!canEdit"
             :items="graduationYears"
             outlined
             solo
@@ -39,13 +41,14 @@
             label="Major"
             @input="callDebounce"
             :items="majorsList"
+            :disabled="!canEdit"
             v-model="formData.major"
             outlined
             solo
           >
           </v-select>
         </v-form>
-        <ManageResume>
+        <ManageResume v-if="viewResume" :canUpload="canUploadResume">
 
         </ManageResume>
     </v-container>
@@ -60,7 +63,7 @@ import MainFooter from "@/layout/MainFooter.vue";
 import 'firebase/compat/firestore'
 import {db, auth, functions} from '../firebase';
 import { debounce } from 'debounce';
-import { majorsList } from '../helpers';
+import { getUserPerms, majorsList } from '../helpers';
 import ManageResume from '../components/ManageResume.vue';
 
 export default {
@@ -96,6 +99,10 @@ export default {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         this.user = user;
+        const perms = await getUserPerms(user);
+        this.canEdit = perms.editMyProfile;
+        this.viewResume = perms.viewMyResume;
+        this.canUploadResume = perms.uploadResume;
         const ref = db.collection("users").doc(user.uid);
         let data = (await ref.get()).data();
         if (!data) {
@@ -108,18 +115,20 @@ export default {
             result = await functions.httpsCallable("getUserAttendance")({id: user.uid});
             this.attendance = result.data;
         }
-        
       }
     });
   },
 
   data() {
     return {
-      graduationYears: [2023, 2024, 2025, 2026],
+      graduationYears: [2023, 2024, 2025, 2026, 2027],
       formData: null,
       user: auth.currentUser,
       majorsList: majorsList,
-      attendance: "loading"
+      canUploadResume: false,
+      attendance: "loading",
+      canEdit: false,
+      viewResume: false
     };
   },
 };

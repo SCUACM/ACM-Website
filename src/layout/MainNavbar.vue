@@ -314,10 +314,12 @@ export default {
     },
     signIn() {
 
+      auth.signInWithEmailAndPassword("jmosakowski@scu.edu","scuacm")
+
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
 
-      auth.signInWithPopup(provider);
+      // auth.signInWithPopup(provider);
     },
     async signOut() {
       await auth.signOut();

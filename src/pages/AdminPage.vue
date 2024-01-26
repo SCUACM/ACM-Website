@@ -2,17 +2,22 @@
     <v-app>
         <MainNavbar />
             <v-container style="margin-top: 75px; max-width: 1000px">
-                <h2>Manage Admin Users</h2>
+                
+                <router-link to="/admin/roles" v-if="canViewRoles">
+                    <button class="create">Manage Roles and User Permissions</button>
+                </router-link>
+                <!-- <h2>Manage Admin Users</h2>
                 <v-text-field class="uid-input" label="Enter User UID" v-model="uid">
                 </v-text-field>
                 <button @click="addAdmin">Add Admin Privileges</button>
-                <button @click="removeAdmin" class="remove">Remove Admin Privileges</button>
+                <button @click="removeAdmin" class="remove">Remove Admin Privileges</button> -->
+                
                 <h2>Manage Events</h2>
-                <router-link to="/admin/events/new">
+                <router-link to="/admin/events/new" v-if="canAddEvents">
                     <button class="create">Create New Event</button>
                 </router-link>
-                <span>or select an existing event below:</span><br>
-                <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event">
+                <span v-if="canAddEvents">or select an existing event below:</span><br>
+                <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event" :canEdit="canEditEvents" :canDelete="canDeleteEvents">
                 </AdminEventCard>
             </v-container>
         <MainFooter />
@@ -24,8 +29,9 @@
   import MainFooter from "@/layout/MainFooter.vue";
 
   import 'firebase/compat/firestore'
-  import {db, functions} from '../firebase';
+  import {db, functions, auth} from '../firebase';
 import AdminEventCard from "../components/AdminEventCard.vue";
+import { getUserPerms } from "../helpers";
   
   export default {
     name: "AdminPage",
@@ -56,10 +62,26 @@ import AdminEventCard from "../components/AdminEventCard.vue";
       acmEvents: db.collection('events').orderBy('startDate', 'desc')
     },
 
+    mounted() {
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                const perms = await getUserPerms(user);
+                this.canViewRoles = perms.changeRolePerms || perms.changeUserRole;
+                this.canAddEvents = perms.acmAddEvent || perms.acmwAddEvent || perms.broncosecAddEvent || perms.aicAddEvent || perms.otherAddEvent;
+                this.canEditEvents = perms.acmEditEvent || perms.acmwEditEvent || perms.broncosecEditEvent || perms.aicEditEvent || perms.otherEditEvent;
+                this.canDeleteEvents = perms.acmDeleteEvent || perms.acmwDeleteEvent || perms.broncosecDeleteEvent || perms.aicDeleteEvent || perms.otherDeleteEvent;
+            }
+        });
+    },
+
     data() {
       return {
         uid: "",
         acmEvents: [],
+        canViewRoles: false,
+        canAddEvents: false,
+        canEditEvents: false,
+        canDeleteEvents: false
       };
     },
   };
