@@ -1,111 +1,111 @@
 <template>
     <v-app>
-        <Navbar />
-            <v-container style="margin-top: 75px; max-width: 1000px">
-                <h2 v-if="canEditRoles">Manage Roles</h2>
-                <div v-if="canEditRoles" class="rolesTable">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th class="role-name" rowspan="2">Role name</th>
-                                <th rowspan="2">Change Role Permissions</th>
-                                <th rowspan="2">Change User Roles</th>
+        <MainNavbar />
+        <v-container style="margin-top: 75px; max-width: 1000px">
+            <h2 v-if="canEditRoles">Manage Roles</h2>
+            <div v-if="canEditRoles" class="rolesTable">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th class="role-name" rowspan="2">Role name</th>
+                            <th rowspan="2">Change Role Permissions</th>
+                            <th rowspan="2">Change User Roles</th>
 
-                                <th rowspan="2">Edit My Profile</th>
-                                <th rowspan="2">View All Profiles</th>
+                            <th rowspan="2">Edit My Profile</th>
+                            <th rowspan="2">View All Profiles</th>
 
-                                <th colspan="3">ACM Events</th>
-                                <th colspan="3">ACM-W Events</th>
-                                <th colspan="3">BroncoSec Events</th>
-                                <th colspan="3">AI Collab. Events</th>
-                                <th colspan="3">Other Events</th>
+                            <th colspan="3">ACM Events</th>
+                            <th colspan="3">ACM-W Events</th>
+                            <th colspan="3">BroncoSec Events</th>
+                            <th colspan="3">AI Collab. Events</th>
+                            <th colspan="3">Other Events</th>
 
-                                <th rowspan="2">View Events</th>
-                                <th rowspan="2">Can Register</th>
-                                <th rowspan="2">Upload Resume</th>
-                                <th rowspan="2">View My Resume</th>
-                                <th rowspan="2">View All Resumes</th>
+                            <th rowspan="2">View Events</th>
+                            <th rowspan="2">Can Register</th>
+                            <th rowspan="2">Upload Resume</th>
+                            <th rowspan="2">View My Resume</th>
+                            <th rowspan="2">View All Resumes</th>
 
-                                <th rowspan="2">View Projects</th>
-                                <th rowspan="2">Create Projects</th>
-                                <th rowspan="2">Edit Projects</th>
-                                <th rowspan="2">Delete Projects</th>
-                            </tr>
-                            <tr>
-                                <th>Add</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>Add</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>Add</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>Add</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>Add</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                            <tr v-for="role in this.roles" :key="role.id">
-                                <!-- <td>{{role.name}}</td> -->
-                                <td>
-                                    <v-text-field
-                                    class="role-name" 
-                                    v-model="role.name"
-                                    :value="role.name"
-                                    solo
-                                    @input="() => updateRole(role)"
-                                    >
-                                    </v-text-field>
-                                </td>
-                                <td v-for="perm in rolePerms" :key="perm">
-                                    <input type="checkbox" v-model="role[perm]" :value="role[perm]" @change="() => updateRole(role)"/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button @click="createRole">Create new Role</button>
-                </div>
+                            <th rowspan="2">View Projects</th>
+                            <th rowspan="2">Create Projects</th>
+                            <th rowspan="2">Edit Projects</th>
+                            <th rowspan="2">Delete Projects</th>
+                        </tr>
+                        <tr>
+                            <th>Add</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Add</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Add</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Add</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>Add</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr v-for="role in this.roles" :key="role.id">
+                            <!-- <td>{{role.name}}</td> -->
+                            <td>
+                                <v-text-field
+                                class="role-name" 
+                                v-model="role.name"
+                                :value="role.name"
+                                solo
+                                @input="() => updateRole(role)"
+                                >
+                                </v-text-field>
+                            </td>
+                            <td v-for="perm in rolePerms" :key="perm">
+                                <input type="checkbox" v-model="role[perm]" :value="role[perm]" @change="() => updateRole(role)"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button @click="createRole">Create new Role</button>
+            </div>
 
-                <h2 v-if="canEditUsers">Manage Users</h2>
-                <div v-if="canEditUsers">
-                    <v-text-field
-                    v-model="search"
-                    label="Search"
-                    solo
-                    ></v-text-field>
-                    <v-btn @click="search = ''">Clear</v-btn>
-                    <v-btn @click="searchUser()">Search</v-btn>
-                    <table v-if="searchResults.length > 0">
-                        <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                            </tr>
-                            <tr v-for="user in searchResults" :key="user.id">
-                                <td>{{ user.uid }}</td>
-                                <td>{{ user.displayName }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ (user.claims || {}).roles || "none" }}
-                                    <v-btn @click="addRole(user)">Add</v-btn>
-                                    <v-btn @click="removeRole(user)">Remove</v-btn>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </v-container>
-        <Footer />
+            <h2 v-if="canEditUsers">Manage Users</h2>
+            <div v-if="canEditUsers">
+                <v-text-field
+                v-model="search"
+                label="Search"
+                solo
+                ></v-text-field>
+                <v-btn @click="search = ''">Clear</v-btn>
+                <v-btn @click="searchUser()">Search</v-btn>
+                <table v-if="searchResults.length > 0">
+                    <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                        </tr>
+                        <tr v-for="user in searchResults" :key="user.id">
+                            <td>{{ user.uid }}</td>
+                            <td>{{ user.displayName }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ (user.claims || {}).roles || "none" }}
+                                <v-btn @click="addRole(user)">Add</v-btn>
+                                <v-btn @click="removeRole(user)">Remove</v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </v-container>
+        <MainFooter />
     </v-app>
   </template>
   
   <script>
-  import Navbar from "@/layout/Navbar.vue";
-  import Footer from "@/layout/Footer.vue";
+  import MainNavbar from "@/layout/MainNavbar.vue";
+  import MainFooter from "@/layout/MainFooter.vue";
 
 import 'firebase/compat/firestore'
 import {db, functions, auth} from '../firebase';
@@ -115,8 +115,8 @@ import { permsList, getUserPerms } from '../helpers';
     name: "AdminRoles",
   
     components: {
-        Navbar,
-        Footer,
+        MainNavbar,
+        MainFooter,
     },
 
     methods: {

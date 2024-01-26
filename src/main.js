@@ -17,10 +17,6 @@ import ProfilePage from "@/pages/ProfilePage.vue";
 import AdminPage from "@/pages/AdminPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import RedirectRouter from "@/pages/RedirectRouter.vue";
-import Profile from "@/pages/Profile.vue";
-import Admin from "@/pages/Admin.vue";
-import Register from "@/pages/Register.vue";
-import Redirect from "@/pages/Redirect.vue";
 import AdminRoles from '@/pages/AdminRoles.vue'
 
 import VueYoutube from 'vue-youtube'
