@@ -182,7 +182,7 @@ router.beforeEach( async (to, from, next) => {
           }
         }
         if(!groupValid) {
-          console.log("FAILED for", permGroup, perms)
+          // console.log("FAILED for", permGroup, perms)
           valid = false;
         }
       }

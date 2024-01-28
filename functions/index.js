@@ -18,7 +18,9 @@ exports.searchUsers = functions.https.onCall((data, context) => {
     if (!data.uids) {
         return {error: "Please pass an array of UIDs to the function"};
     }
-    const uids = data.uids.map((uid) => {return {uid: uid};});
+    const uids = data.uids.map((uid) => {
+return {uid: uid};
+});
 
     console.log(uids);
 
@@ -28,9 +30,9 @@ exports.searchUsers = functions.https.onCall((data, context) => {
                 uid: userRecord.uid,
                 email: userRecord.email,
                 displayName: userRecord.displayName,
-                claims: userRecord.customClaims
-            }
-        })}
+                claims: userRecord.customClaims,
+            };
+        })};
     });
 });
 
@@ -44,20 +46,20 @@ exports.addRole = functions.https.onCall(async (data, context) => {
     if (!uid) {
         return {message: "Please pass a UID to the function"};
     }
-    let currentClaims = (await admin.auth().getUser(uid)).customClaims;
+    const currentClaims = (await admin.auth().getUser(uid)).customClaims;
 
-    let roles = currentClaims?.roles ?? [];
+    const roles = currentClaims?.roles ?? [];
     roles.push(role);
     currentClaims.roles = roles;
 
     await admin.auth().setCustomUserClaims(uid, currentClaims);
-    let userRecord = await admin.auth().getUser(uid);
+    const userRecord = await admin.auth().getUser(uid);
     return {
         uid: userRecord.uid,
         email: userRecord.email,
         displayName: userRecord.displayName,
-        claims: userRecord.customClaims
-    }
+        claims: userRecord.customClaims,
+    };
 });
 
 exports.removeRole = functions.https.onCall(async (data, context) => {
@@ -70,21 +72,21 @@ exports.removeRole = functions.https.onCall(async (data, context) => {
     if (!uid) {
         return {message: "Please pass a UID to the function"};
     }
-    let currentClaims = (await admin.auth().getUser(uid)).customClaims;
+    const currentClaims = (await admin.auth().getUser(uid)).customClaims;
 
-    let roles = currentClaims?.roles ?? [];
-    console.log("INDEX", roles.indexOf(role))
-    roles.splice(roles.indexOf(role),1);
+    const roles = currentClaims?.roles ?? [];
+    console.log("INDEX", roles.indexOf(role));
+    roles.splice(roles.indexOf(role), 1);
     currentClaims.roles = roles;
 
     await admin.auth().setCustomUserClaims(uid, currentClaims);
-    let userRecord = await admin.auth().getUser(uid);
+    const userRecord = await admin.auth().getUser(uid);
     return {
         uid: userRecord.uid,
         email: userRecord.email,
         displayName: userRecord.displayName,
-        claims: userRecord.customClaims
-    }
+        claims: userRecord.customClaims,
+    };
 });
 
 exports.searchUsers = functions.https.onCall((data, context) => {
@@ -95,7 +97,9 @@ exports.searchUsers = functions.https.onCall((data, context) => {
     if (!data.uids) {
         return {error: "Please pass an array of UIDs to the function"};
     }
-    const uids = data.uids.map((uid) => {return {uid: uid};});
+    const uids = data.uids.map((uid) => {
+return {uid: uid};
+});
 
     console.log(uids);
 
@@ -105,9 +109,9 @@ exports.searchUsers = functions.https.onCall((data, context) => {
                 uid: userRecord.uid,
                 email: userRecord.email,
                 displayName: userRecord.displayName,
-                claims: userRecord.customClaims
-            }
-        })}
+                claims: userRecord.customClaims,
+            };
+        })};
     });
 });
 

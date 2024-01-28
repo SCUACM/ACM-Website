@@ -44,7 +44,6 @@ import { getUserPerms } from "../helpers";
 
     methods: {
         async addAdmin() {
-            console.log(this.uid);
             if(this.uid.length > 0) {
                 const result = await functions.httpsCallable("addAdmin")({uid: this.uid});
                 alert(result.data.message);

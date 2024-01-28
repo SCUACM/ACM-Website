@@ -36,7 +36,7 @@ export default {
         async deleteEvent(id) {
             if (confirm("Are you sure you want to delete this event?") == true) {
                 await db.collection("events").doc(id).delete();
-                console.log("deleted");
+                alert("deleted");
             }
         },
         async getEventAttendance(e){

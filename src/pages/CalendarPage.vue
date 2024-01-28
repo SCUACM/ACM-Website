@@ -159,7 +159,7 @@ export default {
         `https://www.googleapis.com/calendar/v3/calendars/en.usa%23holiday%40group.v.calendar.google.com/events?key=${auth}&timeMin=${timeMin}&timeMax=${timeMax}`
       );
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       this.events = this.events.concat(
         data.items.map((event) => ({
           name: event.summary,
@@ -172,7 +172,7 @@ export default {
         `https://clients6.google.com/calendar/v3/calendars/santaclara.acm@gmail.com/events?calendarId=santaclara.acm%40gmail.com&singleEvents=true&timeZone=America%2FLos_Angeles&maxAttendees=1&maxResults=250&sanitizeHtml=true&timeMin=${timeMin}&timeMax=${timeMax}&key=${auth}`
       );
       const acmEventsData = await acmEventsResponse.json();
-      console.log(acmEventsData);
+      // console.log(acmEventsData);
       this.events = this.events.concat(
         acmEventsData.items.map((event) => ({
           name: event.summary,
@@ -187,13 +187,13 @@ export default {
     // fetching acm events gives time string in incorrect format
     parseTime(dateTime) {
       if (!dateTime) return "2000-00-00";
-      console.log(dateTime);
-      console.log(typeof dateTime);
-      console.log(
-        dateTime.substring(0, dateTime.indexOf("T")) +
-          " " +
-          dateTime.substring(dateTime.indexOf("T") + 1, dateTime.length - 9)
-      );
+      // console.log(dateTime);
+      // console.log(typeof dateTime);
+      // console.log(
+      //   dateTime.substring(0, dateTime.indexOf("T")) +
+      //     " " +
+      //     dateTime.substring(dateTime.indexOf("T") + 1, dateTime.length - 9)
+      // );
       return (
         dateTime.substring(0, dateTime.indexOf("T")) +
         " " +

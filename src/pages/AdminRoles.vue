@@ -3,7 +3,7 @@
         <MainNavbar />
         <v-container style="margin-top: 75px; max-width: 1000px">
             <h2 v-if="canEditRoles">Manage Roles</h2>
-            <div v-if="canEditRoles" class="rolesTable">
+            <div v-if="canEditRoles || 1" class="rolesTable">
                 <table>
                     <tbody>
                         <tr>
@@ -18,6 +18,7 @@
                             <th rowspan="2">Delete My Events</th>
 
                             <th colspan="3">ACM Events</th>
+                            <th colspan="3">ICPC Events</th>
                             <th colspan="3">ACM-W Events</th>
                             <th colspan="3">BroncoSec Events</th>
                             <th colspan="3">AI Collab. Events</th>
@@ -51,9 +52,11 @@
                             <th>Add</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Add</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                         <tr v-for="role in this.roles" :key="role.id">
-                            <!-- <td>{{role.name}}</td> -->
                             <td>
                                 <v-text-field
                                 class="role-name" 
@@ -63,7 +66,6 @@
                                 @input="() => updateRole(role)"
                                 >
                                 </v-text-field>
-                                {{role.id}}
                             </td>
                             <td v-for="perm in rolePerms" :key="perm">
                                 <input type="checkbox" v-model="role[perm]" :value="role[perm]" @change="() => updateRole(role)"/>
@@ -75,7 +77,7 @@
             </div>
 
             <h2 v-if="canEditUsers">Manage Users</h2>
-            <div v-if="canEditUsers">
+            <div v-if="canEditUsers || 1">
                 <v-text-field
                 v-model="search"
                 label="Search"
@@ -95,9 +97,18 @@
                             <td>{{ user.uid }}</td>
                             <td>{{ user.displayName }}</td>
                             <td>{{ user.email }}</td>
-                            <td>{{ (user.claims || {}).roles || "none" }}
-                                <v-btn @click="addRole(user)">Add</v-btn>
-                                <v-btn @click="removeRole(user)">Remove</v-btn>
+                            <td>
+                                {{ (user.claims || {}).roles?.map(r => roles.find(role => role.id == r)?.name || r).join(",") || "none" }}
+                                <br>
+                                <select @change="addRole(user, $event.target.value)">
+                                    <option :value="null">Add role</option>
+                                    <option :value="role.id" v-for="role in roles.filter(r => (!(user.claims || {}).roles?.includes(r.id)) || true)" :key="role.id">{{ role.name }}</option>
+                                </select>
+                                <span style="width: 20px;"></span>
+                                <select @change="removeRole(user, $event.target.value)">
+                                    <option :value="null">Remove role</option>
+                                    <option :value="role.id" v-for="role in roles.filter(r => ((user.claims || {}).roles?.includes(r.id)) || false)" :key="role.id">{{ role.name }}</option>
+                                </select>
                             </td>
                         </tr>
                     </tbody>
@@ -158,23 +169,22 @@ import { permsList, getUserPerms } from '../helpers';
                 // console.log(result.data.users);
                 this.searchResults = result.data.users;
             });
-            console.log(this.searchResults);
         },
-        async addRole(user) {
-            this.updateUserRole(user,"addRole");
+        async addRole(user, role) {
+            this.updateUserRole(user,role,"addRole");
         },
-        async removeRole(user) {
-            this.updateUserRole(user,"removeRole");
+        async removeRole(user, role) {
+            this.updateUserRole(user,role,"removeRole");
         },
-        async updateUserRole(user, functionName) {
+        async updateUserRole(user, role, functionName) {
+            if(!role) {
+                return;
+            }
             let uid = user.uid;
-            let role = prompt("Enter role name");
             let newUser = await functions.httpsCallable(functionName)({uid, role});
             let index = this.searchResults.indexOf(user);
             this.searchResults[index] = newUser.data;
-            console.log(this.searchResults);
-            console.log("UPDATED",newUser);
-
+            alert("Role updated! (You might need to refresh the page for the role to show up)")
         }
     },
   

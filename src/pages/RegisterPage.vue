@@ -38,7 +38,7 @@ export default {
         const doc = await db.collection('events').doc(eventId).get();
         if(doc.exists) {
           const registration = await db.collection('registrations').where("uid", "==",user.uid).where("event", "==", eventId).get();
-          console.log(registration.docs);
+          // console.log(registration.docs);
           if(registration.docs.length > 0) {
             this.isRegistered = true;
           }

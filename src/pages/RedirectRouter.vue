@@ -33,7 +33,7 @@ export default {
                             }
                         }
                         if(!groupValid) {
-                            console.log("FAILED for", permGroup, perms)
+                            // console.log("FAILED for", permGroup, perms)
                             canRedirect = false;
                         }
                     }

@@ -272,7 +272,7 @@ export default {
     window.addEventListener("scroll", this.updateScroll);
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log("Signed in", user);
+        // console.log("Signed in", user);
         const email = user.providerData[0].email;
         if (email.includes("@scu.edu")){
             const userName = user.displayName;
@@ -349,17 +349,15 @@ export default {
     },
     signIn() {
 
-      auth.signInWithEmailAndPassword("jmosakowski@scu.edu","scuacm")
-
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
 
-      // auth.signInWithPopup(provider);
+      auth.signInWithPopup(provider);
     },
     async signOut() {
       await auth.signOut();
       if(this.$route.meta.authRequired){
-        this.$router.push("/");
+        this.$router.push("/").catch(()=>{});
       }
     },
     closePopup() {
