@@ -18,12 +18,12 @@
           <img v-if="image" :src="image" class="dialog-img-grid" />
           <!-- Grid Version: Event Info -->
           <h1>{{ event.title }}</h1>
-          <h3 v-if="event.tags">
-            {{ event.tags.length > 1 ? "Tags: " : "Tag: " }}
-            <span v-for="tag of event.tags" :key="tag" :style="{backgroundColor: eventColors[tag]}" class="tag">
+          <p v-if="event.tags">
+            <span v-for="tag of event.tags" :key="tag" class="tag">
+              <span class="tag-circle" :style="{backgroundColor: eventColors[tag]}"></span>
               {{ eventTags[tag] }}
             </span>
-          </h3>
+          </p>
           <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
           <h3 v-if="event.location">Location: 
           <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
