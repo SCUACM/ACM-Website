@@ -14,6 +14,8 @@
                             <th rowspan="2">Edit My Profile</th>
                             <th rowspan="2">View All Profiles</th>
 
+                            <th rowspan="2">Edit My Events</th>
+
                             <th colspan="3">ACM Events</th>
                             <th colspan="3">ACM-W Events</th>
                             <th colspan="3">BroncoSec Events</th>
@@ -28,7 +30,8 @@
 
                             <th rowspan="2">View Projects</th>
                             <th rowspan="2">Create Projects</th>
-                            <th rowspan="2">Edit Projects</th>
+                            <th rowspan="2">Edit My Projects</th>
+                            <th rowspan="2">Edit All Projects</th>
                             <th rowspan="2">Delete Projects</th>
                         </tr>
                         <tr>

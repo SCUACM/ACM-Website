@@ -176,6 +176,8 @@ export const permsList = [
     "editMyProfile",
     "viewAllProfiles",
 
+    "editMyEvent",
+
     "acmAddEvent",
     "acmEditEvent",
     "acmDeleteEvent",
@@ -205,8 +207,9 @@ export const permsList = [
 
     "viewProject",
     "addProject",
+    "editMyProject",
     "editProject",
-    "deleteProject"
+    "deleteProject",
 ];
 
 auth.onAuthStateChanged(async (user) => {
@@ -231,6 +234,8 @@ export async function getUserPerms(user) {
     const idToken = await user.getIdTokenResult();
     const myRoles = (idToken.claims ?? []).roles ?? [];
 
+    console.log(myRoles);
+
     myRoles.push(defaultRole);
     const email = user.providerData[0].email;
     if (email.includes("@scu.edu")){
@@ -247,6 +252,7 @@ export async function getUserPerms(user) {
             userPerms[perm] = userPerms[perm] || values.data()[perm];
         }
     }
+    console.log("USER PERMS", userPerms);
     cachedUserPerms = userPerms;
     return userPerms;
 }
