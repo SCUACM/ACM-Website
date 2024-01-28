@@ -56,6 +56,8 @@
     padding: 20px;
     border-radius: 10px;
     width: 550px;
+    max-height: 85vh;
+    overflow-y: scroll;
     text-align: center;
     @include media-xs-only {
       width: 95%;

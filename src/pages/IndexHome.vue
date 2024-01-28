@@ -28,8 +28,8 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="INRIX Hack 2023 is on November 11 - 12! More information "
-        link="http://acm.engr.scu.edu/inrix/"
+        content="Hack for Humanity will begin Feb. 17th! Sign-up "
+        link="https://bit.ly/H4H-sign-up"
         linkTitle="here!"
       />
       <v-container style="max-width: 800px;">
@@ -57,43 +57,23 @@
       </v-container>
     </div>
 
-    <v-container
-      ref="events"
-      style="max-width: 1200px; margin-bottom: 250px; margin-top: 150px;"
-    >
-      <div class="event-title">
-        Events
+    <v-container style="max-width: 1000px; margin-top: 150px;">
+      <!-- had to use style bind with js breakpoint because class didn't work for some reason... -->
+      <div class="related-club-title">
+        Club Affiliates
       </div>
-      <div class="event-sub-title">
-        We host a plethora of fun events for anyone of any background or major
-        interested in computer science!
+      <div class="related-club-container">
+        <span v-for="(club, i) in relatedClubContent" :key="i">
+          <RelatedClubCard :club="club" />
+        </span>
       </div>
-      <v-row>
-        <v-col
-          v-for="(event, i) in eventContent"
-          :key="i"
-          cols="12"
-          sm="12"
-          md="6"
-          lg="4"
-          xl="4"
-          style="text-align: center; margin-left: auto; margin-right: auto;"
-        >
-          <div>
-            <v-img class="event-img" :src="event.src" :lazy-src="event.src" />
-          </div>
-          <div class="event-header">
-            {{ event.title }}
-          </div>
-          <div class="event-sub-header">
-            {{ event.content }}
-          </div>
-        </v-col>
-      </v-row>
     </v-container>
 
-    <v-container style="max-width: 1000px;" ref="club-info">
+    <v-container style="max-width: 1000px; margin-top: 150px;" ref="club-info">
       <!-- had to use style bind with js breakpoint because class didn't work for some reason... -->
+      <div class="about-title">
+        About ACM
+      </div>
       <v-row
         v-for="(item, i) in boxContent"
         :key="i"
@@ -145,6 +125,41 @@
     </v-container>
 
     <v-container
+      ref="events"
+      style="max-width: 1200px; margin-bottom: 150px;"
+    >
+      <div class="event-title">
+        Events
+      </div>
+      <div class="event-sub-title">
+        We host a plethora of fun events for anyone of any background or major
+        interested in computer science!
+      </div>
+      <v-row>
+        <v-col
+          v-for="(event, i) in eventContent"
+          :key="i"
+          cols="12"
+          sm="12"
+          md="6"
+          lg="4"
+          xl="4"
+          style="text-align: center; margin-left: auto; margin-right: auto;"
+        >
+          <div>
+            <v-img class="event-img" :src="event.src" :lazy-src="event.src" />
+          </div>
+          <div class="event-header">
+            {{ event.title }}
+          </div>
+          <div class="event-sub-header">
+            {{ event.content }}
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container
       ref="resources"
       style="margin-bottom: 100px;"
       :style="{ maxWidth: resourceContainerWidth + 'px' }"
@@ -178,16 +193,23 @@
 import "../assets/scss/index-media.scss";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
+import RelatedClubCard from "@/components/RelatedClubCard";
 import ResourceCard from "@/components/ResourceCard.vue";
 import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
 
-import image1 from "@/assets/images/FirstGeneral.jpg";
-import image2 from "@/assets/images/Bonfire.jpg";
-import image3 from "@/assets/images/Veritas.jpg";
+import ACMW from "@/assets/images/clubs/ACM-W.png";
+import BroncoSec from "@/assets/images/clubs/BroncoSec.png";
+import AiCollab from "@/assets/images/clubs/AiCollab.png";
+import CPC from "@/assets/images/clubs/CPC.png";
+import ACMG from "@/assets/images/clubs/ACM-G.png";
 
-import hackathon from "@/assets/images/events/hackathon2.jpg";
-import workshop from "@/assets/images/events/workshop.jpg";
-import speaker from "@/assets/images/events/Speaker1.jpg";
+import image1 from "@/assets/images/index/firstMeeting2023.jpg";
+import image2 from "@/assets/images/index/bonfire.jpg";
+import image3 from "@/assets/images/index/firstMeeting2022.jpg";
+
+import hackathon from "@/assets/images/index/inrixHack.png";
+import workshop from "@/assets/images/index/workshop.png";
+import speaker from "@/assets/images/index/speaker.jpg";
 
 import ACM from "@/assets/images/resources/ACM.svg";
 import TeamTreeHouse from "@/assets/images/resources/teamtreehouse.svg";
@@ -200,6 +222,7 @@ export default {
   components: {
     MainNavbar,
     MainFooter,
+    RelatedClubCard,
     ResourceCard,
     AnnouncementBanner,
   },
@@ -275,6 +298,34 @@ export default {
       },
     ],
 
+    relatedClubContent: [
+      {
+        src: ACMW,
+        link: "https://scuacmw.com/",
+        title: "ACM-W",
+      },
+      {
+        src: BroncoSec,
+        link: "https://broncosec.com/",
+        title: "BroncoSec",
+      },
+      {
+        src: AiCollab,
+        link: "https://www.instagram.com/scu_aicollab/",
+        title: "AI Collaborate",
+      },
+      {
+        src: CPC,
+        link: "https://scuacm.slack.com/archives/C05VB4JB2MN/",
+        title: "Competitive Programming",
+      },
+      {
+        src: ACMG,
+        link: "https://www.linkedin.com/company/acm-graduate-santa-clara-university-chapter/",
+        title: "ACM-G",
+      },
+    ],
+
     eventContent: [
       {
         src: hackathon,
@@ -286,7 +337,7 @@ export default {
         src: workshop,
         title: "Workshops",
         content:
-          "Our monthly workshops are a great way to learn real world technologies right on SCU's campus.",
+          "Our weekly workshops are a great way to learn real world technologies right on SCU's campus.",
       },
       {
         src: speaker,
@@ -298,12 +349,12 @@ export default {
 
     navLinks: [
       {
-        title: "Events",
-        to: "events",
-      },
-      {
         title: "Club Info",
         to: "club-info",
+      },
+      {
+        title: "Events",
+        to: "events",
       },
       {
         title: "Resources",
@@ -317,28 +368,28 @@ export default {
         link: "https://learning.acm.org/",
         title: "ACM Resources",
         content:
-          "If you are a paid member of ACM, you can sign in to find access to loads of information from the Learning Center. Here you'll find a wealth of useful Ebooks, informative Webinars, a number of video courses you can follow and more!",
+          "If you are a paid member of ACM, you can sign in to find access to loads of information from the Learning Center. Here you'll find a wealth of useful Ebooks, informative Webinars, a number of video courses you can follow, and more!",
       },
       {
         src: TeamTreeHouse,
         link: "https://teamtreehouse.com/",
         title: "Team Treehouse",
         content:
-          "Team Treehouse offers a variety of tutorials and video tutorials that help you walk through the fundamentals of whichever computer science topic you may be exploring. Please contact the ACM president for login credentials.",
+          "Team Treehouse offers a variety of tutorials and video tutorials that help you walk through the fundamentals of whichever computer science topic you may be exploring. Please contact SCU ACM for login credentials.",
       },
       {
         src: SmartScholar,
         link: "http://www.smartscholar.com/computer-science-guide/",
         title: "SmartScholar",
         content:
-          "Smart Scholar's computer science education resource guide provides insight on computer science basics, and general industry knowledge.",
+          "Smart Scholar's computer science education resource guide provides insight on computer science basics and general industry knowledge.",
       },
       {
         src: DataScience,
         link: "https://www.mastersindatascience.org/careers/data-analyst/",
         title: "2U Data Science",
         content:
-          "Mastersindatascience.org is a website dedicated to outlining everything Data Science for students interested in furthering their education in STEM related fields, specifically in the Technology departments.",
+          "\"Mastersindatascience.org\" is a website dedicated to outlining everything Data Science for students interested in furthering their education in STEM fields, specifically in Technology departments.",
       },
     ],
   }),

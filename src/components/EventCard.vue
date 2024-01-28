@@ -3,11 +3,15 @@
     <div>
       <button @click="dialog = true">
         <img v-if="image" :src="image" class="flyer">
+        <div v-else :class="[ view==pageViews.List ? 'list' : 'grid']" class="no-flyer">
+          {{ event.title }}
+        </div>
       </button>
       <v-dialog v-model="dialog" width="unset">
         <!-- List Version: Dialog  -->
         <div v-if="view==pageViews.List" class="dialog-list">
           <img v-if="image" :src="image" class="dialog-img-list" />
+          <div v-else class="dialog-img-list" style="background-color: #1c548d; color: white; font-size: 60px; padding: 30% 100px">{{ event.title }}</div>
         </div>
         <!-- Grid Version: Dialog -->
         <div v-if="view==pageViews.Grid" class="dialog-grid">
@@ -133,13 +137,34 @@ export default {
   border-radius: 1rem;
 }
 
-.flyer:hover{
-  transform: scale(1.05);
+.no-flyer{
+  max-width: 240px;
+  overflow: hidden;
+  border: white 7.5px solid;
+  padding: 0.5rem;
+  background: #1c548d;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
 }
 
-.flyer{
+.no-flyer.list{
+  height: 250px;
+  font-size: 28px;
+}
+
+.no-flyer.grid{
+ width: max(8vw, 7rem);
+ height: calc(max(8vw, 7rem) * 1.25);
+}
+
+.flyer {
   transition: all .2s ease-in-out;
   padding: 0.5rem;
+}
+
+.flyer:hover, .no-flyer:hover{
+  transform: scale(1.05);
 }
 
 .link a {
