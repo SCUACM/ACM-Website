@@ -30,7 +30,7 @@
           Tags
         </div>
         <div v-for="tag of allTags" :key="tag">
-          <input type="checkbox" :checked="eventDetails.tags.includes(tag)" :disabled="!allowedTags.includes(tag)" @change="toggleTag(tag)" />
+          <input type="checkbox" :checked="eventDetails.tags?.includes(tag)" :disabled="!allowedTags.includes(tag)" @change="toggleTag(tag)" />
           {{ eventTags[tag] }}
         </div>
 
@@ -118,7 +118,7 @@ export default {
       return this.$route.params.id == 'new'
     },
     allTags() {
-      return Object.keys(eventTags).filter((tag) => this.allowedTags.includes(tag) || this.eventDetails.tags.includes(tag));
+      return Object.keys(eventTags).filter((tag) => this.allowedTags.includes(tag) || this.eventDetails.tags?.includes(tag));
     }
   },
 
@@ -141,6 +141,9 @@ export default {
           this.eventDetails.createdBy = user.uid;
 
           if(this.allowedTags.length == 1) {
+            if(!this.eventDetails.tags) {
+              this.eventDetails.tags = [];
+            }
             this.eventDetails.tags.push(this.allowedTags[0])
           }
         }
@@ -223,10 +226,13 @@ export default {
       this.removeFlyer = true;
     },
     toggleTag(tag) {
-      if(this.eventDetails.tags.includes(tag)) {
+      if(this.eventDetails.tags?.includes(tag)) {
         this.eventDetails.tags.splice(this.eventDetails.tags.indexOf(tag),1);
       }
       else {
+        if(!this.eventDetails.tags) {
+          this.eventDetails.tags = [];
+        }
         this.eventDetails.tags.push(tag);
       }
       console.log(this.eventDetails.tags);

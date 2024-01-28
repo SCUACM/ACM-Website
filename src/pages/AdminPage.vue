@@ -70,7 +70,6 @@ import { getUserPerms } from "../helpers";
                 if(perms.acmwEditEvent || perms.acmwDeleteEvent) {this.allowedTags.push("acmw")}
                 if(perms.broncosecEditEvent || perms.broncosecDeleteEvent) {this.allowedTags.push("broncosec")}
                 if(perms.aicEditEvent || perms.aicDeleteEvent) {this.allowedTags.push("aic")}
-                if(perms.otherEditEvent || perms.otherDeleteEvent) {this.allowedTags.push("other")}
                 this.acmEvents = [];
 
                 if(perms.editMyEvent || perms.deleteMyEvent) {
@@ -83,7 +82,11 @@ import { getUserPerms } from "../helpers";
                 }
 
                 if(this.allowedTags.length > 0) {
-                    const response2 = await db.collection('events').where('tags', 'array-contains-any', this.allowedTags).get();
+                    let req2 = db.collection('events');
+                    if(!perms.otherEditEvent && !perms.otherDeleteEvent) {
+                        req2 = req2.where('tags', 'array-contains-any', this.allowedTags);
+                    }
+                    const response2 = await req2.get();
                     
                     for(let doc of response2.docs) {
                         const data = doc.data();
