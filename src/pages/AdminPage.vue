@@ -57,10 +57,6 @@ import { getUserPerms } from "../helpers";
             }
         },
     },
-  
-    firestore: {
-      acmEvents: db.collection('events').orderBy('startDate', 'desc')
-    },
 
     mounted() {
         auth.onAuthStateChanged(async (user) => {
@@ -70,6 +66,37 @@ import { getUserPerms } from "../helpers";
                 this.canAddEvents = perms.acmAddEvent || perms.acmwAddEvent || perms.broncosecAddEvent || perms.aicAddEvent || perms.otherAddEvent;
                 this.canEditEvents = perms.acmEditEvent || perms.acmwEditEvent || perms.broncosecEditEvent || perms.aicEditEvent || perms.otherEditEvent;
                 this.canDeleteEvents = perms.acmDeleteEvent || perms.acmwDeleteEvent || perms.broncosecDeleteEvent || perms.aicDeleteEvent || perms.otherDeleteEvent;
+                this.allowedTags = [];
+                if(perms.acmEditEvent || perms.acmDeleteEvent) {this.allowedTags.push("acm")}
+                if(perms.acmwEditEvent || perms.acmwDeleteEvent) {this.allowedTags.push("acmw")}
+                if(perms.broncosecEditEvent || perms.broncosecDeleteEvent) {this.allowedTags.push("broncosec")}
+                if(perms.aicEditEvent || perms.aicDeleteEvent) {this.allowedTags.push("aic")}
+                if(perms.otherEditEvent || perms.otherDeleteEvent) {this.allowedTags.push("other")}
+                this.acmEvents = [];
+
+                if(perms.editMyEvent || perms.deleteMyEvent) {
+                    const response = await db.collection('events').where("createdBy", "==", user.uid).orderBy('startDate', 'desc').get();
+                    for(let doc of response.docs) {
+                        const data = doc.data();
+                        data.id = doc.id;
+                        this.acmEvents.push(data);
+                    }
+                }
+
+                if(this.allowedTags.length > 0) {
+                    const response2 = await db.collection('events').where('tags', 'array-contains-any', this.allowedTags).get();
+                    
+                    for(let doc of response2.docs) {
+                        const data = doc.data();
+                        data.id = doc.id;
+                        if(!this.acmEvents.find(event => event.id == data.id)) {
+                            this.acmEvents.push(data);
+                        }
+                    }
+                }
+                this.acmEvents.sort((a,b) => {
+                    return b.startDate.seconds - a.startDate.seconds;
+                });
             }
         });
     },
@@ -81,7 +108,8 @@ import { getUserPerms } from "../helpers";
         canViewRoles: false,
         canAddEvents: false,
         canEditEvents: false,
-        canDeleteEvents: false
+        canDeleteEvents: false,
+        allowedTags: [],
       };
     },
   };

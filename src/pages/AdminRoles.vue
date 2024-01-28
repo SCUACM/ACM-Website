@@ -15,6 +15,7 @@
                             <th rowspan="2">View All Profiles</th>
 
                             <th rowspan="2">Edit My Events</th>
+                            <th rowspan="2">Delete My Events</th>
 
                             <th colspan="3">ACM Events</th>
                             <th colspan="3">ACM-W Events</th>
@@ -62,6 +63,7 @@
                                 @input="() => updateRole(role)"
                                 >
                                 </v-text-field>
+                                {{role.id}}
                             </td>
                             <td v-for="perm in rolePerms" :key="perm">
                                 <input type="checkbox" v-model="role[perm]" :value="role[perm]" @change="() => updateRole(role)"/>

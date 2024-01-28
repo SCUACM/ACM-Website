@@ -8,9 +8,9 @@
 </template>
 <script>
 
-import {db, functions} from '../firebase';
+import {db, functions, auth} from '../firebase';
 import QRCode from 'qrcode';
-import {getFormatDateTime} from '../helpers';
+import {getFormatDateTime, getUserPerms} from '../helpers';
 
 export default {
     name: "AdminEventCard",
@@ -19,12 +19,17 @@ export default {
 
     props: {
         event: Object,
-        canEdit: Boolean,
-        canDelete: Boolean
     },
 
     async mounted(){
         this.getEventAttendance(this.event.id);
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                const perms = await getUserPerms(user);
+                this.canEdit = (perms.editMyEvent && this.event.createdBy == user.uid) || (perms.acmEditEvent && this.event.tags.includes("acm")) || (perms.acmwEditEvent && this.event.tags.includes("acmw")) || (perms.aicEditEvent && this.event.tags.includes("aic")) || (perms.broncosecEditEvent && this.event.tags.includes("broncosec")) || (perms.otherEditEvent && this.event.tags.includes("other"));
+                this.canDelete = (perms.deleteMyEvent && this.event.createdBy == user.uid) || (perms.acmDeleteEvent && this.event.tags.includes("acm")) || (perms.acmwDeleteEvent && this.event.tags.includes("acmw")) || (perms.aicDeleteEvent && this.event.tags.includes("aic")) || (perms.broncosecDeleteEvent && this.event.tags.includes("broncosec")) || (perms.otherDeleteEvent && this.event.tags.includes("other"));
+            }
+        });
     },
 
     methods: {
@@ -67,7 +72,9 @@ export default {
     },
 
     data: () => ({
-        Attendance: null
+        Attendance: null,
+        canEdit: false,
+        canDelete: false,
     })
 }
 </script>

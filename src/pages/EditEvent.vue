@@ -137,6 +137,7 @@ export default {
           const today = moment(new Date()).format('YYYY-MM-DDT');
           this.eventDetails.startDate = today+"17:45";
           this.eventDetails.endDate = today+"18:45";
+          this.eventDetails.createdBy = user.uid;
 
           if(this.allowedTags.length == 1) {
             this.eventDetails.tags.push(this.allowedTags[0])

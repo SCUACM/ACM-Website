@@ -177,6 +177,7 @@ export const permsList = [
     "viewAllProfiles",
 
     "editMyEvent",
+    "deleteMyEvent",
 
     "acmAddEvent",
     "acmEditEvent",

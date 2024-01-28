@@ -67,7 +67,8 @@ const routes = [
       permsRequired: [[
         "changeRolePerms",
         "changeUserRole",
-        "viewAllProfiles",
+        "editMyEvent",
+        "deleteMyEvent",
         "acmAddEvent",
         "acmEditEvent",
         "acmDeleteEvent",
@@ -104,21 +105,17 @@ const routes = [
     meta: {
       authRequired: true,
       permsRequired: [[
+        "editMyEvent",
         "acmAddEvent",
         "acmEditEvent",
-        "acmDeleteEvent",
         "acmwAddEvent",
         "acmwEditEvent",
-        "acmwDeleteEvent",
         "broncosecAddEvent",
         "broncosecEditEvent",
-        "broncosecDeleteEvent",
         "aicAddEvent",
         "aicEditEvent",
-        "aicDeleteEvent",
         "otherAddEvent",
         "otherEditEvent",
-        "otherDeleteEvent",
       ]]
     },
   },
