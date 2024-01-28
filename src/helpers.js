@@ -183,6 +183,10 @@ export const permsList = [
     "acmEditEvent",
     "acmDeleteEvent",
 
+    "icpcAddEvent",
+    "icpcEditEvent",
+    "icpcDeleteEvent",
+
     "acmwAddEvent",
     "acmwEditEvent",
     "acmwDeleteEvent",
@@ -229,8 +233,8 @@ export async function getUserPerms(user) {
         return cachedUserPerms;
     }
 
-    const defaultRole = "dwhKivN6lb9iFdPVhpf6";
-    const scuRole = "Ty3gvdUlg0pedWFFgFYZ";
+    const defaultRole = "default";
+    const scuRole = "scu";
 
     const idToken = await user.getIdTokenResult();
     const myRoles = (idToken.claims ?? []).roles ?? [];
@@ -261,6 +265,15 @@ export async function getUserPerms(user) {
 export const eventTags = {
     "acm": "ACM",
     "acmw": "ACM-W",
+    "icpc": "Competitive Programming",
     "aic": "AI Collaborate",
     "broncosec": "BroncoSec",
+}
+
+export const eventColors = {
+    "acm": "#1c548d",
+    "acmw": "#9a8ce1",
+    "icpc": "#d98014",
+    "aic": "#3ba858",
+    "broncosec": "#FF0000",
 }

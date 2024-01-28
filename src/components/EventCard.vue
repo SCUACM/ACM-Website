@@ -14,6 +14,12 @@
           <img v-if="image" :src="image" class="dialog-img-grid" />
           <!-- Grid Version: Event Info -->
           <h1>{{ event.title }}</h1>
+          <h3 v-if="event.tags">
+            {{ event.tags.length > 1 ? "Tags: " : "Tag: " }}
+            <span v-for="tag of event.tags" :key="tag" :style="{backgroundColor: eventColors[tag]}" class="tag">
+              {{ eventTags[tag] }}
+            </span>
+          </h3>
           <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
           <h3 v-if="event.location">Location: 
           <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
@@ -35,6 +41,12 @@
     <!-- List Version: Event Info -->
     <div v-if="view==pageViews.List">
       <h1>{{ event.title }}</h1>
+      <p v-if="event.tags">
+        <span v-for="tag of event.tags" :key="tag" class="tag">
+          <span class="tag-circle" :style="{backgroundColor: eventColors[tag]}"></span>
+          {{ eventTags[tag] }}
+        </span>
+      </p>
       <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
       <h3 v-if="event.location">Location: 
       <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
@@ -58,7 +70,7 @@
 import "../assets/scss/board-media.scss";
 import {storage} from '../firebase';
 import { ref, getDownloadURL } from "firebase/storage";
-import {getMapLink} from '../helpers';
+import {eventColors, eventTags, getMapLink} from '../helpers';
 import { marked } from 'marked';
 import {getFormatDateTime} from '../helpers';
 
@@ -87,6 +99,8 @@ export default {
   data: () => ({
     image: null,
     dialog: false,
+    eventTags: eventTags,
+    eventColors: eventColors,
     pageViews: {
         List: 0,
         Grid: 1,
@@ -209,5 +223,13 @@ export default {
   background: white;
   overflow: auto;
   padding: 25px 5% 25px;
+}
+
+.tag-circle {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  margin-left: 0.5rem;
 }
 </style>

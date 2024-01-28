@@ -63,9 +63,9 @@ import { getUserPerms } from "../helpers";
             if (user) {
                 const perms = await getUserPerms(user);
                 this.canViewRoles = perms.changeRolePerms || perms.changeUserRole;
-                this.canAddEvents = perms.acmAddEvent || perms.acmwAddEvent || perms.broncosecAddEvent || perms.aicAddEvent || perms.otherAddEvent;
-                this.canEditEvents = perms.acmEditEvent || perms.acmwEditEvent || perms.broncosecEditEvent || perms.aicEditEvent || perms.otherEditEvent;
-                this.canDeleteEvents = perms.acmDeleteEvent || perms.acmwDeleteEvent || perms.broncosecDeleteEvent || perms.aicDeleteEvent || perms.otherDeleteEvent;
+                this.canAddEvents = perms.acmAddEvent || perms.acmwAddEvent || perms.broncosecAddEvent || perms.aicAddEvent || perms.otherAddEvent || perms.icpcAddEvent;
+                this.canEditEvents = perms.acmEditEvent || perms.acmwEditEvent || perms.broncosecEditEvent || perms.aicEditEvent || perms.otherEditEvent || perms.icpcEditEvent;
+                this.canDeleteEvents = perms.acmDeleteEvent || perms.acmwDeleteEvent || perms.broncosecDeleteEvent || perms.aicDeleteEvent || perms.otherDeleteEvent || perms.icpcDeleteEvent;
                 this.allowedTags = [];
                 if(perms.acmEditEvent || perms.acmDeleteEvent) {this.allowedTags.push("acm")}
                 if(perms.acmwEditEvent || perms.acmwDeleteEvent) {this.allowedTags.push("acmw")}

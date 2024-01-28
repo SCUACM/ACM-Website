@@ -296,6 +296,10 @@ export default {
               "acmEditEvent",
               "acmDeleteEvent",
 
+              "icpcAddEvent",
+              "icpcEditEvent",
+              "icpcDeleteEvent",
+
               "acmwAddEvent",
               "acmwEditEvent",
               "acmwDeleteEvent",

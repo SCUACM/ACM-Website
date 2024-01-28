@@ -127,6 +127,7 @@ export default {
       if (user) {
         const perms = await getUserPerms(user);
         if(perms.acmAddEvent) {this.allowedTags.push("acm")}
+        if(perms.icpcAddEvent) {this.allowedTags.push("icpc")}
         if(perms.acmwAddEvent) {this.allowedTags.push("acmw")}
         if(perms.broncosecAddEvent) {this.allowedTags.push("broncosec")}
         if(perms.aicAddEvent) {this.allowedTags.push("aic")}
