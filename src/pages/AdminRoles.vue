@@ -102,7 +102,7 @@
                                 <br>
                                 <select @change="addRole(user, $event.target.value)">
                                     <option :value="null">Add role</option>
-                                    <option :value="role.id" v-for="role in roles.filter(r => (!(user.claims || {}).roles?.includes(r.id)) || true)" :key="role.id">{{ role.name }}</option>
+                                    <option :value="role.id" v-for="role in roles.filter(r => (!(user.claims || {}).roles?.includes(r.id)) || false)" :key="role.id">{{ role.name }}</option>
                                 </select>
                                 <span style="width: 20px;"></span>
                                 <select @change="removeRole(user, $event.target.value)">

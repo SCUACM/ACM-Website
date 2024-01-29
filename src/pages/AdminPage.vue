@@ -17,7 +17,7 @@
                     <button class="create">Create New Event</button>
                 </router-link>
                 <span v-if="canAddEvents">or select an existing event below:</span><br>
-                <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event" :canEdit="canEditEvents" :canDelete="canDeleteEvents">
+                <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event">
                 </AdminEventCard>
             </v-container>
         <MainFooter />

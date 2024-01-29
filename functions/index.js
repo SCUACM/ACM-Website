@@ -10,32 +10,6 @@ const {App} = require("@slack/bolt");
 
 admin.initializeApp();
 
-exports.searchUsers = functions.https.onCall((data, context) => {
-    const isAdmin = context.auth.token.admin || false;
-    if (!isAdmin) {
-        return {error: "You must be an admin to add another admin user"};
-    }
-    if (!data.uids) {
-        return {error: "Please pass an array of UIDs to the function"};
-    }
-    const uids = data.uids.map((uid) => {
-return {uid: uid};
-});
-
-    console.log(uids);
-
-    return admin.auth().getUsers(uids).then((records) => {
-        return {users: records.users.map((userRecord) => {
-            return {
-                uid: userRecord.uid,
-                email: userRecord.email,
-                displayName: userRecord.displayName,
-                claims: userRecord.customClaims,
-            };
-        })};
-    });
-});
-
 exports.addRole = functions.https.onCall(async (data, context) => {
     const isAdmin = context.auth.token.admin || false;
     if (!isAdmin) {
@@ -92,7 +66,7 @@ exports.removeRole = functions.https.onCall(async (data, context) => {
 exports.searchUsers = functions.https.onCall((data, context) => {
     const isAdmin = context.auth.token.admin || false;
     if (!isAdmin) {
-        return {error: "You must be an admin to add another admin user"};
+        return {error: "You must be an admin to search users"};
     }
     if (!data.uids) {
         return {error: "Please pass an array of UIDs to the function"};
