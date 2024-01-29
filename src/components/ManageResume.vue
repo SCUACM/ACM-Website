@@ -3,6 +3,7 @@
     <div>
       <div 
         id="dropArea" 
+        v-if="canUpload"
         @dragenter.prevent="isHovering = true"
         @dragover.prevent="isHovering = true"
         @dragleave.prevent="isHovering = false"
@@ -32,6 +33,10 @@ import {storage, auth} from '../firebase';
 
   export default {
     name: "ManageResume",
+
+    props: {
+      canUpload: Boolean
+    },
   
     components: {
     },
@@ -95,7 +100,7 @@ import {storage, auth} from '../firebase';
     },
   
     async mounted(){
-      auth.onAuthStateChanged((user) => {
+      auth.onAuthStateChanged(async (user) => {
         if (user) {
           this.getCurrentResume();
         } else {

@@ -53,7 +53,7 @@
               board
             </router-link>
           </span>
-          <span class="link mx-6" v-if="!user">
+          <span class="link mx-6" v-if="!showEvents">
             <router-link
               to="/calendar"
               :class="[
@@ -69,7 +69,7 @@
               calendar
             </router-link>
           </span>
-          <span class="link mx-6" v-if="user">
+          <span class="link mx-6" v-if="showEvents">
             <router-link
               to="/events"
               :class="[
@@ -177,12 +177,12 @@
                   board
                 </router-link>
               </v-list-item>
-              <v-list-item v-if="!user">
+              <v-list-item v-if="!showEvents">
                 <router-link to="/calendar" class="link">
                   calendar
                 </router-link>
               </v-list-item>
-              <v-list-item v-if="user">
+              <v-list-item v-if="showEvents">
                 <router-link to="/events" class="link">
                   events
                 </router-link>
@@ -238,6 +238,7 @@ import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../firebase';
 import WelcomePopup from '../components/WelcomePopup.vue';
+import { getUserPerms } from "../helpers";
 
 export default {
   name: "MainNavbar",
@@ -260,7 +261,8 @@ export default {
       logoBlackSmall,
       logoWhiteSmall,
       user: auth.currentUser,
-      isAdmin: false
+      isAdmin: false,
+      showEvents: false,
     };
   },
 
@@ -270,7 +272,7 @@ export default {
     window.addEventListener("scroll", this.updateScroll);
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log("Signed in", user);
+        // console.log("Signed in", user);
         const email = user.providerData[0].email;
         if (email.includes("@scu.edu")){
             const userName = user.displayName;
@@ -283,10 +285,43 @@ export default {
               });
               this.showWelcome = true;
             }
-            const idToken = await user.getIdTokenResult();
-            if(idToken.claims.admin) {
+            const perms = await getUserPerms(user);
+            const adminPerms = [
+              "changeRolePerms",
+              "changeUserRole",
+              "editMyEvent",
+              "deleteMyEvent",
+
+              "acmAddEvent",
+              "acmEditEvent",
+              "acmDeleteEvent",
+
+              "icpcAddEvent",
+              "icpcEditEvent",
+              "icpcDeleteEvent",
+
+              "acmwAddEvent",
+              "acmwEditEvent",
+              "acmwDeleteEvent",
+
+              "broncosecAddEvent",
+              "broncosecEditEvent",
+              "broncosecDeleteEvent",
+
+              "aicAddEvent",
+              "aicEditEvent",
+              "aicDeleteEvent",
+
+              "otherAddEvent",
+              "otherEditEvent",
+              "otherDeleteEvent",
+            ]
+            const admin = Object.keys(perms).some((perm) => perms[perm] && adminPerms.includes(perm));
+            if (admin) {
               this.isAdmin = true;
             }
+
+            this.showEvents = perms.viewEvents;
         }
         else {
           alert("Please sign in with your scu.edu email address");
@@ -322,7 +357,7 @@ export default {
     async signOut() {
       await auth.signOut();
       if(this.$route.meta.authRequired){
-        this.$router.push("/");
+        this.$router.push("/").catch(()=>{});
       }
     },
     closePopup() {

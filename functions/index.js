@@ -10,6 +10,85 @@ const {App} = require("@slack/bolt");
 
 admin.initializeApp();
 
+exports.addRole = functions.https.onCall(async (data, context) => {
+    const isAdmin = context.auth.token.admin || false;
+    if (!isAdmin) {
+        return {message: "You must be an admin to add another admin user"};
+    }
+    const uid = data.uid;
+    const role = data.role;
+    if (!uid) {
+        return {message: "Please pass a UID to the function"};
+    }
+    const currentClaims = (await admin.auth().getUser(uid)).customClaims;
+
+    const roles = currentClaims?.roles ?? [];
+    roles.push(role);
+    currentClaims.roles = roles;
+
+    await admin.auth().setCustomUserClaims(uid, currentClaims);
+    const userRecord = await admin.auth().getUser(uid);
+    return {
+        uid: userRecord.uid,
+        email: userRecord.email,
+        displayName: userRecord.displayName,
+        claims: userRecord.customClaims,
+    };
+});
+
+exports.removeRole = functions.https.onCall(async (data, context) => {
+    const isAdmin = context.auth.token.admin || false;
+    if (!isAdmin) {
+        return {message: "You must be an admin to add another admin user"};
+    }
+    const uid = data.uid;
+    const role = data.role;
+    if (!uid) {
+        return {message: "Please pass a UID to the function"};
+    }
+    const currentClaims = (await admin.auth().getUser(uid)).customClaims;
+
+    const roles = currentClaims?.roles ?? [];
+    console.log("INDEX", roles.indexOf(role));
+    roles.splice(roles.indexOf(role), 1);
+    currentClaims.roles = roles;
+
+    await admin.auth().setCustomUserClaims(uid, currentClaims);
+    const userRecord = await admin.auth().getUser(uid);
+    return {
+        uid: userRecord.uid,
+        email: userRecord.email,
+        displayName: userRecord.displayName,
+        claims: userRecord.customClaims,
+    };
+});
+
+exports.searchUsers = functions.https.onCall((data, context) => {
+    const isAdmin = context.auth.token.admin || false;
+    if (!isAdmin) {
+        return {error: "You must be an admin to search users"};
+    }
+    if (!data.uids) {
+        return {error: "Please pass an array of UIDs to the function"};
+    }
+    const uids = data.uids.map((uid) => {
+return {uid: uid};
+});
+
+    console.log(uids);
+
+    return admin.auth().getUsers(uids).then((records) => {
+        return {users: records.users.map((userRecord) => {
+            return {
+                uid: userRecord.uid,
+                email: userRecord.email,
+                displayName: userRecord.displayName,
+                claims: userRecord.customClaims,
+            };
+        })};
+    });
+});
+
 exports.addAdmin = functions.https.onCall((data, context) => {
     const uid = data.uid;
     const isAdmin = context.auth.token.admin || false;
@@ -170,7 +249,6 @@ async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,sl
     return "done";
 }
 
-// Function (created using Vue filters, https://v2.vuejs.org/v2/guide/filters.html) used to format an event's date and time
 function formatDateTime(event) {
     if (!event?.startDate) return "";
     // If a start date is provided but an end date isn't, return the start date:

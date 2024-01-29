@@ -17,10 +17,12 @@ import ProfilePage from "@/pages/ProfilePage.vue";
 import AdminPage from "@/pages/AdminPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import RedirectRouter from "@/pages/RedirectRouter.vue";
+import AdminRoles from '@/pages/AdminRoles.vue'
 
 import VueYoutube from 'vue-youtube'
 
 import {auth} from './firebase';
+import { getUserPerms } from "./helpers";
 
 Vue.config.productionTip = false;
 
@@ -42,6 +44,7 @@ const routes = [
     component: Events,
     meta: {
       authRequired: true,
+      permsRequired: [["viewEvents"]]
     },
   },
   {
@@ -54,13 +57,49 @@ const routes = [
   {
     path: "/register/:id",
     component: RegisterPage,
+    permsRequired: [["canRegister"]]
   },
   {
     path: "/admin",
     component: AdminPage,
     meta: {
       authRequired: true,
-      adminRequired: true
+      permsRequired: [[
+        "changeRolePerms",
+        "changeUserRole",
+        "editMyEvent",
+        "deleteMyEvent",
+        "acmAddEvent",
+        "acmEditEvent",
+        "acmDeleteEvent",
+        "icpcAddEvent",
+        "icpcEditEvent",
+        "icpcDeleteEvent",
+        "acmwAddEvent",
+        "acmwEditEvent",
+        "acmwDeleteEvent",
+        "broncosecAddEvent",
+        "broncosecEditEvent",
+        "broncosecDeleteEvent",
+        "aicAddEvent",
+        "aicEditEvent",
+        "aicDeleteEvent",
+        "otherAddEvent",
+        "otherEditEvent",
+        "otherDeleteEvent",
+        "viewAllResume",
+        "addProject",
+        "editProject",
+        "deleteProject"
+      ]]
+    },
+  },
+  {
+    path: "/admin/roles",
+    component: AdminRoles,
+    meta: {
+      authRequired: true,
+      // permsRequired: [["changeRolePerms", "changeUserRole"]]
     },
   },
   {
@@ -68,7 +107,21 @@ const routes = [
     component: EditEvent,
     meta: {
       authRequired: true,
-      adminRequired: true
+      permsRequired: [[
+        "editMyEvent",
+        "acmAddEvent",
+        "acmEditEvent",
+        "acmwAddEvent",
+        "acmwEditEvent",
+        "icpcAddEvent",
+        "icpcEditEvent",
+        "broncosecAddEvent",
+        "broncosecEditEvent",
+        "aicAddEvent",
+        "aicEditEvent",
+        "otherAddEvent",
+        "otherEditEvent",
+      ]]
     },
   },
   {
@@ -109,31 +162,45 @@ const router = new VueRouter({
 router.beforeEach( async (to, from, next) => {
   //Check if the page we are going to requires a user to be signed in or admin permissions
   const needsAuth = to.matched.some(record => record.meta.authRequired);
-  const needsAdmin = to.matched.some(record => record.meta.adminRequired);
-  if (needsAuth) {
-    const user = auth.currentUser;
-    if (user) {
-      if(needsAdmin){
-        const idToken = await user.getIdTokenResult();
-        if(!idToken.claims.admin) {
-          //Push the user to a redirect page to check if they have auth or not
-          const path = "/redirect?uri="+encodeURIComponent(to.path)+"&admin=true";
-          next({
-            path: path,
-          });
+  const needsPerms = to.matched.find(record => record.meta.permsRequired)?.meta?.permsRequired;
+  if (!needsAuth) {
+    next();
+    return;
+  }
+
+  const user = auth.currentUser;
+  if (user) {
+    let valid = true;
+
+    if(needsPerms && needsPerms.length > 0) {
+      const perms = await getUserPerms(user);
+      for(let permGroup of needsPerms) {
+        let groupValid = false;
+        for(let perm of permGroup) {
+          if(perms[perm]) {
+            groupValid = true;
+          }
+        }
+        if(!groupValid) {
+          // console.log("FAILED for", permGroup, perms)
+          valid = false;
         }
       }
-      next();
-    } else {
-      //Push the user to a redirect page to check if they have auth or not
-      const path = "/redirect?uri="+encodeURIComponent(to.path)+"&admin="+(needsAdmin ? "true" : "false");
-      next({
-        path: path,
-      });
     }
-  } else {
-    next();
+    if(valid) {
+      next();
+      return;
+    }
   }
+
+  let path = "/redirect?uri="+encodeURIComponent(to.path);
+  if(needsPerms && needsPerms.length > 0) {
+    path += "&perms="+encodeURIComponent(needsPerms.map(row => row.join(",")).join(":"))
+  }
+
+  next({
+    path: path,
+  });
 });
 
 new Vue({

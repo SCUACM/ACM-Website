@@ -6,6 +6,8 @@
 
 <script>
 import {auth} from '../firebase';
+import { getUserPerms } from '../helpers';
+
 export default {
     name: "RedirectRouter",
     async mounted() {
@@ -15,15 +17,28 @@ export default {
             if (user) {
                 console.log(user);
                 const uri = decodeURIComponent(this.$route.query.uri);
-                const needsAdmin = this.$route.query.admin;
                 let canRedirect = true;
                 // Check if the user has admin permissions
-                if(needsAdmin) {
-                    const idToken = await user.getIdTokenResult();
-                    if(!idToken.claims.admin) {
-                        canRedirect = false;
+                const perms = await getUserPerms(user);
+                const requiredPerms = decodeURI(this.$route.query.perms ?? "");
+
+                if(requiredPerms!= "") {
+                    let permsSplit = requiredPerms.split(":");
+                    for(let group of permsSplit) {
+                        let permGroup = group.split(",");
+                        let groupValid = false;
+                        for(let perm of permGroup) {
+                            if(perms[perm]) {
+                                groupValid = true;
+                            }
+                        }
+                        if(!groupValid) {
+                            // console.log("FAILED for", permGroup, perms)
+                            canRedirect = false;
+                        }
                     }
                 }
+
                 // User has propper permissions!
                 if(canRedirect) {
                     this.$router.push(uri);

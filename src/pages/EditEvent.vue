@@ -27,6 +27,14 @@
         >
         </v-textarea>
         <div class="form-header">
+          Tags
+        </div>
+        <div v-for="tag of allTags" :key="tag">
+          <input type="checkbox" :checked="eventDetails.tags?.includes(tag)" :disabled="!allowedTags.includes(tag)" @change="toggleTag(tag)" />
+          {{ eventTags[tag] }}
+        </div>
+
+        <div class="form-header">
           Location
         </div>
         <v-text-field
@@ -94,7 +102,8 @@ import MainFooter from "@/layout/MainFooter.vue";
 
 import moment from 'moment'
 import 'firebase/compat/firestore'
-import {db, Timestamp, storage} from '../firebase';
+import {db, Timestamp, storage, auth} from '../firebase';
+import { getUserPerms, eventTags } from "../helpers";
 
 export default {
   name: "EditEvent",
@@ -107,27 +116,50 @@ export default {
   computed: {
     isNew() {
       return this.$route.params.id == 'new'
+    },
+    allTags() {
+      return Object.keys(eventTags).filter((tag) => this.allowedTags.includes(tag) || this.eventDetails.tags?.includes(tag));
     }
   },
 
   async mounted() {
-    if(this.isNew) {
-      //Set the date pickers to use today, 5:45-6:45PM by default
-      const today = moment(new Date()).format('YYYY-MM-DDT');
-      this.eventDetails.startDate = today+"17:45";
-      this.eventDetails.endDate = today+"18:45";
-    }
-    else {
-      const doc = await db.collection("events").doc(this.$route.params.id).get();
-      const data = doc.data();
-      this.eventDetails = data;
-      // Format the start and end as date and times. Ex: 2022-09-19T17:45
-      const startDate = moment(data.startDate.toDate()).format('YYYY-MM-DDTHH:mm');
-      const endDate = moment(data.endDate.toDate()).format('YYYY-MM-DDTHH:mm');
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const perms = await getUserPerms(user);
+        if(perms.acmAddEvent) {this.allowedTags.push("acm")}
+        if(perms.icpcAddEvent) {this.allowedTags.push("icpc")}
+        if(perms.acmwAddEvent) {this.allowedTags.push("acmw")}
+        if(perms.broncosecAddEvent) {this.allowedTags.push("broncosec")}
+        if(perms.aicAddEvent) {this.allowedTags.push("aic")}
+        if(perms.otherAddEvent) {this.allowOther = true}
 
-      this.eventDetails.startDate = startDate;
-      this.eventDetails.endDate = endDate;
-    }
+        if(this.isNew) {
+          //Set the date pickers to use today, 5:45-6:45PM by default
+          const today = moment(new Date()).format('YYYY-MM-DDT');
+          this.eventDetails.startDate = today+"17:45";
+          this.eventDetails.endDate = today+"18:45";
+          this.eventDetails.createdBy = user.uid;
+
+          if(this.allowedTags.length == 1) {
+            if(!this.eventDetails.tags) {
+              this.eventDetails.tags = [];
+            }
+            this.eventDetails.tags.push(this.allowedTags[0])
+          }
+        }
+        else {
+          const doc = await db.collection("events").doc(this.$route.params.id).get();
+          const data = doc.data();
+          this.eventDetails = data;
+          // Format the start and end as date and times. Ex: 2022-09-19T17:45
+          const startDate = moment(data.startDate.toDate()).format('YYYY-MM-DDTHH:mm');
+          const endDate = moment(data.endDate.toDate()).format('YYYY-MM-DDTHH:mm');
+
+          this.eventDetails.startDate = startDate;
+          this.eventDetails.endDate = endDate;
+        }
+      }
+    });
   },
 
   methods: {
@@ -146,6 +178,11 @@ export default {
       // Checks for if the event is valid
       if(details.title.length == 0) {
         alert("Please provide an event name");
+        return;
+      }
+
+      if(details.tags.length == 0 && !this.allowOther) {
+        alert("Please include an event tag");
         return;
       }
       const startDateTime = new Date(details.startDate);
@@ -187,6 +224,18 @@ export default {
     markFlyerRemoval(e) {
       e.preventDefault();
       this.removeFlyer = true;
+    },
+    toggleTag(tag) {
+      if(this.eventDetails.tags?.includes(tag)) {
+        this.eventDetails.tags.splice(this.eventDetails.tags.indexOf(tag),1);
+      }
+      else {
+        if(!this.eventDetails.tags) {
+          this.eventDetails.tags = [];
+        }
+        this.eventDetails.tags.push(tag);
+      }
+      console.log(this.eventDetails.tags);
     }
   },
 
@@ -194,13 +243,17 @@ export default {
     return {
       eventDetails: {
         title: '',
+        tags: [],
         description: '',
         startDate: '',
         endDate: '',
         location: '',
         flyer: null
       },
+      allowedTags: [],
+      allowOther: false,
       removeFlyer: false,
+      eventTags: eventTags,
       flyerFile: null,
       rules: {
         required: (value) => !!value || "Required.",

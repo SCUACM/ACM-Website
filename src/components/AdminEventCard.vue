@@ -1,16 +1,16 @@
 <template>
     <div>
-        <h3>{{event.title}} ({{ formatDateTime(event) }}) Attendance: {{this.Attendance}} </h3>
-        <router-link :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
-        <button @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
+        <h3>{{event.title}} ({{formatDateTime(event)}}) Attendance: {{this.Attendance}} </h3>
+        <router-link v-if="canEdit" :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
+        <button v-if="canDelete" @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
         <button @click="() => openQrCode(event.id)">View Event QR Code</button>
     </div>
 </template>
 <script>
 
-import {db, functions} from '../firebase';
+import {db, functions, auth} from '../firebase';
 import QRCode from 'qrcode';
-import {getFormatDateTime} from '../helpers';
+import {getFormatDateTime, getUserPerms} from '../helpers';
 
 export default {
     name: "AdminEventCard",
@@ -18,18 +18,25 @@ export default {
     components: {},
 
     props: {
-        event: Object
+        event: Object,
     },
 
     async mounted(){
         this.getEventAttendance(this.event.id);
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                const perms = await getUserPerms(user);
+                this.canEdit = perms.otherEditEvent || (perms.editMyEvent && this.event.createdBy == user.uid) || (perms.acmEditEvent && this.event.tags?.includes("acm")) || (perms.acmwEditEvent && this.event.tags?.includes("acmw")) || (perms.aicEditEvent && this.event.tags?.includes("aic")) || (perms.broncosecEditEvent && this.event.tags?.includes("broncosec")) || (perms.otherEditEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
+                this.canDelete = perms.otherDeleteEvent || (perms.deleteMyEvent && this.event.createdBy == user.uid) || (perms.acmDeleteEvent && this.event.tags?.includes("acm")) || (perms.acmwDeleteEvent && this.event.tags?.includes("acmw")) || (perms.aicDeleteEvent && this.event.tags?.includes("aic")) || (perms.broncosecDeleteEvent && this.event.tags?.includes("broncosec")) || (perms.otherDeleteEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
+            }
+        });
     },
 
     methods: {
         async deleteEvent(id) {
             if (confirm("Are you sure you want to delete this event?") == true) {
                 await db.collection("events").doc(id).delete();
-                console.log("deleted");
+                alert("deleted");
             }
         },
         async getEventAttendance(e){
@@ -65,7 +72,9 @@ export default {
     },
 
     data: () => ({
-        Attendance: null
+        Attendance: null,
+        canEdit: false,
+        canDelete: false,
     })
 }
 </script>
