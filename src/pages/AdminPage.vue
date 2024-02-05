@@ -70,6 +70,7 @@ import { getUserPerms } from "../helpers";
                 if(perms.acmwEditEvent || perms.acmwDeleteEvent) {this.allowedTags.push("acmw")}
                 if(perms.broncosecEditEvent || perms.broncosecDeleteEvent) {this.allowedTags.push("broncosec")}
                 if(perms.aicEditEvent || perms.aicDeleteEvent) {this.allowedTags.push("aic")}
+                if(perms.icpcEditEvent || perms.icpcDeleteEvent) {this.allowedTags.push("icpc")}
                 this.acmEvents = [];
 
                 if(perms.editMyEvent || perms.deleteMyEvent) {
