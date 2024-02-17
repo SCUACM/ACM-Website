@@ -40,6 +40,8 @@ import DavisRobertson from "../assets/board/broncosec/Davis_Robertson.jpg";
 import EthanSychangco from "../assets/board/broncosec/Ethan_Sychangco.jpg";
 import TiffanyNguyen from "../assets/board/broncosec/Tiffany_Nguyen.jpg";
 import VarunMangla from "../assets/board/broncosec/Varun_Mangla.jpg";
+import AdrianZhang from "../assets/board/broncosec/Adrian_Zhang.jpg";
+import JasonWu from "../assets/board/broncosec/Jason_Wu.jpg";
 
 import AnayaGoradia from "../assets/board/ACM-W/Anaya_Goradia.jpg";
 import LeilaErhili from "../assets/board/ACM-W/Leila_Erhili.jpg";
@@ -387,6 +389,18 @@ export default {
           role: "Workshop Coordinator",
           bio:
             "Hello everyone! I'm Varun, a sophomore Computer Science and Engineering student from Los Altos, CA. While I only started coding during the winter quarter of my first year at SCU, I've always been fascinated with technology. I'm eager to join BroncoSec as its Public Relations manager this year, as participating in the club helped me develop a budding interest in cybersecurity. Through this role, I intend to introduce other students to BroncoSec and the ever-growing field of cybersecurity. Outside of computer science, some of my interests are music, games, and hanging out with my friends. Please let me know if you have any questions or suggestions, and I'm looking forward to seeing everyone at our weekly club meetings!",
+        },
+        {
+          src: AdrianZhang,
+          name: "Adrian Zhang",
+          role: "Underclassmen Rep",
+          bio: ""
+        },
+        {
+          src: JasonWu,
+          name: "Jason Wu",
+          role: "Underclassmen Rep",
+          bio: ""
         },
       ],
 
