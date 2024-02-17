@@ -28,8 +28,8 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="Hack for Humanity will begin Feb. 17th! Sign-up "
-        link="https://bit.ly/H4H-sign-up"
+        content="Hack for Humanity has begun! Join the Devpost "
+        link="https://hack-for-humanity-2024.devpost.com/"
         linkTitle="here!"
       />
       <v-container style="max-width: 800px;">
