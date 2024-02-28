@@ -10,6 +10,7 @@ import { firestorePlugin } from 'vuefire';
 import IndexHome from "@/pages/IndexHome.vue";
 import BoardPage from "@/pages/BoardPage.vue";
 import CalendarPage from "@/pages/CalendarPage.vue";
+import PrivacyPolicy from "@/pages/PrivacyPolicy.vue";
 import Events from "@/pages/EventList.vue";
 import JoinUs from "@/pages/JoinUs.vue";
 import EditEvent from "@/pages/EditEvent.vue";
@@ -38,6 +39,10 @@ const routes = [
   {
     path: "/calendar",
     component: CalendarPage,
+  },
+  {
+    path: "/privacy",
+    component: PrivacyPolicy,
   },
   {
     path: "/events",
