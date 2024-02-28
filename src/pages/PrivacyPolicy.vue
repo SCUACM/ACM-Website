@@ -171,7 +171,7 @@
           <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.</p>
           <p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
           <h2>California Consumer Privacy Act</h2>
-          <p>As We are a part of a non-profit organization, the California Consumer Privacy Act of 2018 (CCPA) does cover Our Organization.</p>
+          <p>As We are a part of a non-profit organization, the California Consumer Privacy Act of 2018 (CCPA) does not cover Our Organization.</p>
           <h2>Links to Other Websites</h2>
           <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
           <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
