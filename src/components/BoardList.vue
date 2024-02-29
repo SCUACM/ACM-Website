@@ -10,6 +10,8 @@
 
     <BoardListSection title="ACM-G" :memberList="acmGBoard" />
 
+    <BoardListSection title="Competitive Programming" :memberList="competitveProgrammingBoard" />
+
     <BoardListSection title="Chapter Advisors" :memberList="chapterAdvisors" />
   </div>
 </template>
@@ -72,6 +74,9 @@ import JordanRandleman from "../assets/board/ACM-G/Jordan_Randleman.jpg"
 import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
 import NolanAnderson from "../assets/board/ACM-G/Nolan_Anderson.jpg"
 import RahulYalavarthi from "../assets/board/ACM-G/Rahul_Yalavarthi.jpg"
+
+import DarylHo from "../assets/board/competitiveProgramming/Daryl_Ho.jpg"
+import MattyHerzig from "../assets/board/competitiveProgramming/Matty_Herzig.jpg"
 
 import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg";
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
@@ -473,6 +478,29 @@ export default {
         },
       ],
 
+      competitveProgrammingBoard: [
+        {
+          src: ConnerYin,
+          name: "Conner Yin",
+          role: "President",
+          bio:
+            "Hello! I’m Conner, a junior computer science & engineering major from Cupertino, CA. I first found my passion for programming by exploring efficient algorithms to solve time-complexity problems. Currently, I like writing scripts to beat web games as well as developing simple websites and applications. In my free time, I love writing songs, going on runs and walks, and playing social deception games with friends. Looking forward to meeting you all!"
+        },
+        {
+          src: DarylHo,
+          name: "Daryl Ho",
+          role: "Vice President",
+          bio:
+            ""
+        },
+        {
+        src: MattyHerzig,
+        name: "Matty Herzig",
+        role: "Programming Director",
+        bio: "Hi! I'm Matty, and I am pursuing a computer science & engineering degree. I'm passionate in just about anything, especially computers and making things. If you need help or advice, just ask!"
+        },
+      ],
+      
       chapterAdvisors: [
         {
           src: YiFang,
