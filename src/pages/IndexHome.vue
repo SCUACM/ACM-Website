@@ -28,7 +28,7 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="Hack for Humanity has begun! Join the Devpost "
+        content="Hack for Humanity 2024 has concluded! See the Devpost "
         link="https://hack-for-humanity-2024.devpost.com/"
         linkTitle="here!"
       />
