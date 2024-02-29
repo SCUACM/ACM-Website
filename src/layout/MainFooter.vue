@@ -2,19 +2,19 @@
   <div>
     <footer class="pa-8 mt-16" style="background-color: #1c548d;">
       <v-row
-        style="display: flex; justify-content: center; text-align: center;"
+          style="display: flex; justify-content: center; text-align: center;"
       >
         <v-col cols="12" class="footer-header">
           Join our mailing list today
         </v-col>
         <v-col cols="12">
           <v-btn
-            style="border-radius: 50px; border: solid white"
-            class="join-btn"
-            outlined
-            height="60px"
-            width="230px"
-            to="/joinus"
+              style="border-radius: 50px; border: solid white"
+              class="join-btn"
+              outlined
+              height="60px"
+              width="230px"
+              to="/joinus"
           >
             Sign me up!
           </v-btn>
@@ -25,21 +25,21 @@
       <v-container style="max-width: 1000px">
         <v-row>
           <v-col
-            class="clickable"
-            @click="$router.push('/')"
-            cols="12"
-            sm="12"
-            md="4"
-            lg="4"
-            xl="4"
+              class="clickable"
+              @click="$router.push('/')"
+              cols="12"
+              sm="12"
+              md="4"
+              lg="4"
+              xl="4"
           >
             <v-img
-              width="200px"
-              height="100px"
-              style="margin: auto;"
-              contain
-              :lazy-src="Logo"
-              :src="Logo"
+                width="200px"
+                height="100px"
+                style="margin: auto;"
+                contain
+                :lazy-src="Logo"
+                :src="Logo"
             />
           </v-col>
           <v-col cols="12" sm="12" md="4" lg="4" xl="4">
@@ -49,24 +49,27 @@
             <div class="footer-subtitle mb-4" style="text-align: center">
               acm@scu.edu
             </div>
+            <div class="footer-title mb-4" style="text-align: center" @click="$router.push('/privacy')">
+              <a href="/privacy" style="color: white; text-decoration: none;">Privacy Policy</a>
+            </div>
           </v-col>
           <v-col
-            cols="12"
-            sm="12"
-            md="4"
-            lg="4"
-            xl="4"
-            style="text-align: center"
+              cols="12"
+              sm="12"
+              md="4"
+              lg="4"
+              xl="4"
+              style="text-align: center"
           >
             <div class="footer-title mb-4">
               Connect with us on social media!
             </div>
             <v-btn
-              icon
-              v-for="(social, i) in socials"
-              :key="i"
-              :href="social.href"
-              class="mx-1"
+                icon
+                v-for="(social, i) in socials"
+                :key="i"
+                :href="social.href"
+                class="mx-1"
             >
               <v-icon large :color="social.color">
                 {{ social.icon }}
@@ -82,6 +85,7 @@
 <script>
 import Logo from "../assets/branding/logo_temp_new_invert.svg";
 import "../assets/scss/footer-media.scss";
+
 export default {
   name: "MainFooter",
 
