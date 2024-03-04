@@ -28,9 +28,9 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="Hack for Humanity 2024 has concluded! See the Devpost "
-        link="https://hack-for-humanity-2024.devpost.com/"
-        linkTitle="here!"
+        content="Roblox Hack 2024, SCU's first game jam, will be on April 13-14th "
+        link="https://bit.ly/roblox-hack-sign-up"
+        linkTitle="SIGN UP TODAY!!!"
       />
       <v-container style="max-width: 800px;">
         <v-row
