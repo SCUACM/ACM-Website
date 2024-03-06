@@ -104,7 +104,7 @@ const routes = [
     component: AdminRoles,
     meta: {
       authRequired: true,
-      // permsRequired: [["changeRolePerms", "changeUserRole"]]
+      permsRequired: [["changeRolePerms", "changeUserRole"]]
     },
   },
   {
