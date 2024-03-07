@@ -87,11 +87,11 @@
           </span>
           <span class="link mx-6">
             <a
-              @click="routeTo('https://hackforhumanity.io/')"
+              @click="routeTo('https://roblox.scuacm.com/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
             >
-              H4H
+              roblox hack
             </a>
           </span>
           <span class="link ml-6">
@@ -274,7 +274,7 @@ export default {
       if (user) {
         // console.log("Signed in", user);
         const email = user.providerData[0].email;
-        if (email.includes("@scu.edu")){
+        if (email.includes("@")){
             const userName = user.displayName;
             const uid = user.uid;
 
