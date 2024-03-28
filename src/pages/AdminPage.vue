@@ -11,7 +11,7 @@
                 </v-text-field>
                 <button @click="addAdmin">Add Admin Privileges</button>
                 <button @click="removeAdmin" class="remove">Remove Admin Privileges</button> -->
-                <AdminEventDataCard :events="acmEvents" />
+                <AdminEventDataCard :events="acmEvents" :tags="this.allowedTags"/>
 
                 <h2>Manage Events</h2>
                 <router-link to="/admin/events/new" v-if="canAddEvents">

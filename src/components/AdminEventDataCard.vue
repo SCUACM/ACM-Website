@@ -2,15 +2,20 @@
   <div>
     <v-btn style="width: 150px; margin-bottom: 15px;" @click="toggleShowData()">{{ showData ? "Hide" : "Show" }} Trends</v-btn>
     <v-card v-if="showData" style="padding: 10px">
+      <v-btn @click="updateData()">Update</v-btn>
+      <br />
+      <select v-if="tags.length > 1" @change="updateSelectedTag($event.target.value)" style="margin-top: 5px;">
+          <option value="all">all</option>
+          <option :value="tag" v-for="tag in tags" :key="tag">{{ tag }}</option>
+        </select>
       <div style="width: 200px">
-        <v-btn @click="updateData()">Update</v-btn>
         <v-slider 
           v-model="tickValue"
           :max="25"
           :min="5"
           :step="5"
           thumb-label
-        />  
+        />
       </div>
       <v-sparkline
         :value="this.attendances"
@@ -20,7 +25,7 @@
         :line-width="1"
         :smooth="4"
       />
-      <h3>Last {{ Math.min(events.length, tickValue) }} events</h3>
+      <h3>Last {{ Math.min(this.filteredEvents.length, tickValue) }} events</h3>
     </v-card>
   </div>
 </template>
@@ -34,6 +39,7 @@ export default {
   
   props: {
     events: Array,
+    tags: Array,
   },
 
   methods: {
@@ -43,14 +49,27 @@ export default {
         this.updateData();
       }
     },
+    updateSelectedTag(tag) {
+      this.selectedTag = tag;
+    },
     async updateData() {
-      this.attendances = [];
-      this.dates = [];
-      for (let i = Math.min(this.events.length - 1, this.tickValue - 1); i >= 0; i--) {
-        this.attendances.push((await functions.httpsCallable("getEventAttendance")({id: this.events[i].id})).data);
+      this.filteredEvents = this.selectedTag == "all" ?  this.events : [];
+      if (this.selectedTag != "all") {
+        for (let e of this.events) {
+          if (e.tags.includes(this.selectedTag)) {
+            this.filteredEvents.push(e);
+          }
+        }
       }
-      for (let i = Math.min(this.events.length - 1, this.tickValue - 1); i >= 0; i--) {
-        let dt = this.events[i].startDate.toDate();
+
+      this.attendances = [];
+      for (let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1); i >= 0; i--) {
+        this.attendances.push((await functions.httpsCallable("getEventAttendance")({id: this.filteredEvents[i].id})).data);
+      }
+
+      this.dates = [];
+      for (let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1); i >= 0; i--) {
+        let dt = this.filteredEvents[i].startDate.toDate();
         this.dates.push((dt.getMonth() + 1) + "/" + dt.getDate());
       }
     }
@@ -61,6 +80,8 @@ export default {
     attendances: [],
     dates: [],
     tickValue: 10,
+    selectedTag: "all",
+    filteredEvents: [],
   })
 }
 </script>
