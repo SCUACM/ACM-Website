@@ -11,7 +11,8 @@
                 </v-text-field>
                 <button @click="addAdmin">Add Admin Privileges</button>
                 <button @click="removeAdmin" class="remove">Remove Admin Privileges</button> -->
-                
+                <AdminEventDataCard :events="acmEvents" />
+
                 <h2>Manage Events</h2>
                 <router-link to="/admin/events/new" v-if="canAddEvents">
                     <button class="create">Create New Event</button>
@@ -28,19 +29,22 @@
   import MainNavbar from "@/layout/MainNavbar.vue";
   import MainFooter from "@/layout/MainFooter.vue";
 
+
   import 'firebase/compat/firestore'
   import {db, functions, auth} from '../firebase';
-import AdminEventCard from "../components/AdminEventCard.vue";
-import { getUserPerms } from "../helpers";
+  import AdminEventCard from "../components/AdminEventCard.vue";
+  import AdminEventDataCard from "../components/AdminEventDataCard.vue";
+  import { getUserPerms } from "../helpers";
   
   export default {
     name: "AdminPage",
   
     components: {
-    MainNavbar,
-    MainFooter,
-    AdminEventCard
-},
+        MainNavbar,
+        MainFooter,
+        AdminEventCard,
+        AdminEventDataCard,
+    },
 
     methods: {
         async addAdmin() {
