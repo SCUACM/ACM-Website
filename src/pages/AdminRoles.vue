@@ -154,19 +154,19 @@ import { permsList, getUserPerms } from '../helpers';
         async searchUser() {
             if(this.search.length == 0) {
                 this.searchResults = [];
+                return
             }
             const query = await db.collection("users").where('name', '>=', this.search).where('name', '<=', this.search+ '\uf8ff').get();
             let results = query.docs;
-            if(query.docs.length == 0) {
+            if(results.length == 0) {
                 // search by document ID
                 const query = await db.collection("users").doc(this.search).get();
                 if(query.exists) {
-                    results = [query.doc];
+                    results = [query];
                 }
             }
             this.searchResults = [];
             await functions.httpsCallable("searchUsers")({uids: results.map(doc => doc.id)}).then((result) => {
-                // console.log(result.data.users);
                 this.searchResults = result.data.users;
             });
         },

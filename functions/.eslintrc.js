@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"] */
 module.exports = {
   root: true,
   env: {
