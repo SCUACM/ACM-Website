@@ -56,7 +56,7 @@ export default {
       this.filteredEvents = this.selectedTag == "all" ?  this.events : [];
       if (this.selectedTag != "all") {
         for (let e of this.events) {
-          if (e.tags.includes(this.selectedTag)) {
+          if (e.tags?.includes(this.selectedTag)) {
             this.filteredEvents.push(e);
           }
         }
