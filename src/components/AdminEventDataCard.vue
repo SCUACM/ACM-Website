@@ -2,7 +2,10 @@
   <div>
     <v-btn style="width: 150px; margin-bottom: 15px;" @click="toggleShowData()">{{ showData ? "Hide" : "Show" }} Trends</v-btn>
     <v-card v-if="showData" style="padding: 10px">
-      <v-btn @click="updateData()">Update</v-btn>
+      <div style="height: 40px">
+        <v-btn v-if="!updating" @click="updateData()">Update</v-btn>
+        <p v-else>Loading...</p>
+      </div>
       <br />
       <select v-if="tags.length > 1" @change="updateSelectedTag($event.target.value)" style="margin-top: 5px;">
           <option value="all">all</option>
@@ -53,6 +56,11 @@ export default {
       this.selectedTag = tag;
     },
     async updateData() {
+      if (this.updating) {
+        return
+      }
+
+      this.updating = true;
       this.filteredEvents = this.selectedTag == "all" ?  this.events : [];
       if (this.selectedTag != "all") {
         for (let e of this.events) {
@@ -72,6 +80,8 @@ export default {
         let dt = this.filteredEvents[i].startDate.toDate();
         this.dates.push((dt.getMonth() + 1) + "/" + dt.getDate());
       }
+      
+      this.updating = false;
     }
   },
 
@@ -82,6 +92,7 @@ export default {
     tickValue: 10,
     selectedTag: "all",
     filteredEvents: [],
+    updating: false
   })
 }
 </script>
