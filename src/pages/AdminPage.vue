@@ -18,7 +18,14 @@
                     <button class="create">Create New Event</button>
                 </router-link>
                 <span v-if="canAddEvents">or select an existing event below:</span><br>
-                <AdminEventCard v-for="event of acmEvents" :key="event.id" :event="event">
+                <span v-if="this.allowedTags.length > 1">
+                    Filter to
+                    <select @change="updateSelectedTag($event.target.value)" style="text-decoration-line: underline">
+                        <option value="all">all</option>
+                        <option :value="tag" v-for="tag in this.allowedTags" :key="tag">{{ tag }}</option>
+                    </select>
+                </span>
+                <AdminEventCard v-for="event of acmEvents.filter(e => (this.selectedTag == 'all' || e.tags?.includes(this.selectedTag) || false))" :key="event.id" :event="event">
                 </AdminEventCard>
             </v-container>
         <MainFooter />
@@ -58,6 +65,9 @@
                 const result = await functions.httpsCallable("removeAdmin")({uid: this.uid});
                 alert(result.data.message);
             }
+        },
+        updateSelectedTag(tag) {
+            this.selectedTag = tag;
         },
     },
 
@@ -117,6 +127,7 @@
         canEditEvents: false,
         canDeleteEvents: false,
         allowedTags: [],
+        selectedTag: 'all'
       };
     },
   };
