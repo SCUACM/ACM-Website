@@ -1,3 +1,4 @@
+/* eslint linebreak-style: ["error", "windows"] */
 /* eslint-disable max-len */
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
@@ -20,9 +21,9 @@ exports.addRole = functions.https.onCall(async (data, context) => {
     if (!uid) {
         return {message: "Please pass a UID to the function"};
     }
-    const currentClaims = (await admin.auth().getUser(uid)).customClaims;
 
-    const roles = currentClaims?.roles ?? [];
+    const currentClaims = (await admin.auth().getUser(uid)).customClaims || {};
+    const roles = currentClaims?.roles || [];
     roles.push(role);
     currentClaims.roles = roles;
 
