@@ -66,7 +66,7 @@
                   : 'link',
               ]"
             >
-              calendar
+              events
             </router-link>
           </span>
           <span class="link mx-6" v-if="showEvents">
