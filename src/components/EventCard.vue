@@ -3,8 +3,8 @@
     <div>
       <button @click="dialog = true">
         <img v-if="image" :src="image" class="flyer">
-        <div v-else :class="[ view==pageViews.List ? 'list' : 'grid']" class="no-flyer">
-          {{ event.title }}
+        <div v-else class="no-flyer" :class="[view==pageViews.List ? 'list' : 'grid']">
+          {{ event.title }} asd
         </div>
       </button>
       <v-dialog v-model="dialog" width="unset">
@@ -138,24 +138,13 @@ export default {
 }
 
 .no-flyer{
-  max-width: 240px;
   overflow: hidden;
   border: white 7.5px solid;
-  padding: 0.5rem;
   background: #1c548d;
   border-radius: 20px;
   color: white;
   text-align: center;
-}
-
-.no-flyer.list{
-  height: 250px;
-  font-size: 28px;
-}
-
-.no-flyer.grid{
- width: max(8vw, 7rem);
- height: calc(max(8vw, 7rem) * 1.25);
+  padding: 0.5rem;
 }
 
 .flyer {
@@ -190,6 +179,15 @@ export default {
   gap: 1rem;
   margin-bottom: 2rem;
   padding: 1rem;
+}
+
+.no-flyer.list{
+  width: 240px;
+  height: 250px;
+  font-size: 28px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dialog-img-list{
@@ -231,7 +229,18 @@ export default {
 }
 
 .event-card-grid.big {
-    width: max(20vw, 8.75rem) !important;
+  width: max(20vw, 8.75rem) !important;
+}
+
+.no-flyer.grid{
+ width: max(8vw, 7rem);
+ height: calc(max(8vw, 7rem) * 1.25);
+}
+
+.event-card-grid.big .no-flyer.grid {
+  width: max(20vw, 8.75rem) !important;
+  height: calc(max(20vw, 8.75rem) * 1.25) !important;
+  font-size: 2.5rem;
 }
 
 .dialog-img-grid{
@@ -257,4 +266,11 @@ export default {
   border-radius: 50%;
   margin-left: 0.5rem;
 }
+
+@media screen and (max-width: 700px) {
+  .event-card-grid.big .no-flyer.grid {
+    font-size: 1.5rem;
+  }
+}
+
 </style>
