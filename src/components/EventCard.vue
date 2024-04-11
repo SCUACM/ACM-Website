@@ -4,7 +4,7 @@
       <button @click="dialog = true">
         <img v-if="image" :src="image" class="flyer">
         <div v-else class="no-flyer" :class="[view==pageViews.List ? 'list' : 'grid']">
-          {{ event.title }} asd
+          {{ event.title }}
         </div>
       </button>
       <v-dialog v-model="dialog" width="unset">
