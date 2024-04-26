@@ -26,12 +26,12 @@
     </div>
 
     <div ref="navigation" class="navigation">
-      <AnnouncementBanner
+      <!-- <AnnouncementBanner
         :show="true"
         content="Roblox Hack 2024, SCU's first game jam, will be on April 13-14th "
         link="https://bit.ly/roblox-hack-sign-up"
         linkTitle="SIGN UP TODAY!!!"
-      />
+      /> -->
       <v-container style="max-width: 800px;">
         <v-row
           style="display: flex; justify-content: center; text-align: center;"
