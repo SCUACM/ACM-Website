@@ -190,7 +190,7 @@ import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 import RelatedClubCard from "@/components/RelatedClubCard";
 import ResourceCard from "@/components/ResourceCard.vue";
-import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
+// import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
 
 import ACMW from "@/assets/images/clubs/ACM-W.png";
 import BroncoSec from "@/assets/images/clubs/BroncoSec.png";
@@ -219,7 +219,7 @@ export default {
     MainFooter,
     RelatedClubCard,
     ResourceCard,
-    AnnouncementBanner,
+    // AnnouncementBanner,
   },
 
   watch: {},
