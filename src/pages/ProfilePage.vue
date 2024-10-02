@@ -47,9 +47,34 @@
             solo
           >
           </v-select>
+          <div class="form-header">
+            Race/Ethnicity
+          </div>
+          <v-select
+            label="Race"
+            v-model="formData.race"
+            @input="callDebounce"
+            :items="race"
+            :disabled="!canEdit"
+            outlined
+            solo
+          >
+          </v-select>
+          <div class="form-header">
+            Gender
+          </div>
+          <v-select
+            label="Gender"
+            @input="callDebounce"
+            :items="gender"
+            :disabled="!canEdit"
+            v-model="formData.gender"
+            outlined
+            solo
+          >
+          </v-select>
         </v-form>
         <ManageResume v-if="viewResume" :canUpload="canUploadResume">
-
         </ManageResume>
     </v-container>
     <MainFooter />
@@ -122,6 +147,8 @@ export default {
   data() {
     return {
       graduationYears: [2023, 2024, 2025, 2026, 2027],
+      race: ['White', 'Black', 'Hispanic', 'Asian', 'Native American', 'Pacific Islander', 'Multiracial'],
+      gender: ['Female', 'Male', 'Non-Binary', 'Other'],
       formData: null,
       user: auth.currentUser,
       majorsList: majorsList,
