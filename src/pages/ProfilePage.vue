@@ -58,6 +58,7 @@
             :disabled="!canEdit"
             outlined
             solo
+            multiple
           >
           </v-select>
           <div class="form-header">
@@ -147,9 +148,11 @@ export default {
   data() {
     return {
       graduationYears: [2023, 2024, 2025, 2026, 2027],
-      race: ['White', 'Black', 'Hispanic', 'Asian', 'Native American', 'Pacific Islander', 'Multiracial'],
-      gender: ['Female', 'Male', 'Non-Binary', 'Other'],
-      formData: null,
+      race: ['White', 'Black/African American', 'Hispanic (any race)', 'Asian', 'Native American', 'Pacific Islander', 'Prefer not to say'],
+      gender: ['Female', 'Male', 'Non-Binary', 'Other', 'Prefer not to say'],
+      formData: {
+        race: [],
+      },
       user: auth.currentUser,
       majorsList: majorsList,
       canUploadResume: false,
