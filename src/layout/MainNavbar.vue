@@ -1,7 +1,10 @@
 <template>
   <div>
     <v-dialog v-model="showWelcome" max-width="800px">
-      <WelcomePopup :user="user" @close="closePopup"></WelcomePopup>
+      <WelcomePopup :user="user" @close="closePopup1"></WelcomePopup>
+    </v-dialog>
+    <v-dialog v-model="showDEI" max-width="800px">
+      <DeiPopup @close="closePopup2"></DeiPopup>
     </v-dialog>
     <v-app-bar
       app
@@ -238,6 +241,7 @@ import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../firebase';
 import WelcomePopup from '../components/WelcomePopup.vue';
+import DeiPopup from '../components/DeiPopup.vue';
 import { getUserPerms } from "../helpers";
 
 export default {
@@ -257,6 +261,7 @@ export default {
   data() {
     return {
       showWelcome: false,
+      showDEI: false,
       scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
@@ -266,7 +271,7 @@ export default {
     };
   },
 
-  components: { WelcomePopup },
+  components: { WelcomePopup, DeiPopup },
 
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
@@ -284,6 +289,13 @@ export default {
                 name: userName,
               });
               this.showWelcome = true;
+            } else {
+              const userData = doc.data();
+              if (!userData.race || !userData.gender) {
+                if (this.$route.path === "/") {
+                  this.showDEI = true;
+                }
+              }
             }
             const perms = await getUserPerms(user);
             const adminPerms = [
@@ -360,8 +372,12 @@ export default {
         this.$router.push("/").catch(()=>{});
       }
     },
-    closePopup() {
+    closePopup1() {
       this.showWelcome = false;
+      this.$router.push("/profile");
+    },
+    closePopup2() {
+      this.showDEI = false;
       this.$router.push("/profile");
     }
   },
