@@ -194,7 +194,6 @@ import ResourceCard from "@/components/ResourceCard.vue";
 
 import ACMW from "@/assets/images/clubs/ACM-W.png";
 import BroncoSec from "@/assets/images/clubs/BroncoSec.png";
-import AiCollab from "@/assets/images/clubs/AiCollab.png";
 import CPC from "@/assets/images/clubs/CPC.png";
 import ACMG from "@/assets/images/clubs/ACM-G.png";
 
@@ -207,7 +206,7 @@ import workshop from "@/assets/images/index/workshop.png";
 import speaker from "@/assets/images/index/speaker.jpg";
 
 import ACM from "@/assets/images/resources/ACM.svg";
-import TeamTreeHouse from "@/assets/images/resources/teamtreehouse.svg";
+import LeetCode from "@/assets/images/resources/leetcode.svg";
 import SmartScholar from "@/assets/images/resources/smartscholar.svg";
 import DataScience from "@/assets/images/resources/datascience.svg";
 
@@ -305,11 +304,6 @@ export default {
         title: "BroncoSec",
       },
       {
-        src: AiCollab,
-        link: "https://www.instagram.com/scu_aicollab/",
-        title: "AI Collaborate",
-      },
-      {
         src: CPC,
         link: "https://scuacm.slack.com/archives/C05VB4JB2MN/",
         title: "Competitive Programming",
@@ -366,11 +360,11 @@ export default {
           "If you are a paid member of ACM, you can sign in to find access to loads of information from the Learning Center. Here you'll find a wealth of useful Ebooks, informative Webinars, a number of video courses you can follow, and more!",
       },
       {
-        src: TeamTreeHouse,
-        link: "https://teamtreehouse.com/",
-        title: "Team Treehouse",
+        src: LeetCode,
+        link: "https://leetcode.com/",
+        title: "LeetCode",
         content:
-          "Team Treehouse offers a variety of tutorials and video tutorials that help you walk through the fundamentals of whichever computer science topic you may be exploring. Please contact SCU ACM for login credentials.",
+          "Leetcode is the place to level up your coding skills and master technical job interviews. ACM has a premium account with access to specific company interview questions and more. Please contact SCU ACM for login credentials.",
       },
       {
         src: SmartScholar,
