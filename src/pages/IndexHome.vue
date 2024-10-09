@@ -26,7 +26,7 @@
     </div>
 
     <div ref="navigation" class="navigation">
-      <!-- <AnnouncementBanner :show="true" content="Roblox Hack 2024, SCU's first game jam, will be on April 13-14th " link="https://bit.ly/roblox-hack-sign-up" linkTitle="SIGN UP TODAY!!!" /> -->
+      <AnnouncementBanner :show="true" content="Amazon Web Services x INRIX Hack, SCU's first AI hackathon, is on November 16-17th " link="https://aws.scuacm.com" linkTitle="SIGN UP TODAY!!!" />
       <v-container style="max-width: 800px;">
         <v-row
           style="display: flex; justify-content: center; text-align: center;"
@@ -190,7 +190,7 @@ import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 import RelatedClubCard from "@/components/RelatedClubCard";
 import ResourceCard from "@/components/ResourceCard.vue";
-// import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
+import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
 
 import ACMW from "@/assets/images/clubs/ACM-W.png";
 import BroncoSec from "@/assets/images/clubs/BroncoSec.png";
@@ -218,7 +218,7 @@ export default {
     MainFooter,
     RelatedClubCard,
     ResourceCard,
-    // AnnouncementBanner,
+    AnnouncementBanner,
   },
 
   watch: {},

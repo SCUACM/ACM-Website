@@ -90,13 +90,22 @@
           </span>
           <span class="link mx-6">
             <a
+              @click="routeTo('https://aws.scuacm.com')"
+              :class="[!isTransparent ? 'link' : 'link-transparent']"
+              style="cursor: alias;"
+            >
+              AWS AI Hack
+            </a>
+          </span>
+          <!-- <span class="link mx-6">
+            <a
               @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
             >
               H4H
             </a>
-          </span>
+          </span> -->
           <span class="link ml-6">
             <router-link
               to="/joinus"
