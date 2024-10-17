@@ -201,10 +201,10 @@
               </v-list-item>
               <v-list-item>
                 <span
-                  @click="routeTo('https://hackforhumanity.io/')"
+                  @click="routeTo('https://aws.scuacm.com/')"
                   class="link"
                 >
-                  H4H
+                  AWS AI Hack
                 </span>
               </v-list-item>
               <v-list-item>
