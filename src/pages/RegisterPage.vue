@@ -1,5 +1,8 @@
 <template>
   <v-app>
+    <v-dialog v-model="showDEI" max-width="800px">
+      <DeiPopup @close="closePopup" />
+    </v-dialog>
     <v-container style="max-width: 500px">
       <div v-if="event">
         <button v-if="!isRegistered" @click='register'>Register for this event</button>
@@ -23,24 +26,32 @@ import 'firebase/compat/firestore'
 import {db,auth, Timestamp} from '../firebase';
 import { GoogleAuthProvider } from "firebase/auth";
 import {getFormatDateTime} from '../helpers';
+import DeiPopup from "../components/DeiPopup.vue";
 
 export default {
   name: "RegisterPage",
 
   components: {
+    DeiPopup
   },
 
   mounted() {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         this.user = user;
+        console.log(user);
         const eventId = this.$route.params.id;
         const doc = await db.collection('events').doc(eventId).get();
+        const userDoc = await db.collection('users').doc(user.uid).get();
         if(doc.exists) {
           const registration = await db.collection('registrations').where("uid", "==",user.uid).where("event", "==", eventId).get();
           // console.log(registration.docs);
           if(registration.docs.length > 0) {
             this.isRegistered = true;
+          }
+          const userData = userDoc.data();
+          if(!userData.race || !userData.gender) {
+            this.showDEI = true;
           }
           this.event = {...doc.data(), id: doc.id};
         }
@@ -68,12 +79,17 @@ export default {
     },
     formatDateTime(event) {
       return getFormatDateTime(event);
+    },
+    closePopup() {
+      this.showDEI = false;
+      this.$router.push("/profile");
     }
   },
 
   data() {
     return {
       showSignIn: false,
+      showDEI: false,
       event: null,
       isRegistered: false,
       user: null,
