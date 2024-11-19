@@ -88,7 +88,7 @@
               events
             </router-link>
           </span>
-          <span class="link mx-6">
+          <!-- <span class="link mx-6">
             <a
               @click="routeTo('https://aws.scuacm.com')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -96,16 +96,16 @@
             >
               AWS AI Hack
             </a>
-          </span>
-          <!-- <span class="link mx-6">
+          </span> -->
+          <span class="link mx-6">
             <a
               @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
             >
-              H4H
+              Hack for Humanity
             </a>
-          </span> -->
+          </span>
           <span class="link ml-6">
             <router-link
               to="/joinus"
@@ -201,10 +201,10 @@
               </v-list-item>
               <v-list-item>
                 <span
-                  @click="routeTo('https://aws.scuacm.com/')"
+                  @click="routeTo('https://hackforhumanity.io/')"
                   class="link"
                 >
-                  AWS AI Hack
+                  Hack for Humanity
                 </span>
               </v-list-item>
               <v-list-item>

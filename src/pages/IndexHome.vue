@@ -26,7 +26,7 @@
     </div>
 
     <div ref="navigation" class="navigation">
-      <AnnouncementBanner :show="true" content="Amazon Web Services x INRIX Hack, SCU's first AI hackathon, is on November 16-17th " link="https://aws.scuacm.com" linkTitle="SIGN UP TODAY!!!" />
+      <AnnouncementBanner :show="true" content="Thank you to everyone who participated in AWS x INRIX Hack! Check out the winners " link="https://aws.scuacm.com" linkTitle="here" />
       <v-container style="max-width: 800px;">
         <v-row
           style="display: flex; justify-content: center; text-align: center;"
