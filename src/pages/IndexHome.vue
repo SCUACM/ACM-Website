@@ -1,12 +1,12 @@
 <template>
-  <v-app style="position: relative;">
+  <v-app style="position: relative">
     <MainNavbar transparent no-elevation />
     <div
       ref="initContainer"
       class="parallax"
       :style="{ height: windowHeight - navigationHeight + 'px' }"
     >
-      <v-container style="max-width: 1200px; margin: auto;">
+      <v-container style="max-width: 1200px; margin: auto">
         <v-scroll-x-transition appear>
           <v-row>
             <v-col cols="12" class="title-container">
@@ -27,14 +27,12 @@
 
     <div ref="navigation" class="navigation">
       <!-- <AnnouncementBanner :show="true" content="Roblox Hack 2024, SCU's first game jam, will be on April 13-14th " link="https://bit.ly/roblox-hack-sign-up" linkTitle="SIGN UP TODAY!!!" /> -->
-      <v-container style="max-width: 800px;">
+      <v-container style="max-width: 800px">
         <v-row
-          style="display: flex; justify-content: center; text-align: center;"
+          style="display: flex; justify-content: center; text-align: center"
         >
           <v-col cols="12">
-            <div class="navigation-header">
-              Learn more
-            </div>
+            <div class="navigation-header">Learn more</div>
           </v-col>
           <v-col v-for="(link, i) in navLinks" :key="i">
             <v-btn
@@ -52,11 +50,9 @@
       </v-container>
     </div>
 
-    <v-container style="max-width: 1000px; margin-top: 150px;">
+    <v-container style="max-width: 1000px; margin-top: 150px">
       <!-- had to use style bind with js breakpoint because class didn't work for some reason... -->
-      <div class="related-club-title">
-        Club Affiliates
-      </div>
+      <div class="related-club-title">Club Affiliates</div>
       <div class="related-club-container">
         <span v-for="(club, i) in relatedClubContent" :key="i">
           <RelatedClubCard :club="club" />
@@ -64,11 +60,9 @@
       </div>
     </v-container>
 
-    <v-container style="max-width: 1000px; margin-top: 150px;" ref="club-info">
+    <v-container style="max-width: 1000px; margin-top: 150px" ref="club-info">
       <!-- had to use style bind with js breakpoint because class didn't work for some reason... -->
-      <div class="about-title">
-        About ACM
-      </div>
+      <div class="about-title">About ACM</div>
       <v-row
         v-for="(item, i) in boxContent"
         :key="i"
@@ -119,13 +113,8 @@
       </v-row>
     </v-container>
 
-    <v-container
-      ref="events"
-      style="max-width: 1200px; margin-bottom: 150px;"
-    >
-      <div class="event-title">
-        Events
-      </div>
+    <v-container ref="events" style="max-width: 1200px; margin-bottom: 150px">
+      <div class="event-title">Events</div>
       <div class="event-sub-title">
         We host a plethora of fun events for anyone of any background or major
         interested in computer science!
@@ -139,7 +128,7 @@
           md="6"
           lg="4"
           xl="4"
-          style="text-align: center; margin-left: auto; margin-right: auto;"
+          style="text-align: center; margin-left: auto; margin-right: auto"
         >
           <div>
             <v-img class="event-img" :src="event.src" :lazy-src="event.src" />
@@ -156,12 +145,10 @@
 
     <v-container
       ref="resources"
-      style="margin-bottom: 100px;"
+      style="margin-bottom: 100px"
       :style="{ maxWidth: resourceContainerWidth + 'px' }"
     >
-      <div class="resource-title">
-        Resources
-      </div>
+      <div class="resource-title">Resources</div>
       <div class="event-sub-title">
         Utilize our resources to learn more about computer science and
         technology!
@@ -198,12 +185,12 @@ import AiCollab from "@/assets/images/clubs/AiCollab.png";
 import CPC from "@/assets/images/clubs/CPC.png";
 import ACMG from "@/assets/images/clubs/ACM-G.png";
 
-import image1 from "@/assets/images/index/firstMeeting2023.jpg";
+import image1 from "@/assets/images/index/firstMeeting2024.jpg";
 import image2 from "@/assets/images/index/bonfire.jpg";
 import image3 from "@/assets/images/index/firstMeeting2022.jpg";
 
-import hackathon from "@/assets/images/index/inrixHack.png";
-import workshop from "@/assets/images/index/workshop.png";
+import hackathon from "@/assets/images/index/firstplace.jpg";
+import workshop from "@/assets/images/index/workshop.jpg";
 import speaker from "@/assets/images/index/speaker.jpg";
 
 import ACM from "@/assets/images/resources/ACM.svg";
@@ -384,7 +371,7 @@ export default {
         link: "https://www.mastersindatascience.org/careers/data-analyst/",
         title: "2U Data Science",
         content:
-          "\"Mastersindatascience.org\" is a website dedicated to outlining everything Data Science for students interested in furthering their education in STEM fields, specifically in Technology departments.",
+          '"Mastersindatascience.org" is a website dedicated to outlining everything Data Science for students interested in furthering their education in STEM fields, specifically in Technology departments.',
       },
     ],
   }),
