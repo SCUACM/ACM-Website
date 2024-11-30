@@ -1,11 +1,7 @@
 <template>
   <v-app style="position: relative">
     <MainNavbar transparent no-elevation />
-    <div
-      ref="initContainer"
-      class="parallax"
-      :style="{ height: windowHeight - navigationHeight + 'px' }"
-    >
+    <div ref="initContainer" class="parallax" :style="{ height: windowHeight - navigationHeight + 'px' }">
       <v-container style="max-width: 1200px; margin: auto">
         <v-scroll-x-transition appear>
           <v-row>
@@ -26,23 +22,17 @@
     </div>
 
     <div ref="navigation" class="navigation">
-      <!-- <AnnouncementBanner :show="true" content="Roblox Hack 2024, SCU's first game jam, will be on April 13-14th " link="https://bit.ly/roblox-hack-sign-up" linkTitle="SIGN UP TODAY!!!" /> -->
-      <v-container style="max-width: 800px">
-        <v-row
-          style="display: flex; justify-content: center; text-align: center"
-        >
+      <AnnouncementBanner :show="true"
+        content="Thank you to everyone who participated in AWS x INRIX Hack! Check out the winners "
+        link="https://aws.scuacm.com" linkTitle="here" />
+      <v-container style="max-width: 800px;">
+        <v-row style="display: flex; justify-content: center; text-align: center">
           <v-col cols="12">
             <div class="navigation-header">Learn more</div>
           </v-col>
           <v-col v-for="(link, i) in navLinks" :key="i">
-            <v-btn
-              style="border-radius: 50px; border: solid white"
-              class="join-btn"
-              outlined
-              height="60px"
-              width="230px"
-              @click="scrollTo(link.to)"
-            >
+            <v-btn style="border-radius: 50px; border: solid white" class="join-btn" outlined height="60px"
+              width="230px" @click="scrollTo(link.to)">
               {{ link.title }}
             </v-btn>
           </v-col>
@@ -63,25 +53,13 @@
     <v-container style="max-width: 1000px; margin-top: 150px" ref="club-info">
       <!-- had to use style bind with js breakpoint because class didn't work for some reason... -->
       <div class="about-title">About ACM</div>
-      <v-row
-        v-for="(item, i) in boxContent"
-        :key="i"
-        :style="{ marginBottom: containerMarginBottom + 'px' }"
-      >
+      <v-row v-for="(item, i) in boxContent" :key="i" :style="{ marginBottom: containerMarginBottom + 'px' }">
         <v-col v-if="i % 2 == 0" cols="12" sm="12" md="6" lg="6" xl="6">
           <div class="item-container">
             <v-img class="item-img" :src="item.src" :lazy-src="item.src" />
           </div>
         </v-col>
-        <v-col
-          v-if="i % 2 == 1"
-          class="hidden-md-and-up"
-          cols="12"
-          sm="12"
-          md="6"
-          lg="6"
-          xl="6"
-        >
+        <v-col v-if="i % 2 == 1" class="hidden-md-and-up" cols="12" sm="12" md="6" lg="6" xl="6">
           <div class="item-container">
             <v-img class="item-img" :src="item.src" :lazy-src="item.src" />
           </div>
@@ -97,15 +75,7 @@
             </div>
           </div>
         </v-col>
-        <v-col
-          class="hidden-sm-and-down"
-          v-if="i % 2 == 1"
-          cols="12"
-          sm="12"
-          md="6"
-          lg="6"
-          xl="6"
-        >
+        <v-col class="hidden-sm-and-down" v-if="i % 2 == 1" cols="12" sm="12" md="6" lg="6" xl="6">
           <div class="item-container">
             <v-img class="item-img" :src="item.src" :lazy-src="item.src" />
           </div>
@@ -120,16 +90,8 @@
         interested in computer science!
       </div>
       <v-row>
-        <v-col
-          v-for="(event, i) in eventContent"
-          :key="i"
-          cols="12"
-          sm="12"
-          md="6"
-          lg="4"
-          xl="4"
-          style="text-align: center; margin-left: auto; margin-right: auto"
-        >
+        <v-col v-for="(event, i) in eventContent" :key="i" cols="12" sm="12" md="6" lg="4" xl="4"
+          style="text-align: center; margin-left: auto; margin-right: auto">
           <div>
             <v-img class="event-img" :src="event.src" :lazy-src="event.src" />
           </div>
@@ -143,26 +105,14 @@
       </v-row>
     </v-container>
 
-    <v-container
-      ref="resources"
-      style="margin-bottom: 100px"
-      :style="{ maxWidth: resourceContainerWidth + 'px' }"
-    >
+    <v-container ref="resources" style="margin-bottom: 100px" :style="{ maxWidth: resourceContainerWidth + 'px' }">
       <div class="resource-title">Resources</div>
       <div class="event-sub-title">
         Utilize our resources to learn more about computer science and
         technology!
       </div>
       <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          md="6"
-          lg="3"
-          xl="3"
-          v-for="(resource, i) in resourceContent"
-          :key="i"
-        >
+        <v-col cols="12" sm="6" md="6" lg="3" xl="3" v-for="(resource, i) in resourceContent" :key="i">
           <ResourceCard :resource="resource" />
         </v-col>
       </v-row>
@@ -177,11 +127,10 @@ import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 import RelatedClubCard from "@/components/RelatedClubCard";
 import ResourceCard from "@/components/ResourceCard.vue";
-// import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
+import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
 
 import ACMW from "@/assets/images/clubs/ACM-W.png";
 import BroncoSec from "@/assets/images/clubs/BroncoSec.png";
-import AiCollab from "@/assets/images/clubs/AiCollab.png";
 import CPC from "@/assets/images/clubs/CPC.png";
 import ACMG from "@/assets/images/clubs/ACM-G.png";
 
@@ -194,7 +143,7 @@ import workshop from "@/assets/images/index/workshop.jpg";
 import speaker from "@/assets/images/index/speaker.jpg";
 
 import ACM from "@/assets/images/resources/ACM.svg";
-import TeamTreeHouse from "@/assets/images/resources/teamtreehouse.svg";
+import LeetCode from "@/assets/images/resources/leetcode.svg";
 import SmartScholar from "@/assets/images/resources/smartscholar.svg";
 import DataScience from "@/assets/images/resources/datascience.svg";
 
@@ -206,7 +155,7 @@ export default {
     MainFooter,
     RelatedClubCard,
     ResourceCard,
-    // AnnouncementBanner,
+    AnnouncementBanner,
   },
 
   watch: {},
@@ -292,11 +241,6 @@ export default {
         title: "BroncoSec",
       },
       {
-        src: AiCollab,
-        link: "https://www.instagram.com/scu_aicollab/",
-        title: "AI Collaborate",
-      },
-      {
         src: CPC,
         link: "https://scuacm.slack.com/archives/C05VB4JB2MN/",
         title: "Competitive Programming",
@@ -353,11 +297,11 @@ export default {
           "If you are a paid member of ACM, you can sign in to find access to loads of information from the Learning Center. Here you'll find a wealth of useful Ebooks, informative Webinars, a number of video courses you can follow, and more!",
       },
       {
-        src: TeamTreeHouse,
-        link: "https://teamtreehouse.com/",
-        title: "Team Treehouse",
+        src: LeetCode,
+        link: "https://leetcode.com/",
+        title: "LeetCode",
         content:
-          "Team Treehouse offers a variety of tutorials and video tutorials that help you walk through the fundamentals of whichever computer science topic you may be exploring. Please contact SCU ACM for login credentials.",
+          "Leetcode is the place to level up your coding skills and master technical job interviews. ACM has a premium account with access to specific company interview questions and more. Please contact SCU ACM for login credentials.",
       },
       {
         src: SmartScholar,
@@ -413,6 +357,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 .join-btn {
   font-family: "Poppins", sans-serif;
   font-size: 1rem !important;

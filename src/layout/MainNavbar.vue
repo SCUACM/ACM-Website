@@ -1,7 +1,10 @@
 <template>
   <div>
     <v-dialog v-model="showWelcome" max-width="800px">
-      <WelcomePopup :user="user" @close="closePopup"></WelcomePopup>
+      <WelcomePopup :user="user" @close="closePopup1"></WelcomePopup>
+    </v-dialog>
+    <v-dialog v-model="showDEI" max-width="800px">
+      <DeiPopup @close="closePopup2"></DeiPopup>
     </v-dialog>
     <v-app-bar
       app
@@ -85,13 +88,22 @@
               events
             </router-link>
           </span>
+          <!-- <span class="link mx-6">
+            <a
+              @click="routeTo('https://aws.scuacm.com')"
+              :class="[!isTransparent ? 'link' : 'link-transparent']"
+              style="cursor: alias;"
+            >
+              AWS AI Hack
+            </a>
+          </span> -->
           <span class="link mx-6">
             <a
               @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
             >
-              H4H
+              Hack for Humanity
             </a>
           </span>
           <span class="link ml-6">
@@ -192,7 +204,7 @@
                   @click="routeTo('https://hackforhumanity.io/')"
                   class="link"
                 >
-                  H4H
+                  Hack for Humanity
                 </span>
               </v-list-item>
               <v-list-item>
@@ -238,6 +250,7 @@ import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../firebase';
 import WelcomePopup from '../components/WelcomePopup.vue';
+import DeiPopup from '../components/DeiPopup.vue';
 import { getUserPerms } from "../helpers";
 
 export default {
@@ -257,6 +270,7 @@ export default {
   data() {
     return {
       showWelcome: false,
+      showDEI: false,
       scrollPosition: null,
       logoBlackSmall,
       logoWhiteSmall,
@@ -266,7 +280,7 @@ export default {
     };
   },
 
-  components: { WelcomePopup },
+  components: { WelcomePopup, DeiPopup },
 
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
@@ -284,6 +298,13 @@ export default {
                 name: userName,
               });
               this.showWelcome = true;
+            } else {
+              const userData = doc.data();
+              if (!userData.race || !userData.gender) {
+                if (this.$route.path === "/") {
+                  this.showDEI = true;
+                }
+              }
             }
             const perms = await getUserPerms(user);
             const adminPerms = [
@@ -360,8 +381,12 @@ export default {
         this.$router.push("/").catch(()=>{});
       }
     },
-    closePopup() {
+    closePopup1() {
       this.showWelcome = false;
+      this.$router.push("/profile");
+    },
+    closePopup2() {
+      this.showDEI = false;
       this.$router.push("/profile");
     }
   },

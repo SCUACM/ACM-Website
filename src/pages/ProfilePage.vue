@@ -2,80 +2,46 @@
   <v-app>
     <MainNavbar />
     <v-container style="margin-top: 75px; max-width: 750px">
-        <div class="events-title">
-          Manage Profile
+      <div class="events-title">
+        Manage Profile
+      </div>
+      <h2 style="text-align:center;" class="">
+        Events Attended: {{ attendance }}
+      </h2>
+      <v-form v-if="formData" @submit.prevent="updateFirebase" @input="callDebounce">
+        <div class="form-header">
+          Preferred Name
         </div>
-        <h2 style="text-align:center;" class="">
-          Events Attended: {{ attendance }}
-        </h2>
-        <v-form v-if="formData" @submit.prevent="updateFirebase" @input="callDebounce">
-          <div class="form-header">
-            Preferred Name 
-          </div>
-          <v-text-field
-            label="Preferred Name"
-            @input="callDebounce"
-            :disabled="!canEdit"
-            v-model="formData.name"
-            outlined
-            solo
-          >
-          </v-text-field>
-          <div class="form-header">
-            Graduation Year
-          </div>
-          <v-select
-            label="Graduation Year"
-            v-model="formData.year"
-            @input="callDebounce"
-            :disabled="!canEdit"
-            :items="graduationYears"
-            outlined
-            solo
-          >
-          </v-select>
-          <div class="form-header">
-            Major
-          </div>
-          <v-select
-            label="Major"
-            @input="callDebounce"
-            :items="majorsList"
-            :disabled="!canEdit"
-            v-model="formData.major"
-            outlined
-            solo
-          >
-          </v-select>
-          <div class="form-header">
-            Race/Ethnicity
-          </div>
-          <v-select
-            label="Race"
-            v-model="formData.race"
-            @input="callDebounce"
-            :items="race"
-            :disabled="!canEdit"
-            outlined
-            solo
-          >
-          </v-select>
-          <div class="form-header">
-            Gender
-          </div>
-          <v-select
-            label="Gender"
-            @input="callDebounce"
-            :items="gender"
-            :disabled="!canEdit"
-            v-model="formData.gender"
-            outlined
-            solo
-          >
-          </v-select>
-        </v-form>
-        <ManageResume v-if="viewResume" :canUpload="canUploadResume">
-        </ManageResume>
+        <v-text-field label="Preferred Name" @input="callDebounce" :disabled="!canEdit" v-model="formData.name" outlined
+          solo>
+        </v-text-field>
+        <div class="form-header">
+          Graduation Year
+        </div>
+        <v-select label="Graduation Year" v-model="formData.year" @input="callDebounce" :disabled="!canEdit"
+          :items="graduationYears" outlined solo>
+        </v-select>
+        <div class="form-header">
+          Major
+        </div>
+        <v-select label="Major" @input="callDebounce" :items="majorsList" :disabled="!canEdit" v-model="formData.major"
+          outlined solo>
+        </v-select>
+        <div class="form-header">
+          Race/Ethnicity
+        </div>
+        <v-select label="Race" v-model="formData.race" @input="callDebounce" :items="race" :disabled="!canEdit" outlined
+          solo multiple>
+        </v-select>
+        <div class="form-header">
+          Gender
+        </div>
+        <v-select label="Gender" @input="callDebounce" :items="gender" :disabled="!canEdit" v-model="formData.gender"
+          outlined solo>
+        </v-select>
+      </v-form>
+      <ManageResume v-if="viewResume" :canUpload="canUploadResume">
+      </ManageResume>
     </v-container>
     <MainFooter />
   </v-app>
@@ -86,7 +52,7 @@ import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 
 import 'firebase/compat/firestore'
-import {db, auth, functions} from '../firebase';
+import { db, auth, functions } from '../firebase';
 import { debounce } from 'debounce';
 import { getUserPerms, majorsList } from '../helpers';
 import ManageResume from '../components/ManageResume.vue';
@@ -98,13 +64,13 @@ export default {
     MainNavbar,
     MainFooter,
     ManageResume
-},
+  },
 
   methods: {
     callDebounce() {
       this.debouncedUpdate();
     },
-    debouncedUpdate: debounce(function() {
+    debouncedUpdate: debounce(function () {
       this.updateFirebase()
     }, 1000),
     async updateFirebase() {
@@ -136,9 +102,9 @@ export default {
         }
         this.formData = data;
         let result;
-        if(this.user.uid.length > 0) {
-            result = await functions.httpsCallable("getUserAttendance")({id: user.uid});
-            this.attendance = result.data;
+        if (this.user.uid.length > 0) {
+          result = await functions.httpsCallable("getUserAttendance")({ id: user.uid });
+          this.attendance = result.data;
         }
       }
     });
@@ -147,9 +113,11 @@ export default {
   data() {
     return {
       graduationYears: [2025, 2026, 2027, 2028],
-      race: ['White', 'Black', 'Hispanic', 'Asian', 'Native American', 'Pacific Islander', 'Multiracial'],
-      gender: ['Female', 'Male', 'Non-Binary', 'Other'],
-      formData: null,
+      race: ['White', 'Black/African American', 'Hispanic (any race)', 'Asian', 'Native American', 'Pacific Islander', 'Prefer not to say'],
+      gender: ['Female', 'Male', 'Non-Binary', 'Other', 'Prefer not to say'],
+      formData: {
+        race: [],
+      },
       user: auth.currentUser,
       majorsList: majorsList,
       canUploadResume: false,
