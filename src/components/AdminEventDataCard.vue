@@ -1,18 +1,24 @@
 <template>
   <div>
-    <v-btn style="width: 150px; margin-bottom: 15px;" @click="toggleShowData()">{{ showData ? "Hide" : "Show" }} Trends</v-btn>
+    <v-btn style="width: 150px; margin-bottom: 15px" @click="toggleShowData()"
+      >{{ showData ? "Hide" : "Show" }} Trends</v-btn
+    >
     <v-card v-if="showData" style="padding: 10px">
       <div style="height: 40px">
         <v-btn v-if="!updating" @click="updateData()">Update</v-btn>
         <p v-else>Loading...</p>
       </div>
       <br />
-      <select v-if="tags.length > 1" @change="updateSelectedTag($event.target.value)" style="margin-top: 5px;">
-          <option value="all">all</option>
-          <option :value="tag" v-for="tag in tags" :key="tag">{{ tag }}</option>
-        </select>
+      <select
+        v-if="tags.length > 1"
+        @change="updateSelectedTag($event.target.value)"
+        style="margin-top: 5px"
+      >
+        <option value="all">all</option>
+        <option :value="tag" v-for="tag in tags" :key="tag">{{ tag }}</option>
+      </select>
       <div style="width: 200px">
-        <v-slider 
+        <v-slider
           v-model="tickValue"
           :max="25"
           :min="5"
@@ -33,13 +39,12 @@
   </div>
 </template>
 
-
 <script>
-import {functions} from '../firebase';
+import { functions } from "../firebase";
 
 export default {
   name: "AdminEventDataCard",
-  
+
   props: {
     events: Array,
     tags: Array,
@@ -57,11 +62,11 @@ export default {
     },
     async updateData() {
       if (this.updating) {
-        return
+        return;
       }
 
       this.updating = true;
-      this.filteredEvents = this.selectedTag == "all" ?  this.events : [];
+      this.filteredEvents = this.selectedTag == "all" ? this.events : [];
       if (this.selectedTag != "all") {
         for (let e of this.events) {
           if (e.tags?.includes(this.selectedTag)) {
@@ -71,18 +76,30 @@ export default {
       }
 
       this.attendances = [];
-      for (let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1); i >= 0; i--) {
-        this.attendances.push((await functions.httpsCallable("getEventAttendance")({id: this.filteredEvents[i].id})).data);
+      for (
+        let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1);
+        i >= 0;
+        i--
+      ) {
+        const eventId = this.filteredEvents[i].id;
+        const result = await functions.httpsCallable("getEventAttendance")({
+          id: eventId,
+        });
+        this.attendances.push(result.data || 0);
       }
 
       this.dates = [];
-      for (let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1); i >= 0; i--) {
+      for (
+        let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1);
+        i >= 0;
+        i--
+      ) {
         let dt = this.filteredEvents[i].startDate.toDate();
-        this.dates.push((dt.getMonth() + 1) + "/" + dt.getDate());
+        this.dates.push(dt.getMonth() + 1 + "/" + dt.getDate());
       }
-      
+
       this.updating = false;
-    }
+    },
   },
 
   data: () => ({
@@ -92,7 +109,7 @@ export default {
     tickValue: 10,
     selectedTag: "all",
     filteredEvents: [],
-    updating: false
-  })
-}
+    updating: false,
+  }),
+};
 </script>

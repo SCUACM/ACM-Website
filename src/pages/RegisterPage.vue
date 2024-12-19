@@ -2,8 +2,12 @@
   <v-app>
     <v-container style="max-width: 500px">
       <div v-if="event">
-        <button v-if="!isRegistered" @click='register'>Register for this event</button>
-        <div class="confirm-text" v-else >You are registered for this event ✓</div>
+        <button v-if="!isRegistered" @click="register">
+          Register for this event
+        </button>
+        <div class="confirm-text" v-else>
+          You are registered for this event ✓
+        </div>
         <h1>{{ event.title }}</h1>
         <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
         <p>{{ event.description }}</p>
@@ -19,30 +23,33 @@
 import "../assets/scss/board-media.scss";
 
 // import firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore'
-import {db,auth, Timestamp} from '../firebase';
+import "firebase/compat/firestore";
+import { db, auth, Timestamp } from "../firebase";
 import { GoogleAuthProvider } from "firebase/auth";
-import {getFormatDateTime} from '../helpers';
+import { getFormatDateTime } from "../helpers";
 
 export default {
   name: "RegisterPage",
 
-  components: {
-  },
+  components: {},
 
   mounted() {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         this.user = user;
         const eventId = this.$route.params.id;
-        const doc = await db.collection('events').doc(eventId).get();
-        if(doc.exists) {
-          const registration = await db.collection('registrations').where("uid", "==",user.uid).where("event", "==", eventId).get();
+        const doc = await db.collection("events").doc(eventId).get();
+        if (doc.exists) {
+          const registration = await db
+            .collection("registrations")
+            .where("uid", "==", user.uid)
+            .where("event", "==", eventId)
+            .get();
           // console.log(registration.docs);
-          if(registration.docs.length > 0) {
+          if (registration.docs.length > 0) {
             this.isRegistered = true;
           }
-          this.event = {...doc.data(), id: doc.id};
+          this.event = { ...doc.data(), id: doc.id };
         }
       } else {
         this.showSignIn = true;
@@ -52,23 +59,39 @@ export default {
 
   methods: {
     async register() {
+      const eventId = this.$route.params.id;
       const data = {
         uid: this.user.uid,
-        event: this.$route.params.id,
+        event: eventId,
         timestamp: Timestamp.now(),
-      }
-      await db.collection("registrations").add(data);
+      };
+
+      const eventRef = db.collection("events").doc(eventId);
+      const registrationRef = db.collection("registrations");
+
+      await db.runTransaction(async (transaction) => {
+        const eventDoc = await transaction.get(eventRef);
+        if (!eventDoc.exists) {
+          throw "Event does not exist!";
+        }
+
+        const newCount = (eventDoc.data().counter ?? 0) + 1;
+        transaction.update(eventRef, { counter: newCount });
+        transaction.set(registrationRef.doc(), data);
+      });
+
       this.isRegistered = true;
     },
+
     signIn() {
       const provider = new GoogleAuthProvider();
-      provider.addScope('email');
-
+      provider.addScope("email");
       auth.signInWithPopup(provider);
     },
+
     formatDateTime(event) {
       return getFormatDateTime(event);
-    }
+    },
   },
 
   data() {
@@ -83,17 +106,17 @@ export default {
 </script>
 
 <style scoped>
-  button {
-    border-radius: 40px;
-    padding: 10px 30px;
-    background-color: #1c548d;
-    margin: 0px 10px 20px 15px;
-    color: white;
-  }
-  .confirm-text {
-    background-color: white;
-    color: #4BB543;
-    font-size: 20px;
-    margin: 17px 0px;
-  }
+button {
+  border-radius: 40px;
+  padding: 10px 30px;
+  background-color: #1c548d;
+  margin: 0px 10px 20px 15px;
+  color: white;
+}
+.confirm-text {
+  background-color: white;
+  color: #4bb543;
+  font-size: 20px;
+  margin: 17px 0px;
+}
 </style>
