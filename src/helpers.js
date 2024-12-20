@@ -195,10 +195,6 @@ export const permsList = [
     "broncosecEditEvent",
     "broncosecDeleteEvent",
 
-    "aicAddEvent",
-    "aicEditEvent",
-    "aicDeleteEvent",
-
     "otherAddEvent",
     "otherEditEvent",
     "otherDeleteEvent",
@@ -264,7 +260,6 @@ export const eventTags = {
     "acm": "ACM",
     "acmw": "ACM-W",
     "icpc": "Competitive Programming",
-    "aic": "AI Collaborate",
     "broncosec": "BroncoSec",
 }
 
@@ -272,6 +267,5 @@ export const eventColors = {
     "acm": "#1c548d",
     "acmw": "#9a8ce1",
     "icpc": "#d98014",
-    "aic": "#3ba858",
     "broncosec": "#FF0000",
 }
