@@ -1,16 +1,20 @@
 <template>
-    <div>
-        <h3>{{event.title}} ({{formatDateTime(event)}}) Attendance: {{this.Attendance}} </h3>
-        <router-link v-if="canEdit" :to="'/admin/events/'+event.id"><button>Edit Event</button></router-link>
+    <div class="event">
+        <img v-if="image" :src="image" class="flyer">
+        <h3>{{ event.title }}</h3>
+        <h4>({{ formatDateTime(event) }})</h4>
+        <h4>Attendance: {{ this.Attendance }}</h4>
+        <router-link v-if="canEdit" :to="'/admin/events/' + event.id"><button>Edit Event</button></router-link>
         <button v-if="canDelete" @click="() => deleteEvent(event.id)" class="remove">Delete Event</button>
         <button @click="() => openQrCode(event.id)">View Event QR Code</button>
     </div>
 </template>
 <script>
 
-import {db, functions, auth} from '../firebase';
+import { db, functions, auth, storage } from '../firebase';
 import QRCode from 'qrcode';
-import {getFormatDateTime, getUserPerms} from '../helpers';
+import { getFormatDateTime, getUserPerms } from '../helpers';
+import { ref, getDownloadURL } from "firebase/storage";
 
 export default {
     name: "AdminEventCard",
@@ -21,7 +25,7 @@ export default {
         event: Object,
     },
 
-    async mounted(){
+    async mounted() {
         this.getEventAttendance(this.event.id);
         auth.onAuthStateChanged(async (user) => {
             if (user) {
@@ -30,6 +34,14 @@ export default {
                 this.canDelete = perms.otherDeleteEvent || (perms.deleteMyEvent && this.event.createdBy == user.uid) || (perms.acmDeleteEvent && this.event.tags?.includes("acm")) || (perms.acmwDeleteEvent && this.event.tags?.includes("acmw")) || (perms.aicDeleteEvent && this.event.tags?.includes("aic")) || (perms.broncosecDeleteEvent && this.event.tags?.includes("broncosec")) || (perms.otherDeleteEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
             }
         });
+        if (this.event.flyer) {
+            try {
+                this.image = await getDownloadURL(ref(storage, this.event.flyer));
+            }
+            catch (e) {
+                console.log("No image available")
+            }
+        }
     },
 
     methods: {
@@ -39,13 +51,13 @@ export default {
                 alert("deleted");
             }
         },
-        async getEventAttendance(e){
-            this.Attendance = JSON.stringify((await functions.httpsCallable("getEventAttendance")({id: e})).data);
-        
+        async getEventAttendance(e) {
+            this.Attendance = JSON.stringify((await functions.httpsCallable("getEventAttendance")({ id: e })).data);
+
         },
         async openQrCode(id) {
-            const url = window.location.origin+"/register/"+id;
-            const imageSrc = await QRCode.toDataURL(url, {width: 512});
+            const url = window.location.origin + "/register/" + id;
+            const imageSrc = await QRCode.toDataURL(url, { width: 512 });
             const contentType = 'image/png';
             const byteCharacters = atob(imageSrc.substr(`data:${contentType};base64,`.length));
             const byteArrays = [];
@@ -61,7 +73,7 @@ export default {
 
                 byteArrays.push(byteArray);
             }
-            const blob = new Blob(byteArrays, {type: contentType});
+            const blob = new Blob(byteArrays, { type: contentType });
             const blobUrl = URL.createObjectURL(blob);
 
             window.open(blobUrl, '_blank');
@@ -72,6 +84,7 @@ export default {
     },
 
     data: () => ({
+        image: null,
         Attendance: null,
         canEdit: false,
         canDelete: false,
@@ -80,42 +93,60 @@ export default {
 </script>
 
 <style scoped>
-    .uid-input {
-        display: inline-block;
-        width: 300px;
-    }
-    
-    .event {
-        margin-top: 10px;
-        font-size: 18px;
-        text-decoration: none;
-    }
+.uid-input {
+    display: inline-block;
+    width: 300px;
+}
 
-    span {
-        font-size: 18px;
-    }
+.event {
+    margin-top: 10px;
+    font-size: 18px;
+    text-decoration: none;
+}
 
-    button {
-        border-radius: 40px;
-        padding: 10px 30px;
-        margin-bottom: 15px;
-        border: 2px solid #1c548d;
-        margin: 0px 10px 20px 10px;
-        color: black;
-    }
-    button.remove {
-        border: 2px solid #eb4034;
-        margin-right: 20px;
-    }
+span {
+    font-size: 18px;
+}
 
-    button.create {
-        background-color: #1c548d;
-        color: white;
-    }
+button {
+    border-radius: 40px;
+    padding: 5px 15px;
+    border: 2px solid #1c548d;
+    margin: 5px 5px 5px 5px;
+    color: black;
+}
 
-    h2 {
-        margin-top: 20px;
-    }
+button.remove {
+    border: 2px solid #eb4034;
+}
 
+button.create {
+    background-color: #1c548d;
+    color: white;
+}
+
+button:hover {
+    background-color: #1c548d;
+    color: white;
+    transition: 0.3s;
+}
+
+button.remove:hover {
+    background-color: #eb4034;
+    color: white;
+    transition: 0.3s;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.event {
+    width: 35%;
+}
+
+.event img {
+    width: 100%;
+    border-radius: 1rem;
+}
 </style>
-  
