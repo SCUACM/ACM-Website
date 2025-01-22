@@ -7,26 +7,24 @@
           {{ formatDateTime(event) }}
         </h3>
       </div>
-      <div v-else-if="showSignIn">
-        <button @click="signIn">Sign in to register for this event</button>
+      <div v-else-if="showSignIn" class="center-container">
+        <button @click="signIn">
+          Sign in to register for this event
+        </button>
       </div>
       <button v-if="!isRegistered" @click="register">
         Register for this event
       </button>
-      <div v-else>
+      <div v-else-if="isRegistered">
         <div class="confirm-text">You are registered for this event ✓</div>
-        <button
-          @click="openLink('https://linktr.ee/scuacm')"
-          class="link-button"
-        >
-          Visit Our Linktree
-        </button>
-        <button
-          @click="openLink('https://hackforhumanity.io/')"
-          class="link-button"
-        >
-          Learn About Hack for Humanity
-        </button>
+        <div class="center-container column">
+          <button @click="openLink('https://linktr.ee/scuacm')" class="button">
+            Visit Our Linktree
+          </button>
+          <button @click="openLink('https://hackforhumanity.io/')" class="button">
+            Learn About Hack for Humanity
+          </button>
+        </div>
       </div>
       <img v-if="flyerImage && !isRegistered" :src="flyerImage" class="flyer" />
     </v-container>
@@ -126,10 +124,11 @@ export default {
 button {
   width: 100%;
   border-radius: 40px;
-  padding: 10px 30px;
+  padding: 20px 30px;
   background-color: #1c548d;
   margin: 0px 20px 20px 0px;
   color: white;
+  font-size: 20px;
 }
 .confirm-text {
   background-color: white;
@@ -137,14 +136,16 @@ button {
   font-size: 20px;
 }
 .event-date {
-  padding-bottom: 20px; /* Add padding to increase space */
+  padding-bottom: 20px;
 }
-.link-button {
-  width: 100%;
-  border-radius: 40px;
-  padding: 10px 0;
-  background-color: #1c548d;
-  color: white;
-  margin-top: 20px;
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.center-container.column {
+  flex-direction: column;
+  align-items: center;
 }
 </style>
