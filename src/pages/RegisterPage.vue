@@ -25,7 +25,7 @@
           @click="openLink('https://hackforhumanity.io/')"
           class="link-button"
         >
-          Learn About Hack for Humanity
+          Learn About Hack 4 Humanity
         </button>
       </div>
       <img v-if="flyerImage && !isRegistered" :src="flyerImage" class="flyer" />
