@@ -2,15 +2,31 @@
   <v-app>
     <v-container style="max-width: 500px">
       <div v-if="event">
-        <button v-if="!isRegistered" @click='register'>Register for this event</button>
-        <div class="confirm-text" v-else >You are registered for this event ✓</div>
         <h1>{{ event.title }}</h1>
-        <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
-        <p>{{ event.description }}</p>
+        <h3 v-if="event.startDate != undefined" class="event-date">
+          {{ formatDateTime(event) }}
+        </h3>
       </div>
-      <div v-else-if="showSignIn">
-        <button @click="signIn">Sign in to register for this event</button>
+      <div v-else-if="showSignIn" class="center-container">
+        <button @click="signIn">
+          Sign in to register for this event
+        </button>
       </div>
+      <button v-if="!isRegistered" @click="register">
+        Register for this event
+      </button>
+      <div v-else-if="isRegistered">
+        <div class="confirm-text">You are registered for this event ✓</div>
+        <div class="center-container column">
+          <button @click="openLink('https://linktr.ee/scuacm')" class="button">
+            Visit Our Linktree
+          </button>
+          <button @click="openLink('https://hackforhumanity.io/')" class="button">
+            Learn About Hack for Humanity
+          </button>
+        </div>
+      </div>
+      <img v-if="flyerImage && !isRegistered" :src="flyerImage" class="flyer" />
     </v-container>
   </v-app>
 </template>
@@ -19,30 +35,43 @@
 import "../assets/scss/board-media.scss";
 
 // import firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore'
-import {db,auth, Timestamp} from '../firebase';
+import "firebase/compat/firestore";
+import { db, auth, Timestamp, storage } from "../firebase";
 import { GoogleAuthProvider } from "firebase/auth";
-import {getFormatDateTime} from '../helpers';
+import { getFormatDateTime } from "../helpers";
+import { ref, getDownloadURL } from "firebase/storage";
 
 export default {
   name: "RegisterPage",
 
-  components: {
-  },
+  components: {},
 
   mounted() {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         this.user = user;
         const eventId = this.$route.params.id;
-        const doc = await db.collection('events').doc(eventId).get();
-        if(doc.exists) {
-          const registration = await db.collection('registrations').where("uid", "==",user.uid).where("event", "==", eventId).get();
+        const doc = await db.collection("events").doc(eventId).get();
+        if (doc.exists) {
+          const registration = await db
+            .collection("registrations")
+            .where("uid", "==", user.uid)
+            .where("event", "==", eventId)
+            .get();
           // console.log(registration.docs);
-          if(registration.docs.length > 0) {
+          if (registration.docs.length > 0) {
             this.isRegistered = true;
           }
-          this.event = {...doc.data(), id: doc.id};
+          this.event = { ...doc.data(), id: doc.id };
+          if (this.event.flyer) {
+            try {
+              this.flyerImage = await getDownloadURL(
+                ref(storage, this.event.flyer)
+              );
+            } catch (e) {
+              console.log("No image available");
+            }
+          }
         }
       } else {
         this.showSignIn = true;
@@ -56,19 +85,22 @@ export default {
         uid: this.user.uid,
         event: this.$route.params.id,
         timestamp: Timestamp.now(),
-      }
+      };
       await db.collection("registrations").add(data);
       this.isRegistered = true;
     },
     signIn() {
       const provider = new GoogleAuthProvider();
-      provider.addScope('email');
+      provider.addScope("email");
 
       auth.signInWithPopup(provider);
     },
     formatDateTime(event) {
       return getFormatDateTime(event);
-    }
+    },
+    openLink(url) {
+      window.open(url, "_blank");
+    },
   },
 
   data() {
@@ -77,23 +109,43 @@ export default {
       event: null,
       isRegistered: false,
       user: null,
+      flyerImage: null,
     };
   },
 };
 </script>
 
 <style scoped>
-  button {
-    border-radius: 40px;
-    padding: 10px 30px;
-    background-color: #1c548d;
-    margin: 0px 10px 20px 15px;
-    color: white;
-  }
-  .confirm-text {
-    background-color: white;
-    color: #4BB543;
-    font-size: 20px;
-    margin: 17px 0px;
-  }
+.flyer {
+  width: 100%;
+  border-radius: 1rem;
+  margin-bottom: 20px;
+}
+button {
+  width: 100%;
+  border-radius: 40px;
+  padding: 20px 30px;
+  background-color: #1c548d;
+  margin: 0px 20px 20px 0px;
+  color: white;
+  font-size: 20px;
+}
+.confirm-text {
+  background-color: white;
+  color: #4bb543;
+  font-size: 20px;
+}
+.event-date {
+  padding-bottom: 20px;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.center-container.column {
+  flex-direction: column;
+  align-items: center;
+}
 </style>
