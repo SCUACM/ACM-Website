@@ -288,7 +288,7 @@ export default {
       if (user) {
         // console.log("Signed in", user);
         const email = user.providerData[0].email;
-        if (email.includes("@scu.edu")){
+        if (email.includes("@scu.edu") || email.includes("@alumni.scu.edu")){
             const userName = user.displayName;
             const uid = user.uid;
 
