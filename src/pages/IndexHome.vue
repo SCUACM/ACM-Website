@@ -28,8 +28,8 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="Thank you to everyone who participated in AWS x INRIX Hack! Check out the winners "
-        link="https://aws.scuacm.com"
+        content="Thank you to everyone who participated in Hack for Humanity! Check out the winners "
+        link="https://hackforhumanity.io"
         linkTitle="here"
       />
       <v-container style="max-width: 800px">
