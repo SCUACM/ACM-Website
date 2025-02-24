@@ -241,7 +241,7 @@ export async function getUserPerms(user) {
 
     myRoles.push(defaultRole);
     const email = user.providerData[0].email;
-    if (email.includes("@scu.edu") || email.includes("@alumni.scu.edu")){
+    if (email.endsWith("@scu.edu") || email.endsWith("@alumni.scu.edu")){
         myRoles.push(scuRole)
     }
 
