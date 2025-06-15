@@ -97,16 +97,16 @@ export default {
       const blobUrl = URL.createObjectURL(blob);
       
       window.open(blobUrl, "_blank");
-
-      async mounted(){
-          this.getEventAttendance(this.event.id);
-          auth.onAuthStateChanged(async (user) => {
-              if (user) {
-                  const perms = await getUserPerms(user);
-                  this.canEdit = perms.otherEditEvent || (perms.editMyEvent && this.event.createdBy == user.uid) || (perms.acmEditEvent && this.event.tags?.includes("acm")) || (perms.acmwEditEvent && this.event.tags?.includes("acmw")) || (perms.broncosecEditEvent && this.event.tags?.includes("broncosec")) || (perms.otherEditEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
-                  this.canDelete = perms.otherDeleteEvent || (perms.deleteMyEvent && this.event.createdBy == user.uid) || (perms.acmDeleteEvent && this.event.tags?.includes("acm")) || (perms.acmwDeleteEvent && this.event.tags?.includes("acmw")) || (perms.broncosecDeleteEvent && this.event.tags?.includes("broncosec")) || (perms.otherDeleteEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
-              }
-          });
+    },
+    async mounted(){
+      this.getEventAttendance(this.event.id);
+      auth.onAuthStateChanged(async (user) => {
+          if (user) {
+              const perms = await getUserPerms(user);
+              this.canEdit = perms.otherEditEvent || (perms.editMyEvent && this.event.createdBy == user.uid) || (perms.acmEditEvent && this.event.tags?.includes("acm")) || (perms.acmwEditEvent && this.event.tags?.includes("acmw")) || (perms.broncosecEditEvent && this.event.tags?.includes("broncosec")) || (perms.otherEditEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
+              this.canDelete = perms.otherDeleteEvent || (perms.deleteMyEvent && this.event.createdBy == user.uid) || (perms.acmDeleteEvent && this.event.tags?.includes("acm")) || (perms.acmwDeleteEvent && this.event.tags?.includes("acmw")) || (perms.broncosecDeleteEvent && this.event.tags?.includes("broncosec")) || (perms.otherDeleteEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
+          }
+      });
     },
     formatDateTime(event) {
       return getFormatDateTime(event);
