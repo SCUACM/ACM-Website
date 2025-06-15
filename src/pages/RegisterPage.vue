@@ -43,7 +43,7 @@ import "../assets/scss/board-media.scss";
 // import firebase from 'firebase/compat/app'
 import "firebase/compat/firestore";
 
-import { db, auth, Timestamp } from "../firebase";
+import { db, auth, Timestamp, storage } from "../firebase";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getFormatDateTime } from "../helpers";
 import { ref, getDownloadURL } from "firebase/storage";
