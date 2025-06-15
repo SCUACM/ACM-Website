@@ -2,6 +2,12 @@
   <v-app>
     <v-container style="max-width: 500px">
       <div v-if="event">
+        <button v-if="!isRegistered" @click="register">
+          Register for this event
+        </button>
+        <div class="confirm-text" v-else>
+          You are registered for this event ✓
+        </div>
         <h1>{{ event.title }}</h1>
         <h3 v-if="event.startDate != undefined" class="event-date">
           {{ formatDateTime(event) }}
@@ -36,6 +42,7 @@ import "../assets/scss/board-media.scss";
 
 // import firebase from 'firebase/compat/app'
 import "firebase/compat/firestore";
+
 import { db, auth, Timestamp, storage } from "../firebase";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getFormatDateTime } from "../helpers";
@@ -81,20 +88,37 @@ export default {
 
   methods: {
     async register() {
+      const eventId = this.$route.params.id;
       const data = {
         uid: this.user.uid,
-        event: this.$route.params.id,
+        event: eventId,
         timestamp: Timestamp.now(),
       };
+
+      const eventRef = db.collection("events").doc(eventId);
+      const registrationRef = db.collection("registrations");
+
+      await db.runTransaction(async (transaction) => {
+        const eventDoc = await transaction.get(eventRef);
+        if (!eventDoc.exists) {
+          throw "Event does not exist!";
+        }
+
+        const newCount = (eventDoc.data().attendance ?? 0) + 1;
+        transaction.update(eventRef, { attendance: newCount });
+        transaction.set(registrationRef.doc(), data);
+      });
+
       await db.collection("registrations").add(data);
       this.isRegistered = true;
     },
+
     signIn() {
       const provider = new GoogleAuthProvider();
       provider.addScope("email");
-
       auth.signInWithPopup(provider);
     },
+
     formatDateTime(event) {
       return getFormatDateTime(event);
     },
@@ -116,24 +140,23 @@ export default {
 </script>
 
 <style scoped>
+button {
+  border-radius: 40px;
+  padding: 10px 30px;
+  background-color: #1c548d;
+  margin: 0px 10px 20px 15px;
+  color: white;
+}
 .flyer {
   width: 100%;
   border-radius: 1rem;
   margin-bottom: 20px;
 }
-button {
-  width: 100%;
-  border-radius: 40px;
-  padding: 20px 30px;
-  background-color: #1c548d;
-  margin: 0px 20px 20px 0px;
-  color: white;
-  font-size: 20px;
-}
 .confirm-text {
   background-color: white;
   color: #4bb543;
   font-size: 20px;
+  margin: 17px 0px;
 }
 .event-date {
   padding-bottom: 20px;
