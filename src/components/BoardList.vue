@@ -16,18 +16,20 @@
 
 <script>
 import ConnerYin from "../assets/board/main/Conner_Yin.jpeg";
-import LindseyLeong from "../assets/board/main/Lindsey_Leong.jpeg";
-import AndrewCollins from "../assets/board/main/Andrew_Collins.jpeg";
-import JakeEsperson from "../assets/board/main/Jake_Esperson.jpeg";
-import SamhitaRachapudi from "../assets/board/main/Samhita_Rachapudi.jpeg";
-import AnishKatragadda from "../assets/board/main/Anish_Katragadda.jpeg";
-import JalenPaige from "../assets/board/main/Jalen_Paige.jpeg";
-import RosalieWessels from "../assets/board/main/Rosalie_Wessels.jpg";
-import GriffinJones from "../assets/board/main/Griffin_Jones.jpeg";
-import ChrisShobe from "../assets/board/main/Chris_Shobe.jpeg";
-import IshikaGupta from "../assets/board/main/Ishika_Gupta.jpeg";
-import SiennaPearson from "../assets/board/main/Sienna_Pearson.jpeg";
-import NikhilVinod from "../assets/board/main/Nikhil_Vinod.jpeg";
+
+// board 25-26
+import ChrisShobe from "../assets/board/main/chris.jpg";
+import JakeEsperson from "../assets/board/main/jake.jpg";
+import AnishKatragadda from "../assets/board/main/anish.jpg";
+import IvyZhuang from '../assets/board/main/ivy.jpg';
+import LindseyLeong from "../assets/board/main/lindsey.jpg";
+import CarysChiu from '../assets/board/main/carys.jpg';
+import AlanFung from '../assets/board/main/alan.jpg';
+import TiffanyLe from '../assets/board/main/tiffany.jpg';
+import MargaritaSchemel from '../assets/board/main/marg.jpg';
+import AbhinavAla from '../assets/board/main/abhi.jpg';
+import MatthiasMasiero from '../assets/board/main/matt.jpg';
+import RayyanHussain from '../assets/board/main/rayyan.jpg';
 
 import WalkerSelby from "../assets/board/broncosec/Walker_Selby.jpg";
 import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
@@ -80,88 +82,87 @@ export default {
       // There's definitely a better way to do this....
       mainBoard: [
         {
-          src: AndrewCollins,
-          name: "Andrew Collins",
-          role: "President",
-          bio:
-            "Hello, I’m Andrew, a Junior Computer Science and Engineering student from San Diego, CA. My passion for computer science started in middle and high school through classes and clubs where I learned how to develop simple websites and fetch data from APIs. I am interested in mobile development, ML and AI, entrepreneurship, and game development. In my free time, I enjoy spending time with friends, reading, watching shows and movies, cooking, finding new music, and working on personal projects. I love meeting new people so feel free to reach out anytime!"
-        },
-        {
           src: JakeEsperson,
           name: "Jake Esperson",
+          role: "President",
+          bio:
+            "Hello everyone! My name is Jake, and I’m a Senior Computer Science Engineering student from Rocklin, CA. My passion for computer science started with learning about the dot-com bubble from my parents and making a pretend tech startup in one of my high school classes. I enjoy learning about virtual reality and front end web development and I want to learn more about back end databases. Outside of school, you can find me playing baseball, working on my car, or learning all the cool spots in Silicon Valley. I am always excited to make new friends, so don’t be afraid to come up and say hi!"
+        },
+        {
+          src: AnishKatragadda,
+          name: "Anish Katragadda",
           role: "Vice President",
           bio:
-            "Hello everyone! My name is Jake, and I’m a Junior Computer Science Engineering student from Rocklin, CA. My passion for computer science started with learning about the dot-com bubble from my parents and making a pretend tech startup in one of my high school classes. I enjoy learning about virtual reality and front end web development and I want to learn more about back end databases. Outside of school, you can find me playing baseball, working on my car, or learning all the cool spots in Silicon Valley. I am always excited to make new friends, so don’t be afraid to come up and say hi!"
+            "Hi! My name is Anish Katragadda, and I am a senior majoring in Computer Science and Engineering and I’m from Los Angeles California. I’ve always had an interest in technology, cars, and tinkering around with laptops and PCS, is what gave me true passion for computer science. And I'm always interested in learning about what’s new in Tech. Outside of school I spend a lot of time playing golf, watching Formula 1, detailing cars, traveling, and hanging out with my friends and family. Please feel free to reach out, I'm looking forward to meeting you all!"
         },
         {
-        src: AnishKatragadda,
-          name: "Anish Katragadda",
-          role: "Hackathon Coordinator",
-          bio:
-            "Hi! My name is Anish Katragadda, and I am a junior majoring in Computer Science and Engineering and I’m from Los Angeles California. I’ve always had an interest in technology, cars, and tinkering around with laptops and PCS, is what gave me true passion for computer science. And I'm always interested in learning about what’s new in Tech. Outside of school I spend a lot of time playing golf, watching Formula 1, detailing cars, traveling, and hanging out with my friends and family. Please feel free to reach out, I'm looking forward to meeting you all!"
-        },
-        {
-        src: GriffinJones,
-          name: "Griffin Jones",
+          src: AbhinavAla,
+          name: "Abhinav Ala",
           role: "Workshop Coordinator",
           bio:
-            "Hi everyone! My name is Griffin, I’m a Junior Computer Science student in the College of Arts and Sciences from Wellesley, MA. I started off learning how to code in elementary school with big dreams of making a video game. I learned some basic Javascript and immediately fell in love with coding! Since then I've done a decent amount of video game design and creation in Unity, some work with reinforcement learning in Python and the pygame library, and more recently I’ve been getting into web development. Aside from my school work I’m a passionate tennis player and I love to work out. If you’re ever  interested in ACM, Computer Science in general, or just making a friend come say hi!"
+            "Hello everyone! My name is Abhi, and I’m a Sophomore Computer Science Engineering student from Dallas, TX. My passion for computer science is a result of having a deep interest for creating solutions to my problems and developing cool projects. I enjoy learning about computer vision and new cutting edge tech stacks and I want to learn more machine learning, artificial intelligence, and being able to build cool things from the ground up. Outside of school, you can find me playing guitar, watching hours of videos about cars or avoiding studying for classes. Meeting and talking with new people is one of my favorite activities, so please do no hesitate to say hey if you see me around."
         },
         {
-          src: RosalieWessels,
-          name: "Rosalie Wessels",
-          role: "Project Coordinator",
+          src: IvyZhuang,
+          name: "Ivy Zhuang",
+          role: "Webmaster",
           bio:
-            "Hi! I’m Rosalie Wessels, and I am a sophomore majoring in computer science and engineering from the Netherlands. I have always been interested in everything tech and programming related — I love to participate in hackathons, build side projects, or attend ACM meetings. I am a software engineering intern at Apple, and plan to become an entrepreneur and found companies in the future. Outside of ACM I race cars and love skiing, basketball, and tennis. I am also a member of RAGE, Santa Clara’s Ultimate Frisbee Team, and the SCU Ski Club."
-        },
-        {
-        src: JalenPaige,
-          name: "Jalen Paige",
-          role: "Career Development Coordinator",
-          bio:
-            "Hey! I’m Jalen Paige, a current junior majoring in Computer Science in the school of Arts and Sciences. I’m from Edmonds, Washington. Computer science has always been an interest of mine because of my father. Beyond that, I absolutely love listening to music (I collect vinyls!), playing video games, and playing guitar. I am a pretty approachable guy, so please come say hi at some point!"
+            "Hello! I'm Ivy Zhuang, a sophomore studying Computer Science and Engineering from Toronto, Canada. I started coding at an after school program in my elementary school and have been passionate about it ever since. Through ACM, I hope to create more accessible and helpful resources related to CS, academics, professional development for students at SCU. Outside of ACM, I'm involved in SWE++, and I like playing video games and doing arts & crafts. :3"
         },
         {
           src: LindseyLeong,
           name: "Lindsey Leong",
+          role: "Outreach Coordinator + DEI Chair",
+          bio:
+            "Hi! My name is Lindsey and I'm a senior Computer Science and Engineering student with a minor in graphic design from Castro Valley, CA. I got super passionate about computer science after taking a course in my junior year of high school, but I've always been interested in game development since (surprise!) I love playing video games. I'm always eager to learn more about computer science and its related fields, especially web dev, automation, UX/UI, and data science. In my free time, I like playing video games, drawing, listening to music, watching shows/movies, and enjoying good food. Feel free to come say hi-- it's awesome to meet new people and I'd love to hear about your interests!"
+        },
+        {
+          src: ChrisShobe,
+          name: "Chris Shobe",
           role: "Treasurer",
           bio:
-            "Hi! My name is Lindsey and I'm a junior Computer Science and Engineering student with a minor in graphic design from Castro Valley, CA. I got super passionate about computer science after taking a course in my junior year of high school, but I've always been interested in game development since (surprise!) I love playing video games. I'm always eager to learn more about computer science and its related fields, especially web dev, automation, UX/UI, and data science. In my free time, I like playing video games, drawing, listening to music, watching shows/movies, and enjoying good food. Feel free to come say hi-- it's awesome to meet new people and I'd love to hear about your interests!"
+            "Hey there, I'm Chris! I'm a Junior CSE student from Redondo Beach, CA, minoring in Marketing. I've always known I wanted to code, but my passion goes beyond just writing software — I'm fascinated by entrepreneurship, cybersecurity, and using tech to make life better for real people. When I'm not coding, you’ll find me doing something creative, like making art or playing the clarinet. I love learning about anything and everything, so if you have something you're excited about, I'd love to hear all about it!"
         },
         {
-          src: SamhitaRachapudi,
-          name: "Samhita Rachapudi",
-          role: "Outreach Coordinator",
-          bio:
-            "Hi! I’m Samhita Rachapudi, and I’m a senior majoring in Computer Science in the CAS from Redmond, Washington. I first became interested in computer science after getting more involved with the CS club at my high school. I decided to major in it because I loved how applicable CS is to anything and I love problem solving! In my free time I like to bake, go swimming, and spend time with my friends and family. I’m excited to serve the CS community at SCU as the IDEAS Liaison for ACM!"
-        },
-        {
-        src: SiennaPearson,
-          name: "Sienna Pearson",
+          src: MargaritaSchemel,
+          name: "Margarita Schemel",
           role: "Social Media Manager",
           bio:
-            "Hi! I’m Sienna Pearson, a sophomore majoring in Dance and Computer Science from San Diego, CA. My passion for computer science began with my love for math and my dad's influence as a computer science teacher. My current interest is in merging technology and artistic expression, using AI and AR to explore new possibilities in choreography and performance. I hope eventually to explore sustainable software solutions and data analysis for environmental causes. I love the outdoors, dance, food, and meeting new people, so if you share any of my interests or just want to chat, I'd love to hear from you!"
+            "Hi all! My name is Margarita and I am a sophomore Computer Science and Engineering major here at SCU. Computer Science has been an interest of mine ever since I can remember- having grown up in the Silicon Valley- and it has always been something I always knew I want to pursue. More specifically, I’m very interested in project development and the ethical aspect of computing. In my free time, I love being active and outdoors, and I’ve recently picked up DJing! I love meeting new people so don’t hesitate to come up whenever and say what’s up!"
         },
         {
-        src: NikhilVinod,
-          name: "Nikhil Vinod",
-          role: "Industry Liason",
+          src: CarysChiu,
+          name: "Carys Chiu",
+          role: "Industry Liaison",
           bio:
-            "Hi everyone! I’m Nikhil Vinod, a sophomore studying Computer Science from Fremont, California. My passion for computer science began after taking an Intro to Java course back in sophomore year of high school, and my love for it has only grown since then. I’m particularly interested in fields such as AI, machine learning, full stack development, and UI/UX design as well. Outside of computer science, I love playing basketball, listening to music, eating mango sticky rice, and spending time with my friends and family. I love meeting new people, so feel free to reach out if you would like to talk!"
+            "Hey, I'm Carys! I'm a sophomore majoring in Computer Science and Engineering from the Bay Area, so I've been surrounded by tech all my life growing up. It's a field with so much potential to create real world solutions and I'm happy to be a part of it ever since I took my first serious computing course in high school. I enjoy creating art, playing tennis, learning languages, and having too much free time. If you catch me around campus, feel free to say hi!"
         },
         {
-        src: ChrisShobe,
-          name: "Chris Shobe",
-          role: "DEI Chair",
+          src: AlanFung,
+          name: "Alan Fung",
+          role: "Industry Liaison",
           bio:
-            "Hello everyone! I'm Chris, a second-year CSE student from Redondo Beach, CA (it’s in LA County). I've known my whole life that I wanted to code. I'm most interested in technology that integrates humanity into it. I hope to eventually create software that improves people's lives. I'm not only interested in coding but I also love doing anything creative, such as digital art and playing the clarinet. I love learning about anything and everything, so if you ever feel the need to rant about something you find interesting, I’d love to hear from you! "
+            "Hi! I’m Alan, a sophomore Electrical Engineering major from Milpitas, CA. I have been interested in software ever since I touched my first keyboard at the age of four. As an electrical engineer, I am interested in building systems, so I am better at lower-level programming languages such as C and Rust. I love tinkering with tech, so at my desk, you might find me playing with a Raspberry Pi, configuring my PC (Arch btw!), or fixing a broken PCB. You might also find me playing the piano, cooking up a noodle soup, playing badminton, hitting leg day, or playing video games. I love meeting new people, so come say hi any time!"
         },
         {
-        src: IshikaGupta,
-          name: "Ishika Gupta",
+          src: TiffanyLe,
+          name: "Tiffany Le",
           role: "Secretary",
           bio:
-            "Hi! I’m Ishika Gupta, a sophmore majoring in Computer Science and Engineering, and I’m from Mumbai, India. My passion for Computer Science started when I was in high school, and I have furthered my interest in tech through clubs and classes. I love listening to music, dancing, spending time with family and friends, and traveling. I love meeting new people, so feel free to reach out if you want to know more about me or just have a chat about anything!"
+            "Hello friends! My name is Tiffany, and I am a 2nd year Computer Science and Engineering student who is also interested in double majoring in Electrical and Computer Engineering! As someone who grew up with many interests, I initially struggled with deciding what career to pursue. However, after taking my first CS course in high school, I found that it combined my love for learning languages with problem solving and creativity. Today, my passion for CS (especially embedded systems) continues to grow as I learn more about the tech world. But aside from tech, I also enjoy baking, crocheting, ice skating, watching basketball, and snacking on candy (gummy bears are awesome). I might not always recognize people right away, but I’m always happy to chat if you say hello! :>"
+        },
+        {
+          src: RayyanHussain,
+          name: "Rayyan Hussain",
+          role: "Hackathon Coordinator",
+          bio:
+            "Hey everyone! My name is Rayyan and I am a sophomore Computer Science and Engineering student from Pleasanton, CA. My passion for computer science started when I began playing around with Scratch and FLL Robotics as a little kid. Being surrounded by innovation in the world’s hub of technology, I always wanted to be on the forefront of cutting edge work, and am always eager to learn something new! I’m currently doing research on clustered drone control calibrated with OptiTrack sensors, and serve on the Student Advisory Board for the Ciocca Center. Apart from that, you’ll catch me playing basketball, building PC’s, and eating/cooking new food. I love meeting new people, so please don’t hesitate to reach out!"
+        },
+        {
+          src: MatthiasMasiero,
+          name: "Matthias Masiero",
+          role: "Event Coordinator",
+          bio: "Hey! I’m Matthias, a Computer Science student, and im from Manhattan NY. I’m into using code to solve real-world problems whether that’s through machine learning, sports tech, or even experimenting with quantum computing. I’ve worked on injury prediction projects using athlete data, and I love pushing the limits with new quantum computing advancments. Outside of class, I’m usually at the gym, playing soccer, or studying in SCDI. I’m always down to meet new people, so feel free to say whats up."
         }
       ],
 

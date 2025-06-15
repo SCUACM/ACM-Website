@@ -28,8 +28,8 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="Thank you to everyone who participated in AWS x INRIX Hack! Check out the winners "
-        link="https://aws.scuacm.com"
+        content="Intel Hack is here! Join us for our first 10-hour hackathon on May 17th! Sign up "
+        link="https://intel.scuacm.com"
         linkTitle="here"
       />
       <v-container style="max-width: 800px">

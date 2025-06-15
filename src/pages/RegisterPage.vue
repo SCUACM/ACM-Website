@@ -9,12 +9,30 @@
           You are registered for this event ✓
         </div>
         <h1>{{ event.title }}</h1>
-        <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
-        <p>{{ event.description }}</p>
+        <h3 v-if="event.startDate != undefined" class="event-date">
+          {{ formatDateTime(event) }}
+        </h3>
       </div>
-      <div v-else-if="showSignIn">
-        <button @click="signIn">Sign in to register for this event</button>
+      <div v-else-if="showSignIn" class="center-container">
+        <button @click="signIn">
+          Sign in to register for this event
+        </button>
       </div>
+      <button v-if="!isRegistered" @click="register">
+        Register for this event
+      </button>
+      <div v-else-if="isRegistered">
+        <div class="confirm-text">You are registered for this event ✓</div>
+        <div class="center-container column">
+          <button @click="openLink('https://linktr.ee/scuacm')" class="button">
+            Visit Our Linktree
+          </button>
+          <button @click="openLink('https://hackforhumanity.io/')" class="button">
+            Learn About Hack for Humanity
+          </button>
+        </div>
+      </div>
+      <img v-if="flyerImage && !isRegistered" :src="flyerImage" class="flyer" />
     </v-container>
   </v-app>
 </template>
@@ -24,9 +42,11 @@ import "../assets/scss/board-media.scss";
 
 // import firebase from 'firebase/compat/app'
 import "firebase/compat/firestore";
+
 import { db, auth, Timestamp } from "../firebase";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getFormatDateTime } from "../helpers";
+import { ref, getDownloadURL } from "firebase/storage";
 
 export default {
   name: "RegisterPage",
@@ -50,6 +70,15 @@ export default {
             this.isRegistered = true;
           }
           this.event = { ...doc.data(), id: doc.id };
+          if (this.event.flyer) {
+            try {
+              this.flyerImage = await getDownloadURL(
+                ref(storage, this.event.flyer)
+              );
+            } catch (e) {
+              console.log("No image available");
+            }
+          }
         }
       } else {
         this.showSignIn = true;
@@ -75,11 +104,12 @@ export default {
           throw "Event does not exist!";
         }
 
-        const newCount = (eventDoc.data().counter ?? 0) + 1;
-        transaction.update(eventRef, { counter: newCount });
+        const newCount = (eventDoc.data().attendance ?? 0) + 1;
+        transaction.update(eventRef, { attendance: newCount });
         transaction.set(registrationRef.doc(), data);
       });
 
+      await db.collection("registrations").add(data);
       this.isRegistered = true;
     },
 
@@ -92,6 +122,9 @@ export default {
     formatDateTime(event) {
       return getFormatDateTime(event);
     },
+    openLink(url) {
+      window.open(url, "_blank");
+    },
   },
 
   data() {
@@ -100,6 +133,7 @@ export default {
       event: null,
       isRegistered: false,
       user: null,
+      flyerImage: null,
     };
   },
 };
@@ -113,10 +147,28 @@ button {
   margin: 0px 10px 20px 15px;
   color: white;
 }
+.flyer {
+  width: 100%;
+  border-radius: 1rem;
+  margin-bottom: 20px;
+}
 .confirm-text {
   background-color: white;
   color: #4bb543;
   font-size: 20px;
   margin: 17px 0px;
+}
+.event-date {
+  padding-bottom: 20px;
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.center-container.column {
+  flex-direction: column;
+  align-items: center;
 }
 </style>

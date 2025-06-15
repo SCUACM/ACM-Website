@@ -2,7 +2,7 @@
   <div>
     <h3>
       {{ event.title }} ({{ formatDateTime(event) }}) Attendance:
-      {{ event.counter || "Loading..." }}
+      {{ Number.isInteger(event.attendance) ? event.attendance : "Loading" }}
     </h3>
     <router-link v-if="canEdit" :to="'/admin/events/' + event.id"
       ><button>Edit Event</button></router-link
@@ -70,7 +70,7 @@ export default {
     async fetchEventAttendance(eventId) {
       const eventDoc = await db.collection("events").doc(eventId).get();
       if (eventDoc.exists) {
-        this.attendance = eventDoc.data().counter;
+        this.attendance = eventDoc.data().attendance;
       }
     },
     async openQrCode(id) {
@@ -95,8 +95,18 @@ export default {
       }
       const blob = new Blob(byteArrays, { type: contentType });
       const blobUrl = URL.createObjectURL(blob);
-
+      
       window.open(blobUrl, "_blank");
+
+      async mounted(){
+          this.getEventAttendance(this.event.id);
+          auth.onAuthStateChanged(async (user) => {
+              if (user) {
+                  const perms = await getUserPerms(user);
+                  this.canEdit = perms.otherEditEvent || (perms.editMyEvent && this.event.createdBy == user.uid) || (perms.acmEditEvent && this.event.tags?.includes("acm")) || (perms.acmwEditEvent && this.event.tags?.includes("acmw")) || (perms.broncosecEditEvent && this.event.tags?.includes("broncosec")) || (perms.otherEditEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
+                  this.canDelete = perms.otherDeleteEvent || (perms.deleteMyEvent && this.event.createdBy == user.uid) || (perms.acmDeleteEvent && this.event.tags?.includes("acm")) || (perms.acmwDeleteEvent && this.event.tags?.includes("acmw")) || (perms.broncosecDeleteEvent && this.event.tags?.includes("broncosec")) || (perms.otherDeleteEvent && this.event.tags?.includes("other")) || (perms.icpcEditEvent && this.event.tags?.includes("icpc"));
+              }
+          });
     },
     formatDateTime(event) {
       return getFormatDateTime(event);
