@@ -2,12 +2,6 @@
   <v-app>
     <v-container style="max-width: 500px">
       <div v-if="event">
-        <button v-if="!isRegistered" @click="register">
-          Register for this event
-        </button>
-        <div class="confirm-text" v-else>
-          You are registered for this event ✓
-        </div>
         <h1>{{ event.title }}</h1>
         <h3 v-if="event.startDate != undefined" class="event-date">
           {{ formatDateTime(event) }}
