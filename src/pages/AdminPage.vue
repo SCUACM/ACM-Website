@@ -109,21 +109,18 @@ export default {
           perms.acmAddEvent ||
           perms.acmwAddEvent ||
           perms.broncosecAddEvent ||
-          perms.aicAddEvent ||
           perms.otherAddEvent ||
           perms.icpcAddEvent;
         this.canEditEvents =
           perms.acmEditEvent ||
           perms.acmwEditEvent ||
           perms.broncosecEditEvent ||
-          perms.aicEditEvent ||
           perms.otherEditEvent ||
           perms.icpcEditEvent;
         this.canDeleteEvents =
           perms.acmDeleteEvent ||
           perms.acmwDeleteEvent ||
           perms.broncosecDeleteEvent ||
-          perms.aicDeleteEvent ||
           perms.otherDeleteEvent ||
           perms.icpcDeleteEvent;
         this.allowedTags = [];
@@ -135,9 +132,6 @@ export default {
         }
         if (perms.broncosecEditEvent || perms.broncosecDeleteEvent) {
           this.allowedTags.push("broncosec");
-        }
-        if (perms.aicEditEvent || perms.aicDeleteEvent) {
-          this.allowedTags.push("aic");
         }
         if (perms.icpcEditEvent || perms.icpcDeleteEvent) {
           this.allowedTags.push("icpc");

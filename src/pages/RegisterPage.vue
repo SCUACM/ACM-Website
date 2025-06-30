@@ -2,12 +2,6 @@
   <v-app>
     <v-container style="max-width: 500px">
       <div v-if="event">
-        <button v-if="!isRegistered" @click="register">
-          Register for this event
-        </button>
-        <div class="confirm-text" v-else>
-          You are registered for this event ✓
-        </div>
         <h1>{{ event.title }}</h1>
         <h3 v-if="event.startDate != undefined" class="event-date">
           {{ formatDateTime(event) }}
@@ -97,15 +91,22 @@ export default {
 
       const eventRef = db.collection("events").doc(eventId);
       const registrationRef = db.collection("registrations");
+      const userRef = db.collection("users").doc(data.uid);
 
       await db.runTransaction(async (transaction) => {
         const eventDoc = await transaction.get(eventRef);
+        const userDoc = await transaction.get(userRef);
         if (!eventDoc.exists) {
           throw "Event does not exist!";
         }
+        else if (!userDoc.exists) {
+          throw "User does not exist!?";
+        }
 
         const newCount = (eventDoc.data().attendance ?? 0) + 1;
+        const userRegis = (userDoc.data().eventsAttended ?? 0) + 1;
         transaction.update(eventRef, { attendance: newCount });
+        transaction.update(userRef, {eventsAttended: userRegis});
         transaction.set(registrationRef.doc(), data);
       });
 

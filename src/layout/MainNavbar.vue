@@ -296,6 +296,7 @@ export default {
             if (!(doc.exists)){
               await db.collection("users").doc(uid).set({
                 name: userName,
+                eventsAttended: 0
               });
               this.showWelcome = true;
             } else {

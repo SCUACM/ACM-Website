@@ -21,7 +21,6 @@
                             <th colspan="3">ICPC Events</th>
                             <th colspan="3">ACM-W Events</th>
                             <th colspan="3">BroncoSec Events</th>
-                            <th colspan="3">AI Collab. Events</th>
                             <th colspan="3">Other Events</th>
 
                             <th rowspan="2">View Events</th>
@@ -37,9 +36,6 @@
                             <th rowspan="2">Delete Projects</th>
                         </tr>
                         <tr>
-                            <th>Add</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
                             <th>Add</th>
                             <th>Edit</th>
                             <th>Delete</th>
