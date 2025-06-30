@@ -87,7 +87,7 @@ import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 
 import 'firebase/compat/firestore'
-import {db, auth, functions} from '../firebase';
+import {db, auth} from '../firebase';
 import { debounce } from 'debounce';
 import { getUserPerms, majorsList } from '../helpers';
 import ManageResume from '../components/ManageResume.vue';
@@ -132,15 +132,11 @@ export default {
         const ref = db.collection("users").doc(user.uid);
         let data = (await ref.get()).data();
         if (!data) {
-          data = { name: user.displayName }
+          data = { name: user.displayName, eventsAttended: 0 }
           await ref.set(data);
         }
         this.formData = data;
-        let result;
-        if(this.user.uid.length > 0) {
-            result = await functions.httpsCallable("getUserAttendance")({id: user.uid});
-            this.attendance = result.data;
-        }
+        this.attendance = data.eventsAttended;
       }
     });
   },
