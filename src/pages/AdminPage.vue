@@ -29,12 +29,19 @@
           </option>
         </select>
       </span>
+      <button @click="pageDown()" class="pageButton">
+        <i class="mdi mdi-arrow-left"></i>
+      </button>
+      <span>{{this.pageNum}}</span>
+      <button @click="pageUp()" class="pageButton">
+        <i class="mdi mdi-arrow-right"></i>
+      </button>
       <AdminEventCard
         v-for="event of acmEvents.filter(
           (e) =>
-            this.selectedTag == 'all' ||
-            e.tags?.includes(this.selectedTag) ||
-            false
+            (e.index >= (this.pageNum-1)*this.eventsPerPage && e.index < this.pageNum*this.eventsPerPage) &&
+            (this.selectedTag == 'all' ||
+            e.tags?.includes(this.selectedTag))
         )"
         :key="event.id"
         :event="event"
@@ -84,20 +91,14 @@ export default {
     },
     updateSelectedTag(tag) {
       this.selectedTag = tag;
+      this.pageNum = 1;
     },
-    async fetchEventCounters() {
-      const eventsSnapshot = await db.collection("events").get();
-      const eventsData = eventsSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      eventsData.forEach((eventData) => {
-        const event = this.acmEvents.find((e) => e.id === eventData.id);
-        if (event) {
-          event.counter = eventData.counter;
-        }
-      });
+    pageUp() {
+      this.pageNum++;
     },
+    pageDown() {
+      this.pageNum = this.pageNum > 1 ? this.pageNum-1 : 1;
+    }
   },
 
   mounted() {
@@ -138,40 +139,27 @@ export default {
         }
         this.acmEvents = [];
 
-        if (perms.editMyEvent || perms.deleteMyEvent) {
-          const response = await db
-            .collection("events")
-            .where("createdBy", "==", user.uid)
-            .orderBy("startDate", "desc")
-            .get();
-          for (let doc of response.docs) {
-            const data = doc.data();
-            data.id = doc.id;
+        const eventCollection = await db
+          .collection("events")
+          .orderBy("startDate", "desc")
+          .get();
+        if (eventCollection.empty) {
+          console.log("No events found");
+          return;
+        }
+
+        let cnt = 0;
+        for (let doc of eventCollection.docs) {
+          const data = doc.data();
+          data.id = doc.id;
+          if ((perms.editMyEvent || perms.deleteMyEvent && data.createdBy === user.uid) || (!perms.otherEditEvent && !perms.otherDeleteEvent && (data.tags === null || data.tags.some(t => data.tags.includes(t))))) {
+            data.index = cnt;
+            cnt++;
+            // console.log(data);
             this.acmEvents.push(data);
           }
         }
-
-        if (this.allowedTags.length > 0) {
-          let req2 = db.collection("events");
-          if (!perms.otherEditEvent && !perms.otherDeleteEvent) {
-            req2 = req2.where("tags", "array-contains-any", this.allowedTags);
-          }
-          const response2 = await req2.get();
-
-          for (let doc of response2.docs) {
-            const data = doc.data();
-            data.id = doc.id;
-            if (!this.acmEvents.find((event) => event.id == data.id)) {
-              this.acmEvents.push(data);
-            }
-          }
-        }
-        this.acmEvents.sort((a, b) => {
-          return b.startDate.seconds - a.startDate.seconds;
-        });
-        await this.fetchEventCounters();
-      }
-    });
+    }});
   },
 
   data() {
@@ -184,12 +172,15 @@ export default {
       canDeleteEvents: false,
       allowedTags: [],
       selectedTag: "all",
+      eventsPerPage: 20,
+      pageNum: 1
     };
   },
 };
 </script>
 
 <style scoped>
+@import url("@mdi/font/css/materialdesignicons.css");
 .uid-input {
   display: inline-block;
   width: 300px;
@@ -221,6 +212,14 @@ button.remove {
 button.create {
   background-color: #1c548d;
   color: white;
+}
+
+button.pageButton {
+  border: 2px solid black;
+  background-color: none;
+  color: black;
+  margin: none;
+  padding: none;
 }
 
 h2 {

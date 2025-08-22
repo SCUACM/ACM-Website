@@ -18,9 +18,10 @@ import ProfilePage from "@/pages/ProfilePage.vue";
 import AdminPage from "@/pages/AdminPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import RedirectRouter from "@/pages/RedirectRouter.vue";
-import AdminRoles from '@/pages/AdminRoles.vue'
+import AdminRoles from '@/pages/AdminRoles.vue';
+import AdminAttendanceData from "@/pages/AdminAttendanceData.vue";
 
-import VueYoutube from 'vue-youtube'
+import VueYoutube from 'vue-youtube';
 
 import {auth} from './firebase';
 import { getUserPerms } from "./helpers";
@@ -125,6 +126,13 @@ const routes = [
         "otherEditEvent",
       ]]
     },
+  },
+  {
+    path: "/admin/data",
+    component: AdminAttendanceData,
+    meta: {
+      authRequired: true,
+    }
   },
   {
     path: "/joinus",
