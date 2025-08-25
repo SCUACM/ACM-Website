@@ -9,7 +9,7 @@
         </v-col>
         <v-col cols="12">
           <v-btn
-              style="border-radius: 50px; border: solid white"
+              style="border-radius: 50px; border: solid white;"
               class="join-btn"
               outlined
               height="60px"
@@ -69,7 +69,8 @@
                 v-for="(social, i) in socials"
                 :key="i"
                 :href="social.href"
-                class="mx-1"
+                class="ms-1"
+                style="background-color: transparent;box-shadow: none;"
             >
               <v-icon large :color="social.color">
                 {{ social.icon }}
@@ -84,7 +85,7 @@
 
 <script>
 import Logo from "../assets/branding/logo_temp_new_invert.svg";
-import "../assets/scss/footer-media.scss";
+import "@/assets/scss/footer-media.scss";
 
 export default {
   name: "MainFooter",
@@ -96,27 +97,27 @@ export default {
 
     socials: [
       {
-        icon: "mdi-slack",
+        icon: "mdi mdi-slack",
         href: "https://scuacm.slack.com/",
         color: "#36C5F0",
       },
       {
-        icon: "mdi-instagram",
+        icon: "mdi mdi-instagram",
         href: "https://www.instagram.com/scu_acm/",
         color: "#E1306C",
       },
       {
-        icon: "mdi-github",
+        icon: "mdi mdi-github",
         href: "https://github.com/scuacm",
         color: "white",
       },
       {
-        icon: "mdi-laptop",
+        icon: "mdi mdi-laptop",
         href: "https://discord.gg/G242hXD",
         color: "#7289da",
       },
       {
-        icon: "mdi-linkedin",
+        icon: "mdi mdi-linkedin",
         href: "https://www.linkedin.com/groups/13597280/",
         color: "#0e76a8",
       },
@@ -137,6 +138,7 @@ export default {
   text-transform: none !important;
   color: white !important;
   transition: color 0.1s, background-color 0.4s;
+  background-color: #1c548d;
 }
 
 .join-btn:hover {

@@ -17,26 +17,26 @@
       </ul>
     </v-container>
     <v-container v-if="view==pageViews.List || view==pageViews.Grid" style="max-width: 1000px">
-      <div class="events-title" v-if="upcoming.length">
+      <div class="events-title" v-if="this.upcoming.length">
         Upcoming Events
       </div>
       <div style="display: flex; flex-wrap: wrap; max-width: 1000px" :style="[view == pageViews.List ? {'justify-content': 'left'} : {'justify-content': 'center'}]">
-        <EventCard v-for="event of this.upcoming" :event="event" :key="event.id" :view="view" :big="true"/>
+        <EventCard v-for="event of upcoming" :event="event" :key="event.id" :view="view" :big="true"/>
       </div>
       <div class="events-title" v-if="past.length">
         Past Events
       </div>
       <div style="display: flex; flex-wrap: wrap; max-width: 1000px" :style="[view == pageViews.List ? {'justify-content': 'left'} : {'justify-content': 'center'}]">
-        <EventCard v-for="event of this.past" :event="event" :key="event.id" :view="view" :big="false"/>
+        <EventCard v-for="event of past" :event="event" :key="event.id" :view="view" :big="false"/>
       </div>
     </v-container>
-    <CalendarComponent v-show="view==pageViews.Calendar"/>
+    <!-- <CalendarComponent v-show="view==pageViews.Calendar"/> -->
     <MainFooter />
   </v-app>
 </template>
 
 <script>
-import "../assets/scss/board-media.scss";
+import "@/assets/scss/board-media.scss";
 
 import EventCard from "@/components/EventCard.vue";
 import CalendarComponent from "@/components/CalendarComponent.vue";
@@ -58,23 +58,38 @@ export default {
   },
 
   // Create Observables (objects that will auto update as data gets updated/added) of all upcoming and past event objects.
-  firestore: {
-    upcoming: db.collection('events').where("startDate",">=",Timestamp.now()).orderBy('startDate', 'asc').limit(10),
-    past: db.collection('events').where("startDate","<",Timestamp.now()).orderBy('startDate', 'desc').limit(45),
-  },
+  // firestore: {
+  //   upcoming: db.collection('events').where("startDate",">=",Timestamp.now()).orderBy('startDate', 'asc').limit(10),
+  //   past: ,
+  // },
 
   data() {
     return {
-      upcoming: [],
-      past: [],
       pageViews: {
         List: 0,
         Grid: 1,
         Calendar: 2,
       },
       view: 0,
+      past: [],
+      upcoming: []
     };
   },
+  mounted() {
+    let getEvents = async () => {
+      const upcomingEvents = await db.collection('events').where("startDate",">=",Timestamp.now()).orderBy('startDate', 'asc').limit(10).get();
+      const pastEvents = await db.collection('events').where("startDate","<",Timestamp.now()).orderBy('startDate', 'desc').limit(45).get();
+      for (let e of upcomingEvents.docs) {
+        this.upcoming.push(e.data());
+      }
+      for (let e of pastEvents.docs) {
+        this.past.push(e.data());
+      }
+      console.log(this.upcoming);
+      console.log(this.past);
+    }
+    getEvents();
+  }
 };
 </script>
 

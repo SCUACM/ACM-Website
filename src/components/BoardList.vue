@@ -68,7 +68,7 @@ import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 
 import "../assets/scss/board-media.scss";
 
-import BoardListSection from "./BoardListSection";
+import BoardListSection from "./BoardListSection.vue";
 
 export default {
   name: "BoardList",

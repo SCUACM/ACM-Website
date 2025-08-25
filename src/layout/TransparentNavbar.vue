@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import "../assets/scss/navbar-media.scss";
+import "@/assets/scss/navbar-media.scss";
 import logoBlackSmall from "../assets/branding/logo_temp_new.svg";
 
 export default {
@@ -39,7 +39,7 @@ export default {
 
 /* overrides vuetify app-bar padding */
 
-/deep/ .v-toolbar__content {
+:deep() .v-toolbar__content {
   padding: 0px !important;
 }
 </style>

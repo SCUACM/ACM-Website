@@ -26,24 +26,51 @@
           thumb-label
         />
       </div>
-      <v-sparkline
+      <!-- <v-sparkline
         :value="this.attendances"
         :labels="this.dates"
         :show-labels="true"
         :label-size="4"
         :line-width="1"
         :smooth="4"
-      />
+      /> -->
+      <LineChart :data="this.data" :options="this.options"/>
       <h3>Last {{ Math.min(this.filteredEvents.length, tickValue) }} events</h3>
     </v-card>
   </div>
 </template>
 
 <script>
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js';
+import {Line as LineChart} from 'vue-chartjs';
 import { functions } from "../firebase";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default {
   name: "AdminEventDataCard",
+
+  components: {
+    LineChart
+  },
 
   props: {
     events: Array,
@@ -74,8 +101,6 @@ export default {
           }
         }
       }
-
-      this.attendances = [];
       for (
         let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1);
         i >= 0;
@@ -85,7 +110,7 @@ export default {
         const result = await functions.httpsCallable("getEventAttendance")({
           id: eventId,
         });
-        this.attendances.push(result.data || 0);
+        this.data.datasets[0].data.push(result.data || 0);
       }
 
       this.dates = [];
@@ -95,7 +120,7 @@ export default {
         i--
       ) {
         let dt = this.filteredEvents[i].startDate.toDate();
-        this.dates.push(dt.getMonth() + 1 + "/" + dt.getDate());
+        this.data.labels.push(dt.getMonth() + 1 + "/" + dt.getDate());
       }
 
       this.updating = false;
@@ -110,6 +135,20 @@ export default {
     selectedTag: "all",
     filteredEvents: [],
     updating: false,
+    data: {
+      labels: [], // dates
+      datasets: [
+        {
+          label: 'attendance',
+          backgroundColor: '#f87979',
+          data: [] // attendances
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
   }),
 };
 </script>

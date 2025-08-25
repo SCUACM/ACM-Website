@@ -2,53 +2,50 @@
   "name": "acm-new",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "serve": "vite preview",
+    "build": "vite build",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
-    "chart.js": "^3.9.1",
+    "@vitejs/plugin-vue": "6.0.1",
+    "chart.js": "^4.5.0",
     "core-js": "^3.6.5",
     "debounce": "^1.2.1",
     "firebase": "^12.1.0",
     "marked": "^4.1.1",
     "moment": "^2.29.4",
     "qrcode": "^1.5.1",
-    "vue": "^2.6.11",
-    "vue-async-computed": "^3.9.0",
-    "vue-chartjs": "^4.1.2",
-    "vue-router": "^3.5.1",
-    "vue-template-compiler": "^2.7.14",
-    "vue-youtube": "^1.4.0",
-    "vuefire": "^2.2.5",
-    "vuetify": "^2.6.10"
+    "vite": "^6.3.5",
+    "vite-plugin-vuetify": "^2.1.2",
+    "vue": "^3.5.19",
+    "vue-async-computed": "^4.0.1",
+    "vue-chartjs": "^5.3.2",
+    "vue-router": "^4.5.1",
+    "vue-youtube-vue-3": "^1.5.0",
+    "vuefire": "^3.2.2",
+    "vuetify": "^3.9.5"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^9.17.0",
-    "sass": "^1.32.0",
-    "sass-loader": "^10.0.0",
-    "vue-cli-plugin-vuetify": "~2.4.0",
-    "vuetify-loader": "^1.7.0"
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^8.7.1",
+    "sass": "^1.90.0",
+    "webpack-plugin-vuetify": "^3.1.2"
   },
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "esnode22": true
     },
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
+    "parserOptions": {},
     "rules": {}
   },
   "browserslist": [

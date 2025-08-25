@@ -1,9 +1,13 @@
-import Vue from "vue";
 import App from "./App.vue";
-import vuetify from "./plugins/vuetify";
-import VueRouter from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
+import {createApp} from 'vue';
 
-import { firestorePlugin } from 'vuefire';
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+
+import Youtube from 'vue-youtube-vue-3';
 
 // pages
 
@@ -19,14 +23,10 @@ import AdminPage from "@/pages/AdminPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import RedirectRouter from "@/pages/RedirectRouter.vue";
 import AdminRoles from '@/pages/AdminRoles.vue';
-import AdminAttendanceData from "@/pages/AdminAttendanceData.vue";
-
-import VueYoutube from 'vue-youtube';
 
 import {auth} from './firebase';
 import { getUserPerms } from "./helpers";
-
-Vue.config.productionTip = false;
+import '@mdi/font/css/materialdesignicons.css';
 
 const routes = [
   {
@@ -128,13 +128,6 @@ const routes = [
     },
   },
   {
-    path: "/admin/data",
-    component: AdminAttendanceData,
-    meta: {
-      authRequired: true,
-    }
-  },
-  {
     path: "/joinus",
     component: JoinUs,
   },
@@ -147,74 +140,78 @@ const routes = [
     beforeEnter() {
         window.location.replace("https://inrix.scuacm.com")
     }
-  },
-  {
-    path: "*",
-    redirect: "/",
-  },
+  }
 ];
 
-Vue.use(VueRouter);
-
-Vue.use(firestorePlugin);
- 
-Vue.use(VueYoutube)
-
-const router = new VueRouter({
-  base: "",
+const router = createRouter({
+  history: createWebHistory(),
   routes,
-  mode: "history",
   scrollBehavior() {
-    return { x: 0, y: 0 };
-  },
+    return { left: 0, top: 0 };
+  }
 });
 
-router.beforeEach( async (to, from, next) => {
+async function getUser() {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        resolve(user);
+      }
+      else {
+        reject(null);
+      }
+    })
+  });
+}
+
+router.beforeEach( async (to, from) => {
   //Check if the page we are going to requires a user to be signed in or admin permissions
   const needsAuth = to.matched.some(record => record.meta.authRequired);
   const needsPerms = to.matched.find(record => record.meta.permsRequired)?.meta?.permsRequired;
   if (!needsAuth) {
-    next();
-    return;
+    return true;
   }
-
-  const user = auth.currentUser;
+  const user = await getUser();
+  let valid = false;
   if (user) {
-    let valid = true;
-
-    if(needsPerms && needsPerms.length > 0) {
+    valid = true;
+    if (needsPerms && needsPerms.length > 0) {
       const perms = await getUserPerms(user);
-      for(let permGroup of needsPerms) {
+      for (let permGroup of needsPerms) {
         let groupValid = false;
-        for(let perm of permGroup) {
-          if(perms[perm]) {
+        for (let perm of permGroup) {
+          if (perms[perm]) {
             groupValid = true;
           }
         }
-        if(!groupValid) {
+        if (!groupValid) {
           // console.log("FAILED for", permGroup, perms)
           valid = false;
         }
       }
     }
-    if(valid) {
-      next();
-      return;
-    }
+  }
+  if(valid) {
+    return true;
   }
 
   let path = "/redirect?uri="+encodeURIComponent(to.path);
   if(needsPerms && needsPerms.length > 0) {
     path += "&perms="+encodeURIComponent(needsPerms.map(row => row.join(",")).join(":"))
   }
-
-  next({
-    path: path,
-  });
+  return {
+    name: path,
+    replace: true
+  };
 });
 
-new Vue({
-  vuetify,
-  router,
-  render: (h) => h(App),
-}).$mount("#app");
+const vuetify = createVuetify({
+  components,
+  directives
+});
+
+const app = createApp(App);
+app.use(router);
+app.use(vuetify);
+app.use(Youtube);
+app.mount("#app")

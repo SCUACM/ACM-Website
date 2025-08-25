@@ -7,9 +7,9 @@
       <div style="height: 600px;">
         <!-- Calendar Navigation -->
         <v-sheet tile height="54" class="d-flex">
-          <v-btn icon class="ma-2" @click="$refs.calendar.prev()">
+          <!-- <v-btn icon class="ma-2" @click="$refs.calendar.prev()">
             <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
+          </v-btn> -->
           <v-spacer />
           <div class="events-calendar-title" v-if="$refs.calendar">
             {{ $refs.calendar.title }}
@@ -24,19 +24,17 @@
             class="ma-2"
             label="type"
           ></v-select>
-          <v-btn icon class="ma-2" @click="$refs.calendar.next()">
+          <!-- <v-btn icon class="ma-2" @click="$refs.calendar.next()">
             <v-icon>mdi-chevron-right</v-icon>
-          </v-btn>
+          </v-btn> -->
         </v-sheet>
         <!-- Calendar -->
         <v-calendar
           ref="calendar"
-          v-model="value"
+          v-model="today"
           :type="calendarType"
           :events="events"
-          :event-overlap-mode="mode"
-          :event-overlap-threshold="30"
-          :event-color="getEventColor"
+          color="primary"
           @change="getEvents"
           @click:event="showEvent"
         />
@@ -61,7 +59,7 @@
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
           </v-card>
-        </v-menu>c
+        </v-menu>
       </div>
     </div>
     <!-- List of events -->
@@ -71,11 +69,14 @@
 
 <script>
 import "../assets/scss/events-media.scss";
+import { VCalendar } from 'vuetify/labs/VCalendar';
 // import EventList from "@/components/EventList";
 export default {
   name: "CalendarComponent",
 
-  components: {},
+  components: {
+    VCalendar
+  },
 
   data: () => ({
     isMounted: false,
@@ -96,11 +97,54 @@ export default {
       "orange",
       "grey darken-1",
     ],
+    today: new Date()
   }),
 
   async mounted() {
-    await this.getHolidays();
-    this.isMounted = true;
+    let fetchEvents = async () => {
+      const _events = [];
+      // typically we want to hide our auth... but since this is private it is fine
+      const auth = "AIzaSyCnRyFyPuJ9WSeu602Q7CE13TsxWVNbw10";
+
+      // only get holidays for 6 months prior and forward
+      let currentDate = new Date();
+      let futureDate = new Date(currentDate);
+      futureDate.setMonth(currentDate.getMonth() + 6);
+      let pastDate = new Date(currentDate);
+      pastDate.setMonth(currentDate.getMonth() - 6);
+
+      const timeMin = pastDate.toJSON();
+      const timeMax = futureDate.toJSON();
+
+      const res = await fetch(
+        `https://www.googleapis.com/calendar/v3/calendars/en.usa%23holiday%40group.v.calendar.google.com/events?key=${auth}&timeMin=${timeMin}&timeMax=${timeMax}`
+      );
+      const data = await res.json();
+      for (let event of data.items) {
+        _events.push({
+          title: event.summary,
+          start: new Date(event.start.date),
+          color: "grey darken-1",
+          allDay: true
+        });
+      }
+
+      const acmEventsResponse = await fetch(
+        `https://clients6.google.com/calendar/v3/calendars/santaclara.acm@gmail.com/events?calendarId=santaclara.acm%40gmail.com&singleEvents=true&timeZone=America%2FLos_Angeles&maxAttendees=1&maxResults=250&sanitizeHtml=true&timeMin=${timeMin}&timeMax=${timeMax}&key=${auth}`
+      );
+      const acmEventsData = await acmEventsResponse.json();
+      for (let event of acmEventsData.items) {
+        _events.push({
+          title: event.summary,
+          start: new Date(event.start.date),
+          color: "grey darken-1",
+          allDay: true
+        });
+      }
+      this.events = _events;
+    }
+    await fetchEvents();
+    console.log(this.events);
   },
 
   methods: {
@@ -131,53 +175,10 @@ export default {
       nativeEvent.stopPropagation();
     },
 
-    async getHolidays() {
-      // typically we want to hide our auth... but since this is private it is fine
-      const auth = "AIzaSyCnRyFyPuJ9WSeu602Q7CE13TsxWVNbw10";
-
-      // only get holidays for 6 months prior and forward
-      let currentDate = new Date();
-      let futureDate = new Date(currentDate);
-      futureDate.setMonth(currentDate.getMonth() + 6);
-      let pastDate = new Date(currentDate);
-      pastDate.setMonth(currentDate.getMonth() - 6);
-
-      const timeMin = pastDate.toJSON();
-      const timeMax = futureDate.toJSON();
-
-      const res = await fetch(
-        `https://www.googleapis.com/calendar/v3/calendars/en.usa%23holiday%40group.v.calendar.google.com/events?key=${auth}&timeMin=${timeMin}&timeMax=${timeMax}`
-      );
-      const data = await res.json();
-      // console.log(data);
-      this.events = this.events.concat(
-        data.items.map((event) => ({
-          name: event.summary,
-          start: event.start.date,
-          color: "grey darken-1",
-        }))
-      );
-
-      const acmEventsResponse = await fetch(
-        `https://clients6.google.com/calendar/v3/calendars/santaclara.acm@gmail.com/events?calendarId=santaclara.acm%40gmail.com&singleEvents=true&timeZone=America%2FLos_Angeles&maxAttendees=1&maxResults=250&sanitizeHtml=true&timeMin=${timeMin}&timeMax=${timeMax}&key=${auth}`
-      );
-      const acmEventsData = await acmEventsResponse.json();
-      // console.log(acmEventsData);
-      this.events = this.events.concat(
-        acmEventsData.items.map((event) => ({
-          name: event.summary,
-          start: this.parseTime(event.start.dateTime),
-          end: this.parseTime(event.end.dateTime),
-          color: this.getColor(event.summary),
-          details: event.description,
-        }))
-      );
-    },
-
     // fetching acm events gives time string in incorrect format
     parseTime(dateTime) {
       if (!dateTime) return "2000-00-00";
-      // console.log(dateTime);
+      console.log(dateTime);
       // console.log(typeof dateTime);
       // console.log(
       //   dateTime.substring(0, dateTime.indexOf("T")) +

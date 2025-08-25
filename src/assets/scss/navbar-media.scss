@@ -1,28 +1,26 @@
+@use "custom-media";
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
-@import "./custom-media";
 
 .app-bar {
   display: flex;
-  width: 1000px;
-  height: 75px;
 }
 
 .logo {
-  @include media-xs-only {
-  }
-  @include media-sm-only {
-  }
-
   &:hover {
     cursor: pointer;
+  }
+  @include custom-media.media-xs-only {
+  }
+  @include custom-media.media-sm-only {
   }
 }
 
 .routes {
   margin-top: auto;
   margin-bottom: auto;
-  @include media-xs-only {
+  @include custom-media.media-xs-only {
   }
-  @include media-sm-only {
+  @include custom-media.media-sm-only {
   }
 }
