@@ -1,0 +1,17 @@
+:root {
+    --fc-button-text-color: black;
+    --fc-button-bg-color: white;
+    --fc-button-border-color: black;
+    --fc-button-hover-bg-color: lightgray;
+    --fc-button-hover-border-color: black;
+    --fc-button-active-bg-color: lightgray;
+    --fc-button-active-border-color: black;
+}
+
+.fc-icon {
+    justify-content: center;
+    justify-items: center;
+    height: auto;
+    display: flex !important;
+    justify-content: center !important;
+}
