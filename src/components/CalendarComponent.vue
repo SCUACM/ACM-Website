@@ -1,18 +1,18 @@
 <template>
-  <v-container style="max-width: 1000px">
+  <div class="calendar-container">
     <div style="margin-bottom: 200px;">
       <div class="events-title">
         Calendar
       </div>
-      <div style="height: 600px;">
+      <div style="height: 600px; width: 1000px;">
         <!-- Calendar Navigation -->
-        <v-sheet tile height="54" class="d-flex">
-          <!-- <v-btn icon class="ma-2" @click="$refs.calendar.prev()">
+        <!-- <v-sheet tile height="54" class="d-flex">
+          <v-btn icon class="ma-2" @click="$refs.calendar.getApi().prev()">
             <v-icon>mdi-chevron-left</v-icon>
-          </v-btn> -->
+          </v-btn>
           <v-spacer />
           <div class="events-calendar-title" v-if="$refs.calendar">
-            {{ $refs.calendar.title }}
+            {{ $refs.calendar.getApi().getCurrentData().viewTitle }}
           </div>
           <v-spacer />
           <v-select
@@ -24,20 +24,12 @@
             class="ma-2"
             label="type"
           ></v-select>
-          <!-- <v-btn icon class="ma-2" @click="$refs.calendar.next()">
+          <v-btn icon class="ma-2" @click="$refs.calendar.getApi().next()">
             <v-icon>mdi-chevron-right</v-icon>
-          </v-btn> -->
-        </v-sheet>
+          </v-btn>
+        </v-sheet> -->
         <!-- Calendar -->
-        <v-calendar
-          ref="calendar"
-          v-model="today"
-          :type="calendarType"
-          :events="events"
-          color="primary"
-          @change="getEvents"
-          @click:event="showEvent"
-        />
+        <FullCalendar ref="calendar" :options="calendarOptions" class="calendar"/>
         <!-- Below is code for popup on click -->
         <v-menu
           v-model="selectedOpen"
@@ -45,18 +37,18 @@
           :activator="selectedElement"
           offset-x
         >
-          <v-card color="grey lighten-4" min-width="350px" flat>
-            <v-toolbar :color="selectedEvent.color" dark>
+          <v-card color="white" min-width="350px" flat>
+            <v-toolbar :color="selectedEvent.backgroundColor" dark>
               <!-- eslint-disable -->
-              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <v-toolbar-title v-html="selectedEvent.title"></v-toolbar-title>
               <!-- eslint-enable -->
               <v-spacer></v-spacer>
               <v-btn icon @click="selectedOpen = false">
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-toolbar>
-            <v-card-text v-if="selectedEvent.details">
-              <span v-html="selectedEvent.details"></span>
+            <v-card-text v-if="selectedEvent.extendedProps.details">
+              <span v-html="selectedEvent.extendedProps.details"></span>
             </v-card-text>
           </v-card>
         </v-menu>
@@ -64,41 +56,59 @@
     </div>
     <!-- List of events -->
     <!-- <EventList /> -->
-  </v-container>
+  </div>
 </template>
 
 <script>
 import "../assets/scss/events-media.scss";
-import { VCalendar } from 'vuetify/labs/VCalendar';
+import FullCalendar from '@fullcalendar/vue3';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { defineComponent } from "vue";
 // import EventList from "@/components/EventList";
-export default {
+export default defineComponent({
   name: "CalendarComponent",
 
   components: {
-    VCalendar
+    FullCalendar
   },
 
-  data: () => ({
-    isMounted: false,
-    selectedOpen: false,
-    selectedEvent: "",
-    selectedElement: "",
-    calendarType: "month",
-    mode: "stack",
-    value: "",
-    calendarTypes: ["month", "week", "day"],
-    events: [],
-    colors: [
-      "blue",
-      "indigo",
-      "deep-purple",
-      "cyan",
-      "green",
-      "orange",
-      "grey darken-1",
-    ],
-    today: new Date()
-  }),
+  data() {
+    return {
+      isMounted: false,
+      selectedOpen: false,
+      selectedEvent: "",
+      selectedElement: "",
+      calendarType: "month",
+      mode: "stack",
+      value: "",
+      calendarTypes: ["month", "week", "day"],
+      events: [],
+      colors: [
+        "blue",
+        "indigo",
+        "deep-purple",
+        "cyan",
+        "green",
+        "orange",
+        "grey darken-1",
+      ],
+      today: new Date(),
+      calendarOptions: {
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        initialView: 'dayGridMonth',
+        events: [],
+        headerToolbar: {
+          start: 'prev,next today',
+          center: 'title',
+          end: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        eventClick: this.handleEventClick,
+        contentHeight: 'auto'
+      }
+    }
+  },
 
   async mounted() {
     let fetchEvents = async () => {
@@ -123,8 +133,8 @@ export default {
       for (let event of data.items) {
         _events.push({
           title: event.summary,
-          start: new Date(event.start.date),
-          color: "grey darken-1",
+          start: event.start.date,
+          color: "gray",
           allDay: true
         });
       }
@@ -136,15 +146,17 @@ export default {
       for (let event of acmEventsData.items) {
         _events.push({
           title: event.summary,
-          start: new Date(event.start.date),
-          color: "grey darken-1",
-          allDay: true
+          start: this.parseTime(event.start.dateTime),
+          end: this.parseTime(event.end.dateTime),
+          color: this.getColor(event.summary),
+          allDay: false,
+          details: event.description
         });
       }
-      this.events = _events;
+      this.calendarOptions.events = _events;
     }
     await fetchEvents();
-    console.log(this.events);
+    setTimeout(() => this.$refs.calendar.getApi().updateSize(), 1000);
   },
 
   methods: {
@@ -154,6 +166,11 @@ export default {
 
     getEvents() {
       this.events;
+    },
+
+    handleEventClick(info) {
+      // console.log(info);
+      this.showEvent({nativeEvent: info.jsEvent, event: info.event});
     },
 
     showEvent({ nativeEvent, event }) {
@@ -178,7 +195,7 @@ export default {
     // fetching acm events gives time string in incorrect format
     parseTime(dateTime) {
       if (!dateTime) return "2000-00-00";
-      console.log(dateTime);
+      // console.log(dateTime);
       // console.log(typeof dateTime);
       // console.log(
       //   dateTime.substring(0, dateTime.indexOf("T")) +
@@ -201,7 +218,20 @@ export default {
       return "green";
     },
   },
-};
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+.calendar {
+  display: flex;
+  min-height: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+}
+.calendar-container {
+  justify-content: center;
+  justify-items: center;
+  margin-inline: 1.5em;
+}
+</style>

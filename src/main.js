@@ -27,6 +27,7 @@ import AdminRoles from '@/pages/AdminRoles.vue';
 import {auth} from './firebase';
 import { getUserPerms } from "./helpers";
 import '@mdi/font/css/materialdesignicons.css';
+import '@/assets/override.css';
 
 const routes = [
   {

@@ -72,9 +72,8 @@
                 class="ms-1"
                 style="background-color: transparent;box-shadow: none;"
             >
-              <v-icon large :color="social.color">
-                {{ social.icon }}
-              </v-icon>
+              <i large :class="social.icon" :style="'color: '+social.color+'; font-size: 2em'">
+              </i>
             </v-btn>
           </v-col>
         </v-row>
@@ -112,7 +111,7 @@ export default {
         color: "white",
       },
       {
-        icon: "mdi mdi-laptop",
+        icon: "fa-brands fa-discord",
         href: "https://discord.gg/G242hXD",
         color: "#7289da",
       },

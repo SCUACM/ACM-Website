@@ -30,7 +30,7 @@
         <EventCard v-for="event of past" :event="event" :key="event.id" :view="view" :big="false"/>
       </div>
     </v-container>
-    <!-- <CalendarComponent v-show="view==pageViews.Calendar"/> -->
+    <CalendarComponent v-show="view==pageViews.Calendar"/>
     <MainFooter />
   </v-app>
 </template>
@@ -85,8 +85,8 @@ export default {
       for (let e of pastEvents.docs) {
         this.past.push(e.data());
       }
-      console.log(this.upcoming);
-      console.log(this.past);
+      // console.log(this.upcoming);
+      // console.log(this.past);
     }
     getEvents();
   }
