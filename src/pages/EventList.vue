@@ -30,7 +30,7 @@
         <EventCard v-for="event of past" :event="event" :key="event.id" :view="view" :big="false"/>
       </div>
     </v-container>
-    <CalendarComponent v-show="view==pageViews.Calendar"/>
+    <CalendarComponent v-if="view==pageViews.Calendar"/>
     <MainFooter />
   </v-app>
 </template>

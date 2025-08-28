@@ -1,6 +1,6 @@
 <template>
   <v-app style="position: relative">
-    <MainNavbar no-elevation />
+    <MainNavbar transparent no-elevation />
     <div
       ref="initContainer"
       class="parallax"

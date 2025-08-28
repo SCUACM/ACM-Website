@@ -8,13 +8,13 @@
     </v-dialog>
     <v-app-bar
       app
-      :background="navColor"
-      width="100vw"
+      width="100%"
       height="75px"
-      elevate-on-scroll
+      scroll-behavior="elevate"
+      class="pr-4 pl-4 pt-1 pb-1"
     >
-      <div class="app-bar mx-auto">
-        <div class="mr-auto my-auto logo" @click="$router.push('/')">
+      <div class="app-bar">
+        <div class="mr-auto logo" @click="$router.push('/')">
           <v-img
             width="120px"
             height="60px"
@@ -24,7 +24,7 @@
           />
         </div>
         <div class="ml-auto routes hidden-sm-and-down">
-          <span class="link ms-6">
+          <span class="link ml-6 mr-6">
             <router-link
               to="/"
               :class="[
@@ -40,7 +40,7 @@
               about
             </router-link>
           </span>
-          <span class="link ms-6">
+          <span class="link ml-6 mr-6">
             <router-link
               to="/board"
               :class="[
@@ -56,7 +56,7 @@
               board
             </router-link>
           </span>
-          <span class="link ms-6" v-if="!showEvents">
+          <span class="link ml-6 mr-6" v-if="!showEvents">
             <router-link
               to="/calendar"
               :class="[
@@ -72,7 +72,7 @@
               events
             </router-link>
           </span>
-          <span class="link ms-6" v-if="showEvents">
+          <span class="link ml-6 mr-6" v-if="showEvents">
             <router-link
               to="/events"
               :class="[
@@ -88,7 +88,7 @@
               events
             </router-link>
           </span>
-          <span class="link ms-6">
+          <span class="link ml-6 mr-6">
             <a
               @click="routeTo('https://intel.scuacm.com')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -97,7 +97,7 @@
               Intel Hack
             </a>
           </span>
-          <!-- <span class="link ms-6">
+          <!-- <span class="link ml-6 mr-6">
             <a
               @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -157,7 +157,7 @@
             </v-btn>
           </span>
         </div>
-        <div class="ml-auto d-md-none">
+        <div class="ml-auto hidden-md-and-up">
           <v-col justify-end>
             <v-btn
                     icon
@@ -356,6 +356,7 @@ export default {
     },
 
     updateScroll() {
+      console.log(this.scrollPosition);
       this.scrollPosition = window.scrollY;
     },
 
@@ -519,5 +520,9 @@ a:focus::before {
   transform-origin: center top;
   -webkit-transform: scale(1, 1);
   transform: scale(1, 1);
+}
+
+.v-app-bar {
+    background: v-bind(navColor);
 }
 </style>

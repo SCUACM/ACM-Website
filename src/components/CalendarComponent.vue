@@ -4,7 +4,7 @@
       <div class="events-title">
         Calendar
       </div>
-      <div style="height: 600px; width: 1000px;">
+      <div style="height: 600px; max-width: 1000px;">
         <!-- Calendar Navigation -->
         <!-- <v-sheet tile height="54" class="d-flex">
           <v-btn icon class="ma-2" @click="$refs.calendar.getApi().prev()">
@@ -92,7 +92,7 @@ export default defineComponent({
         "cyan",
         "green",
         "orange",
-        "grey darken-1",
+        "lightgray",
       ],
       today: new Date(),
       calendarOptions: {
