@@ -26,15 +26,7 @@
           thumb-label
         />
       </div>
-      <!-- <v-sparkline
-        :value="this.attendances"
-        :labels="this.dates"
-        :show-labels="true"
-        :label-size="4"
-        :line-width="1"
-        :smooth="4"
-      /> -->
-      <LineChart :data="this.data" :options="this.options"/>
+      <LineChart v-if="!updating && attendances.length" :data="chartData" :options="chartOptions"/>
       <h3>Last {{ Math.min(this.filteredEvents.length, tickValue) }} events</h3>
     </v-card>
   </div>
@@ -53,7 +45,6 @@ import {
   Legend
 } from 'chart.js';
 import {Line as LineChart} from 'vue-chartjs';
-import { functions } from "../firebase";
 
 ChartJS.register(
   CategoryScale,
@@ -91,7 +82,6 @@ export default {
       if (this.updating) {
         return;
       }
-
       this.updating = true;
       this.filteredEvents = this.selectedTag == "all" ? this.events : [];
       if (this.selectedTag != "all") {
@@ -101,16 +91,13 @@ export default {
           }
         }
       }
+      this.attendances = [];
       for (
         let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1);
         i >= 0;
         i--
       ) {
-        const eventId = this.filteredEvents[i].id;
-        const result = await functions.httpsCallable("getEventAttendance")({
-          id: eventId,
-        });
-        this.data.datasets[0].data.push(result.data || 0);
+        this.attendances.push(this.filteredEvents[i].attendance);
       }
 
       this.dates = [];
@@ -120,9 +107,8 @@ export default {
         i--
       ) {
         let dt = this.filteredEvents[i].startDate.toDate();
-        this.data.labels.push(dt.getMonth() + 1 + "/" + dt.getDate());
+        this.dates.push(dt.getMonth() + 1 + "/" + dt.getDate() + ": "+this.filteredEvents[i].title);
       }
-
       this.updating = false;
     },
   },
@@ -135,20 +121,26 @@ export default {
     selectedTag: "all",
     filteredEvents: [],
     updating: false,
-    data: {
-      labels: [], // dates
-      datasets: [
-        {
-          label: 'attendance',
-          backgroundColor: '#f87979',
-          data: [] // attendances
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
   }),
+  computed: {
+    chartData() {
+      return {
+        labels: this.dates,
+        datasets: [
+          {
+            label: 'attendance',
+            backgroundColor: '#1c548d',
+            data: this.attendances
+          }
+        ]
+      }
+    },
+    chartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: true
+      }
+    }
+  }
 };
 </script>

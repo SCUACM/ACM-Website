@@ -30,11 +30,11 @@
         </select>
       </span>
       <button @click="pageDown()" class="pageButton">
-        <i class="mdi mdi-arrow-left"></i>
+        <v-icon large color="black">mdi mdi-arrow-left</v-icon>
       </button>
       <span>{{this.pageNum}}</span>
       <button @click="pageUp()" class="pageButton">
-        <i class="mdi mdi-arrow-right"></i>
+        <v-icon large color="black">mdi mdi-arrow-right</v-icon>
       </button>
       <AdminEventCard
         v-for="event of acmEvents.filter(
@@ -217,9 +217,9 @@ button.create {
 button.pageButton {
   border: 2px solid black;
   background-color: none;
-  color: black;
-  margin: none;
-  padding: none;
+  margin-block: 0;
+  padding: 0;
+
 }
 
 h2 {
