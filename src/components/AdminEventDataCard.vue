@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-btn style="width: 150px; margin-bottom: 15px" @click="toggleShowData()"
-      >{{ showData ? "Hide" : "Show" }} Trends</v-btn
+      >{{ showData ? "Hide" : "Show" }} Statistics</v-btn
     >
     <v-card v-if="showData" style="padding: 10px">
       <div style="height: 40px">
@@ -17,6 +17,7 @@
         <option value="all">all</option>
         <option :value="tag" v-for="tag in tags" :key="tag">{{ tag }}</option>
       </select>
+      <v-checkbox label="Omit events with 0 attendance" v-model="omitZeros"></v-checkbox>
       <div style="width: 200px">
         <v-slider
           v-model="tickValue"
@@ -92,23 +93,22 @@ export default {
         }
       }
       this.attendances = [];
-      for (
-        let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1);
-        i >= 0;
-        i--
-      ) {
-        this.attendances.push(this.filteredEvents[i].attendance);
-      }
-
       this.dates = [];
-      for (
-        let i = Math.min(this.filteredEvents.length - 1, this.tickValue - 1);
-        i >= 0;
-        i--
-      ) {
+      let cnt = this.tickValue;
+      for (let i = 0; i < this.filteredEvents.length; i++) {
+        if (cnt == 0) {
+          break;
+        }
+        if (this.omitZeros == true && this.filteredEvents[i].attendance == 0) {
+          continue;
+        }
+        this.attendances.push(this.filteredEvents[i].attendance);
         let dt = this.filteredEvents[i].startDate.toDate();
         this.dates.push(dt.getMonth() + 1 + "/" + dt.getDate() + ": "+this.filteredEvents[i].title);
+        cnt--;
       }
+      this.attendances.reverse();
+      this.dates.reverse();
       this.updating = false;
     },
   },
@@ -121,6 +121,7 @@ export default {
     selectedTag: "all",
     filteredEvents: [],
     updating: false,
+    omitZeros: false
   }),
   computed: {
     chartData() {

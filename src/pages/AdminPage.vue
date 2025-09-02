@@ -32,17 +32,12 @@
       <button @click="pageDown()" class="pageButton">
         <v-icon large color="black">mdi mdi-arrow-left</v-icon>
       </button>
-      <span>{{this.pageNum}}</span>
+      <span>Page {{this.pageNum}} of {{ this.maxPageNum }}</span>
       <button @click="pageUp()" class="pageButton">
         <v-icon large color="black">mdi mdi-arrow-right</v-icon>
       </button>
       <AdminEventCard
-        v-for="event of acmEvents.filter(
-          (e) =>
-            (e.index >= (this.pageNum-1)*this.eventsPerPage && e.index < this.pageNum*this.eventsPerPage) &&
-            (this.selectedTag == 'all' ||
-            e.tags?.includes(this.selectedTag))
-        )"
+        v-for="event of filteredEvents.filter((value, index) => (index >= (this.pageNum-1)*this.eventsPerPage && index < this.pageNum*this.eventsPerPage))"
         :key="event.id"
         :event="event"
       >
@@ -94,11 +89,11 @@ export default {
       this.pageNum = 1;
     },
     pageUp() {
-      this.pageNum++;
+      this.pageNum += this.pageNum == this.maxPageNum ? 0 : 1;
     },
     pageDown() {
-      this.pageNum = this.pageNum > 1 ? this.pageNum-1 : 1;
-    }
+      this.pageNum -= this.pageNum > 1 ? 1 : 0;
+    },
   },
 
   mounted() {
@@ -147,18 +142,14 @@ export default {
           console.log("No events found");
           return;
         }
-
-        let cnt = 0;
         for (let doc of eventCollection.docs) {
           const data = doc.data();
           data.id = doc.id;
           if ((perms.editMyEvent || perms.deleteMyEvent && data.createdBy === user.uid) || (!perms.otherEditEvent && !perms.otherDeleteEvent && (data.tags === null || data.tags.some(t => data.tags.includes(t))))) {
-            data.index = cnt;
-            cnt++;
-            // console.log(data);
             this.acmEvents.push(data);
           }
         }
+        this.eventsOnDisplay = this.acmEvents.length;
     }});
   },
 
@@ -173,9 +164,20 @@ export default {
       allowedTags: [],
       selectedTag: "all",
       eventsPerPage: 20,
-      pageNum: 1
+      pageNum: 1,
+      eventsOnDisplay: 0
     };
   },
+  computed: {
+    maxPageNum() {
+      return Math.trunc(this.eventsOnDisplay / this.eventsPerPage) + (this.eventsOnDisplay % this.eventsPerPage > 0 ? 1 : 0);
+    },
+    filteredEvents() {
+      let result = this.acmEvents.filter((e) => (this.selectedTag == 'all' || e.tags?.includes(this.selectedTag)));
+      this.eventsOnDisplay = result.length;
+      return result;
+    }
+  }
 };
 </script>
 
