@@ -238,9 +238,9 @@ export default {
         details.flyer = fileName;
       }
 
-      // Initialize the counter field to 0 if it's a new event
+      // Initialize the attendance field to 0 if it's a new event
       if (this.isNew) {
-        details.counter = 0;
+        details.attendance = 0;
       }
 
       // Update the event and navigate back to the main events list page
@@ -280,7 +280,7 @@ export default {
         endDate: "",
         location: "",
         flyer: null,
-        counter: 0,
+        attendance: 0,
       },
       allowedTags: [],
       allowOther: false,
