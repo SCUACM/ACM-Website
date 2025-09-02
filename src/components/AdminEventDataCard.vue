@@ -9,14 +9,16 @@
         <p v-else>Loading...</p>
       </div>
       <br />
-      <select
+      <v-select
         v-if="tags.length > 1"
-        @change="updateSelectedTag($event.target.value)"
-        style="margin-top: 5px"
+        style="margin-top: 5px; width: fit-content;"
+        :items="tags"
+        v-model="selectedTag"
+        variant="underlined"
       >
-        <option value="all">all</option>
-        <option :value="tag" v-for="tag in tags" :key="tag">{{ tag }}</option>
-      </select>
+        <!-- <option value="all">all</option>
+        <option :value="tag" v-for="tag in tags" :key="tag">{{ tag }}</option> -->
+      </v-select>
       <v-checkbox label="Omit events with 0 attendance" v-model="omitZeros"></v-checkbox>
       <div style="width: 200px">
         <v-slider
@@ -75,9 +77,6 @@ export default {
       if (this.showData) {
         this.updateData();
       }
-    },
-    updateSelectedTag(tag) {
-      this.selectedTag = tag;
     },
     async updateData() {
       if (this.updating) {
@@ -141,6 +140,9 @@ export default {
         responsive: true,
         maintainAspectRatio: true
       }
+    },
+    maxAttendance() {
+
     }
   }
 };

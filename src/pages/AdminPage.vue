@@ -17,25 +17,30 @@
         <button class="create">Create New Event</button>
       </router-link>
       <span v-if="canAddEvents">or select an existing event below:</span><br />
-      <span v-if="this.allowedTags.length > 1">
-        Filter to
-        <select
-          @change="updateSelectedTag($event.target.value)"
-          style="text-decoration-line: underline"
+      <div style="margin-bottom: 1em;">
+        <v-select
+          v-if="this.allowedTags.length > 1"
+          @update:model-value="this.setPageNumToStart()"
+          v-model="selectedTag"
+          :items="this.allowedTags"
+          width="fit-content"
+          style="margin-inline: 1em 2em; display: inline-flex;"
+          variant="underlined"
+          density="compact"
         >
-          <option value="all">all</option>
-          <option :value="tag" v-for="tag in this.allowedTags" :key="tag">
-            {{ tag }}
-          </option>
-        </select>
-      </span>
-      <button @click="pageDown()" class="pageButton">
-        <v-icon large color="black">mdi mdi-arrow-left</v-icon>
-      </button>
-      <span>Page {{this.pageNum}} of {{ this.maxPageNum }}</span>
-      <button @click="pageUp()" class="pageButton">
-        <v-icon large color="black">mdi mdi-arrow-right</v-icon>
-      </button>
+        </v-select>
+        <div class="pageButtonContainer">
+          <span style="align-content: center; margin-right: 1em;">
+            {{(this.pageNum-1) * this.eventsPerPage + 1}}-{{ Math.min(this.pageNum * this.eventsPerPage, this.eventsOnDisplay) }} of {{ this.eventsOnDisplay }}
+          </span>
+          <v-btn @click="pageDown()" class="pageButton">
+            <v-icon large color="black">mdi mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn @click="pageUp()" class="pageButton">
+            <v-icon large color="black">mdi mdi-chevron-right</v-icon>
+          </v-btn>
+        </div>
+      </div>
       <AdminEventCard
         v-for="event of filteredEvents.filter((value, index) => (index >= (this.pageNum-1)*this.eventsPerPage && index < this.pageNum*this.eventsPerPage))"
         :key="event.id"
@@ -84,8 +89,7 @@ export default {
         alert(result.data.message);
       }
     },
-    updateSelectedTag(tag) {
-      this.selectedTag = tag;
+    setPageNumToStart() {
       this.pageNum = 1;
     },
     pageUp() {
@@ -119,7 +123,7 @@ export default {
           perms.broncosecDeleteEvent ||
           perms.otherDeleteEvent ||
           perms.icpcDeleteEvent;
-        this.allowedTags = [];
+        this.allowedTags = ["all"];
         if (perms.acmEditEvent || perms.acmDeleteEvent) {
           this.allowedTags.push("acm");
         }
@@ -165,7 +169,7 @@ export default {
       selectedTag: "all",
       eventsPerPage: 20,
       pageNum: 1,
-      eventsOnDisplay: 0
+      eventsOnDisplay: 0,
     };
   },
   computed: {
@@ -217,11 +221,21 @@ button.create {
 }
 
 button.pageButton {
-  border: 2px solid black;
+  border: none;
   background-color: none;
-  margin-block: 0;
+  margin: 0;
   padding: 0;
+  box-shadow: none;
+  aspect-ratio: 1;
+  min-width: 0;
+  width: fit-content;
+}
 
+div.pageButtonContainer {
+  width: auto;
+  float: right;
+  display: inline-flex;
+  margin-right: 4em;
 }
 
 h2 {
