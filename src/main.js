@@ -7,8 +7,6 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 
-import Youtube from 'vue-youtube-vue-3';
-
 // pages
 
 import IndexHome from "@/pages/IndexHome.vue";
@@ -23,6 +21,7 @@ import AdminPage from "@/pages/AdminPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import RedirectRouter from "@/pages/RedirectRouter.vue";
 import AdminRoles from '@/pages/AdminRoles.vue';
+import AdminStats from "@/pages/AdminStats.vue";
 
 import {auth} from './firebase';
 import { getUserPerms } from "./helpers";
@@ -129,6 +128,38 @@ const routes = [
     },
   },
   {
+    path: "/admin/stats",
+    component: AdminStats,
+    meta: {
+      authRequired: true,
+      permsRequired: [[
+        "changeRolePerms",
+        "changeUserRole",
+        "editMyEvent",
+        "deleteMyEvent",
+        "acmAddEvent",
+        "acmEditEvent",
+        "acmDeleteEvent",
+        "icpcAddEvent",
+        "icpcEditEvent",
+        "icpcDeleteEvent",
+        "acmwAddEvent",
+        "acmwEditEvent",
+        "acmwDeleteEvent",
+        "broncosecAddEvent",
+        "broncosecEditEvent",
+        "broncosecDeleteEvent",
+        "otherAddEvent",
+        "otherEditEvent",
+        "otherDeleteEvent",
+        "viewAllResume",
+        "addProject",
+        "editProject",
+        "deleteProject"
+      ]]
+    }
+  },
+  {
     path: "/joinus",
     component: JoinUs,
   },
@@ -141,6 +172,10 @@ const routes = [
     beforeEnter() {
         window.location.replace("https://inrix.scuacm.com")
     }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: "/",
   }
 ];
 
@@ -152,19 +187,6 @@ const router = createRouter({
   }
 });
 
-async function getUser() {
-  return new Promise((resolve, reject) => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        resolve(user);
-      }
-      else {
-        reject(null);
-      }
-    })
-  });
-}
-
 router.beforeEach( async (to, from) => {
   //Check if the page we are going to requires a user to be signed in or admin permissions
   const needsAuth = to.matched.some(record => record.meta.authRequired);
@@ -172,7 +194,7 @@ router.beforeEach( async (to, from) => {
   if (!needsAuth) {
     return true;
   }
-  const user = await getUser();
+  const user = await auth.currentUser;
   let valid = false;
   if (user) {
     valid = true;
@@ -200,10 +222,7 @@ router.beforeEach( async (to, from) => {
   if(needsPerms && needsPerms.length > 0) {
     path += "&perms="+encodeURIComponent(needsPerms.map(row => row.join(",")).join(":"))
   }
-  return {
-    name: path,
-    replace: true
-  };
+  return path;
 });
 
 const vuetify = createVuetify({
@@ -214,5 +233,4 @@ const vuetify = createVuetify({
 const app = createApp(App);
 app.use(router);
 app.use(vuetify);
-app.use(Youtube);
 app.mount("#app")
