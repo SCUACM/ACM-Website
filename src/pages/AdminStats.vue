@@ -309,7 +309,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .v-text-field {
   width: fit-content;
   display: inline-flex;
