@@ -5,12 +5,14 @@
       <router-link to="/admin/roles" v-if="canViewRoles">
         <button class="create">Manage Roles and User Permissions</button>
       </router-link>
+      <router-link to="/admin/stats" v-if="acmEvents.length">
+        <button class="create">View attendance data statistics</button>
+      </router-link>
       <!-- <h2>Manage Admin Users</h2>
                 <v-text-field class="uid-input" label="Enter User UID" v-model="uid">
                 </v-text-field>
                 <button @click="addAdmin">Add Admin Privileges</button>
                 <button @click="removeAdmin" class="remove">Remove Admin Privileges</button> -->
-      <AdminEventDataCard :events="acmEvents" :tags="this.allowedTags" />
 
       <h2>Manage Events</h2>
       <router-link to="/admin/events/new" v-if="canAddEvents">
@@ -59,7 +61,6 @@ import MainFooter from "@/layout/MainFooter.vue";
 import "firebase/compat/firestore";
 import { db, functions, auth } from "../firebase";
 import AdminEventCard from "../components/AdminEventCard.vue";
-import AdminEventDataCard from "../components/AdminEventDataCard.vue";
 import { getUserPerms } from "../helpers";
 
 export default {
@@ -69,7 +70,6 @@ export default {
     MainNavbar,
     MainFooter,
     AdminEventCard,
-    AdminEventDataCard,
   },
 
   methods: {
