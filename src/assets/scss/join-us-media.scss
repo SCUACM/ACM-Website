@@ -1,7 +1,8 @@
+@use "custom-media";
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
-@import "./custom-media";
 
 .right-panel-colored {
   display: flex;
@@ -15,12 +16,12 @@
   padding-top: 8%;
   padding-left: 5%;
   padding-right: 5%;
-  @include media-xs-only {
+  @include custom-media.media-xs-only {
     padding-top: 150px;
     padding-left: 30px;
     padding-right: 30px;
   }
-  @include media-sm-only {
+  @include custom-media.media-sm-only {
     padding-top: 150px;
   }
 }
@@ -30,7 +31,7 @@
   margin: auto;
   position: relative;
   top: -75px;
-  @include media-xxl-only {
+  @include custom-media.media-xxl-only {
     width: 800px;
   }
 
@@ -38,7 +39,7 @@
     text-align: center;
     margin: auto;
     width: 100%;
-    @include media-xxl-only {
+    @include custom-media.media-xxl-only {
       width: 800px;
     }
   }
@@ -55,7 +56,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 600 !important;
   font-size: 3rem;
-  @include media-xs-only {
+  @include custom-media.media-xs-only {
     font-size: 1.8rem;
   }
 }
@@ -64,7 +65,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 400 !important;
   font-size: 1.5rem;
-  @include media-xs-only {
+  @include custom-media.media-xs-only {
     font-size: 1.1rem;
   }
 }

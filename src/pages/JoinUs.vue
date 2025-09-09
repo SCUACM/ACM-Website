@@ -110,7 +110,7 @@
 
       <v-col class="hidden-sm-and-down right-panel-colored" cols="6">
         <div class="img-container">
-          <v-img class="img" src="@/assets/branding/remote_work1.svg" />
+          <v-img class="img" :src='remoteWorkImage'/>
           <div class="welcome-text">
             Welcome to SCU ACM!
           </div>
@@ -123,6 +123,7 @@
 <script>
 import "../assets/scss/join-us-media.scss";
 import MainNavbar from "@/layout/TransparentNavbar.vue";
+import imgUrl from '../assets/branding/remote_work1.svg';
 
 export default {
   name: "JoinUs",
@@ -136,7 +137,7 @@ export default {
     firstName: "",
     lastName: "",
     dialog: false,
-
+    remoteWorkImage: imgUrl,
     rules: {
       required: (value) => !!value || "Required.",
       // disgusting regex from google to pattern match email string:

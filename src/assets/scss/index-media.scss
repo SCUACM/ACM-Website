@@ -1,7 +1,8 @@
+@use "custom-media";
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
-@import "./custom-media";
 
 .title {
   &-container {
@@ -16,13 +17,13 @@
     font-weight: 600;
     max-width: 1000px;
     color: white;
-    @include media-xs-only {
+    @include custom-media.media-xs-only {
       font-size: 1.5rem;
     }
-    @include media-sm-only {
+    @include custom-media.media-sm-only {
       font-size: 2rem;
     }
-    @include media-xxl-only {
+    @include custom-media.media-xxl-only {
       max-width: 1200px;
       font-size: 3.7rem;
     }
@@ -34,14 +35,14 @@
     font-weight: 400;
     max-width: 600px;
     color: white;
-    @include media-xs-only {
+    @include custom-media.media-xs-only {
       font-size: 1.1rem;
     }
-    @include media-sm-only {
+    @include custom-media.media-sm-only {
       font-size: 1.3rem;
       max-width: 400px;
     }
-    @include media-xxl-only {
+    @include custom-media.media-xxl-only {
       font-size: 2rem;
       max-width: 900px;
     }
@@ -92,7 +93,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     gap: 25px;
-    @include media-sm-and-up {
+    @include custom-media.media-sm-and-up {
       justify-content: center;
       gap: 40px;
     }
@@ -100,18 +101,18 @@
 
   &-card-container {
     width: fit-content;
-    @include media-sm-and-up {
-      padding: 10px 20px 10px;
-    }
-    @include media-xs-only {
-      padding: 5px;
-    }
     border-radius: 10px;
     transition: background-color 0.5s ease;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     gap: 15px;
+    @include custom-media.media-sm-and-up {
+      padding: 10px 20px 10px;
+    }
+    @include custom-media.media-xs-only {
+      padding: 5px;
+    }
   }
 
   &-card-container:hover {
@@ -120,27 +121,27 @@
   }
 
   &-card-img {
-    @include media-sm-and-up {
+    margin: auto;
+    @include custom-media.media-sm-and-up {
       width: 60px;
       height: 60px;
       max-width: 60px;
     }
-    @include media-xs-only {
+    @include custom-media.media-xs-only {
       width: 40px;
       height: 40px;
       max-width: 40px;
     }
-    margin: auto;
   }
 
   &-card-header {
     margin: auto;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
-    @include media-sm-and-up {
+    @include custom-media.media-sm-and-up {
       font-size: 1.8rem;
     }
-    @include media-xs-only {
+    @include custom-media.media-xs-only {
       font-size: 1.3rem;
     }
   }
@@ -178,10 +179,10 @@
     font-size: 1.8rem;
     font-weight: 400;
     text-align: center;
-    @include media-xs-only {
+    @include custom-media.media-xs-only {
       font-size: 1.5rem;
     }
-    @include media-sm-only {
+    @include custom-media.media-sm-only {
       max-width: 600px;
     }
   }
@@ -222,7 +223,7 @@
     color: white;
     font-weight: 600;
     font-size: 3rem;
-    @include media-xs-only {
+    @include custom-media.media-xs-only {
       font-size: 2rem;
     }
   }

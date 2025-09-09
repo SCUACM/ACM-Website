@@ -27,7 +27,7 @@
 
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
-        :show="true"
+        :show="false"
         content="Intel Hack is here! Join us for our first 10-hour hackathon on May 17th! Sign up "
         link="https://intel.scuacm.com"
         linkTitle="here"
@@ -41,7 +41,6 @@
           </v-col>
           <v-col v-for="(link, i) in navLinks" :key="i">
             <v-btn
-              style="border-radius: 50px; border: solid white"
               class="join-btn"
               outlined
               height="60px"
@@ -177,10 +176,10 @@
 </template>
 
 <script>
-import "../assets/scss/index-media.scss";
+import "@/assets/scss/index-media.scss";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
-import RelatedClubCard from "@/components/RelatedClubCard";
+import RelatedClubCard from "@/components/RelatedClubCard.vue";
 import ResourceCard from "@/components/ResourceCard.vue";
 import AnnouncementBanner from "@/components/AnnouncementBanner.vue";
 
@@ -201,6 +200,8 @@ import ACM from "@/assets/images/resources/ACM.svg";
 import LeetCode from "@/assets/images/resources/leetcode.svg";
 import SmartScholar from "@/assets/images/resources/smartscholar.svg";
 import DataScience from "@/assets/images/resources/datascience.svg";
+
+import { useDisplay } from "vuetify";
 
 export default {
   name: "IndexHome",
@@ -227,7 +228,7 @@ export default {
 
   computed: {
     containerMarginBottom() {
-      switch (this.$vuetify.breakpoint.name) {
+      switch (this.displayName) {
         case "xs":
           return 75;
         case "sm":
@@ -238,7 +239,7 @@ export default {
     },
 
     resourceContainerWidth() {
-      switch (this.$vuetify.breakpoint.name) {
+      switch (this.displayName) {
         case "sm":
           return 700;
         case "md":
@@ -397,6 +398,13 @@ export default {
       window.scrollTo({ top, behavior: "smooth" });
     },
   },
+  setup() {
+    const {name} = useDisplay();
+    const displayName = name.value;
+    return {
+      displayName
+    };
+  }
 };
 </script>
 
@@ -413,11 +421,14 @@ export default {
   background-size: cover;
 }
 .join-btn {
+  border-radius: 50px;
+  border: solid white;
   font-family: "Poppins", sans-serif;
   font-size: 1rem !important;
   letter-spacing: normal !important;
   text-transform: none !important;
   color: white !important;
+  background-color: #1c548d;
   transition: color 0.1s, background-color 0.4s;
 }
 

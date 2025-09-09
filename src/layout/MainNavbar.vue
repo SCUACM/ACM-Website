@@ -8,13 +8,13 @@
     </v-dialog>
     <v-app-bar
       app
-      :color="navColor"
-      width="100vw"
+      width="100%"
       height="75px"
-      elevate-on-scroll
+      scroll-behavior="elevate"
+      class="pr-4 pl-4 pt-1 pb-1"
     >
-      <div class="app-bar mx-auto">
-        <div class="mr-auto my-auto logo" @click="$router.push('/')">
+      <div class="app-bar">
+        <div class="mr-auto logo" @click="$router.push('/')">
           <v-img
             width="120px"
             height="60px"
@@ -24,7 +24,7 @@
           />
         </div>
         <div class="ml-auto routes hidden-sm-and-down">
-          <span class="link mx-6">
+          <span class="link ml-6 mr-6">
             <router-link
               to="/"
               :class="[
@@ -40,7 +40,7 @@
               about
             </router-link>
           </span>
-          <span class="link mx-6">
+          <span class="link ml-6 mr-6">
             <router-link
               to="/board"
               :class="[
@@ -56,7 +56,7 @@
               board
             </router-link>
           </span>
-          <span class="link mx-6" v-if="!showEvents">
+          <span class="link ml-6 mr-6" v-if="!showEvents">
             <router-link
               to="/calendar"
               :class="[
@@ -72,7 +72,7 @@
               events
             </router-link>
           </span>
-          <span class="link mx-6" v-if="showEvents">
+          <span class="link ml-6 mr-6" v-if="showEvents">
             <router-link
               to="/events"
               :class="[
@@ -88,7 +88,7 @@
               events
             </router-link>
           </span>
-          <span class="link mx-6">
+          <span class="link ml-6 mr-6">
             <a
               @click="routeTo('https://intel.scuacm.com')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -97,7 +97,7 @@
               Intel Hack
             </a>
           </span>
-          <!-- <span class="link mx-6">
+          <!-- <span class="link ml-6 mr-6">
             <a
               @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -126,116 +126,109 @@
             >
               sign in
             </v-btn>
-            <v-menu offset-y v-else>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  outlined
-                  :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
-                  height="40px"
-                  width="130px"
-                  style="border-radius:10px; border: solid #0099ff"
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                  account
-                </v-btn>
-              </template>
-              <v-list>
-                <router-link to="/profile">
-                  <v-list-item>
-                    <v-list-item-title>Manage Profile</v-list-item-title>
-                  </v-list-item>
-                </router-link><br>
-                <router-link to="/admin" v-if="isAdmin">
-                  <v-list-item>
-                    <v-list-item-title>Admin Dashboard</v-list-item-title>
-                  </v-list-item>
-                </router-link><br>
-                <a style="width: 100%" @click="signOut">
-                  <v-list-item>
-                    <v-list-item-title>Sign Out</v-list-item-title>
-                  </v-list-item>
-                </a>
-              </v-list>
-            </v-menu>
+            <v-btn
+                outlined
+                :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
+                height="40px"
+                width="130px"
+                style="border-radius:10px; border: solid #0099ff"
+                v-else
+              >
+              account
+              <v-menu offset-y activator="parent">
+                <v-list>
+                  <router-link to="/profile">
+                    <v-list-item>
+                      <v-list-item-title>Manage Profile</v-list-item-title>
+                    </v-list-item>
+                  </router-link><br>
+                  <router-link to="/admin" v-if="isAdmin">
+                    <v-list-item>
+                      <v-list-item-title>Admin Dashboard</v-list-item-title>
+                    </v-list-item>
+                  </router-link><br>
+                  <a style="width: 100%" @click="signOut">
+                    <v-list-item>
+                      <v-list-item-title>Sign Out</v-list-item-title>
+                    </v-list-item>
+                  </a>
+                </v-list>
+              </v-menu>
+            </v-btn>
           </span>
         </div>
         <div class="ml-auto hidden-md-and-up">
-          <v-menu>
-            <template v-slot:activator="{ on, attrs }">
-              <v-flex justify-end>
-                <v-btn
-                  icon
-                  color="white"
-                  depressed
-                  v-on="on"
-                  v-bind="attrs"
-                  style="margin-top: 12px"
-                >
-                  <v-icon large :color="fontColor">
+          <v-col justify-end>
+            <v-btn
+                    icon
+                    color="black"
+                    depressed
+                    style="margin-top: 12px"
+            >
+              <v-icon large :color="fontColor">
                     mdi-menu
-                  </v-icon>
-                </v-btn>
-              </v-flex>
-            </template>
-            <v-list>
-              <v-list-item>
-                <router-link to="/" class="link">
-                  about
-                </router-link>
-              </v-list-item>
-              <v-list-item>
-                <router-link to="/board" class="link">
-                  board
-                </router-link>
-              </v-list-item>
-              <v-list-item v-if="!showEvents">
-                <router-link to="/calendar" class="link">
-                  calendar
-                </router-link>
-              </v-list-item>
-              <v-list-item v-if="showEvents">
-                <router-link to="/events" class="link">
-                  events
-                </router-link>
-              </v-list-item>
-              <v-list-item>
-                <span
-                  @click="routeTo('https://intel.scuacm.com/')"
-                  class="link"
-                >
-                  Intel Hack
-                </span>
-              </v-list-item>
-              <v-list-item>
-                <router-link to="/joinus" class="link">
-                  newsletter
-                </router-link>
-              </v-list-item>
-              <v-list-item v-if="!user">
-                <a @click="signIn" class="link">
-                  sign in
-                </a>
-              </v-list-item>
-              <template v-else>
-                <v-list-item>
-                  <router-link to="/profile" class="link">
-                    manage profile
-                  </router-link>
-                </v-list-item>
-                <v-list-item v-if="isAdmin">
-                  <router-link to="/admin" class="link">
-                    admin dashboard
-                  </router-link>
-                </v-list-item>
-                <v-list-item>
-                  <a @click="signOut" class="link">
-                    sign out
-                  </a>
-                </v-list-item>
-              </template>
-            </v-list>
-          </v-menu>
+              </v-icon>
+              <v-menu activator="parent">
+                <v-list>
+                  <v-list-item>
+                    <router-link to="/" class="link">
+                      about
+                    </router-link>
+                  </v-list-item>
+                  <v-list-item>
+                    <router-link to="/board" class="link">
+                      board
+                    </router-link>
+                  </v-list-item>
+                  <v-list-item v-if="!showEvents">
+                    <router-link to="/calendar" class="link">
+                      calendar
+                    </router-link>
+                  </v-list-item>
+                  <v-list-item v-if="showEvents">
+                    <router-link to="/events" class="link">
+                      events
+                    </router-link>
+                  </v-list-item>
+                  <v-list-item>
+                    <span
+                      @click="routeTo('https://intel.scuacm.com/')"
+                      class="link"
+                    >
+                      Intel Hack
+                    </span>
+                  </v-list-item>
+                  <v-list-item>
+                    <router-link to="/joinus" class="link">
+                      newsletter
+                    </router-link>
+                  </v-list-item>
+                  <v-list-item v-if="!user">
+                    <a @click="signIn" class="link">
+                      sign in
+                    </a>
+                  </v-list-item>
+                  <template v-else>
+                    <v-list-item>
+                      <router-link to="/profile" class="link">
+                        manage profile
+                      </router-link>
+                    </v-list-item>
+                    <v-list-item v-if="isAdmin">
+                      <router-link to="/admin" class="link">
+                        admin dashboard
+                      </router-link>
+                    </v-list-item>
+                    <v-list-item>
+                      <a @click="signOut" class="link">
+                        sign out
+                      </a>
+                    </v-list-item>
+                  </template>
+                </v-list>
+              </v-menu>
+            </v-btn>
+          </v-col>
         </div>
       </div>
     </v-app-bar>
@@ -243,7 +236,7 @@
 </template>
 
 <script>
-import "../assets/scss/navbar-media.scss";
+import "@/assets/scss/navbar-media.scss";
 import logoBlackSmall from "@/assets/branding/logo_temp_new.svg";
 import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
 // New imports
@@ -251,7 +244,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../firebase';
 import WelcomePopup from '../components/WelcomePopup.vue';
 import DeiPopup from '../components/DeiPopup.vue';
-import { getUserPerms } from "../helpers";
+import { getUserPerms } from "../helpers.js";
 
 export default {
   name: "MainNavbar",
@@ -271,7 +264,7 @@ export default {
     return {
       showWelcome: false,
       showDEI: false,
-      scrollPosition: null,
+      scrollPosition: 0,
       logoBlackSmall,
       logoWhiteSmall,
       user: auth.currentUser,
@@ -286,7 +279,7 @@ export default {
     window.addEventListener("scroll", this.updateScroll);
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        // console.log("Signed in", user);
+        console.log("Signed in", user);
         const email = user.providerData[0].email;
         if (email.endsWith("@scu.edu") || email.endsWith("@alumni.scu.edu")){
             const userName = user.displayName;
@@ -370,6 +363,7 @@ export default {
       window.open(path);
     },
     signIn() {
+      console.log("sign in");
 
       const provider = new GoogleAuthProvider();
       provider.addScope('email');
@@ -460,7 +454,7 @@ export default {
 .link {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
-  color: black;
+  color: black !important;
 }
 .link-transparent {
   font-family: "Poppins", sans-serif;
@@ -525,5 +519,9 @@ a:focus::before {
   transform-origin: center top;
   -webkit-transform: scale(1, 1);
   transform: scale(1, 1);
+}
+
+.v-app-bar {
+    background: v-bind(navColor);
 }
 </style>

@@ -38,7 +38,7 @@
               <span>{{ link.title }}</span>
             </a>
           </p>
-          <youtube v-if="event.youtube" :video-id="event.youtube"></youtube>
+          <!-- <youtube v-if="event.youtube" :video-id="event.youtube"></youtube> -->
         </div>
       </v-dialog>
     </div>
@@ -65,7 +65,7 @@
           <span>{{ link.title }}</span>
         </a>
       </p>
-      <youtube v-if="event.youtube" :video-id="event.youtube"></youtube>
+      <!-- <youtube v-if="event.youtube" :video-id="event.youtube"></youtube> -->
     </div>
   </div>
 </template>

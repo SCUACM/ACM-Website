@@ -5,37 +5,46 @@
       <router-link to="/admin/roles" v-if="canViewRoles">
         <button class="create">Manage Roles and User Permissions</button>
       </router-link>
+      <router-link to="/admin/stats" v-if="acmEvents.length">
+        <button class="create">View attendance data statistics</button>
+      </router-link>
       <!-- <h2>Manage Admin Users</h2>
                 <v-text-field class="uid-input" label="Enter User UID" v-model="uid">
                 </v-text-field>
                 <button @click="addAdmin">Add Admin Privileges</button>
                 <button @click="removeAdmin" class="remove">Remove Admin Privileges</button> -->
-      <AdminEventDataCard :events="acmEvents" :tags="this.allowedTags" />
 
       <h2>Manage Events</h2>
       <router-link to="/admin/events/new" v-if="canAddEvents">
         <button class="create">Create New Event</button>
       </router-link>
       <span v-if="canAddEvents">or select an existing event below:</span><br />
-      <span v-if="this.allowedTags.length > 1">
-        Filter to
-        <select
-          @change="updateSelectedTag($event.target.value)"
-          style="text-decoration-line: underline"
+      <div style="margin-bottom: 1em;">
+        <v-select
+          v-if="this.allowedTags.length > 1"
+          @update:model-value="this.setPageNumToStart()"
+          v-model="selectedTag"
+          :items="this.allowedTags"
+          width="fit-content"
+          style="margin-inline: 1em 2em; display: inline-flex;"
+          variant="underlined"
+          density="compact"
         >
-          <option value="all">all</option>
-          <option :value="tag" v-for="tag in this.allowedTags" :key="tag">
-            {{ tag }}
-          </option>
-        </select>
-      </span>
+        </v-select>
+        <div class="pageButtonContainer">
+          <span style="align-content: center; margin-right: 1em;">
+            {{(this.pageNum-1) * this.eventsPerPage + 1}}-{{ Math.min(this.pageNum * this.eventsPerPage, this.eventsOnDisplay) }} of {{ this.eventsOnDisplay }}
+          </span>
+          <v-btn @click="pageDown()" class="pageButton">
+            <v-icon large color="black">mdi mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn @click="pageUp()" class="pageButton">
+            <v-icon large color="black">mdi mdi-chevron-right</v-icon>
+          </v-btn>
+        </div>
+      </div>
       <AdminEventCard
-        v-for="event of acmEvents.filter(
-          (e) =>
-            this.selectedTag == 'all' ||
-            e.tags?.includes(this.selectedTag) ||
-            false
-        )"
+        v-for="event of filteredEvents.filter((value, index) => (index >= (this.pageNum-1)*this.eventsPerPage && index < this.pageNum*this.eventsPerPage))"
         :key="event.id"
         :event="event"
       >
@@ -52,7 +61,6 @@ import MainFooter from "@/layout/MainFooter.vue";
 import "firebase/compat/firestore";
 import { db, functions, auth } from "../firebase";
 import AdminEventCard from "../components/AdminEventCard.vue";
-import AdminEventDataCard from "../components/AdminEventDataCard.vue";
 import { getUserPerms } from "../helpers";
 
 export default {
@@ -62,7 +70,6 @@ export default {
     MainNavbar,
     MainFooter,
     AdminEventCard,
-    AdminEventDataCard,
   },
 
   methods: {
@@ -82,21 +89,14 @@ export default {
         alert(result.data.message);
       }
     },
-    updateSelectedTag(tag) {
-      this.selectedTag = tag;
+    setPageNumToStart() {
+      this.pageNum = 1;
     },
-    async fetchEventCounters() {
-      const eventsSnapshot = await db.collection("events").get();
-      const eventsData = eventsSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      eventsData.forEach((eventData) => {
-        const event = this.acmEvents.find((e) => e.id === eventData.id);
-        if (event) {
-          event.counter = eventData.counter;
-        }
-      });
+    pageUp() {
+      this.pageNum += this.pageNum == this.maxPageNum ? 0 : 1;
+    },
+    pageDown() {
+      this.pageNum -= this.pageNum > 1 ? 1 : 0;
     },
   },
 
@@ -123,7 +123,7 @@ export default {
           perms.broncosecDeleteEvent ||
           perms.otherDeleteEvent ||
           perms.icpcDeleteEvent;
-        this.allowedTags = [];
+        this.allowedTags = ["all"];
         if (perms.acmEditEvent || perms.acmDeleteEvent) {
           this.allowedTags.push("acm");
         }
@@ -138,40 +138,23 @@ export default {
         }
         this.acmEvents = [];
 
-        if (perms.editMyEvent || perms.deleteMyEvent) {
-          const response = await db
-            .collection("events")
-            .where("createdBy", "==", user.uid)
-            .orderBy("startDate", "desc")
-            .get();
-          for (let doc of response.docs) {
-            const data = doc.data();
-            data.id = doc.id;
+        const eventCollection = await db
+          .collection("events")
+          .orderBy("startDate", "desc")
+          .get();
+        if (eventCollection.empty) {
+          console.log("No events found");
+          return;
+        }
+        for (let doc of eventCollection.docs) {
+          const data = doc.data();
+          data.id = doc.id;
+          if ((perms.editMyEvent || perms.deleteMyEvent && data.createdBy === user.uid) || (!perms.otherEditEvent && !perms.otherDeleteEvent && (data.tags === null || data.tags.some(t => data.tags.includes(t))))) {
             this.acmEvents.push(data);
           }
         }
-
-        if (this.allowedTags.length > 0) {
-          let req2 = db.collection("events");
-          if (!perms.otherEditEvent && !perms.otherDeleteEvent) {
-            req2 = req2.where("tags", "array-contains-any", this.allowedTags);
-          }
-          const response2 = await req2.get();
-
-          for (let doc of response2.docs) {
-            const data = doc.data();
-            data.id = doc.id;
-            if (!this.acmEvents.find((event) => event.id == data.id)) {
-              this.acmEvents.push(data);
-            }
-          }
-        }
-        this.acmEvents.sort((a, b) => {
-          return b.startDate.seconds - a.startDate.seconds;
-        });
-        await this.fetchEventCounters();
-      }
-    });
+        this.eventsOnDisplay = this.acmEvents.length;
+    }});
   },
 
   data() {
@@ -184,12 +167,26 @@ export default {
       canDeleteEvents: false,
       allowedTags: [],
       selectedTag: "all",
+      eventsPerPage: 20,
+      pageNum: 1,
+      eventsOnDisplay: 0,
     };
   },
+  computed: {
+    maxPageNum() {
+      return Math.trunc(this.eventsOnDisplay / this.eventsPerPage) + (this.eventsOnDisplay % this.eventsPerPage > 0 ? 1 : 0);
+    },
+    filteredEvents() {
+      let result = this.acmEvents.filter((e) => (this.selectedTag == 'all' || e.tags?.includes(this.selectedTag)));
+      this.eventsOnDisplay = result.length;
+      return result;
+    }
+  }
 };
 </script>
 
 <style scoped>
+@import url("@mdi/font/css/materialdesignicons.css");
 .uid-input {
   display: inline-block;
   width: 300px;
@@ -221,6 +218,24 @@ button.remove {
 button.create {
   background-color: #1c548d;
   color: white;
+}
+
+button.pageButton {
+  border: none;
+  background-color: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  aspect-ratio: 1;
+  min-width: 0;
+  width: fit-content;
+}
+
+div.pageButtonContainer {
+  width: auto;
+  float: right;
+  display: inline-flex;
+  margin-right: 4em;
 }
 
 h2 {
