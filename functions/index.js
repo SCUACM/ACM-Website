@@ -1,10 +1,13 @@
 /* eslint linebreak-style: ["error", "windows"] */
 /* eslint-disable max-len */
+const fs = require("fs");
+const path = require("path");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const {firestore} = require("firebase-admin");
 const request = require("request");
 const moment = require("moment");
+const nodemailer = require("nodemailer");
 // eslint-disable-next-line no-unused-vars
 const {tz} = require("moment-timezone");
 const {App} = require("@slack/bolt");
@@ -248,7 +251,39 @@ async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,sl
         await slackResult;
     }
     return "done";
-}
+}       
+
+exports.sendWelcomeEmail = functions.runWith({secrets: ["mailAppPassword"]})
+.https.onCall(async (data, context) => {
+    const { email, firstName } = data;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'santaclara.acm@gmail.com',
+            pass: process.env.mailAppPassword,
+        }
+    });
+
+    const templatePath = path.join(__dirname, 'welcome_email.html');
+    let html = fs.readFileSync(templatePath, 'utf8');
+    html = html.replace('{{firstName}},', `${firstName},` || '');
+
+    const mailOptions = {
+        from: 'SCUACM <santaclara.acm@gmail.com>',
+        to: email,
+        subject: '😍 Welcome to ACM!! 😍',
+        html: html,
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        return { success: true };
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw new functions.https.HttpsError('internal', 'Failed to send email');
+    }
+});
 
 function formatDateTime(event) {
     if (!event?.startDate) return "";

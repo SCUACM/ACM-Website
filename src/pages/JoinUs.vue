@@ -121,6 +121,7 @@
 </template>
 
 <script>
+import { functions } from "../firebase";
 import "../assets/scss/join-us-media.scss";
 import MainNavbar from "@/layout/TransparentNavbar.vue";
 import imgUrl from '../assets/branding/remote_work1.svg';
@@ -159,10 +160,16 @@ export default {
   },
 
   methods: {
-    submitJoin() {
-      console.log("email: ", this.email);
-      console.log("First Name: ", this.firstName);
-      console.log("Last Name: ", this.lastName);
+    async submitJoin() {
+      try {
+        await functions.httpsCallable("sendWelcomeEmail")({
+          email: this.email,
+          firstName: this.firstName,
+        });
+        alert("Welcome email sent!");
+      } catch (error) {
+        alert("Error sending welcome email: " + error.message);
+      }
     },
   },
 };
