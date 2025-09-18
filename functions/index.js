@@ -212,19 +212,19 @@ async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,sl
         "\n" + doc.data().description;
 
         // Send message to Slack
-        const channel = slackChannel;
-        if (hasFlyer) {
-            var slackResult = await app.client.files.upload({
-                channels: channel,
-                initial_comment: slackTitle + messageBody,
-                file: flyer[0],
-            });
-        } else {
-            var slackResult = await app.client.chat.postMessage({
-                channels: channel,
-                text: slackTitle + messageBody,
-            });
-        }
+        // const channel = slackChannel;
+        // if (hasFlyer) {
+        //     var slackResult = await app.client.files.upload({
+        //         channels: channel,
+        //         initial_comment: slackTitle + messageBody,
+        //         file: flyer[0],
+        //     });
+        // } else {
+        //     var slackResult = await app.client.chat.postMessage({
+        //         channels: channel,
+        //         text: slackTitle + messageBody,
+        //     });
+        // }
 
         // Send message to Discord
         let formdata = {
@@ -248,7 +248,7 @@ async function sendEventMessages(discordWebhook ,slackBotToken, slackAppToken,sl
             if (error) throw new Error(error);
                 console.log(response.body);
         });
-        await slackResult;
+        // await slackResult;
     }
     return "done";
 }       
