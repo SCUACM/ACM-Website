@@ -90,11 +90,11 @@
           </span>
           <span class="link ml-6 mr-6">
             <a
-              @click="routeTo('https://intel.scuacm.com')"
+              @click="routeTo('https://roblox.scuacm.com/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
             >
-              Intel Hack
+              Roblox Hack
             </a>
           </span>
           <!-- <span class="link ml-6 mr-6">
@@ -192,10 +192,10 @@
                   </v-list-item>
                   <v-list-item>
                     <span
-                      @click="routeTo('https://intel.scuacm.com/')"
+                      @click="routeTo('https://roblox.scuacm.com/')"
                       class="link"
                     >
-                      Intel Hack
+                      Roblox Hack
                     </span>
                   </v-list-item>
                   <v-list-item>

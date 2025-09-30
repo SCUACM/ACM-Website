@@ -33,7 +33,6 @@ a:visited,
 a:active {
   font-family: "Poppins", sans-serif;
   font-weight: 600 !important;
-  font-size: 1.1rem;
   color: lightblue !important;
   text-transform: none;
   transition: 0.4s;
@@ -41,5 +40,8 @@ a:active {
 
 a:hover {
   color: white !important;
+}
+div {
+  font-size: 1.3rem;
 }
 </style>

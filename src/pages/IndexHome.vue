@@ -27,9 +27,9 @@
 
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
-        :show="false"
-        content="Intel Hack is here! Join us for our first 10-hour hackathon on May 17th! Sign up "
-        link="https://intel.scuacm.com"
+        :show="true"
+        content="Roblox Hack is here! Join us for a week-long game jam filled with workshops, prizes, and fun! Sign up "
+        link="https://roblox.scuacm.com/"
         linkTitle="here"
       />
       <v-container style="max-width: 800px">
