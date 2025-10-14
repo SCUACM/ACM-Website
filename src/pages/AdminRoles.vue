@@ -183,10 +183,6 @@ import { permsList, getUserPerms } from '../helpers';
             alert("Role updated! (You might need to refresh the page for the role to show up)")
         }
     },
-  
-    firestore: {
-        roles: db.collection('roles')
-    },
 
     mounted() {
     auth.onAuthStateChanged(async (user) => {
@@ -195,6 +191,9 @@ import { permsList, getUserPerms } from '../helpers';
         this.canEditRoles = perms.changeRolePerms;
         this.canEditUsers = perms.changeUserRole;
       }
+      db.collection("roles").get().then(snapshot => {
+        this.roles = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      });
     });
   },
 
