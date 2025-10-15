@@ -28,8 +28,8 @@
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
         :show="true"
-        content="Roblox Hack is here! Join us for a week-long game jam filled with workshops, prizes, and fun! Sign up "
-        link="https://roblox.scuacm.com/"
+        content="AWS x INRIX Hack is here! Join us for a 24-hour long hackathon, and build innovative projects using AI and cloud technology! Sign up "
+        link="https://aws.scuacm.com/"
         linkTitle="here"
       />
       <v-container style="max-width: 800px">
