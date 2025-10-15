@@ -134,9 +134,8 @@
           xl="4"
           style="text-align: center; margin-left: auto; margin-right: auto"
         >
-          <div>
             <v-img class="event-img" :src="event.src" :lazy-src="event.src" />
-          </div>
+         
           <div class="event-header">
             {{ event.title }}
           </div>
