@@ -90,11 +90,11 @@
           </span>
           <span class="link ml-6 mr-6">
             <a
-              @click="routeTo('https://roblox.scuacm.com/')"
+              @click="routeTo('https://aws.scuacm.com/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
             >
-              Roblox Hack
+              AWS x INRIX Hack
             </a>
           </span>
           <!-- <span class="link ml-6 mr-6">
@@ -192,10 +192,10 @@
                   </v-list-item>
                   <v-list-item>
                     <span
-                      @click="routeTo('https://roblox.scuacm.com/')"
+                      @click="routeTo('https://aws.scuacm.com/')"
                       class="link"
                     >
-                      Roblox Hack
+                      AWS x INRIX Hack
                     </span>
                   </v-list-item>
                   <v-list-item>
