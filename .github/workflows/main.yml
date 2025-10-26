@@ -23,10 +23,10 @@ jobs:
             cd /home/ec2-user
 
             if [ -d ACM-Website ]; then
-              echo "[+] Repo exists, resetting to origin/main"
+              echo "[+] Repo exists, resetting to origin/master"
               cd ACM-Website
               git fetch --all
-              git reset --hard origin/main
+              git reset --hard origin/master
             else
               echo "[+] Cloning fresh"
               git clone https://github.com/rayyanh192/ACM-Website.git
