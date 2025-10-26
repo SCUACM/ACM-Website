@@ -111,6 +111,13 @@ export default {
     }, 1000),
     async updateFirebase() {
       try {
+        // Log user action
+        await cloudWatchLogger.logUserAction('Profile Update', {
+          component: 'ProfilePage',
+          userId: this.user?.uid,
+          fields: Object.keys(this.formData)
+        });
+        
         const ref = db.collection("users").doc(this.user.uid);
         await ref.set(this.formData);
         this.state = 'synced';

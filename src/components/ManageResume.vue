@@ -67,6 +67,14 @@ import cloudWatchLogger from '../utils/cloudwatch-logger';
       },
       async submit() {
         try {
+          // Log button click
+          await cloudWatchLogger.logButtonClick('Resume Upload', {
+            component: 'ManageResume',
+            userId: auth.currentUser?.uid,
+            fileName: this.file?.name,
+            fileSize: this.file?.size
+          });
+          
           if(!this.file || !this.storageRef) {
             return;
           }
@@ -95,16 +103,29 @@ import cloudWatchLogger from '../utils/cloudwatch-logger';
         }
       },
       async downloadCurrentResume() {
-        if(!this.pdfUrl) {
-          return;
+        try {
+          // Log button click
+          await cloudWatchLogger.logButtonClick('Resume Download', {
+            component: 'ManageResume',
+            userId: auth.currentUser?.uid
+          });
+          
+          if(!this.pdfUrl) {
+            return;
+          }
+          const blob = await fetch(this.pdfUrl).then((response) => response.blob());
+          const a = document.createElement("a");
+          a.href = window.URL.createObjectURL(blob);
+          a.download = "resume.pdf";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        } catch (error) {
+          await cloudWatchLogger.error(`Resume download failed: ${error.message}`, {
+            component: 'ManageResume',
+            action: 'downloadResume'
+          });
         }
-        const blob = await fetch(this.pdfUrl).then((response) => response.blob());
-        const a = document.createElement("a");
-        a.href = window.URL.createObjectURL(blob);
-        a.download = "resume.pdf";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
       }
     },
   

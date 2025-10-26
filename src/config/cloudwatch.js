@@ -24,6 +24,7 @@ export const cloudWatchConfig = {
   region: process.env.VUE_APP_AWS_REGION || 'us-east-1',
   logGroupName: process.env.VUE_APP_CLOUDWATCH_LOG_GROUP || '/aws/lambda/checkout-api',
   logStreamName: process.env.VUE_APP_CLOUDWATCH_LOG_STREAM || 'website-errors',
+  activityStreamName: process.env.VUE_APP_CLOUDWATCH_ACTIVITY_STREAM || 'website-activity',
   accessKeyId: process.env.VUE_APP_AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.VUE_APP_AWS_SECRET_ACCESS_KEY
 };

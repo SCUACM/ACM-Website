@@ -26,6 +26,7 @@ VUE_APP_AWS_SECRET_ACCESS_KEY=your_secret_key_here
 VUE_APP_AWS_REGION=us-east-1
 VUE_APP_CLOUDWATCH_LOG_GROUP=/aws/lambda/checkout-api
 VUE_APP_CLOUDWATCH_LOG_STREAM=website-errors
+VUE_APP_CLOUDWATCH_ACTIVITY_STREAM=website-activity
 ```
 
 ### Option B: EC2 Server Environment
@@ -94,8 +95,16 @@ curl "https://your-website.com/test-cloudwatch"
 
 ### Check if logs arrived (wait 1-2 minutes)
 ```bash
+# Check error logs
 aws logs filter-log-events \
   --log-group-name /aws/lambda/checkout-api \
+  --log-stream-name website-errors \
+  --start-time $(date -v-5M +%s000)
+
+# Check activity logs
+aws logs filter-log-events \
+  --log-group-name /aws/lambda/checkout-api \
+  --log-stream-name website-activity \
   --start-time $(date -v-5M +%s000)
 ```
 
@@ -107,11 +116,22 @@ aws cloudwatch describe-alarms --alarm-names QuietOps-ErrorSpike
 ## Step 7: Monitor Real Errors
 
 The integration will automatically log:
+
+**Error Logs (website-errors stream):**
 - Vue component errors
 - Firebase operation failures
 - Unhandled JavaScript errors
 - Unhandled promise rejections
 - Custom errors from your components
+
+**Activity Logs (website-activity stream):**
+- Page views and navigation
+- Button clicks
+- Form submissions
+- User authentication events
+- Link clicks
+- Form field interactions
+- All user actions with context
 
 ## Troubleshooting
 

@@ -2419,3 +2419,1145 @@ Does this help you understand how everything works together? Let me know if you 
 
 ---
 
+_**User (2025-10-26 05:45Z)**_
+
+Add logging for everything in your website:
+javascript
+const { logToCloudWatch } = require('./utils/cloudwatch-logger');
+
+// Button clicks
+app.post('/button-click', async (req, res) => {
+  await logToCloudWatch('INFO: Button clicked by user');
+  res.json({ success: true });
+});
+
+// Page views
+app.get('/homepage', async (req, res) => {
+  await logToCloudWatch('INFO: Homepage visited');
+  res.render('homepage');
+});
+
+// Any activity
+app.use(async (req, res, next) => {
+  await logToCloudWatch(`INFO: ${req.method} ${req.path}`);
+  next();
+});
+
+
+Update your logger to handle all log levels:
+javascript
+async function logToCloudWatch(message) {
+  await logs.putLogEvents({
+    logGroupName: '/aws/lambda/checkout-api',
+    logStreamName: 'website-activity',
+    logEvents: [{
+      timestamp: Date.now(),
+      message: message  // INFO, ERROR, DEBUG, etc.
+    }]
+  }).promise();
+}
+
+make these changes
+
+---
+
+_**Assistant (default)**_
+
+I'll add comprehensive logging for all website activity! Let me update the logger to handle all log levels and add logging throughout your Vue.js application.
+
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [-] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [ ] Add page view logging to Vue router
+- [ ] Add button click logging throughout components
+- [ ] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+## Step 1: Update CloudWatch Logger to Handle All Log Levels
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/utils/cloudwatch-logger.js</summary>
+
+**Chunk 1**
+Lines added: 7, lines removed: 5
+
+```diff
+@@ -15,15 +15,17 @@
+  
+  /**
+-  * Log an error to CloudWatch
+-  * @param {string} message - Error message to log
++  * Log any message to CloudWatch with specified level
++  * @param {string} message - Message to log
++  * @param {string} level - Log level (INFO, ERROR, DEBUG, WARN)
+   * @param {Object} context - Additional context information
++  * @param {string} streamName - Optional custom stream name
+   */
+- async function logError(message, context = {}) {
++ async function logToCloudWatch(message, level = 'INFO', context = {}, streamName = null) {
+    try {
+-     const logMessage = `ERROR: ${message} - Source: ${window.location.host} - Context: ${JSON.stringify(context)}`;
++     const logMessage = `${level}: ${message} - Source: ${window.location.host} - Context: ${JSON.stringify(context)}`;
+      
+      await logs.putLogEvents({
+        logGroupName: cloudWatchConfig.logGroupName,
+-       logStreamName: cloudWatchConfig.logStreamName,
++       logStreamName: streamName || cloudWatchConfig.logStreamName,
+        logEvents: [{
+          timestamp: Date.now(),
+```
+
+**Chunk 2**
+Lines added: 11, lines removed: 2
+
+```diff
+@@ -32,11 +34,20 @@
+      }).promise();
+      
+-     console.log('Error logged to CloudWatch:', message);
++     console.log(`${level} logged to CloudWatch:`, message);
+    } catch (err) {
+      console.log('Failed to log to CloudWatch:', err);
+      // Fallback: log to console
+-     console.error('Original error:', message, context);
++     console.log(`${level} (fallback):`, message, context);
+    }
+  }
++ 
++ /**
++  * Log an error to CloudWatch (backwards compatibility)
++  * @param {string} message - Error message to log
++  * @param {Object} context - Additional context information
++  */
++ async function logError(message, context = {}) {
++   return logToCloudWatch(message, 'ERROR', context);
++ }
+  
+  /**
+```
+
+</details>
+
+---
+
+Now let's add the new logging methods to the cloudWatchLogger object:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/utils/cloudwatch-logger.js</summary>
+
+**Chunk 1**
+Lines added: 56, lines removed: 2
+
+```diff
+@@ -52,11 +52,65 @@
+  
+  /**
+-  * Log different types of errors
++  * Comprehensive CloudWatch Logger with all log levels
+   */
+  export const cloudWatchLogger = {
+-   // General error logging
++   // Main logging function for all levels
++   async logToCloudWatch(message, level = 'INFO', context = {}, streamName = null) {
++     return logToCloudWatch(message, level, context, streamName);
++   },
++ 
++   // Log level shortcuts
++   async info(message, context = {}) {
++     return logToCloudWatch(message, 'INFO', context, 'website-activity');
++   },
++ 
++   async warn(message, context = {}) {
++     return logToCloudWatch(message, 'WARN', context, 'website-activity');
++   },
++ 
++   async debug(message, context = {}) {
++     return logToCloudWatch(message, 'DEBUG', context, 'website-activity');
++   },
++ 
+    async error(message, context = {}) {
+      return logError(message, context);
+    },
++ 
++   // Activity logging
++   async logPageView(pageName, context = {}) {
++     return logToCloudWatch(`Page viewed: ${pageName}`, 'INFO', {
++       type: 'page_view',
++       page: pageName,
++       url: window.location.href,
++       ...context
++     }, 'website-activity');
++   },
++ 
++   async logButtonClick(buttonName, context = {}) {
++     return logToCloudWatch(`Button clicked: ${buttonName}`, 'INFO', {
++       type: 'button_click',
++       button: buttonName,
++       url: window.location.href,
++       ...context
++     }, 'website-activity');
++   },
++ 
++   async logUserAction(action, context = {}) {
++     return logToCloudWatch(`User action: ${action}`, 'INFO', {
++       type: 'user_action',
++       action: action,
++       url: window.location.href,
++       ...context
++     }, 'website-activity');
++   },
++ 
++   async logNavigation(from, to, context = {}) {
++     return logToCloudWatch(`Navigation: ${from} → ${to}`, 'INFO', {
++       type: 'navigation',
++       from: from,
++       to: to,
++       ...context
++     }, 'website-activity');
++   },
+  
+    // Database errors
+```
+
+</details>
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [ ] Add page view logging to Vue router
+- [ ] Add button click logging throughout components
+- [ ] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+## Step 2: Add Page View Logging to Vue Router
+
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [-] Add page view logging to Vue router
+- [ ] Add button click logging throughout components
+- [ ] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/main.js</summary>
+
+**Chunk 1**
+Lines added: 10, lines removed: undefined
+
+```diff
+@@ -195,4 +195,14 @@
+  
+  router.beforeEach( async (to, from) => {
++   // Log page navigation
++   try {
++     await cloudWatchLogger.logNavigation(from.path, to.path, {
++       needsAuth: to.matched.some(record => record.meta.authRequired),
++       hasPerms: to.matched.find(record => record.meta.permsRequired)?.meta?.permsRequired ? true : false
++     });
++   } catch (error) {
++     console.log('Failed to log navigation:', error);
++   }
++ 
+    //Check if the page we are going to requires a user to be signed in or admin permissions
+    const needsAuth = to.matched.some(record => record.meta.authRequired);
+```
+
+**Chunk 2**
+Lines added: 14, lines removed: undefined
+
+```diff
+@@ -231,4 +241,18 @@
+    return path;
+  });
++ 
++ // Log successful page views
++ router.afterEach(async (to, from) => {
++   try {
++     await cloudWatchLogger.logPageView(to.name || to.path, {
++       from: from.path,
++       to: to.path,
++       params: to.params,
++       query: to.query
++     });
++   } catch (error) {
++     console.log('Failed to log page view:', error);
++   }
++ });
+  
+  const vuetify = createVuetify({
+```
+
+</details>
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [x] Add page view logging to Vue router
+- [ ] Add button click logging throughout components
+- [ ] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+## Step 3: Add Button Click Logging Throughout Components
+
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [x] Add page view logging to Vue router
+- [-] Add button click logging throughout components
+- [ ] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+Let's add button click logging to the TestCloudWatch component first:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/pages/TestCloudWatch.vue</summary>
+
+**Chunk 1**
+Lines added: 6, lines removed: undefined
+
+```diff
+@@ -91,4 +91,10 @@
+        this.loading.payment = true;
+        try {
++         // Log button click
++         await cloudWatchLogger.logButtonClick('Test Payment Error', {
++           component: 'TestCloudWatch',
++           testType: 'payment_error'
++         });
++         
+          await cloudWatchLogger.paymentError(
+            new Error('Payment processing failed - insufficient funds'),
+```
+
+</details>
+
+---
+
+Let's add button click logging to all the test methods:
+
+
+---
+
+Tool use: **MultiEdit**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/pages/TestCloudWatch.vue</summary>
+
+**Chunk 1**
+Lines added: 6, lines removed: undefined
+
+```diff
+@@ -118,4 +118,10 @@
+        this.loading.database = true;
+        try {
++         // Log button click
++         await cloudWatchLogger.logButtonClick('Test Database Error', {
++           component: 'TestCloudWatch',
++           testType: 'database_error'
++         });
++         
+          await cloudWatchLogger.databaseError(
+            new Error('Database connection timeout'),
+```
+
+**Chunk 2**
+Lines added: 6, lines removed: undefined
+
+```diff
+@@ -139,4 +145,10 @@
+        this.loading.api = true;
+        try {
++         // Log button click
++         await cloudWatchLogger.logButtonClick('Test API Error', {
++           component: 'TestCloudWatch',
++           testType: 'api_error'
++         });
++         
+          await cloudWatchLogger.apiError(
+            new Error('External API returned 500 error'),
+```
+
+**Chunk 3**
+Lines added: 6, lines removed: undefined
+
+```diff
+@@ -160,4 +172,10 @@
+        this.loading.firebase = true;
+        try {
++         // Log button click
++         await cloudWatchLogger.logButtonClick('Test Firebase Error', {
++           component: 'TestCloudWatch',
++           testType: 'firebase_error'
++         });
++         
+          await cloudWatchLogger.firebaseError(
+            new Error('Firebase authentication failed'),
+```
+
+**Chunk 4**
+Lines added: 6, lines removed: undefined
+
+```diff
+@@ -181,4 +199,10 @@
+        this.loading.general = true;
+        try {
++         // Log button click
++         await cloudWatchLogger.logButtonClick('Test General Error', {
++           component: 'TestCloudWatch',
++           testType: 'general_error'
++         });
++         
+          await cloudWatchLogger.error(
+            'General system error - website crash simulation',
+```
+
+</details>
+
+---
+
+Now let's add button click logging to the ProfilePage:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/pages/ProfilePage.vue</summary>
+
+**Chunk 1**
+Lines added: 7, lines removed: undefined
+
+```diff
+@@ -112,4 +112,11 @@
+      async updateFirebase() {
+        try {
++         // Log user action
++         await cloudWatchLogger.logUserAction('Profile Update', {
++           component: 'ProfilePage',
++           userId: this.user?.uid,
++           fields: Object.keys(this.formData)
++         });
++         
+          const ref = db.collection("users").doc(this.user.uid);
+          await ref.set(this.formData);
+```
+
+</details>
+
+---
+
+Now let's add button click logging to the ManageResume component:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/components/ManageResume.vue</summary>
+
+**Chunk 1**
+Lines added: 8, lines removed: undefined
+
+```diff
+@@ -68,4 +68,12 @@
+        async submit() {
+          try {
++           // Log button click
++           await cloudWatchLogger.logButtonClick('Resume Upload', {
++             component: 'ManageResume',
++             userId: auth.currentUser?.uid,
++             fileName: this.file?.name,
++             fileSize: this.file?.size
++           });
++           
+            if(!this.file || !this.storageRef) {
+              return;
+```
+
+</details>
+
+---
+
+Let's also add logging to the download function:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/components/ManageResume.vue</summary>
+
+**Chunk 1**
+Lines added: 23, lines removed: 10
+
+```diff
+@@ -104,14 +104,27 @@
+        },
+        async downloadCurrentResume() {
+-         if(!this.pdfUrl) {
+-           return;
+-         }
+-         const blob = await fetch(this.pdfUrl).then((response) => response.blob());
+-         const a = document.createElement("a");
+-         a.href = window.URL.createObjectURL(blob);
+-         a.download = "resume.pdf";
+-         document.body.appendChild(a);
+-         a.click();
+-         document.body.removeChild(a);
++         try {
++           // Log button click
++           await cloudWatchLogger.logButtonClick('Resume Download', {
++             component: 'ManageResume',
++             userId: auth.currentUser?.uid
++           });
++           
++           if(!this.pdfUrl) {
++             return;
++           }
++           const blob = await fetch(this.pdfUrl).then((response) => response.blob());
++           const a = document.createElement("a");
++           a.href = window.URL.createObjectURL(blob);
++           a.download = "resume.pdf";
++           document.body.appendChild(a);
++           a.click();
++           document.body.removeChild(a);
++         } catch (error) {
++           await cloudWatchLogger.error(`Resume download failed: ${error.message}`, {
++             component: 'ManageResume',
++             action: 'downloadResume'
++           });
++         }
+        }
+      },
+```
+
+</details>
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [x] Add page view logging to Vue router
+- [x] Add button click logging throughout components
+- [ ] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+## Step 4: Add Activity Logging for All User Interactions
+
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [x] Add page view logging to Vue router
+- [x] Add button click logging throughout components
+- [-] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+Let's add a global activity logger that tracks all user interactions. We'll add this to the main.js file:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/main.js</summary>
+
+**Chunk 1**
+Lines added: 63, lines removed: 22
+
+```diff
+@@ -296,24 +296,65 @@
+  });
+  
+- // Global JavaScript error handler
+- window.addEventListener('error', (event) => {
+-   console.error('Global JavaScript Error:', event.error);
+-   
+-   // Log to CloudWatch
+-   cloudWatchLogger.error(
+-     `Global JavaScript Error: ${event.error?.message || event.message}`,
+-     {
+-       type: 'javascript_error',
+-       filename: event.filename,
+-       lineno: event.lineno,
+-       colno: event.colno,
+-       url: window.location.href
+-     }
+-   ).catch(logError => {
+-     console.error('Failed to log JS error to CloudWatch:', logError);
+-   });
+- });
+- 
+- app.use(router);
+- app.use(vuetify);
+- app.mount("#app")
++ // Global activity logging
++ window.addEventListener('click', async (event) => {
++   try {
++     const target = event.target;
++     const tagName = target.tagName.toLowerCase();
++     
++     // Log different types of clicks
++     if (tagName === 'button' || target.classList.contains('v-btn')) {
++       await cloudWatchLogger.logButtonClick(target.textContent?.trim() || 'Unknown Button', {
++         tagName: tagName,
++         className: target.className,
++         id: target.id,
++         href: target.href || null
++       });
++     } else if (tagName === 'a') {
++       await cloudWatchLogger.logUserAction('Link Click', {
++         href: target.href,
++         text: target.textContent?.trim(),
++         target: target.target
++       });
++     } else if (target.classList.contains('v-text-field') || target.classList.contains('v-select')) {
++       await cloudWatchLogger.logUserAction('Form Field Interaction', {
++         fieldType: tagName,
++         className: target.className,
++         id: target.id
++       });
++     }
++   } catch (error) {
++     console.log('Failed to log click activity:', error);
++   }
++ });
++ 
++ // Log form submissions
++ window.addEventListener('submit', async (event) => {
++   try {
++     await cloudWatchLogger.logUserAction('Form Submission', {
++       formId: event.target.id,
++       formClass: event.target.className,
++       action: event.target.action
++     });
++   } catch (error) {
++     console.log('Failed to log form submission:', error);
++   }
++ });
++ 
++ // Log authentication state changes
++ auth.onAuthStateChanged(async (user) => {
++   try {
++     if (user) {
++       await cloudWatchLogger.logUserAction('User Signed In', {
++         userId: user.uid,
++         email: user.email,
++         provider: user.providerData[0]?.providerId
++       });
++     } else {
++       await cloudWatchLogger.logUserAction('User Signed Out', {
++         timestamp: new Date().toISOString()
++       });
++     }
++   } catch (error) {
++     console.log('Failed to log auth state change:', error);
++   }
++ });
+```
+
+</details>
+
+---
+
+Now let's add the missing global JavaScript error handler back:
+
+
+---
+
+The string to replace was not found in the file.
+
+---
+
+Let me check the end of the file:
+
+
+---
+
+Tool use: **read_file**
+
+Read file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/main.js
+
+---
+
+I need to add the missing parts. Let me add them:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/main.js</summary>
+
+**Chunk 1**
+Lines added: 23, lines removed: undefined
+
+```diff
+@@ -359,2 +359,25 @@
+    }
+  });
++ 
++ // Global JavaScript error handler
++ window.addEventListener('error', (event) => {
++   console.error('Global JavaScript Error:', event.error);
++   
++   // Log to CloudWatch
++   cloudWatchLogger.error(
++     `Global JavaScript Error: ${event.error?.message || event.message}`,
++     {
++       type: 'javascript_error',
++       filename: event.filename,
++       lineno: event.lineno,
++       colno: event.colno,
++       url: window.location.href
++     }
++   ).catch(logError => {
++     console.error('Failed to log JS error to CloudWatch:', logError);
++   });
++ });
++ 
++ app.use(router);
++ app.use(vuetify);
++ app.mount("#app")
+```
+
+</details>
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [x] Add page view logging to Vue router
+- [x] Add button click logging throughout components
+- [x] Add activity logging for all user interactions
+- [ ] Create activity log stream for general website activity
+
+---
+
+## Step 5: Update Configuration for Activity Stream
+
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [x] Add page view logging to Vue router
+- [x] Add button click logging throughout components
+- [x] Add activity logging for all user interactions
+- [-] Create activity log stream for general website activity
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/config/cloudwatch.js</summary>
+
+**Chunk 1**
+Lines added: 1, lines removed: undefined
+
+```diff
+@@ -25,4 +25,5 @@
+    logGroupName: process.env.VUE_APP_CLOUDWATCH_LOG_GROUP || '/aws/lambda/checkout-api',
+    logStreamName: process.env.VUE_APP_CLOUDWATCH_LOG_STREAM || 'website-errors',
++   activityStreamName: process.env.VUE_APP_CLOUDWATCH_ACTIVITY_STREAM || 'website-activity',
+    accessKeyId: process.env.VUE_APP_AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.VUE_APP_AWS_SECRET_ACCESS_KEY
+```
+
+</details>
+
+---
+
+Now let's update the logger to use the activity stream name:
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/utils/cloudwatch-logger.js</summary>
+
+**Chunk 1**
+Lines added: 3, lines removed: 3
+
+```diff
+@@ -62,13 +62,13 @@
+    // Log level shortcuts
+    async info(message, context = {}) {
+-     return logToCloudWatch(message, 'INFO', context, 'website-activity');
++     return logToCloudWatch(message, 'INFO', context, cloudWatchConfig.activityStreamName);
+    },
+  
+    async warn(message, context = {}) {
+-     return logToCloudWatch(message, 'WARN', context, 'website-activity');
++     return logToCloudWatch(message, 'WARN', context, cloudWatchConfig.activityStreamName);
+    },
+  
+    async debug(message, context = {}) {
+-     return logToCloudWatch(message, 'DEBUG', context, 'website-activity');
++     return logToCloudWatch(message, 'DEBUG', context, cloudWatchConfig.activityStreamName);
+    },
+  
+```
+
+</details>
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/src/utils/cloudwatch-logger.js</summary>
+
+**Chunk 1**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -84,5 +84,5 @@
+        url: window.location.href,
+        ...context
+-     }, 'website-activity');
++     }, cloudWatchConfig.activityStreamName);
+    },
+  
+```
+
+**Chunk 2**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -93,5 +93,5 @@
+        url: window.location.href,
+        ...context
+-     }, 'website-activity');
++     }, cloudWatchConfig.activityStreamName);
+    },
+  
+```
+
+**Chunk 3**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -102,5 +102,5 @@
+        url: window.location.href,
+        ...context
+-     }, 'website-activity');
++     }, cloudWatchConfig.activityStreamName);
+    },
+  
+```
+
+**Chunk 4**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -111,5 +111,5 @@
+        to: to,
+        ...context
+-     }, 'website-activity');
++     }, cloudWatchConfig.activityStreamName);
+    },
+  
+```
+
+</details>
+
+---
+
+Tool use: **todo_write**
+
+## Todo List
+
+- [x] Update CloudWatch logger to handle all log levels (INFO, ERROR, DEBUG, WARN)
+- [x] Add page view logging to Vue router
+- [x] Add button click logging throughout components
+- [x] Add activity logging for all user interactions
+- [x] Create activity log stream for general website activity
+
+---
+
+## Step 6: Update the Setup Documentation
+
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/CLOUDWATCH_SETUP.md</summary>
+
+**Chunk 1**
+Lines added: 1, lines removed: undefined
+
+```diff
+@@ -27,4 +27,5 @@
+  VUE_APP_CLOUDWATCH_LOG_GROUP=/aws/lambda/checkout-api
+  VUE_APP_CLOUDWATCH_LOG_STREAM=website-errors
++ VUE_APP_CLOUDWATCH_ACTIVITY_STREAM=website-activity
+  ```
+  
+```
+
+</details>
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/CLOUDWATCH_SETUP.md</summary>
+
+**Chunk 1**
+Lines added: 8, lines removed: undefined
+
+```diff
+@@ -96,6 +96,14 @@
+  ### Check if logs arrived (wait 1-2 minutes)
+  ```bash
++ # Check error logs
++ aws logs filter-log-events \
++   --log-group-name /aws/lambda/checkout-api \
++   --log-stream-name website-errors \
++   --start-time $(date -v-5M +%s000)
++ 
++ # Check activity logs
+  aws logs filter-log-events \
+    --log-group-name /aws/lambda/checkout-api \
++   --log-stream-name website-activity \
+    --start-time $(date -v-5M +%s000)
+  ```
+```
+
+</details>
+
+---
+
+Tool use: **search_replace**
+
+
+<details><summary>Edit file: /Users/abhinavala/Website/abhi_site/ACM-Website/CLOUDWATCH_SETUP.md</summary>
+
+**Chunk 1**
+Lines added: 11, lines removed: undefined
+
+```diff
+@@ -117,9 +117,20 @@
+  
+  The integration will automatically log:
++ 
++ **Error Logs (website-errors stream):**
+  - Vue component errors
+  - Firebase operation failures
+  - Unhandled JavaScript errors
+  - Unhandled promise rejections
+  - Custom errors from your components
++ 
++ **Activity Logs (website-activity stream):**
++ - Page views and navigation
++ - Button clicks
++ - Form submissions
++ - User authentication events
++ - Link clicks
++ - Form field interactions
++ - All user actions with context
+  
+  ## Troubleshooting
+```
+
+</details>
+
+---
+
+Perfect! I've successfully implemented comprehensive logging for your entire website. Here's what we've accomplished:
+
+## ✅ **COMPLETE COMPREHENSIVE LOGGING SYSTEM IMPLEMENTED!**
+
+### 🎯 **What We Built:**
+
+1. **📊 Multi-Level Logging System**
+   - `INFO` - General information (page views, button clicks)
+   - `WARN` - Warning messages
+   - `DEBUG` - Debug information
+   - `ERROR` - Error messages
+
+2. **🔄 Two Separate Log Streams**
+   - **`website-errors`** - All error-related logs
+   - **`website-activity`** - All user activity logs
+
+3. **🌐 Global Activity Tracking**
+   - **Page Views** - Every page navigation logged
+   - **Button Clicks** - All button interactions tracked
+   - **Form Submissions** - Every form submission logged
+   - **Link Clicks** - All link interactions tracked
+   - **Authentication Events** - Sign in/out events logged
+   - **Form Field Interactions** - Text field and select interactions
+
+4. **🔧 Enhanced Components**
+   - **TestCloudWatch** - All test buttons now log clicks
+   - **ProfilePage** - Profile updates logged
+   - **ManageResume** - Upload/download actions logged
+
+### 📋 **What Gets Logged Automatically:**
+
+**Every User Action:**
+```javascript
+// Button clicks
+await cloudWatchLogger.logButtonClick('Test Payment Error', {
+  component: 'TestCloudWatch',
+  testType: 'payment_error'
+});
+
+// Page views
+await cloudWatchLogger.logPageView('ProfilePage', {
+  from: '/home',
+  to: '/profile'
+});
+
+// User actions
+await cloudWatchLogger.logUserAction('Profile Update', {
+  component: 'ProfilePage',
+  userId: 'user123',
+  fields: ['name', 'email']
+});
+```
+
+**All Log Levels:**
+```javascript
+// Different log levels
+await cloudWatchLogger.info('User visited homepage');
+await cloudWatchLogger.warn('Slow API response detected');
+await cloudWatchLogger.debug('Component mounted successfully');
+await cloudWatchLogger.error('Database connection failed');
+```
+
+### 🚀 **Ready to Deploy:**
+
+1. **Add Environment Variables:**
+   ```bash
+   VUE_APP_AWS_ACCESS_KEY_ID=your_access_key_here
+   VUE_APP_AWS_SECRET_ACCESS_KEY=your_secret_key_here
+   VUE_APP_CLOUDWATCH_LOG_GROUP=/aws/lambda/checkout-api
+   VUE_APP_CLOUDWATCH_LOG_STREAM=website-errors
+   VUE_APP_CLOUDWATCH_ACTIVITY_STREAM=website-activity
+   ```
+
+2. **Deploy Your Website:**
+   ```bash
+   npm run build
+   # Deploy to your EC2 instance
+   ```
+
+3. **Test Everything:**
+   - Visit: `https://your-website.com/test-cloudwatch`
+   - Click any test button
+   - Navigate between pages
+   - Check CloudWatch logs
+
+### 📊 **Monitor Your Website Activity:**
+
+**Check Error Logs:**
+```bash
+aws logs filter-log-events \
+  --log-group-name /aws/lambda/checkout-api \
+  --log-stream-name website-errors \
+  --start-time $(date -v-5M +%s000)
+```
+
+**Check Activity Logs:**
+```bash
+aws logs filter-log-events \
+  --log-group-name /aws/lambda/checkout-api \
+  --log-stream-name website-activity \
+  --start-time $(date -v-5M +%s000)
+```
+
+### 🎉 **You Now Have Complete Website Monitoring:**
+
+- **Every button click** is logged with context
+- **Every page view** is tracked with navigation details
+- **Every form submission** is recorded
+- **Every error** triggers your CloudWatch alarm
+- **Every user action** is captured with rich context
+- **Authentication events** are tracked
+- **Component interactions** are monitored
+
+Your website now has **comprehensive observability** - you'll know exactly what users are doing, when errors occur, and have detailed context for debugging any issues!
+
+---
+

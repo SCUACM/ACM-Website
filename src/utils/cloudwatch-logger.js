@@ -14,38 +14,103 @@ const logs = new AWS.CloudWatchLogs({
 });
 
 /**
- * Log an error to CloudWatch
- * @param {string} message - Error message to log
+ * Log any message to CloudWatch with specified level
+ * @param {string} message - Message to log
+ * @param {string} level - Log level (INFO, ERROR, DEBUG, WARN)
  * @param {Object} context - Additional context information
+ * @param {string} streamName - Optional custom stream name
  */
-async function logError(message, context = {}) {
+async function logToCloudWatch(message, level = 'INFO', context = {}, streamName = null) {
   try {
-    const logMessage = `ERROR: ${message} - Source: ${window.location.host} - Context: ${JSON.stringify(context)}`;
+    const logMessage = `${level}: ${message} - Source: ${window.location.host} - Context: ${JSON.stringify(context)}`;
     
     await logs.putLogEvents({
       logGroupName: cloudWatchConfig.logGroupName,
-      logStreamName: cloudWatchConfig.logStreamName,
+      logStreamName: streamName || cloudWatchConfig.logStreamName,
       logEvents: [{
         timestamp: Date.now(),
         message: logMessage
       }]
     }).promise();
     
-    console.log('Error logged to CloudWatch:', message);
+    console.log(`${level} logged to CloudWatch:`, message);
   } catch (err) {
     console.log('Failed to log to CloudWatch:', err);
     // Fallback: log to console
-    console.error('Original error:', message, context);
+    console.log(`${level} (fallback):`, message, context);
   }
 }
 
 /**
- * Log different types of errors
+ * Log an error to CloudWatch (backwards compatibility)
+ * @param {string} message - Error message to log
+ * @param {Object} context - Additional context information
+ */
+async function logError(message, context = {}) {
+  return logToCloudWatch(message, 'ERROR', context);
+}
+
+/**
+ * Comprehensive CloudWatch Logger with all log levels
  */
 export const cloudWatchLogger = {
-  // General error logging
+  // Main logging function for all levels
+  async logToCloudWatch(message, level = 'INFO', context = {}, streamName = null) {
+    return logToCloudWatch(message, level, context, streamName);
+  },
+
+  // Log level shortcuts
+  async info(message, context = {}) {
+    return logToCloudWatch(message, 'INFO', context, cloudWatchConfig.activityStreamName);
+  },
+
+  async warn(message, context = {}) {
+    return logToCloudWatch(message, 'WARN', context, cloudWatchConfig.activityStreamName);
+  },
+
+  async debug(message, context = {}) {
+    return logToCloudWatch(message, 'DEBUG', context, cloudWatchConfig.activityStreamName);
+  },
+
   async error(message, context = {}) {
     return logError(message, context);
+  },
+
+  // Activity logging
+  async logPageView(pageName, context = {}) {
+    return logToCloudWatch(`Page viewed: ${pageName}`, 'INFO', {
+      type: 'page_view',
+      page: pageName,
+      url: window.location.href,
+      ...context
+    }, cloudWatchConfig.activityStreamName);
+  },
+
+  async logButtonClick(buttonName, context = {}) {
+    return logToCloudWatch(`Button clicked: ${buttonName}`, 'INFO', {
+      type: 'button_click',
+      button: buttonName,
+      url: window.location.href,
+      ...context
+    }, cloudWatchConfig.activityStreamName);
+  },
+
+  async logUserAction(action, context = {}) {
+    return logToCloudWatch(`User action: ${action}`, 'INFO', {
+      type: 'user_action',
+      action: action,
+      url: window.location.href,
+      ...context
+    }, cloudWatchConfig.activityStreamName);
+  },
+
+  async logNavigation(from, to, context = {}) {
+    return logToCloudWatch(`Navigation: ${from} → ${to}`, 'INFO', {
+      type: 'navigation',
+      from: from,
+      to: to,
+      ...context
+    }, cloudWatchConfig.activityStreamName);
   },
 
   // Database errors

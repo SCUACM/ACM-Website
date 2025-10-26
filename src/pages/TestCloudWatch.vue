@@ -90,6 +90,12 @@ export default {
     async testPaymentError() {
       this.loading.payment = true;
       try {
+        // Log button click
+        await cloudWatchLogger.logButtonClick('Test Payment Error', {
+          component: 'TestCloudWatch',
+          testType: 'payment_error'
+        });
+        
         await cloudWatchLogger.paymentError(
           new Error('Payment processing failed - insufficient funds'),
           'txn_123456789'
@@ -111,6 +117,12 @@ export default {
     async testDatabaseError() {
       this.loading.database = true;
       try {
+        // Log button click
+        await cloudWatchLogger.logButtonClick('Test Database Error', {
+          component: 'TestCloudWatch',
+          testType: 'database_error'
+        });
+        
         await cloudWatchLogger.databaseError(
           new Error('Database connection timeout'),
           'user_query'
@@ -132,6 +144,12 @@ export default {
     async testApiError() {
       this.loading.api = true;
       try {
+        // Log button click
+        await cloudWatchLogger.logButtonClick('Test API Error', {
+          component: 'TestCloudWatch',
+          testType: 'api_error'
+        });
+        
         await cloudWatchLogger.apiError(
           new Error('External API returned 500 error'),
           '/api/external-service'
@@ -153,6 +171,12 @@ export default {
     async testFirebaseError() {
       this.loading.firebase = true;
       try {
+        // Log button click
+        await cloudWatchLogger.logButtonClick('Test Firebase Error', {
+          component: 'TestCloudWatch',
+          testType: 'firebase_error'
+        });
+        
         await cloudWatchLogger.firebaseError(
           new Error('Firebase authentication failed'),
           'signIn'
@@ -174,6 +198,12 @@ export default {
     async testGeneralError() {
       this.loading.general = true;
       try {
+        // Log button click
+        await cloudWatchLogger.logButtonClick('Test General Error', {
+          component: 'TestCloudWatch',
+          testType: 'general_error'
+        });
+        
         await cloudWatchLogger.error(
           'General system error - website crash simulation',
           { 
