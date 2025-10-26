@@ -1,0 +1,6 @@
+ssh -i "/Users/rayyan/Downloads/Rayyan Key.pem" ec2-user@ec2-54-209-203-149.compute-1.amazonaws.com
+cd /home/ec2-user
+git clone https://github.com/rayyanh192/ACM-Website.git
+cd ACM-Website
+npm run build
+sudo cp -r dist/* /var/www/html/
