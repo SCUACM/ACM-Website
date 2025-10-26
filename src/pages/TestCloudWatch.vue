@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import cloudWatchLogger from '@/utils/cloudwatch-logger';
+import { cloudWatchLogger } from '@/utils/cloudWatchLogger';
 
 export default {
   name: 'TestCloudWatch',
