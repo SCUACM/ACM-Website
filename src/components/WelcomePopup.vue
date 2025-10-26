@@ -90,7 +90,7 @@
         </v-row>
       </v-container>
     </v-form>
-    <button @click="closePopup"
+    <button @click="closPopup"
       style="margin-left: 12px; height: 60px; width: 200px; border-radius: 40px; border: solid #1c548d"
       >Continue</button>
   </div>
