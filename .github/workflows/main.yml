@@ -1,6 +1,48 @@
-ssh -i "/Users/rayyan/Downloads/Rayyan Key.pem" ec2-user@ec2-54-209-203-149.compute-1.amazonaws.com
-cd /home/ec2-user
-git clone https://github.com/rayyanh192/ACM-Website.git
-cd ACM-Website
-npm run build
-sudo cp -r dist/* /var/www/html/
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ main ]   # adjust if your default branch is different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH and build on EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}           # e.g. 54.209.203.149
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}         # contents of your Rayyan Key.pem
+          # Optional: skip strict host key checking on first connect
+          script_stop: true
+          script: |
+            set -euo pipefail
+            sudo mkdir -p /var/www/html
+
+            cd /home/ec2-user
+
+            if [ -d ACM-Website ]; then
+              echo "[+] Repo exists, resetting to origin/main"
+              cd ACM-Website
+              git fetch --all
+              git reset --hard origin/main
+            else
+              echo "[+] Cloning fresh"
+              git clone https://github.com/rayyanh192/ACM-Website.git
+              cd ACM-Website
+            fi
+
+            # Install deps (was missing in your commands)
+            if command -v npm >/dev/null 2>&1; then
+              echo "[+] npm version: $(npm -v)"
+            else
+              echo "[!] npm not found on EC2. Install Node/npm or use Option B below."; exit 1
+            fi
+
+            npm ci --quiet || npm install --quiet
+            npm run build
+
+            # Deploy (rsync is safer & handles deletes)
+            sudo rsync -a --delete dist/ /var/www/html/
+            echo "[+] Deployed to /var/www/html"
