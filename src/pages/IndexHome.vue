@@ -16,7 +16,7 @@
             </v-col>
             <v-col cols="12" class="title-container">
               <div class="title-sub-header">
-                Advancing computing as a science & profession at Santa Clara
+                Advancing rayyan's computing as a science & profession at Santa Clara
                 University.
               </div>
             </v-col>
