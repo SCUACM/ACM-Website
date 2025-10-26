@@ -91,6 +91,7 @@ import {db, auth} from '../firebase';
 import { debounce } from 'debounce';
 import { getUserPerms, majorsList } from '../helpers';
 import ManageResume from '../components/ManageResume.vue';
+import cloudWatchLogger from '../utils/cloudwatch-logger';
 
 export default {
   name: "ProfilePage",
@@ -114,6 +115,9 @@ export default {
         await ref.set(this.formData);
         this.state = 'synced';
       } catch (error) {
+        // Log to CloudWatch
+        await cloudWatchLogger.firebaseError(error, 'updateUserProfile');
+        
         this.errorMessage = JSON.stringify(error)
         this.state = 'error';
       }
@@ -123,20 +127,26 @@ export default {
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
     auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        this.user = user;
-        const perms = await getUserPerms(user);
-        this.canEdit = perms.editMyProfile;
-        this.viewResume = perms.viewMyResume;
-        this.canUploadResume = perms.uploadResume;
-        const ref = db.collection("users").doc(user.uid);
-        let data = (await ref.get()).data();
-        if (!data) {
-          data = { name: user.displayName, eventsAttended: 0 }
-          await ref.set(data);
+      try {
+        if (user) {
+          this.user = user;
+          const perms = await getUserPerms(user);
+          this.canEdit = perms.editMyProfile;
+          this.viewResume = perms.viewMyResume;
+          this.canUploadResume = perms.uploadResume;
+          const ref = db.collection("users").doc(user.uid);
+          let data = (await ref.get()).data();
+          if (!data) {
+            data = { name: user.displayName, eventsAttended: 0 }
+            await ref.set(data);
+          }
+          this.formData = data;
+          this.attendance = data.eventsAttended;
         }
-        this.formData = data;
-        this.attendance = data.eventsAttended;
+      } catch (error) {
+        // Log to CloudWatch
+        await cloudWatchLogger.firebaseError(error, 'loadUserProfile');
+        console.error('Error loading user profile:', error);
       }
     });
   },

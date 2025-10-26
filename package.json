@@ -17,6 +17,7 @@
     "@fullcalendar/vue3": "^6.1.19",
     "@mdi/font": "^7.4.47",
     "@vitejs/plugin-vue": "6.0.1",
+    "aws-sdk": "^2.1692.0",
     "chart.js": "^4.5.0",
     "core-js": "^3.6.5",
     "debounce": "^1.2.1",

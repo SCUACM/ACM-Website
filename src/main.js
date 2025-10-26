@@ -22,9 +22,11 @@ import RegisterPage from "@/pages/RegisterPage.vue";
 import RedirectRouter from "@/pages/RedirectRouter.vue";
 import AdminRoles from '@/pages/AdminRoles.vue';
 import AdminStats from "@/pages/AdminStats.vue";
+import TestCloudWatch from "@/pages/TestCloudWatch.vue";
 
 import {auth} from './firebase';
 import { getUserPerms } from "./helpers";
+import cloudWatchLogger from './utils/cloudwatch-logger';
 import '@mdi/font/css/materialdesignicons.css';
 import '@/assets/override.css';
 
@@ -164,6 +166,10 @@ const routes = [
     component: JoinUs,
   },
   {
+    path: "/test-cloudwatch",
+    component: TestCloudWatch,
+  },
+  {
     path: "/redirect",
     component: RedirectRouter,
   },
@@ -231,6 +237,59 @@ const vuetify = createVuetify({
 });
 
 const app = createApp(App);
+
+// Global error handler for Vue
+app.config.errorHandler = (err, vm, info) => {
+  console.error('Vue Error:', err);
+  console.error('Component:', vm);
+  console.error('Info:', info);
+  
+  // Log to CloudWatch
+  cloudWatchLogger.componentError(
+    err, 
+    vm?.$options?.name || 'Unknown', 
+    info || 'unknown'
+  ).catch(logError => {
+    console.error('Failed to log Vue error to CloudWatch:', logError);
+  });
+};
+
+// Global unhandled promise rejection handler
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('Unhandled Promise Rejection:', event.reason);
+  
+  // Log to CloudWatch
+  cloudWatchLogger.error(
+    `Unhandled Promise Rejection: ${event.reason}`,
+    {
+      type: 'promise_rejection',
+      url: window.location.href,
+      userAgent: navigator.userAgent
+    }
+  ).catch(logError => {
+    console.error('Failed to log promise rejection to CloudWatch:', logError);
+  });
+});
+
+// Global JavaScript error handler
+window.addEventListener('error', (event) => {
+  console.error('Global JavaScript Error:', event.error);
+  
+  // Log to CloudWatch
+  cloudWatchLogger.error(
+    `Global JavaScript Error: ${event.error?.message || event.message}`,
+    {
+      type: 'javascript_error',
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+      url: window.location.href
+    }
+  ).catch(logError => {
+    console.error('Failed to log JS error to CloudWatch:', logError);
+  });
+});
+
 app.use(router);
 app.use(vuetify);
 app.mount("#app")

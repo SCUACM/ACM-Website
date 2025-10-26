@@ -28,6 +28,7 @@
 
 <script>
 import {storage, auth} from '../firebase';
+import cloudWatchLogger from '../utils/cloudwatch-logger';
 
   const fileSizeLimit = 5000000;
 
@@ -65,14 +66,20 @@ import {storage, auth} from '../firebase';
         }
       },
       async submit() {
-        if(!this.file || !this.storageRef) {
-          return;
+        try {
+          if(!this.file || !this.storageRef) {
+            return;
+          }
+          await this.storageRef.put(this.file);
+          this.$refs.form.reset();
+          this.file = null;
+          alert("Your resume has been uploaded!");
+          this.getCurrentResume();
+        } catch (error) {
+          // Log to CloudWatch
+          await cloudWatchLogger.firebaseError(error, 'uploadResume');
+          alert("Failed to upload resume. Please try again.");
         }
-        await this.storageRef.put(this.file);
-        this.$refs.form.reset();
-        this.file = null;
-        alert("Your resume has been uploaded!");
-        this.getCurrentResume();
       },
       async getCurrentResume() {
         if(this.storageRef){
@@ -81,6 +88,8 @@ import {storage, auth} from '../firebase';
             this.pdfUrl = await this.storageRef.getDownloadURL();
           }
           catch (e) {
+            // Log to CloudWatch
+            await cloudWatchLogger.firebaseError(e, 'getResumeMetadata');
             console.log("No resume found");
           }
         }
