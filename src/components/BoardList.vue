@@ -30,6 +30,8 @@ import MargaritaSchemel from '../assets/board/main/marg.jpg';
 import AbhinavAla from '../assets/board/main/abhi.jpg';
 import MatthiasMasiero from '../assets/board/main/matt.jpg';
 import RayyanHussain from '../assets/board/main/rayyan.jpg';
+import EspyAguilar from '../assets/board/main/espy.jpg';
+import MariamShihab from '../assets/board/main/mariam.png';
 
 import WalkerSelby from "../assets/board/broncosec/Walker_Selby.jpg";
 import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
@@ -163,6 +165,18 @@ export default {
           name: "Matthias Masiero",
           role: "Event Coordinator",
           bio: "Hey! I’m Matthias, a Computer Science student, and im from Manhattan NY. I’m into using code to solve real-world problems whether that’s through machine learning, sports tech, or even experimenting with quantum computing. I’ve worked on injury prediction projects using athlete data, and I love pushing the limits with new quantum computing advancments. Outside of class, I’m usually at the gym, playing soccer, or studying in SCDI. I’m always down to meet new people, so feel free to say whats up."
+        },
+        {
+          src: EspyAguilar,
+          name: "Esperanza Aguilar",
+          role: "Underclassmen Representative",
+          bio: "Hey! I’m Espy, a freshman majoring in Computer Science and Engineering from San Jose. I used to do a lot of coding for fun as a kid, so I practically grew up on websites like code.org and Khan Academy. I recently rediscovered my passion for CS in my Junior year of high school, and have been exploring as many subjects as I could since then. I’m particularly interested in Video Game Programming and Machine Learning, but I’m open to learning and talking about anything CS related. I love teaching and tutoring, so don’t be scared to ask if you have any CS questions or even just need guidance in general. As Underclassmen Rep, I want to make sure your ideas shine through, so please reach out, and I’ll make sure your voice is heard."
+        },
+        {
+          src: MariamShihab,
+          name: "Mariam Shihab",
+          role: "Underclassmen Representative",
+          bio: "Hi! My name is Mariam, and I am a freshman majoring in Computer Science and Engineering. I grew up in San Jose, California, but I was born in Vancouver, Canada. I've always been a problem solver, and that's why I'm drawn to coding as I believe it is the most effective way for creation and sharing new ideas. Right now I am particularly interested in AI and Machine learning, since if used correctly, it has the power to benefit a lot of people. Other than technology, I enjoy reading and watching movies (especially Marvel movies!) I’m excited to meet more people this year and learn more about coding!"
         }
       ],
 

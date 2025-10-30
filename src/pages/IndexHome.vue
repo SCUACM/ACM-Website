@@ -27,7 +27,7 @@
 
     <div ref="navigation" class="navigation">
       <AnnouncementBanner
-        :show="true"
+        :show="false"
         content="AWS x INRIX Hack is here! Join us for a 24-hour long hackathon, and build innovative projects using AI and cloud technology! Sign up "
         link="https://aws.scuacm.com/"
         linkTitle="here"
