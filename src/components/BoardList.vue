@@ -33,16 +33,16 @@ import RayyanHussain from '../assets/board/main/rayyan.jpg';
 import EspyAguilar from '../assets/board/main/espy.jpg';
 import MariamShihab from '../assets/board/main/mariam.png';
 
-import WalkerSelby from "../assets/board/broncosec/Walker_Selby.jpg";
-import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
-import DannyWalsh from "../assets/board/broncosec/Danny_Walsh.jpg";
-import KaraBaresse from "../assets/board/broncosec/Kara_Baresse.jpg";
-import DavisRobertson from "../assets/board/broncosec/Davis_Robertson.jpg";
-import EthanSychangco from "../assets/board/broncosec/Ethan_Sychangco.jpg";
-import TiffanyNguyen from "../assets/board/broncosec/Tiffany_Nguyen.jpg";
-import VarunMangla from "../assets/board/broncosec/Varun_Mangla.jpg";
-import AdrianZhang from "../assets/board/broncosec/Adrian_Zhang.jpg";
+import KaraBarrese from "../assets/board/broncosec/Kara_Barrese.jpg";
+import EthanSychangco from "../assets/board/broncosec/Ethan_Sychangco.png";
+import TiffanyNguyen from "../assets/board/broncosec/Tiffany_Nguyen.png";
 import JasonWu from "../assets/board/broncosec/Jason_Wu.jpg";
+import EricWei from "../assets/board/broncosec/Eric_Wei.jpg";
+import EvanChin from "../assets/board/broncosec/Evan_Chin.jpg";
+import HuyNgo from "../assets/board/broncosec/Huy_Ngo.jpeg";
+import TateSteven from '../assets/board/broncosec/Tate_Steven-Schneider.jpg';
+import VietHa from '../assets/board/broncosec/Viet_Ha.jpg';
+import WilliamPatmore from '../assets/board/broncosec/William_Patmore.jpg';
 
 import CatherineHung from "../assets/board/ACM-W/Catherine_Hung.jpeg";
 import LeilaErhili from "../assets/board/ACM-W/Leila_Erhili.jpeg";
@@ -269,72 +269,65 @@ export default {
 
       broncoSecBoard: [
         {
-          src: DevinBhatt,
-          name: "Devin Bhatt",
+          src: EthanSychangco,
+          name: "Ethan Sychangco",
           role: "President",
-          bio:
-            "Hi, I’m Devin. I’m a junior Computer Science from the Bay Area. For my second year on the BroncoCTF board, I’ve taken on the role of BroncoCTF coordinator. Most of my work at BroncoSec involves planning for BroncoCTF, writing challenges, and setting up the infrastructure for you to (hopefully not) break :wink:. I love to learn new things (especially when it comes to security and infrastructure), and I love to help others learn as well. I hope that BroncoCTF is not just a fun event, but a learning opportunity for all of its attendees!",
+          bio: "",
         },  
         {
-          src: DavisRobertson,
-          name: "Davis Robertson",
+          src: WilliamPatmore,
+          name: "William Patmore",
           role: "Vice President",
-          bio:
-            "Hello! I’m Davis and I’m excited to be BroncoSec’s external CTF coordinator this year! I am a junior computer science (security emphasis) and philosophy major from New York. I’ve been interested in computer science since I was a kid and have really enjoyed being a part of BroncoSec at SCU. When I’m not writing papers or working on CS projects there’s a good chance you can find me playing or watching basketball. Please reach out if you have any questions or for any other reason, I’m looking forward to connecting with the BroncoSec community!",
+          bio: "",
         },
         {
-          src: DannyWalsh,
-          name: "Danny Walsh",
-          role: "Industry Liaison",
-          bio:
-            ""
-          },
-        {
-          src: WalkerSelby,
-          name: "Walker Selby",
-          role: "BroncoCTF coordinator",
+          src: KaraBarrese,
+          name: "Kara Barrese",
+          role: "CTF Lead",
           bio: ""
         },
         {
-          src: KaraBaresse,
-          name: "Kara Baresse",
-          role: "External CTF coordinator",
-          bio:
-            ""
-          },
+          src: VietHa,
+          name: "Viet Ha",
+          role: "Event Lead",
+          bio: "",
+        },
         {
-          src: EthanSychangco,
-          name: "Ethan Sychangco",
-          role: "Workshop Coordinator",
-          bio:
-            "Hello, my name is Ethan Sychangco! I am one of your BroncoSec underclassman representatives for the 2022-2023 school year! I am a first-year majoring in Computer Science and Engineering, and I am local to the Bay Area. I find interest in all things technology, gaming, and cybersecurity, and I want to bring that excitement to the BroncoSec club. When I am not laser-focused on developing a project, I am probably spending time with family, enjoying game nights with friends, or watching random YouTube videos to take a break from my busy days. I want to make sure all BroncoSec members have their voices heard, and that we can support each other's passions for cybersecurity. You can reach out to me at any time!",
+          src: HuyNgo,
+          name: "Huy Ngo",
+          role: "Event Lead",
+          bio: "",
+        },
+        {
+          src: EricWei,
+          name: "Eric Wei",
+          role: "Event Lead",
+          bio: "",
+        },
+        {
+          src: TateSteven,
+          name: "Tate Steven-Schneider",
+          role: "Event Lead",
+          bio: "",
         },
         {
           src: TiffanyNguyen,
           name: "Tiffany Nguyen",
-          role: "Workshop Coordinator",
-          bio:
-            "My name is Tiffany Nguyen, and I am a freshman majoring in Computer Science and Engineering from San Jose, California. I am passionate about learning about all the fun and interesting ways computer science can be applied across various fields like cybersecurity, and I hope to be able to help plan fun activities that get others excited about security.",
-        },
-        {
-          src: VarunMangla,
-          name: "Varun Mangla",
-          role: "Workshop Coordinator",
-          bio:
-            "Hello everyone! I'm Varun, a sophomore Computer Science and Engineering student from Los Altos, CA. While I only started coding during the winter quarter of my first year at SCU, I've always been fascinated with technology. I'm eager to join BroncoSec as its Public Relations manager this year, as participating in the club helped me develop a budding interest in cybersecurity. Through this role, I intend to introduce other students to BroncoSec and the ever-growing field of cybersecurity. Outside of computer science, some of my interests are music, games, and hanging out with my friends. Please let me know if you have any questions or suggestions, and I'm looking forward to seeing everyone at our weekly club meetings!",
-        },
-        {
-          src: AdrianZhang,
-          name: "Adrian Zhang",
-          role: "Underclassmen Rep",
-          bio: ""
+          role: "Publicity Manager",
+          bio: "",
         },
         {
           src: JasonWu,
           name: "Jason Wu",
-          role: "Underclassmen Rep",
+          role: "Treasurer",
           bio: ""
         },
+        {
+          src: EvanChin,
+          name: "Evan Chin",
+          role: "Outreach Coordinator",
+          bio: ""
+        }
       ],
 
       acmGBoard: [
