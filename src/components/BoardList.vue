@@ -6,9 +6,9 @@
 
     <BoardListSection title="BroncoSec" :memberList="broncoSecBoard" />
 
-    <BoardListSection title="ACM-G" :memberList="acmGBoard" />
+    <!-- <BoardListSection title="ACM-G" :memberList="acmGBoard" />
 
-    <BoardListSection title="Competitive Programming" :memberList="competitveProgrammingBoard" />
+    <BoardListSection title="Competitive Programming" :memberList="competitveProgrammingBoard" /> -->
 
     <BoardListSection title="Chapter Advisors" :memberList="chapterAdvisors" />
   </div>
@@ -41,21 +41,22 @@ import EricWei from "../assets/board/broncosec/Eric_Wei.jpg";
 import EvanChin from "../assets/board/broncosec/Evan_Chin.jpg";
 import HuyNgo from "../assets/board/broncosec/Huy_Ngo.jpeg";
 import TateSteven from '../assets/board/broncosec/Tate_Steven-Schneider.jpg';
-import VietHa from '../assets/board/broncosec/Viet_Ha.jpg';
+import VietHa from '../assets/board/broncosec/Viet_Ha.png';
 import WilliamPatmore from '../assets/board/broncosec/William_Patmore.jpg';
 
 import CatherineHung from "../assets/board/ACM-W/Catherine_Hung.jpeg";
-import LeilaErhili from "../assets/board/ACM-W/Leila_Erhili.jpeg";
 import AnnaAldrin from "../assets/board/ACM-W/Anna_Aldrin.jpeg";
-import AryaDeshpande from "../assets/board/ACM-W/Arya_Deshpande.jpeg";
-import SamiaAhmer from "../assets/board/ACM-W/Samia_Ahmer.jpeg";
-import IreneChang from "../assets/board/ACM-W/Irene_Chang.jpeg";
+import AryaDeshpande from "../assets/board/ACM-W/Arya_Deshpande.jpg";
 import MaddieFollosco from "../assets/board/ACM-W/Maddie_Follosco.jpeg";
 import SanjnaSood from "../assets/board/ACM-W/Sanjna_Sood.jpeg";
-import PrakritiPatnaik from "../assets/board/ACM-W/Prakriti_Patnaik.jpg";
-import TrishaGanesh from "../assets/board/ACM-W/Trisha_Ganesh.jpeg";
-import SattvikaBhatt from "../assets/board/ACM-W/Sattvika_Bhatt.jpeg";
-import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
+import DanielaCasillas from '../assets/board/ACM-W/Daniela_Casillas.jpg';
+import EmaanZaidi from '../assets/board/ACM-W/Emaan_Zaidi.JPG';
+import GinaChiu from '../assets/board/ACM-W/Gina_Chiu.jpg';
+import KaavyaJethwa from '../assets/board/ACM-W/Kaavya_Jethwa.jpg';
+import PaulinaLandry from '../assets/board/ACM-W/Paulina_Landry.jpg';
+import PriyankaGanguly from '../assets/board/ACM-W/Priyanka_Ganguly.JPG';
+import SaraDonnelly from '../assets/board/ACM-W/Sara_Donnelly.jpg';
+import TanviGandhi from '../assets/board/ACM-W/Tanvi_Gandhi.jpg'
 
 import JordanRandleman from "../assets/board/ACM-G/Jordan_Randleman.jpg"
 import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
@@ -182,88 +183,83 @@ export default {
 
       acmWBoard: [
         {
-          src: LeilaErhili,
-          name: "Leila Erhili",
-          role: "President",
-          bio:
-            "Hello! My name is Leila and I am a senior studying Computer Science and Engineering here at SCU. I absolutely love computer science, so I am a huge advocate for getting more women the opportunity to discover how fun and satisfying programming can be. I actually did not begin my college journey studying Computer Science and Engineering. My freshman year, I took a C++ class out of curiosity, and immediately knew that I had found what I wanted to study. I then switched majors and have never looked back. Other pastimes that I enjoy include moving my body (ie. gym, hiking, etc,) , thrifting, writing, and of course, spending time with the people closest to me. I am so excited to be part of such an amazing community of amazing women and can’t wait to get to know everyone! "
-        },
-        {
           src: MaddieFollosco,
           name: "Maddie Follosco",
-          role: "Vice President",
-          bio: 
+          role: "President",
+          bio:
             "Hey! My name is Maddie Follosco and I am a Computer Science and Engineering major from Santa Clarita, California. In high school I thought I wanted to go into the medical field because I wanted to have a lasting impact on people's lives. However, after job shadowing engineers at a local medical devices startup, I realized I could still have that altruistic impact as an engineer by designing cool things for people. And so naturally my love for math and logic led me here and I am loving it so far. I am interested in exploring all the fields of computer science especially machine learning and game design. In my free time, I am an avid Dodgers fan, I am obsessed with pop music and R&B, and I love spending quality time with friends and family. I look forward to an amazing year with the gals at ACM-W!"
+        },
+        {
+          src: AryaDeshpande,
+          name: "Arya Deshpande",
+          role: "Vice President",
+          bio: ""
         },
         {
           src: CatherineHung,
           name: "Catherine Hung",
           role: "Treasurer",
-          bio:
-            ""
+          bio: ""
+        },
+        {
+          src: PriyankaGanguly,
+          name: "Priyanka Ganguly",
+          role: "Secretary",
+          bio: ""
         },
         {
           src: SanjnaSood,
           name: "Sanjna Sood",
-          role: "Secretary",
-          bio: 
-            ""
+          role: "Hackathon Coordinator",
+          bio: ""
         },
         {
-          src: IreneChang,
-          name: "Irene Chang",
-          role: "Director of Events",
-          bio:
-            ""
+          src: SaraDonnelly,
+          name: "Sara Donnelly",
+          role: "Co-director of Events",
+          bio: ""
         },
         {
           src: AnnaAldrin,
           name: "Anna Aldrin",
-          role: "Event Coordinator",
-          bio:
-            ""
+          role: "Co-director of Events",
+          bio: ""
         },
         {
-          src: AryaDeshpande,
-          name: "Arya Deshpande",
-          role: "Event Coordinator",
-          bio:
-            ""
+          src: DanielaCasillas,
+          name: "Daniela Casillas",
+          role: "Cybersisters Event Coordinator",
+          bio: ""
         },
         {
-          src: SamiaAhmer,
-          name: "Samia Ahmer",
-          role: "Media and Public Relations",
-          bio:
-            ""
+          src: GinaChiu,
+          name: "Gina Chiu",
+          role: "Director of Media and PR",
+          bio: ""
         },
         {
-          src: PrakritiPatnaik,
-          name: "Prakriti Patnaik",
+          src: KaavyaJethwa,
+          name: "Kaavya Jethwa",
           role: "Webmaster",
-          bio: 
-            ""
+          bio: ""
         },
         {
-          src: TrishaGanesh,
-          name: "Trisha Ganesh",
+          src: PaulinaLandry,
+          name: "Paulina Landry",
           role: "Industry Liaison",
-          bio: 
-            ""
+          bio: ""
         },
         {
-          src: SattvikaBhatt,
-          name: "Sattvika Bhatt",
-          role: "Hackathon Coordinator",
-          bio: 
-            ""
+          src: EmaanZaidi,
+          name: "Emaan Zaidi",
+          role: "Industry Liaison",
+          bio: ""
         },
         {
-          src: AnanyaPagadala,
-          name: "Ananya Pagadala",
-          role: "Conference/Career Opportunity Strategist",
-          bio: 
-            ""
+          src: TanviGandhi,
+          name: "Tanvi Gandhi",
+          role: "Conference and Career Advisor",
+          bio: ""
         },
       ],
 
