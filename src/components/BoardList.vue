@@ -6,9 +6,9 @@
 
     <BoardListSection title="BroncoSec" :memberList="broncoSecBoard" />
 
-    <BoardListSection title="ACM-G" :memberList="acmGBoard" />
+    <!-- <BoardListSection title="ACM-G" :memberList="acmGBoard" />
 
-    <BoardListSection title="Competitive Programming" :memberList="competitveProgrammingBoard" />
+    <BoardListSection title="Competitive Programming" :memberList="competitveProgrammingBoard" /> -->
 
     <BoardListSection title="Chapter Advisors" :memberList="chapterAdvisors" />
   </div>
@@ -30,30 +30,33 @@ import MargaritaSchemel from '../assets/board/main/marg.jpg';
 import AbhinavAla from '../assets/board/main/abhi.jpg';
 import MatthiasMasiero from '../assets/board/main/matt.jpg';
 import RayyanHussain from '../assets/board/main/rayyan.jpg';
+import EspyAguilar from '../assets/board/main/espy.jpg';
+import MariamShihab from '../assets/board/main/mariam.png';
 
-import WalkerSelby from "../assets/board/broncosec/Walker_Selby.jpg";
-import DevinBhatt from "../assets/board/broncosec/Devin_Bhatt.jpg";
-import DannyWalsh from "../assets/board/broncosec/Danny_Walsh.jpg";
-import KaraBaresse from "../assets/board/broncosec/Kara_Baresse.jpg";
-import DavisRobertson from "../assets/board/broncosec/Davis_Robertson.jpg";
-import EthanSychangco from "../assets/board/broncosec/Ethan_Sychangco.jpg";
-import TiffanyNguyen from "../assets/board/broncosec/Tiffany_Nguyen.jpg";
-import VarunMangla from "../assets/board/broncosec/Varun_Mangla.jpg";
-import AdrianZhang from "../assets/board/broncosec/Adrian_Zhang.jpg";
+import KaraBarrese from "../assets/board/broncosec/Kara_Barrese.jpg";
+import EthanSychangco from "../assets/board/broncosec/Ethan_Sychangco.png";
+import TiffanyNguyen from "../assets/board/broncosec/Tiffany_Nguyen.png";
 import JasonWu from "../assets/board/broncosec/Jason_Wu.jpg";
+import EricWei from "../assets/board/broncosec/Eric_Wei.jpg";
+import EvanChin from "../assets/board/broncosec/Evan_Chin.jpg";
+import HuyNgo from "../assets/board/broncosec/Huy_Ngo.jpeg";
+import TateSteven from '../assets/board/broncosec/Tate_Steven-Schneider.jpg';
+import VietHa from '../assets/board/broncosec/Viet_Ha.png';
+import WilliamPatmore from '../assets/board/broncosec/William_Patmore.jpg';
 
 import CatherineHung from "../assets/board/ACM-W/Catherine_Hung.jpeg";
-import LeilaErhili from "../assets/board/ACM-W/Leila_Erhili.jpeg";
 import AnnaAldrin from "../assets/board/ACM-W/Anna_Aldrin.jpeg";
-import AryaDeshpande from "../assets/board/ACM-W/Arya_Deshpande.jpeg";
-import SamiaAhmer from "../assets/board/ACM-W/Samia_Ahmer.jpeg";
-import IreneChang from "../assets/board/ACM-W/Irene_Chang.jpeg";
+import AryaDeshpande from "../assets/board/ACM-W/Arya_Deshpande.jpg";
 import MaddieFollosco from "../assets/board/ACM-W/Maddie_Follosco.jpeg";
 import SanjnaSood from "../assets/board/ACM-W/Sanjna_Sood.jpeg";
-import PrakritiPatnaik from "../assets/board/ACM-W/Prakriti_Patnaik.jpg";
-import TrishaGanesh from "../assets/board/ACM-W/Trisha_Ganesh.jpeg";
-import SattvikaBhatt from "../assets/board/ACM-W/Sattvika_Bhatt.jpeg";
-import AnanyaPagadala from "../assets/board/ACM-W/Ananya_Pagadala.jpeg";
+import DanielaCasillas from '../assets/board/ACM-W/Daniela_Casillas.jpg';
+import EmaanZaidi from '../assets/board/ACM-W/Emaan_Zaidi.JPG';
+import GinaChiu from '../assets/board/ACM-W/Gina_Chiu.jpg';
+import KaavyaJethwa from '../assets/board/ACM-W/Kaavya_Jethwa.jpg';
+import PaulinaLandry from '../assets/board/ACM-W/Paulina_Landry.jpg';
+import PriyankaGanguly from '../assets/board/ACM-W/Priyanka_Ganguly.JPG';
+import SaraDonnelly from '../assets/board/ACM-W/Sara_Donnelly.jpg';
+import TanviGandhi from '../assets/board/ACM-W/Tanvi_Gandhi.jpg'
 
 import JordanRandleman from "../assets/board/ACM-G/Jordan_Randleman.jpg"
 import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
@@ -163,164 +166,164 @@ export default {
           name: "Matthias Masiero",
           role: "Event Coordinator",
           bio: "Hey! I’m Matthias, a Computer Science student, and im from Manhattan NY. I’m into using code to solve real-world problems whether that’s through machine learning, sports tech, or even experimenting with quantum computing. I’ve worked on injury prediction projects using athlete data, and I love pushing the limits with new quantum computing advancments. Outside of class, I’m usually at the gym, playing soccer, or studying in SCDI. I’m always down to meet new people, so feel free to say whats up."
+        },
+        {
+          src: EspyAguilar,
+          name: "Esperanza Aguilar",
+          role: "Underclassmen Representative",
+          bio: "Hey! I’m Espy, a freshman majoring in Computer Science and Engineering from San Jose. I used to do a lot of coding for fun as a kid, so I practically grew up on websites like code.org and Khan Academy. I recently rediscovered my passion for CS in my Junior year of high school, and have been exploring as many subjects as I could since then. I’m particularly interested in Video Game Programming and Machine Learning, but I’m open to learning and talking about anything CS related. I love teaching and tutoring, so don’t be scared to ask if you have any CS questions or even just need guidance in general. As Underclassmen Rep, I want to make sure your ideas shine through, so please reach out, and I’ll make sure your voice is heard."
+        },
+        {
+          src: MariamShihab,
+          name: "Mariam Shihab",
+          role: "Underclassmen Representative",
+          bio: "Hi! My name is Mariam, and I am a freshman majoring in Computer Science and Engineering. I grew up in San Jose, California, but I was born in Vancouver, Canada. I've always been a problem solver, and that's why I'm drawn to coding as I believe it is the most effective way for creation and sharing new ideas. Right now I am particularly interested in AI and Machine learning, since if used correctly, it has the power to benefit a lot of people. Other than technology, I enjoy reading and watching movies (especially Marvel movies!) I’m excited to meet more people this year and learn more about coding!"
         }
       ],
 
       acmWBoard: [
         {
-          src: LeilaErhili,
-          name: "Leila Erhili",
-          role: "President",
-          bio:
-            "Hello! My name is Leila and I am a senior studying Computer Science and Engineering here at SCU. I absolutely love computer science, so I am a huge advocate for getting more women the opportunity to discover how fun and satisfying programming can be. I actually did not begin my college journey studying Computer Science and Engineering. My freshman year, I took a C++ class out of curiosity, and immediately knew that I had found what I wanted to study. I then switched majors and have never looked back. Other pastimes that I enjoy include moving my body (ie. gym, hiking, etc,) , thrifting, writing, and of course, spending time with the people closest to me. I am so excited to be part of such an amazing community of amazing women and can’t wait to get to know everyone! "
-        },
-        {
           src: MaddieFollosco,
           name: "Maddie Follosco",
-          role: "Vice President",
-          bio: 
+          role: "President",
+          bio:
             "Hey! My name is Maddie Follosco and I am a Computer Science and Engineering major from Santa Clarita, California. In high school I thought I wanted to go into the medical field because I wanted to have a lasting impact on people's lives. However, after job shadowing engineers at a local medical devices startup, I realized I could still have that altruistic impact as an engineer by designing cool things for people. And so naturally my love for math and logic led me here and I am loving it so far. I am interested in exploring all the fields of computer science especially machine learning and game design. In my free time, I am an avid Dodgers fan, I am obsessed with pop music and R&B, and I love spending quality time with friends and family. I look forward to an amazing year with the gals at ACM-W!"
+        },
+        {
+          src: AryaDeshpande,
+          name: "Arya Deshpande",
+          role: "Vice President",
+          bio: ""
         },
         {
           src: CatherineHung,
           name: "Catherine Hung",
           role: "Treasurer",
-          bio:
-            ""
+          bio: ""
+        },
+        {
+          src: PriyankaGanguly,
+          name: "Priyanka Ganguly",
+          role: "Secretary",
+          bio: ""
         },
         {
           src: SanjnaSood,
           name: "Sanjna Sood",
-          role: "Secretary",
-          bio: 
-            ""
+          role: "Hackathon Coordinator",
+          bio: ""
         },
         {
-          src: IreneChang,
-          name: "Irene Chang",
-          role: "Director of Events",
-          bio:
-            ""
+          src: SaraDonnelly,
+          name: "Sara Donnelly",
+          role: "Co-director of Events",
+          bio: ""
         },
         {
           src: AnnaAldrin,
           name: "Anna Aldrin",
-          role: "Event Coordinator",
-          bio:
-            ""
+          role: "Co-director of Events",
+          bio: ""
         },
         {
-          src: AryaDeshpande,
-          name: "Arya Deshpande",
-          role: "Event Coordinator",
-          bio:
-            ""
+          src: DanielaCasillas,
+          name: "Daniela Casillas",
+          role: "Cybersisters Event Coordinator",
+          bio: ""
         },
         {
-          src: SamiaAhmer,
-          name: "Samia Ahmer",
-          role: "Media and Public Relations",
-          bio:
-            ""
+          src: GinaChiu,
+          name: "Gina Chiu",
+          role: "Director of Media and PR",
+          bio: ""
         },
         {
-          src: PrakritiPatnaik,
-          name: "Prakriti Patnaik",
+          src: KaavyaJethwa,
+          name: "Kaavya Jethwa",
           role: "Webmaster",
-          bio: 
-            ""
+          bio: ""
         },
         {
-          src: TrishaGanesh,
-          name: "Trisha Ganesh",
+          src: PaulinaLandry,
+          name: "Paulina Landry",
           role: "Industry Liaison",
-          bio: 
-            ""
+          bio: ""
         },
         {
-          src: SattvikaBhatt,
-          name: "Sattvika Bhatt",
-          role: "Hackathon Coordinator",
-          bio: 
-            ""
+          src: EmaanZaidi,
+          name: "Emaan Zaidi",
+          role: "Industry Liaison",
+          bio: ""
         },
         {
-          src: AnanyaPagadala,
-          name: "Ananya Pagadala",
-          role: "Conference/Career Opportunity Strategist",
-          bio: 
-            ""
+          src: TanviGandhi,
+          name: "Tanvi Gandhi",
+          role: "Conference and Career Advisor",
+          bio: ""
         },
       ],
 
       broncoSecBoard: [
         {
-          src: DevinBhatt,
-          name: "Devin Bhatt",
+          src: EthanSychangco,
+          name: "Ethan Sychangco",
           role: "President",
-          bio:
-            "Hi, I’m Devin. I’m a junior Computer Science from the Bay Area. For my second year on the BroncoCTF board, I’ve taken on the role of BroncoCTF coordinator. Most of my work at BroncoSec involves planning for BroncoCTF, writing challenges, and setting up the infrastructure for you to (hopefully not) break :wink:. I love to learn new things (especially when it comes to security and infrastructure), and I love to help others learn as well. I hope that BroncoCTF is not just a fun event, but a learning opportunity for all of its attendees!",
+          bio: "",
         },  
         {
-          src: DavisRobertson,
-          name: "Davis Robertson",
+          src: WilliamPatmore,
+          name: "William Patmore",
           role: "Vice President",
-          bio:
-            "Hello! I’m Davis and I’m excited to be BroncoSec’s external CTF coordinator this year! I am a junior computer science (security emphasis) and philosophy major from New York. I’ve been interested in computer science since I was a kid and have really enjoyed being a part of BroncoSec at SCU. When I’m not writing papers or working on CS projects there’s a good chance you can find me playing or watching basketball. Please reach out if you have any questions or for any other reason, I’m looking forward to connecting with the BroncoSec community!",
+          bio: "",
         },
         {
-          src: DannyWalsh,
-          name: "Danny Walsh",
-          role: "Industry Liaison",
-          bio:
-            ""
-          },
-        {
-          src: WalkerSelby,
-          name: "Walker Selby",
-          role: "BroncoCTF coordinator",
+          src: KaraBarrese,
+          name: "Kara Barrese",
+          role: "CTF Lead",
           bio: ""
         },
         {
-          src: KaraBaresse,
-          name: "Kara Baresse",
-          role: "External CTF coordinator",
-          bio:
-            ""
-          },
+          src: VietHa,
+          name: "Viet Ha",
+          role: "Event Lead",
+          bio: "",
+        },
         {
-          src: EthanSychangco,
-          name: "Ethan Sychangco",
-          role: "Workshop Coordinator",
-          bio:
-            "Hello, my name is Ethan Sychangco! I am one of your BroncoSec underclassman representatives for the 2022-2023 school year! I am a first-year majoring in Computer Science and Engineering, and I am local to the Bay Area. I find interest in all things technology, gaming, and cybersecurity, and I want to bring that excitement to the BroncoSec club. When I am not laser-focused on developing a project, I am probably spending time with family, enjoying game nights with friends, or watching random YouTube videos to take a break from my busy days. I want to make sure all BroncoSec members have their voices heard, and that we can support each other's passions for cybersecurity. You can reach out to me at any time!",
+          src: HuyNgo,
+          name: "Huy Ngo",
+          role: "Event Lead",
+          bio: "",
+        },
+        {
+          src: EricWei,
+          name: "Eric Wei",
+          role: "Event Lead",
+          bio: "",
+        },
+        {
+          src: TateSteven,
+          name: "Tate Steven-Schneider",
+          role: "Event Lead",
+          bio: "",
         },
         {
           src: TiffanyNguyen,
           name: "Tiffany Nguyen",
-          role: "Workshop Coordinator",
-          bio:
-            "My name is Tiffany Nguyen, and I am a freshman majoring in Computer Science and Engineering from San Jose, California. I am passionate about learning about all the fun and interesting ways computer science can be applied across various fields like cybersecurity, and I hope to be able to help plan fun activities that get others excited about security.",
-        },
-        {
-          src: VarunMangla,
-          name: "Varun Mangla",
-          role: "Workshop Coordinator",
-          bio:
-            "Hello everyone! I'm Varun, a sophomore Computer Science and Engineering student from Los Altos, CA. While I only started coding during the winter quarter of my first year at SCU, I've always been fascinated with technology. I'm eager to join BroncoSec as its Public Relations manager this year, as participating in the club helped me develop a budding interest in cybersecurity. Through this role, I intend to introduce other students to BroncoSec and the ever-growing field of cybersecurity. Outside of computer science, some of my interests are music, games, and hanging out with my friends. Please let me know if you have any questions or suggestions, and I'm looking forward to seeing everyone at our weekly club meetings!",
-        },
-        {
-          src: AdrianZhang,
-          name: "Adrian Zhang",
-          role: "Underclassmen Rep",
-          bio: ""
+          role: "Publicity Manager",
+          bio: "",
         },
         {
           src: JasonWu,
           name: "Jason Wu",
-          role: "Underclassmen Rep",
+          role: "Treasurer",
           bio: ""
         },
+        {
+          src: EvanChin,
+          name: "Evan Chin",
+          role: "Outreach Coordinator",
+          bio: ""
+        }
       ],
 
       acmGBoard: [

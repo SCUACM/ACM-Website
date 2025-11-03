@@ -53,7 +53,8 @@
   &-content {
     position: relative;
     background-color: #ffffff;
-    margin: 5% auto; /* 200px from the top and centered */
+    margin: auto;
+    margin-top: 90px;
     padding: 20px;
     border-radius: 10px;
     width: 550px;
@@ -62,7 +63,9 @@
     text-align: center;
     @include custom-media.media-xs-only {
       width: 95%;
-      margin: 50px auto;
+    }
+    @include custom-media.media-sm-and-down {
+      margin-top: 120px;
     }
   }
 

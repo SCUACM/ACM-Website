@@ -24,7 +24,7 @@
           />
         </div>
         <div class="ml-auto routes hidden-sm-and-down">
-          <span class="link ml-6 mr-6">
+          <span class="link ml-4 mr-4">
             <router-link
               to="/"
               :class="[
@@ -40,7 +40,7 @@
               about
             </router-link>
           </span>
-          <span class="link ml-6 mr-6">
+          <span class="link ml-4 mr-4">
             <router-link
               to="/board"
               :class="[
@@ -56,7 +56,7 @@
               board
             </router-link>
           </span>
-          <span class="link ml-6 mr-6" v-if="!showEvents">
+          <span class="link ml-4 mr-4" v-if="!showEvents">
             <router-link
               to="/calendar"
               :class="[
@@ -72,7 +72,7 @@
               events
             </router-link>
           </span>
-          <span class="link ml-6 mr-6" v-if="showEvents">
+          <span class="link ml-4 mr-4" v-if="showEvents">
             <router-link
               to="/events"
               :class="[
@@ -88,7 +88,7 @@
               events
             </router-link>
           </span>
-          <span class="link ml-6 mr-6">
+          <!-- <span class="link ml-6 mr-6">
             <a
               @click="routeTo('https://aws.scuacm.com/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -96,8 +96,8 @@
             >
               AWS x INRIX Hack
             </a>
-          </span>
-          <!-- <span class="link ml-6 mr-6">
+          </span> -->
+          <span class="link ml-4 mr-4">
             <a
               @click="routeTo('https://hackforhumanity.io/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -105,8 +105,8 @@
             >
               Hack for Humanity
             </a>
-          </span> -->
-          <span class="link ml-6">
+          </span>
+          <span class="link ml-4">
             <router-link
               to="/joinus"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
@@ -114,7 +114,7 @@
               newsletter
             </router-link>
           </span>
-          <span class="link ml-6">
+          <span class="link ml-4">
             <v-btn 
               v-if="user == null"
               @click="signIn()"
