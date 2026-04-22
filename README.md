@@ -1,4 +1,4 @@
-# acm-new
+# SCU ACM
 
 ## Project setup
 ```
