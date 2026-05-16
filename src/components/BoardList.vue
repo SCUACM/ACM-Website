@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import ConnerYin from "../assets/board/main/Conner_Yin.jpeg";
 
 // board 25-26
 import ChrisShobe from "../assets/board/main/chris.jpg";
@@ -63,9 +62,6 @@ import JordanRandleman from "../assets/board/ACM-G/Jordan_Randleman.jpg"
 import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
 import NolanAnderson from "../assets/board/ACM-G/Nolan_Anderson.jpg"
 import RahulYalavarthi from "../assets/board/ACM-G/Rahul_Yalavarthi.jpg"
-
-import DarylHo from "../assets/board/competitiveProgramming/Daryl_Ho.jpg"
-import MattyHerzig from "../assets/board/competitiveProgramming/Matty_Herzig.jpg"
 
 import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg";
 import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
