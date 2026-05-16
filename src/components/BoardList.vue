@@ -348,29 +348,6 @@ export default {
             "Hi! My name is Landis and I am a first-year COEN Masters student. Some of my interests include Ethics, AI/ML, and Information Security."
         },
       ],
-
-      competitveProgrammingBoard: [
-        {
-          src: ConnerYin,
-          name: "Conner Yin",
-          role: "President",
-          bio:
-            "Hello! I’m Conner, a junior computer science & engineering major from Cupertino, CA. I first found my passion for programming by exploring efficient algorithms to solve time-complexity problems. Currently, I like writing scripts to beat web games as well as developing simple websites and applications. In my free time, I love writing songs, going on runs and walks, and playing social deception games with friends. Looking forward to meeting you all!"
-        },
-        {
-          src: DarylHo,
-          name: "Daryl Ho",
-          role: "Vice President",
-          bio:
-            ""
-        },
-        {
-        src: MattyHerzig,
-        name: "Matty Herzig",
-        role: "Programming Director",
-        bio: "Hi! I'm Matty, and I am pursuing a computer science & engineering degree. I'm passionate in just about anything, especially computers and making things. If you need help or advice, just ask!"
-        },
-      ],
       
       chapterAdvisors: [
         {
