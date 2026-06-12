@@ -28,8 +28,7 @@ import PuneetGella from '../assets/board/main/puneet.jpg';
 import AshwiniAnantharaman from '../assets/board/main/ashwini.jpg';
 import NeelashaSudarshan from '../assets/board/main/neelasha.jpg';
 import LaurenKimura from '../assets/board/main/lauren.jpg';
-
-// cpc - need to add 
+ 
 import IvyZhuang from '../assets/board/competitiveProgramming/IvyZhuang.jpg';
 import AlanFung from '../assets/board/competitiveProgramming/AlanFung.jpg';
 
@@ -63,8 +62,7 @@ import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
 import NolanAnderson from "../assets/board/ACM-G/Nolan_Anderson.jpg"
 import RahulYalavarthi from "../assets/board/ACM-G/Rahul_Yalavarthi.jpg"
 
-import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg";
-import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
+import KrishnaRamamoorthy from "../assets/board/chapterAdvisors/Krishna_Ramamoorthy.jpeg"
 
 import "../assets/scss/board-media.scss";
 
@@ -351,18 +349,11 @@ export default {
       
       chapterAdvisors: [
         {
-          src: YiFang,
-          name: "Yi Fang",
+          src: KrishnaRamamoorthy,
+          name: "Krishna Ramamoorthy",
           role: "ACM Advisor",
           bio:
-            "Prof. Yi Fang is an assistant professor in the Department of Computer Engineering who specializes in Machine Learning and Artificial Intelligence. You can read more about his research here. He received his Ph.D. in computer science at Purdue University. He was awarded both Teacher of the Year and Researcher of the Year in 2017.",
-        },
-        {
-          src: SharonHsaio,
-          name: "Sharon Hsaio",
-          role: "ACM-W Advisor",
-          bio:
-            "Dr. Hsiao is Assistant Professor & David Packard endowed junior fellow in the Department of Computer Science & Engineering at Santa Clara University. Prior to SCU, she was an assistant professor at Arizona State University and Columbia University, where she established several research projects and taught a number of graduate & undergraduate level courses. Her research focuses on educational technologies, computational modeling, visual analytics, and adaptive technology for personalized learning. Her research methodology involves AI and HCI approaches, applied data science, and machine learning techniques in researching effective technology to help people learn. Dr. Hsiao is actively involved in several international research communities, including Educational Data Mining (EDM), Learning Analytics & Knowledge (LAK), and Artificial Intelligence in Education (AIED). She serves as one of the board directors in the International Educational Data Mining Society (IMEDS), the Program Chair of the 14th International Conference on Educational Data Mining, the Organizing Chair of the 9th of International Conference on Learning Analytics & Knowledge, and several other leadership and editing positions.",
+            "Dr. Krishna Ramamoorthy is an Assistant Professor in the Department of Computer Science and Engineering at Santa Clara University. Prior to joining Santa Clara University, he earned his Ph.D. in Computational Science from University of California, Irvine and conducted research in wireless communications, networking, and machine learning. His research focuses on next-generation wireless networks, including Wi-Fi, 5G/6G systems, next-generation multiple access such as Non Orthogonal Multiple Access (NOMA) and Rate Splitting Multiple Access (RSMA), reinforcement learning for networking, and emerging reconfigurable antenna technologies such as Fluid Antenna Systems (FAS) and Pinching Antenna Systems (PASS). At Santa Clara University, he teaches undergraduate and graduate courses in computer networks, wireless and mobile networks, data structures and programming, and related areas while mentoring student researchers through the Wireless Intelligent Networks (WIN) Lab. His long-term vision is to develop intelligent, sustainable, and user-centric communication systems that support the growing demands of next-generation connected applications.",
         },
       ],
     };
