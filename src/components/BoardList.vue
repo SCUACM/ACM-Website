@@ -18,10 +18,9 @@
 
 // board 25-26
 import ChrisShobe from "../assets/board/main/chris.jpg";
-import RayyanHussain from '../assets/board/main/rayyan.jpg'; // old
+import EspyAguilar from '../assets/board/main/espy.jpg'
 import CarysChiu from '../assets/board/main/carys.jpg';
 import MariamShihab from '../assets/board/main/mariam.jpg'
-import EspyAguilar from '../assets/board/main/espy.jpg'
 import AbhinavAla from '../assets/board/main/abhinav.jpg';
 import SunjanaBanwait from '../assets/board/main/sunjana.jpg';
 import PuneetGella from '../assets/board/main/puneet.jpg';
@@ -88,11 +87,11 @@ export default {
             "Hey there, I’m Chris! I’m a Senior Computer Science and Engineering student at Santa Clara University, minoring in Marketing. I’ve been passionate about coding since I was 8, and over the summer worked at Capital One in cybersecurity. I’m driven by building technology that solves real-world problems, with a focus on security, entrepreneurship, and user-centered design. Outside of tech, I love getting creative whether that’s making art or playing the clarinet. I’m always curious and enjoy learning about anything and everything, so if there’s something you’re excited about, I’d love to hear about it!"
         }, 
         {
-          src: RayyanHussain,
-          name: "Rayyan Hussain",
+          src: EspyAguilar,
+          name: "Espy Aguilar",
           role: "Vice President",
           bio:
-            "Hey everyone! My name is Rayyan and I am a Junior Computer Science and Engineering student from Pleasanton, CA. My passion for computer science started when I began playing around with Scratch and FLL Robotics as a little kid. Being surrounded by innovation in the world’s hub of technology, I always wanted to be on the forefront of cutting edge work, and am always eager to learn something new! Last year I published a paper on clustered drone control for the IEEE Aerospace Conference, and this summer I interned at CrowdStrike as a software engineering intern. Apart from that, you’ll catch me playing basketball, building PCs, and eating/cooking new food. I love meeting new people, so please don’t hesitate to reach out!" 
+            "Hey! I’m Espy, a Sophmore majoring in Computer Science and Engineering from San Jose, CA. I used to do a lot of coding for fun as a kid, so I practically grew up on websites like code.org and Khan Academy. I'm super passionate about CS and education, so you'll probably see me up front teaching on Tuesdays or working through the crowd to help people figure out where they're stuck. I’m particularly interested in Video Game Programming and Machine Learning, but I’m always open to learn something new."
         }, 
         {
           src: CarysChiu,
@@ -109,11 +108,11 @@ export default {
             "Hi, I’m Mariam! I’m a Sophomore Computer Science and Engineering major and Responsible AI minor from the Bay. I’ve always wanted to help people, and I believe computing is the best way to reach a global audience since all you need is a computer! I’m fascinated by the intersection of medicine and AI and am currently working on some projects in that area. I’m also looking to get more into robotics and ML. Outside of CS, I love being outdoors/gardening, shopping, traveling, and binge-watching 2000s movies. I’m also a complete matcha and iced coffee enthusiast, and I’m always down to talk tech over a good cup of caffeine!!"
         },
         {
-          src: EspyAguilar,
-          name: "Esperanza Aguilar",
+          src: LaurenKimura,
+          name: "Lauren Kimura",
           role: "Workshop Coordinator",
           bio:
-            "Hey! I’m Espy, a Sophmore majoring in Computer Science and Engineering from San Jose, CA. I used to do a lot of coding for fun as a kid, so I practically grew up on websites like code.org and Khan Academy. I'm super passionate about CS and education, so you'll probably see me up front teaching on Tuesdays or working through the crowd to help people figure out where they're stuck. I’m particularly interested in Video Game Programming and Machine Learning, but I’m always open to learn something new."
+            "Hi I’m Lauren, a sophomore majoring in Computer Science and Engineering. I wanted to join ACM because I loved the active involvement this club had at SCU including their Hack For Humanity, which is how I originally heard of the club. My current role in ACM is Workshop Coordinator, so I plan and organize our weekly technical workshops every Tuesday, covering topics like APIs, Databases + SQL, System Design, Test Driven Development, Machine Learning, React.js/React Native, Firebase, mobile app dev, and Game dev with Unity. So happy to be a part of this team and hope I can make change within not only the ACM community, but SCU in general."
         }, 
         {
           src: AbhinavAla,
@@ -148,14 +147,7 @@ export default {
           name: "Neelasha Sudarshan",
           role: "Webmaster",
           bio:
-            "Hello, I'm Neelasha! I'm a Sophomore studying Computer Science and Engineering. I'm really interested in AI safety and security research, which is what my current research is focused on. Apart from that, I'm also interested in web development and cybersecurity. In my free time, I love learning new languages, playing the guitar, and hanging out with friends! Feel free to stop me anytime and say hi!"
-        },
-        {
-          src: LaurenKimura,
-          name: "Lauren Kimura",
-          role: "Marketing Coordinator",
-          bio:
-            "Hi I'm Lauren, a Sophmore majoring in Computer Science and Engineering. I wanted to join ACM because I loved the active involvmenet this club had at SCU including their Hack For Humanity, which is how I originally heard of the club. My current role in ACM is Marketing Coordinator, so basically everything you see about ACM, from instagram to posters, videos and photos, if it has ACM branding on it, that was me. So happy to be apart of this team and hope I can make change within not only the ACM community, but SCU in general."
+            "Hello, I'm Neelasha! I'm a Sophomore studying Computer Science and Engineering. I'm really interested in AI safety and security research, which is what my current passion project is focused on. Apart from that, I'm also interested in web development and cybersecurity. In my free time, I love learning new languages, playing the guitar, and hanging out with friends! Feel free to stop me anytime and say hi!"
         }
       ],
       
