@@ -18,16 +18,17 @@
 
 // board 25-26
 import ChrisShobe from "../assets/board/main/chris.jpg";
-import EspyAguilar from '../assets/board/main/espy.jpg'
 import CarysChiu from '../assets/board/main/carys.jpg';
 import MariamShihab from '../assets/board/main/mariam.jpg'
+import EspyAguilar from '../assets/board/main/espy.jpg'
 import AbhinavAla from '../assets/board/main/abhinav.jpg';
 import SunjanaBanwait from '../assets/board/main/sunjana.jpg';
 import PuneetGella from '../assets/board/main/puneet.jpg';
 import AshwiniAnantharaman from '../assets/board/main/ashwini.jpg';
 import NeelashaSudarshan from '../assets/board/main/neelasha.jpg';
 import LaurenKimura from '../assets/board/main/lauren.jpg';
- 
+
+// cpc - need to add 
 import IvyZhuang from '../assets/board/competitiveProgramming/IvyZhuang.jpg';
 import AlanFung from '../assets/board/competitiveProgramming/AlanFung.jpg';
 
@@ -61,8 +62,8 @@ import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
 import NolanAnderson from "../assets/board/ACM-G/Nolan_Anderson.jpg"
 import RahulYalavarthi from "../assets/board/ACM-G/Rahul_Yalavarthi.jpg"
 
-import KrishnaRamamoorthy from "../assets/board/chapterAdvisors/Krishna_Ramamoorthy.jpeg"
-import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg"
+import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg";
+import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
 
 import "../assets/scss/board-media.scss";
 
@@ -91,7 +92,7 @@ export default {
           name: "Espy Aguilar",
           role: "Vice President",
           bio:
-            "Hey! I’m Espy, a Sophmore majoring in Computer Science and Engineering from San Jose, CA. I used to do a lot of coding for fun as a kid, so I practically grew up on websites like code.org and Khan Academy. I'm super passionate about CS and education, so you'll probably see me up front teaching on Tuesdays or working through the crowd to help people figure out where they're stuck. I’m particularly interested in Video Game Programming and Machine Learning, but I’m always open to learn something new."
+            "Hey! I’m Espy, a Sophomore majoring in Computer Science and Engineering from San Jose, CA. I used to do a lot of coding for fun as a kid, so I practically grew up on websites like code.org and Khan Academy. I'm super passionate about taking interdisciplinary approaches to my work, and other than CS I enjoy exploring education, engineering, storytelling, and human-centered design. In particular, I took a summer internship at the American Foundation for the Blind, and I really love seeing new perspectives on how people interact with technology and how to make the web a better place for everyone. If you see me out and about, don’t be afraid to say hi!" 
         }, 
         {
           src: CarysChiu,
@@ -147,8 +148,8 @@ export default {
           name: "Neelasha Sudarshan",
           role: "Webmaster",
           bio:
-            "Hello, I'm Neelasha! I'm a Sophomore studying Computer Science and Engineering. I'm really interested in AI safety and security research, which is what my current passion project is focused on. Apart from that, I'm also interested in web development and cybersecurity. In my free time, I love learning new languages, playing the guitar, and hanging out with friends! Feel free to stop me anytime and say hi!"
-        }
+            "Hello, I'm Neelasha! I'm a Sophomore studying Computer Science and Engineering. I'm really interested in AI safety and security research, which is what my current research is focused on. Apart from that, I'm also interested in web development and cybersecurity. In my free time, I love learning new languages, playing the guitar, and hanging out with friends! Feel free to stop me anytime and say hi!"
+        },
       ],
       
       acmWBoard: [
@@ -342,18 +343,19 @@ export default {
       
       chapterAdvisors: [
         {
-          src: KrishnaRamamoorthy,
-          name: "Krishna Ramamoorthy",
+          src: YiFang,
+          name: "Yi Fang",
           role: "ACM Advisor",
           bio:
-            "Dr. Krishna Ramamoorthy is an Assistant Professor in the Department of Computer Science and Engineering at Santa Clara University. Prior to joining Santa Clara University, he earned his Ph.D. in Computational Science from University of California, Irvine and conducted research in wireless communications, networking, and machine learning. His research focuses on next-generation wireless networks, including Wi-Fi, 5G/6G systems, next-generation multiple access such as Non Orthogonal Multiple Access (NOMA) and Rate Splitting Multiple Access (RSMA), reinforcement learning for networking, and emerging reconfigurable antenna technologies such as Fluid Antenna Systems (FAS) and Pinching Antenna Systems (PASS). At Santa Clara University, he teaches undergraduate and graduate courses in computer networks, wireless and mobile networks, data structures and programming, and related areas while mentoring student researchers through the Wireless Intelligent Networks (WIN) Lab. His long-term vision is to develop intelligent, sustainable, and user-centric communication systems that support the growing demands of next-generation connected applications.",
+            "Prof. Yi Fang is an assistant professor in the Department of Computer Engineering who specializes in Machine Learning and Artificial Intelligence. You can read more about his research here. He received his Ph.D. in computer science at Purdue University. He was awarded both Teacher of the Year and Researcher of the Year in 2017.",
         },
         {
-          src: SharonHsaio, 
-          name: "Sharon Hsaio", 
-          role: "ACM-W Advisor", 
-          bio: "Dr. Hsiao is Assistant Professor & David Packard endowed junior fellow in the Department of Computer Science & Engineering at Santa Clara University. Prior to SCU, she was an assistant professor at Arizona State University and Columbia University, where she established several research projects and taught a number of graduate & undergraduate level courses. Her research focuses on educational technologies, computational modeling, visual analytics, and adaptive technology for personalized learning. Her research methodology involves AI and HCI approaches, applied data science, and machine learning techniques in researching effective technology to help people learn. Dr. Hsiao is actively involved in several international research communities, including Educational Data Mining (EDM), Learning Analytics & Knowledge (LAK), and Artificial Intelligence in Education (AIED). She serves as one of the board directors in the International Educational Data Mining Society (IMEDS), the Program Chair of the 14th International Conference on Educational Data Mining, the Organizing Chair of the 9th of International Conference on Learning Analytics & Knowledge, and several other leadership and editing positions."
-        }, 
+          src: SharonHsaio,
+          name: "Sharon Hsaio",
+          role: "ACM-W Advisor",
+          bio:
+            "Dr. Hsiao is Assistant Professor & David Packard endowed junior fellow in the Department of Computer Science & Engineering at Santa Clara University. Prior to SCU, she was an assistant professor at Arizona State University and Columbia University, where she established several research projects and taught a number of graduate & undergraduate level courses. Her research focuses on educational technologies, computational modeling, visual analytics, and adaptive technology for personalized learning. Her research methodology involves AI and HCI approaches, applied data science, and machine learning techniques in researching effective technology to help people learn. Dr. Hsiao is actively involved in several international research communities, including Educational Data Mining (EDM), Learning Analytics & Knowledge (LAK), and Artificial Intelligence in Education (AIED). She serves as one of the board directors in the International Educational Data Mining Society (IMEDS), the Program Chair of the 14th International Conference on Educational Data Mining, the Organizing Chair of the 9th of International Conference on Learning Analytics & Knowledge, and several other leadership and editing positions.",
+        },
       ],
     };
   },
