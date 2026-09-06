@@ -180,11 +180,11 @@ export default {
 
 /* This is the border of the v-input-fields when selected */
 .v-application .primary--text {
-  color: #1c548d !important;
-  caret-color: #1c548d !important;
+  color: #09357a !important;
+  caret-color: #09357a !important;
 }
 .submit-btn:hover {
-  background-color: #1c548d;
+  background-color: #09357a;
   color: white;
   transition: color 0.1s, background-color 0.4s;
 }

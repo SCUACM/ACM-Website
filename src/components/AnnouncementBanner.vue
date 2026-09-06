@@ -33,7 +33,7 @@ a:visited,
 a:active {
   font-family: "Poppins", sans-serif;
   font-weight: 600 !important;
-  color: lightblue !important;
+  color: #91b8f5 !important;
   text-transform: none;
   transition: 0.4s;
 }
