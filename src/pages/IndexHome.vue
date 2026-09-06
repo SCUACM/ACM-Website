@@ -427,7 +427,7 @@ export default {
   letter-spacing: normal !important;
   text-transform: none !important;
   color: white !important;
-  background-color: #1c548d;
+  background-color: #09357a;
   transition: color 0.1s, background-color 0.4s;
 }
 
