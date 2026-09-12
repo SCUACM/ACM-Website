@@ -3,10 +3,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Francois+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
 
 .events {
   &-title {
-    font-family: "Poppins", sans-serif;
+    font-family: "Francois One", sans-serif;
     font-size: 3rem;
     font-weight: 800;
     text-align: center;
@@ -19,7 +21,7 @@
   }
 
   &-calendar-title {
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue One", sans-serif;
     font-size: 2rem;
     font-weight: 400;
     margin: auto;
@@ -42,7 +44,7 @@
   }
 
   &-date {
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue One", sans-serif;
     font-size: 2rem;
     font-weight: 600;
     @include custom-media.media-xs-only {
