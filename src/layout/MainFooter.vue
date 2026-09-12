@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="pa-8 mt-16" style="background-color: #09357a;">
+    <footer class="pa-8 mt-16" style="background-color: #1c548d;">
       <v-row
           style="display: flex; justify-content: center; text-align: center;"
       >
@@ -132,7 +132,7 @@ export default {
   text-transform: none !important;
   color: white !important;
   transition: color 0.1s, background-color 0.4s;
-  background-color: #09357a;
+  background-color: #1c548d;
 }
 
 .join-btn:hover {

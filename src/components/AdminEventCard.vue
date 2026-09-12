@@ -133,7 +133,7 @@ button {
   border-radius: 40px;
   padding: 10px 30px;
   margin-bottom: 15px;
-  border: 2px solid #09357a;
+  border: 2px solid #1c548d;
   margin: 0px 10px 20px 10px;
   color: black;
 }
@@ -143,7 +143,7 @@ button.remove {
 }
 
 button.create {
-  background-color: #09357a;
+  background-color: #1c548d;
   color: white;
 }
 

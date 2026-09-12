@@ -38,11 +38,11 @@ export default {
   height: 60px;
   width: 200px;
   border-radius: 40px;
-  border: solid #91b8f5;
+  border: solid #1c548d;
 }
 
 .close-btn:hover {
-  background-color: #09357a;
+  background-color: #1c548d;
   color: white;
   transition: color 0.1s, background-color 0.2s;
 }

@@ -145,7 +145,7 @@ import {storage, auth} from '../firebase';
     border-radius: 1em;
   }
   #dropArea.highlight {
-    border-color: #09357a ;
+    border-color: #104ca4 ;
   }
   button[disabled] {
     visibility: hidden;
@@ -154,7 +154,7 @@ import {storage, auth} from '../firebase';
     border-radius: 40px;
     padding: 10px 30px;
     margin-bottom: 15px;
-    border: 2px solid #09357a;
+    border: 2px solid #1c548d;
     margin-right: 20px;
   }
   button.remove {
@@ -167,7 +167,7 @@ import {storage, auth} from '../firebase';
   input[type=button], label {
     padding: 10px 30px;
     border-radius: 40px;
-    background-color: #09357a;
+    background-color: #1c548d;
     color: white;
     margin-bottom: 15px;
   }
