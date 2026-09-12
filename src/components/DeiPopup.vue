@@ -35,7 +35,7 @@ export default {
   height: 60px;
   width: 200px;
   border-radius: 40px;
-  border: solid #91b8f5;
+  border: solid #09357a;
 }
 
 .close-btn:hover {
