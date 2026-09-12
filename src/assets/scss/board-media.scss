@@ -3,13 +3,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Francois+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
 
 .board-title {
   display: inline-block;
   width: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: "Francois One", sans-serif;
   font-weight: 800 !important;
-  font-size: 1.5rem;
+  font-size: 30px;
   margin-top: 50px;
   margin-bottom: 50px;
 }
@@ -29,7 +31,7 @@
 .board-name {
   display: inline-block;
   width: 100%;
-  font-family: "Poppins", sans-serif;
+  font-family: "Epilogue", sans-serif;
   font-weight: 600 !important;
   font-size: 1.27rem;
 }
@@ -97,6 +99,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 250px;
+    border: 2px solid rgba(9, 53, 122, 1); 
     @include custom-media.media-xs-only {
       width: 200px;
     }
@@ -111,7 +114,7 @@
 
   &-name {
     margin-top: 10px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue", sans-serif;
     font-weight: 600 !important;
     font-size: 1.5rem;
     margin-bottom: 10px;
