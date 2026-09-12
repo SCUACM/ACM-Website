@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Francois+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+
 <template>
   <div class="dei-popup">
-    <h2>Update Your Profile!</h2>
+    <h2 style="font-family: Francois One, sans-serif;">Update Your Profile!</h2>
     <p class="subtext">In our ongoing efforts to be an inclusive and diverse organization, we would really appreciate
       if you could update your race and gender information on your profile page!
     </p>
-    <button class="close-btn" @click="closePopup">Go to Profile Page</button>
+    <button class="close-btn" @click="closePopup" style="font-family: Epilogue, sans-serif;">Go to Profile Page</button>
     <p>{{ data }}</p>
   </div>
 </template>
