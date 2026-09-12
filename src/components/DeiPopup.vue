@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Francois+One&display=swap'); 
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
 
 <template>
   <div class="dei-popup">
-    <h2 style="font-family: Francois One, sans-serif;">Update Your Profile!</h2>
+    <h2 style="font-family: Epilogue, sans-serif;">Update Your Profile!</h2>
     <p class="subtext">In our ongoing efforts to be an inclusive and diverse organization, we would really appreciate
       if you could update your race and gender information on your profile page!
     </p>
-    <button class="close-btn" @click="closePopup" style="font-family: Epilogue, sans-serif;">Go to Profile Page</button>
+    <button class="close-btn" @click="closePopup">Go to Profile Page</button>
     <p>{{ data }}</p>
   </div>
 </template>
@@ -39,6 +39,7 @@ export default {
   width: 200px;
   border-radius: 40px;
   border: solid #1c548d;
+  font-family: Poppins, sans-serif;
 }
 
 .close-btn:hover {
@@ -49,6 +50,8 @@ export default {
 
 .subtext {
   margin-top: 15px;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+  padding-bottom: 20px; 
 }
 </style>
