@@ -122,7 +122,7 @@
               :class="[!isTransparent ? 'join-btn' : 'join-btn-transparent']"
               height="40px"
               width="130px"
-              style="border-radius:10px; border: solid #91b8f5"
+              style="border-radius:10px; border: solid #0099ff"
             >
               sign in
             </v-btn>
