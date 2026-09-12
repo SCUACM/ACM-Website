@@ -34,8 +34,8 @@
               xl="4"
           >
             <v-img
-                width="400px"
-                height="200px"
+                width="200px"
+                height="100px"
                 style="margin: auto;"
                 contain
                 :lazy-src="Logo"
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import Logo from "../assets/branding/scu-acm-white.svg";
+import Logo from "../assets/branding/acm-white.png";
 import "@/assets/scss/footer-media.scss";
 
 export default {
