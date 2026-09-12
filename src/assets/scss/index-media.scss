@@ -3,6 +3,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Francois+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
 
 .title {
   &-container {
@@ -12,7 +14,7 @@
   }
 
   &-header {
-    font-family: "Poppins", sans-serif;
+    font-family: "Francois One", sans-serif;
     font-size: 3rem;
     font-weight: 600;
     max-width: 1000px;
@@ -30,7 +32,7 @@
   }
 
   &-sub-header {
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue", sans-serif;
     font-size: 1.5rem;
     font-weight: 400;
     max-width: 600px;
@@ -58,7 +60,7 @@
   }
 
   &-title {
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue", sans-serif;
     font-size: 2.2rem;
     font-weight: 600;
   }
@@ -82,7 +84,7 @@
     max-width: 400px;
     margin: auto;
     margin-bottom: 30px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Francois One", sans-serif;
     font-size: 3rem;
     font-weight: 800;
     text-align: center;
@@ -136,7 +138,7 @@
 
   &-card-header {
     margin: auto;
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue", sans-serif;
     font-weight: 600;
     @include custom-media.media-sm-and-up {
       font-size: 1.8rem;
@@ -152,7 +154,7 @@
   width: 300px;
   margin: auto;
   margin-bottom: 75px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Francois One", sans-serif;
   font-size: 3rem;
   font-weight: 800;
   text-align: center;
@@ -164,7 +166,7 @@
     width: 200px;
     margin: auto;
     margin-bottom: 30px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Francois One", sans-serif;
     font-size: 3rem;
     font-weight: 800;
     text-align: center;
@@ -175,7 +177,7 @@
     max-width: 800px;
     margin: auto;
     margin-bottom: 75px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue", sans-serif;
     font-size: 1.8rem;
     font-weight: 400;
     text-align: center;
@@ -197,7 +199,7 @@
   }
 
   &-header {
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue", sans-serif;
     font-size: 1.7rem;
     font-weight: 600;
     margin: 20px 0;
@@ -220,7 +222,7 @@
   background-color: #09357a;
 
   &-header {
-    font-family: "Poppins", sans-serif;
+    font-family: "Francois One", sans-serif;
     color: white;
     font-weight: 600;
     font-size: 3rem;
@@ -236,7 +238,7 @@
     width: 300px;
     margin: auto;
     margin-bottom: 30px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Francois One", sans-serif;
     font-size: 3rem;
     font-weight: 800;
     text-align: center;
@@ -267,7 +269,7 @@
   &-header {
     margin-top: 25px;
     margin-bottom: 30px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Epilogue", sans-serif;
     font-weight: 600;
     font-size: 1.6rem;
   }
