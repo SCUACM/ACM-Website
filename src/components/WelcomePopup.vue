@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Francois+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+
 <template>
   <div class="welcome-popup">
-    <h2>Thanks for joining SCU ACM!</h2>
+    <h2 style="font-family: Francois One, sans-serif;">Thanks for joining SCU ACM!</h2>
     <span class="subtext">If you haven't already done so, please consider subscribing to our newsletter and filling out our welcome survey:</span>
     <v-form
       action="https://scu.us12.list-manage.com/subscribe/post?u=6c12b19c2669eb3e7b5abb862&amp;id=4bb2a9a097"
