@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+
 <template>
   <div :class="{'event-card-list': view==pageViews.List, 'event-card-grid': view==pageViews.Grid, 'big': view==pageViews.Grid && big}">
     <div>
@@ -44,19 +47,19 @@
     </div>
     <!-- List Version: Event Info -->
     <div v-if="view==pageViews.List">
-      <h1>{{ event.title }}</h1>
+      <h1 style="font-family: Epilogue, sans-serif;">{{ event.title }}</h1>
       <p v-if="event.tags">
         <span v-for="tag of event.tags" :key="tag" class="tag">
           <span class="tag-circle" :style="{backgroundColor: eventColors[tag]}"></span>
           {{ eventTags[tag] }}
         </span>
       </p>
-      <h3 v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
-      <h3 v-if="event.location">Location: 
+      <h3 style="font-family: Epilogue, sans-serif;" v-if="event.startDate != undefined">{{ formatDateTime(event) }}</h3>
+      <h3 style="font-family: Epilogue, sans-serif;" v-if="event.location">Location: 
       <a v-if="mapLink" :href="mapLink" target="_blank"> {{ event.location }}</a>
       <span v-else> {{ event.location }}</span>
       </h3>
-      <div v-html="getMarkdownDescription"></div>
+      <div v-html="getMarkdownDescription" style="font-family: Poppins, sans-serif;"></div>
       <p v-for="link of event.links || {}" :key="link.title" class="link">
         <a :href="link.url" target="_blank">
           <v-icon color="#1976d2" class="link-icon">

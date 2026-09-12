@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Francois+One&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+
 <template>
   <v-app style="overflow: hidden">
     <MainNavbar :just-logo="true" />
     <v-row style="">
       <v-col class="left-panel" cols="12" sm="12" md="6" lg="6" xl="6">
-        <div class="header">
+        <div class="header" style="font-family: Francois One, sans-serif;">
           Want to join SCU ACM?
         </div>
-        <div class="sub-header">
+        <div class="sub-header" style="font-family: Epilogue, sans-serif;">
           Sign up below to follow us for updates and stay on top of upcoming
           events!
         </div>
@@ -111,7 +114,7 @@
       <v-col class="hidden-sm-and-down right-panel-colored" cols="6">
         <div class="img-container">
           <v-img class="img" :src='remoteWorkImage'/>
-          <div class="welcome-text">
+          <div class="welcome-text" style="font-family: Francois One, sans-serif;">
             Welcome to SCU ACM!
           </div>
         </div>

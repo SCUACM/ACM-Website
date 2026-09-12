@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+
 <template>
   <div class="dei-popup">
-    <h2>Update Your Profile!</h2>
+    <h2 style="font-family: Epilogue, sans-serif;">Update Your Profile!</h2>
     <p class="subtext">In our ongoing efforts to be an inclusive and diverse organization, we would really appreciate
       if you could update your race and gender information on your profile page!
     </p>
@@ -36,6 +39,7 @@ export default {
   width: 200px;
   border-radius: 40px;
   border: solid #1c548d;
+  font-family: Poppins, sans-serif;
 }
 
 .close-btn:hover {
@@ -46,6 +50,8 @@ export default {
 
 .subtext {
   margin-top: 15px;
-  font-size: 20px;
+  font-size: 18px;
+  font-family: Poppins, sans-serif;
+  padding-bottom: 20px; 
 }
 </style>
