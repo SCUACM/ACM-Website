@@ -227,7 +227,7 @@ export default defineComponent({
   min-height: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  font-family: "Poppins", sans-serif;
+  font-family: "Epilogue", sans-serif;
 }
 .calendar-container {
   justify-content: center;
