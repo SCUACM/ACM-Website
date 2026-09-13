@@ -64,9 +64,9 @@
       </div>
     </v-container>
 
-    <v-container style="max-width: 1000px; margin-top: 150px" ref="club-info">
+    <v-container style="max-width: 1000px; margin-top: 150px">
       <!-- had to use style bind with js breakpoint because class didn't work for some reason... -->
-      <div class="about-title">About ACM</div>
+      <div ref="club-info" class="about-title">About ACM</div>
       <v-row
         v-for="(item, i) in boxContent"
         :key="i"
@@ -117,8 +117,8 @@
       </v-row>
     </v-container>
 
-    <v-container ref="events" style="max-width: 1200px; margin-bottom: 150px">
-      <div class="event-title">Events</div>
+    <v-container style="max-width: 1200px; margin-bottom: 150px">
+      <div ref="events" class="event-title">Events</div>
       <div class="event-sub-title">
         We host a plethora of fun events for anyone of any background or major
         interested in computer science!
@@ -147,11 +147,10 @@
     </v-container>
 
     <v-container
-      ref="resources"
       style="margin-bottom: 100px"
       :style="{ maxWidth: resourceContainerWidth + 'px' }"
     >
-      <div class="resource-title">Resources</div>
+      <div ref="resources" class="resource-title">Resources</div>
       <div class="event-sub-title">
         Utilize our resources to learn more about computer science and
         technology!
