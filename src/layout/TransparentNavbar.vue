@@ -2,7 +2,7 @@
   <v-app-bar app color="transparent" flat width="100vw" height="75px" absolute>
     <div class="app-bar mx-auto">
       <div class="mr-auto my-auto logo" @click="$router.push('/')">
-        <v-img width="120px" height="60px" contain :src="logoBlackSmall" />
+        <v-img width="120px" height="60px" contain :src="logoBlueSmall" />
       </div>
     </div>
   </v-app-bar>
@@ -10,7 +10,7 @@
 
 <script>
 import "@/assets/scss/navbar-media.scss";
-import logoBlackSmall from "../assets/branding/logo_temp_new.svg";
+import logoBlueSmall from "../assets/branding/acm-blue.png";
 
 export default {
   name: "TransparentNavbar",
@@ -18,7 +18,7 @@ export default {
 
   data() {
     return {
-      logoBlackSmall,
+      logoBlueSmall,
     };
   },
 
