@@ -277,7 +277,7 @@ export default {
         src: image3,
         title: "How do I get involved?",
         content:
-          "Meetings are every Tuesday at 5:45 in various rooms around campus. Join our mailing list or slack channel to get updated information!",
+          "Meetings are every Tuesday and Thursday at 5:45 in various rooms around campus. Join our mailing list or slack channel to get updated information!",
         content2:
           "We are open to, and accepting of all majors and backgrounds. Don't be afraid to stop by even if you don't have any computer science experience.",
       },
