@@ -83,7 +83,7 @@ export default defineComponent({
       calendarType: "month",
       mode: "stack",
       value: "",
-      calendarTypes: ["month", "week", "day"],
+      calendarTypes: ["month"],
       events: [],
       colors: [
         "blue",
@@ -102,7 +102,7 @@ export default defineComponent({
         headerToolbar: {
           start: 'prev,next today',
           center: 'title',
-          end: 'dayGridMonth,timeGridWeek,timeGridDay'
+          end: ''
         },
         eventClick: this.handleEventClick,
         contentHeight: 'auto'
@@ -234,4 +234,11 @@ export default defineComponent({
   justify-items: center;
   margin-inline: 1.5em;
 }
+
+:deep(.fc .fc-toolbar-chunk) {
+  display: flex; 
+  flex: 1 1 auto; 
+  align-items: center; 
+}
+
 </style>
