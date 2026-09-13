@@ -291,7 +291,7 @@ export default {
       },
       {
         src: BroncoSec,
-        link: "https://broncosec.com/",
+        link: "https://discord.gg/6rUHRNPKqg",
         title: "BroncoSec",
       },
       {
