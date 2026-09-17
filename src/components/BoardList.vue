@@ -19,7 +19,6 @@
 // board 25-26
 import ChrisShobe from "../assets/board/main/chris.jpg";
 import CarysChiu from '../assets/board/main/carys.jpg';
-import MariamShihab from '../assets/board/main/mariam.jpg'
 import EspyAguilar from '../assets/board/main/espy.jpg'
 import AbhinavAla from '../assets/board/main/abhinav.jpg';
 import SunjanaBanwait from '../assets/board/main/sunjana.jpg';
@@ -43,19 +42,18 @@ import TateSteven from '../assets/board/broncosec/Tate_Steven-Schneider.jpg';
 import VietHa from '../assets/board/broncosec/Viet_Ha.png';
 import WilliamPatmore from '../assets/board/broncosec/William_Patmore.jpg';
 
-import CatherineHung from "../assets/board/ACM-W/Catherine_Hung.jpeg";
-import AnnaAldrin from "../assets/board/ACM-W/Anna_Aldrin.jpeg";
-import AryaDeshpande from "../assets/board/ACM-W/Arya_Deshpande.jpg";
-import MaddieFollosco from "../assets/board/ACM-W/Maddie_Follosco.jpeg";
-import SanjnaSood from "../assets/board/ACM-W/Sanjna_Sood.jpeg";
-import DanielaCasillas from '../assets/board/ACM-W/Daniela_Casillas.jpg';
-import EmaanZaidi from '../assets/board/ACM-W/Emaan_Zaidi.JPG';
-import GinaChiu from '../assets/board/ACM-W/Gina_Chiu.jpg';
-import KaavyaJethwa from '../assets/board/ACM-W/Kaavya_Jethwa.jpg';
-import PaulinaLandry from '../assets/board/ACM-W/Paulina_Landry.jpg';
-import PriyankaGanguly from '../assets/board/ACM-W/Priyanka_Ganguly.JPG';
-import SaraDonnelly from '../assets/board/ACM-W/Sara_Donnelly.jpg';
-import TanviGandhi from '../assets/board/ACM-W/Tanvi_Gandhi.jpg'
+import AryaDeshpande from "../assets/board/ACM-W/arya.jpg";
+import DanielaCasillas from '../assets/board/ACM-W/daniela.jpg';
+import KaavyaJethwa from '../assets/board/ACM-W/kaavya.jpg';
+import PaulinaLandry from '../assets/board/ACM-W/paulina.jpg';
+import SaraDonnelly from '../assets/board/ACM-W/sara.jpg';
+import TanviGandhi from '../assets/board/ACM-W/tanvi.jpg'
+import PriyanjalPoswal from '../assets/board/ACM-W/priyanjal.png'
+import ShrimayiSinkarbabuBharathy from '../assets/board/ACM-W/shrim.jpeg'
+import LeslieMejia from '../assets/board/ACM-W/leslie.jpeg'
+import FaithOgunfunmi from '../assets/board/ACM-W/faith.jpeg'
+import AnvitaBuddhavaram from '../assets/board/ACM-W/anvita.jpg'
+import PriyankaBurra from '../assets/board/ACM-W/priyanka.jpg'
 
 import JordanRandleman from "../assets/board/ACM-G/Jordan_Randleman.jpg"
 import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
@@ -100,13 +98,6 @@ export default {
           role: "Treasurer",
           bio:
             "Hey, I'm Carys! I'm a Junior majoring in Computer Science and Engineering from the Bay Area, so I've been surrounded by tech all my life growing up. Computer science has so much potential and creativity involved, so I've been happy to have been wielding it ever since I took my first serious computing course in high school. I enjoy drawing, playing guitar, learning languages, and having too much free time. If you catch me around campus, feel free to say hi!"
-        },
-        {
-          src: MariamShihab,
-          name: "Mariam Shihab",
-          role: "Secretary",
-          bio:
-            "Hi, I’m Mariam! I’m a Sophomore Computer Science and Engineering major and Responsible AI minor from the Bay. I’ve always wanted to help people, and I believe computing is the best way to reach a global audience since all you need is a computer! I’m fascinated by the intersection of medicine and AI and am currently working on some projects in that area. I’m also looking to get more into robotics and ML. Outside of CS, I love being outdoors/gardening, shopping, traveling, and binge-watching 2000s movies. I’m also a complete matcha and iced coffee enthusiast, and I’m always down to talk tech over a good cup of caffeine!!"
         },
         {
           src: LaurenKimura,
@@ -154,60 +145,59 @@ export default {
       
       acmWBoard: [
         {
-          src: MaddieFollosco,
-          name: "Maddie Follosco",
-          role: "President",
-          bio:
-            "Hey! My name is Maddie Follosco and I am a Computer Science and Engineering major from Santa Clarita, California. In high school I thought I wanted to go into the medical field because I wanted to have a lasting impact on people's lives. However, after job shadowing engineers at a local medical devices startup, I realized I could still have that altruistic impact as an engineer by designing cool things for people. And so naturally my love for math and logic led me here and I am loving it so far. I am interested in exploring all the fields of computer science especially machine learning and game design. In my free time, I am an avid Dodgers fan, I am obsessed with pop music and R&B, and I love spending quality time with friends and family. I look forward to an amazing year with the gals at ACM-W!"
-        },
-        {
           src: AryaDeshpande,
           name: "Arya Deshpande",
-          role: "Vice President",
-          bio: ""
-        },
-        {
-          src: CatherineHung,
-          name: "Catherine Hung",
-          role: "Treasurer",
-          bio: ""
-        },
-        {
-          src: PriyankaGanguly,
-          name: "Priyanka Ganguly",
-          role: "Secretary",
-          bio: ""
-        },
-        {
-          src: SanjnaSood,
-          name: "Sanjna Sood",
-          role: "Hackathon Coordinator",
+          role: "President",
           bio: ""
         },
         {
           src: SaraDonnelly,
           name: "Sara Donnelly",
-          role: "Co-director of Events",
+          role: "Vice President",
           bio: ""
         },
         {
-          src: AnnaAldrin,
-          name: "Anna Aldrin",
-          role: "Co-director of Events",
+          src: ShrimayiSinkarbabuBharathy,
+          name: "Shrimayi Sinkar babu Bharathy",
+          role: "Secretary",
+          bio: ""
+        }, 
+        {
+          src: PriyanjalPoswal,
+          name: "Priyanjal Poswal",
+          role: "Treasurer",
+          bio: ""
+        }, 
+        {
+          src: PaulinaLandry,
+          name: "Paulina Landry",
+          role: "Webmaster",
+          bio: ""
+        },
+        {
+          src: LeslieMejia,
+          name: "Leslie Mejia",
+          role: "Director of Media and PR",
+          bio: ""            
+        },
+        {
+          src: TanviGandhi,
+          name: "Tanvi Gandhi",
+          role: "Technical Events Coordinator",
           bio: ""
         },
         {
           src: DanielaCasillas,
           name: "Daniela Casillas",
-          role: "Cybersisters Event Coordinator",
+          role: "Social Events Coordinator",
           bio: ""
         },
         {
-          src: GinaChiu,
-          name: "Gina Chiu",
-          role: "Director of Media and PR",
+          src: FaithOgunfunmi,
+          name: "Faith Ogunfunmi",
+          role: "Conference/Career Strategist",
           bio: ""
-        },
+        },        
         {
           src: KaavyaJethwa,
           name: "Kaavya Jethwa",
@@ -215,21 +205,15 @@ export default {
           bio: ""
         },
         {
-          src: PaulinaLandry,
-          name: "Paulina Landry",
-          role: "Industry Liaison",
+          src: AnvitaBuddhavaram,
+          name: "Anvita Buddhavaram",
+          role: "Industry Liason",
           bio: ""
         },
         {
-          src: EmaanZaidi,
-          name: "Emaan Zaidi",
-          role: "Industry Liaison",
-          bio: ""
-        },
-        {
-          src: TanviGandhi,
-          name: "Tanvi Gandhi",
-          role: "Conference and Career Advisor",
+          src: PriyankaBurra,
+          name: "Priyanka Burra",
+          role: "Industry Liason",
           bio: ""
         },
       ],
