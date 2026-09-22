@@ -87,7 +87,7 @@
                     value="Subscribe"
                     name="subscribe"
                     class="mt-2 submit-btn"
-                    style="height: 60px; width: 250px; border-radius: 40px; border: solid #1c548d"
+                    style="height: 60px; width: 250px; border-radius: 40px; border: solid #09357a"
                   />
                 </div>
               </v-col>
@@ -193,12 +193,12 @@ export default {
   letter-spacing: normal;
   font-weight: 500;
   text-transform: none !important;
-  color: #1c548d;
+  color: #09357a;
   transition: color 0.1s, background-color 0.4s;
 }
 
 .submit-btn:hover {
-  background-color: #1c548d;
+  background-color: #09357a;
   color: white;
   transition: color 0.1s, background-color 0.4s;
 }

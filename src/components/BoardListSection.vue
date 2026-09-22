@@ -100,8 +100,9 @@ export default {
   transition: background-color 0.3s ease;
 }
 .board-member:hover {
-  background-color: #d3d3d3;
+  background-color: #91b8f5;
   cursor: pointer;
+  color: #112A46; 
 }
 
 .fade-enter-active,

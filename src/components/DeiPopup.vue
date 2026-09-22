@@ -35,11 +35,11 @@ export default {
   height: 60px;
   width: 200px;
   border-radius: 40px;
-  border: solid #1c548d;
+  border: solid #09357a;
 }
 
 .close-btn:hover {
-  background-color: #1c548d;
+  background-color: #09357a;
   color: white;
   transition: color 0.1s, background-color 0.2s;
 }

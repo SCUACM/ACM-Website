@@ -19,8 +19,8 @@
             width="120px"
             height="60px"
             contain
-            :laz-src="!isTransparent ? logoBlackSmall : logoWhiteSmall"
-            :src="!isTransparent ? logoBlackSmall : logoWhiteSmall"
+            :laz-src="!isTransparent ? logoBlueSmall : logoWhiteSmall"
+            :src="!isTransparent ? logoBlueSmall : logoWhiteSmall"
           />
         </div>
         <div class="ml-auto routes hidden-sm-and-down">
@@ -237,8 +237,8 @@
 
 <script>
 import "@/assets/scss/navbar-media.scss";
-import logoBlackSmall from "@/assets/branding/logo_temp_new.svg";
-import logoWhiteSmall from "@/assets/branding/logo_temp_new_invert.svg";
+import logoBlueSmall from "@/assets/branding/acm-blue.png";
+import logoWhiteSmall from "@/assets/branding/acm-white.png";
 // New imports
 import { GoogleAuthProvider } from "firebase/auth";
 import {auth, db} from '../firebase';
@@ -265,7 +265,7 @@ export default {
       showWelcome: false,
       showDEI: false,
       scrollPosition: 0,
-      logoBlackSmall,
+      logoBlueSmall,
       logoWhiteSmall,
       user: auth.currentUser,
       isAdmin: false,

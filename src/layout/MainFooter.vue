@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="pa-8 mt-16" style="background-color: #1c548d;">
+    <footer class="pa-8 mt-16" style="background-color: #09357a;">
       <v-row
           style="display: flex; justify-content: center; text-align: center;"
       >
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import Logo from "../assets/branding/logo_temp_new_invert.svg";
+import Logo from "../assets/branding/acm-white.png";
 import "@/assets/scss/footer-media.scss";
 
 export default {
@@ -132,7 +132,7 @@ export default {
   text-transform: none !important;
   color: white !important;
   transition: color 0.1s, background-color 0.4s;
-  background-color: #1c548d;
+  background-color: #09357a;
 }
 
 .join-btn:hover {

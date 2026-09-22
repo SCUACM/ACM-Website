@@ -11,7 +11,7 @@
         <!-- List Version: Dialog  -->
         <div v-if="view==pageViews.List" class="dialog-list">
           <img v-if="image" :src="image" class="dialog-img-list" />
-          <div v-else class="dialog-img-list" style="background-color: #1c548d; color: white; font-size: 60px; padding: 30% 100px">{{ event.title }}</div>
+          <div v-else class="dialog-img-list" style="background-color: #09357a; color: white; font-size: 60px; padding: 30% 100px">{{ event.title }}</div>
         </div>
         <!-- Grid Version: Dialog -->
         <div v-if="view==pageViews.Grid" class="dialog-grid">
@@ -140,7 +140,7 @@ export default {
 .no-flyer{
   overflow: hidden;
   border: white 7.5px solid;
-  background: #1c548d;
+  background: #09357a;
   border-radius: 20px;
   color: white;
   text-align: center;
