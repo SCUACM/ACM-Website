@@ -32,15 +32,11 @@ import IvyZhuang from '../assets/board/competitiveProgramming/IvyZhuang.jpg';
 import AlanFung from '../assets/board/competitiveProgramming/AlanFung.jpg';
 
 import KaraBarrese from "../assets/board/broncosec/Kara_Barrese.jpg";
-import EthanSychangco from "../assets/board/broncosec/Ethan_Sychangco.png";
-import TiffanyNguyen from "../assets/board/broncosec/Tiffany_Nguyen.png";
-import JasonWu from "../assets/board/broncosec/Jason_Wu.jpg";
 import EricWei from "../assets/board/broncosec/Eric_Wei.jpg";
-import EvanChin from "../assets/board/broncosec/Evan_Chin.jpg";
-import HuyNgo from "../assets/board/broncosec/Huy_Ngo.jpeg";
-import TateSteven from '../assets/board/broncosec/Tate_Steven-Schneider.jpg';
-import VietHa from '../assets/board/broncosec/Viet_Ha.png';
 import WilliamPatmore from '../assets/board/broncosec/William_Patmore.jpg';
+import EmilyRamos from '../assets/board/broncosec/emily_ramos.jpg'
+import OsasuOgbeide from '../assets/board/broncosec/Osasu_Ogbeide.jpg'
+import RushilKumar from '../assets/board/broncosec/rushil_kumar.jpeg'
 
 import AryaDeshpande from "../assets/board/ACM-W/arya.jpg";
 import DanielaCasillas from '../assets/board/ACM-W/daniela.jpg';
@@ -201,7 +197,7 @@ export default {
         {
           src: KaavyaJethwa,
           name: "Kaavya Jethwa",
-          role: "Webmaster",
+          role: "Hackathon Coordinator",
           bio: ""
         },
         {
@@ -220,12 +216,6 @@ export default {
 
       broncoSecBoard: [
         {
-          src: EthanSychangco,
-          name: "Ethan Sychangco",
-          role: "President",
-          bio: "",
-        },  
-        {
           src: WilliamPatmore,
           name: "William Patmore",
           role: "Vice President",
@@ -234,49 +224,31 @@ export default {
         {
           src: KaraBarrese,
           name: "Kara Barrese",
-          role: "CTF Lead",
+          role: "Vice President",
           bio: ""
-        },
-        {
-          src: VietHa,
-          name: "Viet Ha",
-          role: "Event Lead",
-          bio: "",
-        },
-        {
-          src: HuyNgo,
-          name: "Huy Ngo",
-          role: "Event Lead",
-          bio: "",
         },
         {
           src: EricWei,
           name: "Eric Wei",
-          role: "Event Lead",
+          role: "Events Team",
           bio: "",
         },
         {
-          src: TateSteven,
-          name: "Tate Steven-Schneider",
-          role: "Event Lead",
-          bio: "",
-        },
-        {
-          src: TiffanyNguyen,
-          name: "Tiffany Nguyen",
-          role: "Publicity Manager",
-          bio: "",
-        },
-        {
-          src: JasonWu,
-          name: "Jason Wu",
-          role: "Treasurer",
+          src: EmilyRamos,
+          name: "Emily Ramos",
+          role: "Outreach Coordinator",
           bio: ""
         },
         {
-          src: EvanChin,
-          name: "Evan Chin",
-          role: "Outreach Coordinator",
+          src: OsasuOgbeide,
+          name: "Osasu Ogbeide",
+          role: "Event Lead",
+          bio: ""
+        }, 
+        {
+          src: RushilKumar,
+          name: "Rushil Kumar",
+          role: "CTF Lead",
           bio: ""
         }
       ],
