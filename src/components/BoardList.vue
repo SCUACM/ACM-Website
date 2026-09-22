@@ -218,7 +218,7 @@ export default {
         {
           src: WilliamPatmore,
           name: "William Patmore",
-          role: "Vice President",
+          role: "President",
           bio: "",
         },
         {
@@ -228,16 +228,16 @@ export default {
           bio: ""
         },
         {
-          src: EricWei,
-          name: "Eric Wei",
-          role: "Events Team",
-          bio: "",
-        },
-        {
           src: EmilyRamos,
           name: "Emily Ramos",
           role: "Outreach Coordinator",
           bio: ""
+        },
+        {
+          src: EricWei,
+          name: "Eric Wei",
+          role: "Event Lead",
+          bio: "",
         },
         {
           src: OsasuOgbeide,
