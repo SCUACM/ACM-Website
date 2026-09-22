@@ -37,6 +37,7 @@ import WilliamPatmore from '../assets/board/broncosec/William_Patmore.jpg';
 import EmilyRamos from '../assets/board/broncosec/emily_ramos.jpg'
 import OsasuOgbeide from '../assets/board/broncosec/Osasu_Ogbeide.jpg'
 import RushilKumar from '../assets/board/broncosec/rushil_kumar.jpeg'
+import PranavSaravanan from '../assets/board/broncosec/Pranav_Saravanan.png'
 
 import AryaDeshpande from "../assets/board/ACM-W/arya.jpg";
 import DanielaCasillas from '../assets/board/ACM-W/daniela.jpg';
@@ -249,6 +250,12 @@ export default {
           src: RushilKumar,
           name: "Rushil Kumar",
           role: "CTF Lead",
+          bio: ""
+        },
+        {
+          src: PranavSaravanan,
+          name: "Pranav Saravanan",
+          role: "PR Lead",
           bio: ""
         }
       ],
