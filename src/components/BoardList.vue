@@ -57,8 +57,9 @@ import LandisFusato from "../assets/board/ACM-G/Landis_Fusato.jpg"
 import NolanAnderson from "../assets/board/ACM-G/Nolan_Anderson.jpg"
 import RahulYalavarthi from "../assets/board/ACM-G/Rahul_Yalavarthi.jpg"
 
-import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg";
-import YiFang from "../assets/board/chapterAdvisors/Yi_Fang.jpg";
+import DanielOstrov from "../assets/board/chapterAdvisors/Daniel_Ostrov.jpg";
+import SharonHsaio from "../assets/board/chapterAdvisors/Sharon_Hsaio.jpg"
+import KrishnaRamamoorthy from "../assets/board/chapterAdvisors/Krishna_Ramamoorthy.jpg";
 
 import "../assets/scss/board-media.scss";
 
@@ -306,11 +307,16 @@ export default {
       
       chapterAdvisors: [
         {
-          src: YiFang,
-          name: "Yi Fang",
+          src: KrishnaRamamoorthy,
+          name: "Krishna Ramamoorthy",
           role: "ACM Advisor",
-          bio:
-            "Prof. Yi Fang is an assistant professor in the Department of Computer Engineering who specializes in Machine Learning and Artificial Intelligence. You can read more about his research here. He received his Ph.D. in computer science at Purdue University. He was awarded both Teacher of the Year and Researcher of the Year in 2017.",
+          bio: "",
+        },
+        {
+          src: DanielOstrov,
+          name: "Daniel Ostrov",
+          role: "ACM Advisor",
+          bio: "",          
         },
         {
           src: SharonHsaio,
