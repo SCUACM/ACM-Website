@@ -310,7 +310,7 @@ export default {
           src: KrishnaRamamoorthy,
           name: "Krishna Ramamoorthy",
           role: "ACM Advisor",
-          bio: "",
+          bio: "Dr. Krishna Ramamoorthy is an Assistant Professor in the Department of Computer Science and Engineering at Santa Clara University. Prior to joining Santa Clara University, he earned his Ph.D. in Computational Science from University of California, Irvine and conducted research in wireless communications, networking, and machine learning. His research focuses on next-generation wireless networks, including Wi-Fi, 5G/6G systems, next-generation multiple access such as Non Orthogonal Multiple Access (NOMA) and Rate Splitting Multiple Access (RSMA), reinforcement learning for networking, and emerging reconfigurable antenna technologies such as Fluid Antenna Systems (FAS) and Pinching Antenna Systems (PASS). At Santa Clara University, he teaches undergraduate and graduate courses in computer networks, wireless and mobile networks, data structures and programming, and related areas while mentoring student researchers through the Wireless Intelligent Networks (WIN) Lab. His long-term vision is to develop intelligent, sustainable, and user-centric communication systems that support the growing demands of next-generation connected applications.",
         },
         {
           src: DanielOstrov,
