@@ -1,17 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
+
 <template>
   <v-app>
     <MainNavbar />
     <v-container style="margin-top: 100px; max-width: 1000px;">
       <ul style="list-style: none; display: flex; justify-content: right; gap: 0.5rem; font-size: 1.25rem">
-        <li @click="view=pageViews.List" style="cursor: pointer" :style="[view == pageViews.List ? {'color': '#0099ff'} : {'color': 'black'}]">
+        <li @click="view=pageViews.List" style="cursor: pointer; font-family: Poppins, sans-serif;" :style="[view == pageViews.List ? {'color': '#0099ff'} : {'color': 'black'}]">
           List
         </li>
         /
-        <li @click="view=pageViews.Grid" style="cursor: pointer" :style="[view == pageViews.Grid ? {'color': '#0099ff'} : {'color': 'black'}]">
+        <li @click="view=pageViews.Grid" style="cursor: pointer; font-family: Poppins, sans-serif;" :style="[view == pageViews.Grid ? {'color': '#0099ff'} : {'color': 'black'}]">
           Grid
         </li>
         /
-        <li @click="view=pageViews.Calendar" style="cursor: pointer" :style="[view == pageViews.Calendar ? {'color': '#0099ff'} : {'color': 'black'}]">
+        <li @click="view=pageViews.Calendar" style="cursor: pointer; font-family: Poppins, sans-serif;" :style="[view == pageViews.Calendar ? {'color': '#0099ff'} : {'color': 'black'}]">
           Calendar
         </li>
       </ul>
