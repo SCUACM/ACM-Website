@@ -195,7 +195,7 @@
                       @click="routeTo('https://aws.scuacm.com/')"
                       class="link"
                     >
-                      AWS x INRIX Hack
+                      AWS Hack
                     </span>
                   </v-list-item>
                   <v-list-item>
