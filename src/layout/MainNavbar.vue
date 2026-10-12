@@ -103,7 +103,7 @@
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
             >
-              AWS Hack
+              AWS x A10 Hack
             </a>
           </span>
           <span class="link ml-4">
@@ -195,7 +195,7 @@
                       @click="routeTo('https://aws.scuacm.com/')"
                       class="link"
                     >
-                      AWS Hack
+                      AWS X A10 Hack
                     </span>
                   </v-list-item>
                   <v-list-item>
