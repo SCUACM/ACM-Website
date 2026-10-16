@@ -99,11 +99,10 @@
           </span> -->
           <span class="link ml-4 mr-4">
             <a
-              @click="routeTo('https://hackforhumanity.io/')"
+              @click="routeTo('https://aws.scuacm.com/')"
               :class="[!isTransparent ? 'link' : 'link-transparent']"
               style="cursor: alias;"
-            >
-              Hack for Humanity
+            > AWS x A10 Hack
             </a>
           </span>
           <span class="link ml-4">
@@ -195,7 +194,7 @@
                       @click="routeTo('https://aws.scuacm.com/')"
                       class="link"
                     >
-                      AWS x INRIX Hack
+                      AWS x A10 Hack
                     </span>
                   </v-list-item>
                   <v-list-item>
