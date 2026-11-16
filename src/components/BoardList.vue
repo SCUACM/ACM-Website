@@ -26,6 +26,10 @@ import PuneetGella from '../assets/board/main/puneet.jpg';
 import AshwiniAnantharaman from '../assets/board/main/ashwini.jpg';
 import NeelashaSudarshan from '../assets/board/main/neelasha.jpg';
 import LaurenKimura from '../assets/board/main/lauren.jpg';
+import IshaniPaul from '../assets/board/main/ishani.jpg';
+import OumarSakho from '../assets/board/main/oumar.jpg';
+import SanyaKher from '../assets/board/main/sanya.png';
+import DavidSimmons from '../assets/board/main/david.png';
 
 // cpc - need to add 
 import IvyZhuang from '../assets/board/competitiveProgramming/IvyZhuang.jpg';
@@ -98,6 +102,13 @@ export default {
             "Hey, I'm Carys! I'm a Junior majoring in Computer Science and Engineering from the Bay Area, so I've been surrounded by tech all my life growing up. Computer science has so much potential and creativity involved, so I've been happy to have been wielding it ever since I took my first serious computing course in high school. I enjoy drawing, playing guitar, learning languages, and having too much free time. If you catch me around campus, feel free to say hi!"
         },
         {
+          src: SanyaKher,
+          name: "Sanya Kher",
+          role: "Secretary",
+          bio:
+            "Hi! I'm Sanya! I'm a sophomore double majoring in Computer Science and Engineering as well as Physics. Im from San Jose, and in my free time I really enjoy learning about space, rock climbing, and reading comic books."
+        },
+        {
           src: LaurenKimura,
           name: "Lauren Kimura",
           role: "Workshop Coordinator",
@@ -119,6 +130,13 @@ export default {
             "Helloo, I'm Sunjana! I'm a Sophmore CS and Engineering student at SCU, from Morgan Hill, CA. I've always been drawn to STEM, and I love computer science since there is ALWAYS something new to learn. I'm still exploring my interests in CS, but I've really enjoyed working on projects that push my full-stack skills. I'm also involved with outreach and teaching STEM to younger students, with the goal of making these spaces feel less intimidating. In my free time, I love being outdoors, going on roadtrips, playing volleyball, and all things music. I love learning from people around me, so always feel free to say hi!"
         },
         {
+          src: DavidSimmons,
+          name: "David Simmons",
+          role: "Marketing Coordinator",
+          bio:
+            "Hey, I’m David! I’m a sophomore double majoring in Finance and Psychology from Lake Forest, IL. I joined ACM because I love seeing how tech can transform real ideas. As Marketing Coordinator, I run our Instagram, posters, photos, and videos, so if it has ACM branding, I was involved. I’m also President of TEDxSantaClaraUniversity and part of the Santa Clara Investment Fund (SCIF). In my free time, I love skiing, traveling, and eating Korean BBQ."
+        },
+        {
           src: PuneetGella,
           name: "Puneet Gella",
           role: "Industry Liaison",
@@ -138,6 +156,20 @@ export default {
           role: "Webmaster",
           bio:
             "Hello, I'm Neelasha! I'm a Sophomore studying Computer Science and Engineering. I'm really interested in AI safety and security research, which is what my current research is focused on. Apart from that, I'm also interested in web development and cybersecurity. In my free time, I love learning new languages, playing the guitar, and hanging out with friends! Feel free to stop me anytime and say hi!"
+        },
+        {
+          src: IshaniPaul,
+          name: "Ishani Paul",
+          role: "Underclassmen Representative",
+          bio:
+            "Hi I'm Ishani! I'm a freshman in Computer Science & Engineering from San Ramon, CA! I love building apps and exploring different areas of computer science, especially AI. I'm excited to be part of ACM and meet others who share my interests! Some of my hobbies outside of CS are reading, playing the violin, and going on spontaneous hikes."
+        },
+        {
+          src: OumarSakho,
+          name: "Oumar Sakho",
+          role: "Underclassmen Representative",
+          bio:
+            "Hello I'm Oumar! I'm a freshman studying Biochemistry at the illustrious SCU. I'm from Los Angeles, CA, and love the outdoors, riding my bike, and playing sports like soccer and golf. I'm fairly new to the world of computer science, however, I hope to continue exploring the various fields and find a way to merge CS and Biochemistry."
         },
       ],
       
